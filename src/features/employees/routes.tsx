@@ -1,10 +1,11 @@
 import { ReactComponent as IconEmployees } from '../../assets/icons/employees.svg';
 import { ReactComponent as IconEmployeesActive } from '../../assets/icons/employees-active.svg';
+import { LINK_TO_DASHBOARD } from '../../common/config/config';
 
 export const employeesSidebarRoutes = [
   {
     isWindowRedirectNecessary: true,
-    path: '/employees',
+    path: `${LINK_TO_DASHBOARD}employees`,
     label: 'Employees',
     icon: <IconEmployees />,
     iconActive: <IconEmployeesActive />,
