@@ -1,0 +1,27 @@
+.create-account {
+  &__box {
+    display: flex;
+
+    & + & {
+      margin-top: 20px;
+    }
+  }
+
+  &__label {
+    width: 20%;
+  }
+
+  &__input-domain {
+    display: flex;
+    align-items: baseline;
+
+    .tc-input {
+      flex: none;
+    }
+  }
+
+  &__inner-button {
+    margin-top: 40px;
+    text-align: center;
+  }
+}

@@ -18,6 +18,7 @@ import App from './App';
 import { ThemeProvider } from './theme/themeContext';
 import { authService } from './common/authService';
 import { refreshTokenAndSubscribe } from './common/api/refreshByInterval';
+import { AccountProvider } from './common/context/AccountContex';
 
 async function initApp() {
   await refreshTokenAndSubscribe();
@@ -26,7 +27,9 @@ async function initApp() {
     <React.StrictMode>
       <authService.AuthProvider>
         <ThemeProvider>
-          <App />
+          <AccountProvider>
+            <App />
+          </AccountProvider>
         </ThemeProvider>
       </authService.AuthProvider>
     </React.StrictMode>,
