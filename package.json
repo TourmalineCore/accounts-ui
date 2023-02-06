@@ -63,7 +63,7 @@
   "scripts": {
     "start": "run-s create-config:dev start-devserver",
     "start:local": "run-s create-config:local start-devserver",
-    "start-devserver": "PORT=3001 react-scripts start",
+    "start-devserver": "react-scripts start",
     "build": "cross-env DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
