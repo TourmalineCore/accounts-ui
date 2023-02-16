@@ -1,12 +1,11 @@
-import {
-  Input, Button, CheckField,
-} from '@tourmalinecore/react-tc-ui-kit';
-import { ChangeEvent, useContext, useState } from 'react';
+import { Input, Button, CheckField } from '@tourmalinecore/react-tc-ui-kit';
+import clsx from 'clsx';
+import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { api } from '../../../../common/api';
 
 import ContentCard from '../../../../components/ContentCard/ContentCard';
-import { AccountContext } from '../../../../common/context/AccountContex';
 
 const checkFieldsData = {
   1: 'Admin',
@@ -18,14 +17,15 @@ const checkFieldsData = {
 function CreateAccount() {
   const history = useNavigate();
 
+  const [triedToSubmit, setTriedToSubmit] = useState(false);
   const [selectedCheckboxes, setSelectedCheckboxes] = useState(new Set(['4']));
-  const [form, setForm] = useState({
+  const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     corporateEmail: '',
   });
 
-  const { setIsCreateAccount } = useContext(AccountContext);
+  const isCorporateEmailError = !formData.corporateEmail && triedToSubmit;
 
   return (
     <ContentCard>
@@ -35,30 +35,51 @@ function CreateAccount() {
         <div className="create-account__box">
           <span className="create-account__label">First Name</span>
           <Input
-            type="text"
-            value={form.firstName}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setForm({ ...form, firstName: e.target.value })}
+            value={formData.firstName}
+            isInvalid={!formData.firstName && triedToSubmit}
+            validationMessages={['This field is required. Please fill it up.']}
+            isMessagesAbsolute
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, firstName: e.target.value.trim() })}
           />
         </div>
 
         <div className="create-account__box">
           <span className="create-account__label">Last Name</span>
           <Input
-            type="text"
-            value={form.lastName}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setForm({ ...form, lastName: e.target.value })}
+            value={formData.lastName}
+            isInvalid={!formData.lastName && triedToSubmit}
+            validationMessages={['This field is required. Please fill it up.']}
+            isMessagesAbsolute
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, lastName: e.target.value.trim() })}
           />
         </div>
 
-        <div className="create-account__box">
-          <span className="create-account__label">Corporate Email</span>
-          <div className="create-account__input-domain">
-            <Input
-              type="text"
-              value={form.corporateEmail}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => setForm({ ...form, corporateEmail: e.target.value })}
-            />
-            <span>@tourmalinecore.com</span>
+        <div style={{ margin: '34px 0 0 12px', position: 'relative' }}>
+          <div className="create-account__box">
+            <span className="create-account__label">Corporate Email</span>
+            <div>
+              <div className="create-account__input-domain">
+                <Input
+                  className={clsx('create-account__input', {
+                    'create-account__input--error': !isCorporateEmailError,
+                  })}
+                  value={formData.corporateEmail}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, corporateEmail: e.target.value.trim() })}
+                />
+                <span>@tourmalinecore.com</span>
+              </div>
+              <div className={clsx('create-account__important-info', {
+                'create-account__important-info--error': isCorporateEmailError,
+              })}
+              >
+                {!isCorporateEmailError ? (
+                  <>
+                    <b>Сheck the entered data</b>
+                    , it will be impossible to edit this field.
+                  </>
+                ) : (<>Account with such Corpotare Email is already exists. Check the correctness of the entered data, it must be unique.</>)}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -95,9 +116,7 @@ function CreateAccount() {
           </Button>
 
           <Button
-            onClick={() => {
-              createAccountAsync();
-            }}
+            onClick={() => createAccountAsync()}
           >
             Add
           </Button>
@@ -107,15 +126,24 @@ function CreateAccount() {
   );
 
   async function createAccountAsync() {
+    setTriedToSubmit(true);
+
     try {
       await api.post('/accounts/create', {
-        ...form,
-        corporateEmail: `${form.corporateEmail}@tourmalinecore.com`,
+        ...formData,
+        corporateEmail: `${formData.corporateEmail}@tourmalinecore.com`,
         roleIds: [...selectedCheckboxes].map((item) => Number(item)),
       });
 
+      setTriedToSubmit(false);
       history('/account-management');
-      setIsCreateAccount(true);
+
+      toast('New account added successfully', {
+        type: 'success',
+        position: 'bottom-center',
+        autoClose: 5000,
+        pauseOnHover: false,
+      });
     } catch (e) {
       console.log(e);
     }

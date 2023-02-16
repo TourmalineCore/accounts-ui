@@ -1,20 +1,14 @@
 /* eslint-disable react/no-unstable-nested-components */
-import React, {
-  useContext, useEffect, useState,
-} from 'react';
-import {
-  Button,
-} from '@tourmalinecore/react-tc-ui-kit';
-import { Modal } from '@tourmalinecore/react-tc-modal';
-
-import {
-  ClientTable,
-} from '@tourmalinecore/react-table-responsive';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { Button } from '@tourmalinecore/react-tc-ui-kit';
+import { ClientTable } from '@tourmalinecore/react-table-responsive';
+
 import moment from 'moment';
-import ContentCard from '../../components/ContentCard/ContentCard';
 import { api } from '../../common/api';
-import { AccountContext } from '../../common/context/AccountContex';
+
+import ContentCard from '../../components/ContentCard/ContentCard';
 
 type Accounts = {
   id: number;
@@ -38,19 +32,10 @@ function AccountManagementPage() {
   const history = useNavigate();
 
   const [accounts, setAccounts] = useState<Accounts[]>([]);
-  const { isCreateAccount, setIsCreateAccount } = useContext(AccountContext);
 
   useEffect(() => {
     getAccountsAsync();
   }, []);
-
-  useEffect(() => {
-    if (isCreateAccount) {
-      setTimeout(() => {
-        setIsCreateAccount(false);
-      }, 2000);
-    }
-  }, [isCreateAccount]);
 
   const columns = [
     {
@@ -97,7 +82,6 @@ function AccountManagementPage() {
       disableFilters: true,
       Cell: ({ row }: Table<Accounts>) => {
         const { creationDate } = row.original;
-
         const formattedDate = moment(creationDate).format('DD.MM.YYYY HH:mm');
 
         return (<div>{formattedDate}</div>);
@@ -110,9 +94,7 @@ function AccountManagementPage() {
       <div className="account-management-page">
         <h1>Account`s list</h1>
         <Button
-          style={{
-            marginBottom: 20,
-          }}
+          style={{ marginBottom: 20 }}
           onClick={() => history('/account-management/add')}
         >
           Add New Account
@@ -128,16 +110,6 @@ function AccountManagementPage() {
           actions={[]}
           columns={columns}
         />
-
-        {isCreateAccount && (
-          <Modal
-            content={(
-              <div style={{ textAlign: 'center' }}>New account added successfully</div>
-            )}
-            showApply={false}
-            onClose={() => setIsCreateAccount(false)}
-          />
-        )}
 
       </div>
     </ContentCard>

@@ -1,14 +1,24 @@
 .create-account {
+  $error-color: #e11961;
+
   &__box {
     display: flex;
 
     & + & {
-      margin-top: 20px;
+      margin-top: 34px;
     }
   }
 
   &__label {
     width: 20%;
+  }
+
+  &__input {
+    &--error {
+      .tc-input {
+        border-bottom: 1px solid $error-color;
+      }
+    }
   }
 
   &__input-domain {
@@ -20,8 +30,28 @@
     }
   }
 
+  &__error-message {
+    color: $error-color;
+  }
+
+  &__important-info {
+    margin-top: 4px;
+    min-height: 40px;
+    max-width: 412px;
+    font-size: 14px;
+    color: "#838383";
+
+    &--error {
+      color: $error-color;
+    }
+  }
+
   &__inner-button {
     margin-top: 40px;
     text-align: center;
+
+    button + button {
+      margin-left: 40px;
+    }
   }
 }
