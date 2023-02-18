@@ -6,11 +6,13 @@ import 'react-app-polyfill/stable';
 import '@tourmalinecore/react-tc-ui-kit/es/index.css';
 import '@tourmalinecore/react-tc-modal/es/index.css';
 import '@tourmalinecore/react-table-responsive/es/index.css';
+import 'react-toastify/ReactToastify.min.css';
 
 import './styles/index.scss';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ToastContainer } from 'react-toastify';
 import reportWebVitals from './reportWebVitals';
 
 import App from './App';
@@ -27,6 +29,7 @@ async function initApp() {
       <authService.AuthProvider>
         <ThemeProvider>
           <App />
+          <ToastContainer position="bottom-right" newestOnTop />
         </ThemeProvider>
       </authService.AuthProvider>
     </React.StrictMode>,
