@@ -1,16 +1,19 @@
 .create-account {
   $error-color: #e11961;
 
+  &__inner {
+    margin: 0 auto;
+    max-width: 700px;
+  }
+
   &__box {
-    display: flex;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr 4fr;
 
     & + & {
       margin-top: 34px;
     }
-  }
-
-  &__label {
-    width: 20%;
   }
 
   &__input {
@@ -24,10 +27,6 @@
   &__input-domain {
     display: flex;
     align-items: baseline;
-
-    .tc-input {
-      flex: none;
-    }
   }
 
   &__error-message {
