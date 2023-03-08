@@ -1,7 +1,7 @@
 export type AccountCreate = {
   firstName: string;
   lastName: string;
-  middleName: string;
+  middleName?: string;
   corporateEmail: string;
   roleIds: number[];
 };
@@ -11,6 +11,7 @@ export type Accounts = {
   corporateEmail: string;
   creationDate: Date;
   firstName: string;
+  middleName?: string;
   lastName: string;
   roles: {
     id: number;

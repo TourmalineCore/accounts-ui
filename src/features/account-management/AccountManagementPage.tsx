@@ -26,10 +26,12 @@ function AccountManagementPage() {
       Header: 'Name',
       accessor: 'lastName',
       Cell: ({ row }: Table<Accounts>) => {
-        const { firstName, lastName } = row.original;
+        const { firstName, lastName, middleName } = row.original;
         return (
           <div>
             {lastName}
+            {' '}
+            {middleName || ''}
             {' '}
             {firstName}
           </div>

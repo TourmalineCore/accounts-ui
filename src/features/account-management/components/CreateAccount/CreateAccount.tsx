@@ -50,8 +50,6 @@ function CreateAccount() {
             <span>Middle Name</span>
             <Input
               value={formData.middleName}
-              isInvalid={!formData.middleName && triedToSubmit}
-              validationMessages={['This field is required. Please fill it up.']}
               isMessagesAbsolute
               onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, middleName: e.target.value.trim() })}
             />
@@ -145,6 +143,7 @@ function CreateAccount() {
       await api.post<AccountCreate>('/accounts/create', {
         ...formData,
         corporateEmail: `${formData.corporateEmail}@tourmalinecore.com`,
+        middleName: formData.middleName || undefined,
         roleIds: [...selectedCheckboxes].map((item) => Number(item)),
       });
 
