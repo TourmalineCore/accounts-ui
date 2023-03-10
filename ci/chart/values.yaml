@@ -10,7 +10,7 @@ ReCaptchaOptions:
   Enabled: true
 
 image:
-  repository: ghcr.io/tourmalinecore/inner-circle/dev-account-management-ui
+  repository: ghcr.io/tourmalinecore/inner-circle/dev-inner-circle-account-management-ui
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag:
