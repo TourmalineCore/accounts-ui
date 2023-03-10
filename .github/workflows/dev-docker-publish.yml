@@ -34,10 +34,10 @@ jobs:
         with:
           exec: helm upgrade --namespace dev-inner-circle --create-namespace --install dev-inner-circle-account-management-ui
                   --set "domain=${{ secrets.DEV_HOST }}"
-                  --set "resources.limits.cpu=${{ variables.DEV_APP_CPU_LIMIT }}"
-                  --set "resources.limits.memory=${{ variables.DEV_APP_MEMORY_LIMIT }}"
-                  --set "resources.requests.cpu=${{ variables.DEV_APP_CPU_REQUESTS }}"
-                  --set "resources.requests.memory=${{ variables.DEV_APP_MEMORY_REQUESTS }}"
+                  --set "resources.limits.cpu=${{ vars.DEV_APP_CPU_LIMIT }}"
+                  --set "resources.limits.memory=${{ vars.DEV_APP_MEMORY_LIMIT }}"
+                  --set "resources.requests.cpu=${{ vars.DEV_APP_CPU_REQUESTS }}"
+                  --set "resources.requests.memory=${{ vars.DEV_APP_MEMORY_REQUESTS }}"
                   --set "imageCredentials.username=${{ github.actor }}" 
                   --set "imageCredentials.password=${{ secrets.GH_REGISTRY_TOKEN }}" 
                   --set "image.tag=${{ github.sha }}"
