@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v1
       - name: Build and push image
         run: |
-            docker login ${{ env.GITHUB_REGISTRY }} -u ${{ github.actor }} -p ${{ secrets.GH_REGISTRY_TOKEN }}
+            docker login ${{ env.GITHUB_REGISTRY }} -u ${{ secrets.GH_REGISTRY_LOGIN }} -p ${{ secrets.GH_REGISTRY_TOKEN }}
             docker build -t $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-account-management-ui:latest -t $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-account-management-ui:${{ github.sha }} .
             docker push $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-account-management-ui:latest
             docker push $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-account-management-ui:${{ github.sha }}
@@ -38,7 +38,7 @@ jobs:
                   --set "resources.limits.memory=${{ vars.DEV_APP_MEMORY_LIMIT }}"
                   --set "resources.requests.cpu=${{ vars.DEV_APP_CPU_REQUESTS }}"
                   --set "resources.requests.memory=${{ vars.DEV_APP_MEMORY_REQUESTS }}"
-                  --set "imageCredentials.username=${{ github.actor }}" 
+                  --set "imageCredentials.username=${{ secrets.GH_REGISTRY_LOGIN }}" 
                   --set "imageCredentials.password=${{ secrets.GH_REGISTRY_TOKEN }}" 
                   --set "image.tag=${{ github.sha }}"
                   --set "envKey=Development"
