@@ -10,7 +10,7 @@ ReCaptchaOptions:
   Enabled: true
 
 image:
-  repository: ghcr.io/tourmalinecore/inner-circle/dev-inner-circle-ui
+  repository: ghcr.io/tourmalinecore/inner-circle/dev-account-management-ui
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag:
@@ -23,3 +23,15 @@ imageCredentials:
 apiLinks:
   LINK_TO_SALARY_SERVICE: /salary/
   LINK_TO_ACCOUNT_SERVICE: /account/
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    cpu: 150m
+    memory: 300Mi
+  requests:
+    cpu: 100m
+    memory: 250Mi

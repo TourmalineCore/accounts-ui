@@ -15,7 +15,7 @@ spec:
   - host: {{ required "domain must be defined!" .Values.domain }}
     http:
       paths:
-      - path: /
+      - path: /account-management(/|$)(.*)
         pathType: Prefix
         backend:
           service:
