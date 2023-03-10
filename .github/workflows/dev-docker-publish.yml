@@ -26,9 +26,9 @@ jobs:
       - name: Build and push image
         run: |
             docker login ${{ env.GITHUB_REGISTRY }} -u ${{ github.actor }} -p ${{ secrets.GH_REGISTRY_TOKEN }}
-            docker build -t $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-ui:latest -t $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-ui:${{ github.sha }} .
-            docker push $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-ui:latest
-            docker push $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-ui:${{ github.sha }}
+            docker build -t $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-account-management-ui:latest -t $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-account-management-ui:${{ github.sha }} .
+            docker push $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-account-management-ui:latest
+            docker push $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-account-management-ui:${{ github.sha }}
       - name: Deploy
         uses: WyriHaximus/github-action-helm3@v2
         with:
