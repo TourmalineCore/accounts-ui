@@ -2,8 +2,8 @@
 {{.Release.Name}}
 {{- end -}}
 
-{{- define "inner-circle-ui.image-url" -}}
-ghcr.io/tourmalinecore/inner-circle/dev-inner-circle-ui{{ if ne (trunc 1 (.Values.imageTag | default "latest" | toString )) "@" }}:{{end}}{{ .Values.imageTag | default "latest" | toString }}
+{{- define "inner-circle-account-management-ui.image-url" -}}
+ghcr.io/tourmalinecore/inner-circle/dev-inner-circle-account-management-ui{{ if ne (trunc 1 (.Values.imageTag | default "latest" | toString )) "@" }}:{{end}}{{ .Values.imageTag | default "latest" | toString }}
 {{- end -}}
 
 {{- define "imagePullSecret" }}
