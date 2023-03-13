@@ -9,24 +9,8 @@ import moment from 'moment';
 import { api } from '../../common/api';
 
 import ContentCard from '../../components/ContentCard/ContentCard';
-
-type Accounts = {
-  id: number;
-  corporateEmail: string;
-  creationDate: Date;
-  firstName: string;
-  lastName: string;
-  roles: {
-    id: number;
-    name: string;
-  }[];
-};
-
-type Table<TypeProps> = {
-  row: {
-    original: TypeProps;
-  }
-};
+import { Table } from '../../types';
+import { Accounts } from './types';
 
 function AccountManagementPage() {
   const history = useNavigate();
@@ -42,10 +26,12 @@ function AccountManagementPage() {
       Header: 'Name',
       accessor: 'lastName',
       Cell: ({ row }: Table<Accounts>) => {
-        const { firstName, lastName } = row.original;
+        const { firstName, lastName, middleName } = row.original;
         return (
           <div>
             {lastName}
+            {' '}
+            {middleName || ''}
             {' '}
             {firstName}
           </div>
@@ -53,8 +39,8 @@ function AccountManagementPage() {
       },
     },
     {
-      Header: 'Role',
-      accessor: 'role',
+      Header: 'Roles',
+      accessor: 'roles',
       disableSortBy: true,
       disableFilters: true,
       Cell: ({ row }: Table<Accounts>) => {

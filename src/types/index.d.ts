@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-interface SidebarRoutesProps {
+export interface SidebarRoutesProps {
   isWindowRedirectNecessary?: boolean;
   path: string;
   label: string;
@@ -13,3 +13,9 @@ interface SidebarRoutesProps {
     iconMini: ReactNode;
   }[];
 }
+
+export type Table<TypeProps> = {
+  row: {
+    original: TypeProps;
+  }
+};
