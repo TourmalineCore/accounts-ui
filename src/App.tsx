@@ -14,7 +14,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/*"
+          path="account-management/*"
           element={<WithPrivateRoute />}
         />
       </Routes>
