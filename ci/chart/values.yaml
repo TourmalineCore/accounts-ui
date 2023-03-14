@@ -4,6 +4,7 @@ deploySecrets: true
 
 envKey: Production
 apiRoot: /api
+apiRootAuth: /api/auth
 imageTag:
 ReCaptchaOptions:
   SiteKey: # secret
@@ -21,6 +22,7 @@ imageCredentials:
   password: # secret
 
 apiLinks:
+  LINK_TO_DASHBOARD: /
   LINK_TO_SALARY_SERVICE: /salary/
   LINK_TO_ACCOUNT_SERVICE: /account/
 
