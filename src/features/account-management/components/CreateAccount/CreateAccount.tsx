@@ -4,6 +4,7 @@ import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { api } from '../../../../common/api';
+import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config';
 
 import ContentCard from '../../../../components/ContentCard/ContentCard';
 import { AccountCreate } from '../../types';
@@ -140,7 +141,7 @@ function CreateAccount() {
     setTriedToSubmit(true);
 
     try {
-      await api.post<AccountCreate>('/accounts/create', {
+      await api.post<AccountCreate>(`${LINK_TO_ACCOUNT_SERVICE}accounts/create`, {
         ...formData,
         corporateEmail: `${formData.corporateEmail}@tourmalinecore.com`,
         middleName: formData.middleName || undefined,

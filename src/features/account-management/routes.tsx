@@ -6,12 +6,12 @@ import CreateAccount from './components/CreateAccount/CreateAccount';
 
 export const accountManagementRoutes = [
   {
-    path: '/account-management',
+    path: '/',
     breadcrumb: 'Account management',
     Component: AccountManagementPage,
   },
   {
-    path: '/account-management/add',
+    path: '/add',
     breadcrumb: 'Add an employee',
     Component: CreateAccount,
   },
@@ -19,7 +19,7 @@ export const accountManagementRoutes = [
 
 export const accountManagementSidebarRoutes = [
   {
-    path: '/account-management',
+    path: '/',
     label: 'Account management',
     icon: <IconAnalytics />,
     iconActive: <IconAnalyticsActive />,
