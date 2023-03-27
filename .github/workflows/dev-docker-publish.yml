@@ -4,42 +4,48 @@ on:
   push:
     branches:
       - develop
-
-    tags:
-      - v*
-
   pull_request:
 
 env:
   GITHUB_REGISTRY: ghcr.io
 
 jobs:
-  deploy-to-dev-k8s:
-    name: Deploy UI to k8s for development environment
-    if: github.event_name == 'push'
+  build-image:
+    name: Build and push service image  
     runs-on: ubuntu-22.04
-
     steps:
-      - name: checkout 
+      - name: checkout
         uses: actions/checkout@v1
       - name: Build and push image
         run: |
-            docker login ${{ env.GITHUB_REGISTRY }} -u ${{ secrets.GH_REGISTRY_LOGIN }} -p ${{ secrets.GH_REGISTRY_TOKEN }}
-            docker build -t $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-account-management-ui:latest -t $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-account-management-ui:${{ github.sha }} .
-            docker push $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-account-management-ui:latest
-            docker push $GITHUB_REGISTRY/tourmalinecore/inner-circle/dev-inner-circle-account-management-ui:${{ github.sha }}
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+          docker build -t $GITHUB_REGISTRY/tourmalinecore/inner-circle/account-management-ui:latest -t $GITHUB_REGISTRY/tourmalinecore/inner-circle/account-management-ui:${{ github.sha }} .
+          docker push $GITHUB_REGISTRY/tourmalinecore/inner-circle/account-management-ui:latest
+          docker push $GITHUB_REGISTRY/tourmalinecore/inner-circle/account-management-ui:${{ github.sha }}
+  deploy-to-dev-k8s:
+    needs: build-image
+    name: Deploy service to k8s for development environment  
+    if: github.event_name == 'push'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
       - name: Deploy
         uses: WyriHaximus/github-action-helm3@v2
         with:
-          exec: helm upgrade --namespace dev-inner-circle --create-namespace --install dev-inner-circle-account-management-ui
-                  --set "domain=${{ secrets.DEV_HOST }}"
-                  --set "resources.limits.cpu=${{ vars.DEV_APP_CPU_LIMIT }}"
-                  --set "resources.limits.memory=${{ vars.DEV_APP_MEMORY_LIMIT }}"
-                  --set "resources.requests.cpu=${{ vars.DEV_APP_CPU_REQUESTS }}"
-                  --set "resources.requests.memory=${{ vars.DEV_APP_MEMORY_REQUESTS }}"
-                  --set "imageCredentials.username=${{ secrets.GH_REGISTRY_LOGIN }}" 
-                  --set "imageCredentials.password=${{ secrets.GH_REGISTRY_TOKEN }}" 
-                  --set "image.tag=${{ github.sha }}"
-                  --set "envKey=Development"
-                  ./ci/chart
-          kubeconfig: '${{ secrets.DEV_KUBECONFIG }}'
+          exec: |
+            RELEASE_NAME=account-management-ui
+            helm repo add bitnami https://charts.bitnami.com/bitnami
+            helm upgrade --install --namespace dev-inner-circle --create-namespace --values ./ci/values-custom.yaml \
+            --set "image.tag=${{ github.sha }}" \
+            --set "ingress.enabled=true" \
+            --set "ingress.hostname=${{ secrets.DEV_HOST }}" \
+            --set "extraConfigMapEnvVars.API_ROOT=\/api" \
+            --set "extraConfigMapEnvVars.API_ROOT_AUTH=\/api\/auth" \
+            --set "extraConfigMapEnvVars.ENV_KEY=Development" \
+            --set "extraConfigMapEnvVars.LINK_TO_ACCOUNT_SERVICE=\/account-management\/" \
+            --set "extraConfigMapEnvVars.LINK_TO_DASHBOARD=\/" \
+            --set "extraConfigMapEnvVars.LINK_TO_SALARY_SERVICE=\/salary\/" \
+            "${RELEASE_NAME}" \
+            bitnami/nginx
+          kubeconfig: "${{ secrets.DEV_KUBECONFIG }}"
