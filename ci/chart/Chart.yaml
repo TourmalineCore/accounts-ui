@@ -1,5 +1,0 @@
-apiVersion: v1
-name: inner-circle-account-management-ui
-description: Chart for Inner Circle Account UI
-type: application
-version: 1.0.0
