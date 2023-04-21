@@ -1,8 +1,8 @@
 import { defineConfig } from 'cypress';
-import mochawesomeWriter from 'cypress-mochawesome-reporter/plugin';
+// @ts-ignore
+import mochawesomeWriter from 'cypress-mochawesome-reporter';
 
 export default defineConfig({
-
   e2e: {
     reporter: 'cypress-multi-reporters',
     reporterOptions: {
@@ -15,6 +15,12 @@ export default defineConfig({
     video: false,
     setupNodeEvents(on, config) {
       mochawesomeWriter(on, config);
+    },
+  },
+  component: {
+    devServer: {
+      framework: 'create-react-app',
+      bundler: 'webpack',
     },
   },
 });
