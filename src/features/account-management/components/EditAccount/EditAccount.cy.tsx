@@ -31,6 +31,29 @@ describe('EditAccount', () => {
     cy.getByData('corporate-email')
       .should('have.text', 'test@tourmalinecore.com');
   });
+
+  it('SHOULD call the backend to get data WHEN it wants to render first name input with value', () => {
+    cy.intercept(
+      'GET',
+      `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}accounts/1`,
+      {
+        corporateEmail: 'test@tourmalinecore.com',
+        firstName: 'TestName',
+        lastName: '',
+        roles: [
+          {
+            id: 1,
+            name: 'CEO',
+          },
+        ],
+      },
+    );
+
+    mountComponent();
+
+    cy.getByData('first-name')
+      .should('have.value', 'TestName');
+  });
 });
 
 function mountComponent() {
