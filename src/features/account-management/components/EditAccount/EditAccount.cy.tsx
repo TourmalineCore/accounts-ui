@@ -41,6 +41,11 @@ describe('EditAccount', () => {
     cy.getByData('last-name')
       .should('have.value', 'TestLastName');
   });
+
+  it('SHOULD call the backend to get data WHEN it wants to render middle name input with not have value', () => {
+    cy.getByData('middle-name')
+      .should('have.value', '');
+  });
 });
 
 function mountComponent() {
