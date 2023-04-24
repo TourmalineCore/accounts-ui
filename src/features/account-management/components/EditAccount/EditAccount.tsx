@@ -37,6 +37,11 @@ function EditAccount() {
         value={account.firstName}
       />
 
+      <Input
+        data-cy="last-name"
+        value={account.lastName}
+      />
+
     </ContentCard>
   );
 
