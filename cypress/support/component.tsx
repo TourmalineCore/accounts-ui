@@ -37,6 +37,3 @@ Cypress.Commands.add('mount', (component, options: MountOptions & { routerProps?
 
   return mount(wrapped, mountOptions);
 });
-
-// Example use:
-// cy.mount(<MyComponent />)
