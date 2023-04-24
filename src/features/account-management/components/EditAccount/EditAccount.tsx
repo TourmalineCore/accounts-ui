@@ -9,7 +9,7 @@ type EditAccountType = {
   corporateEmail: string;
   firstName: string;
   lastName: string;
-  middleName: string;
+  middleName?: string;
   roles: {
     id: number;
     name: string;
@@ -40,6 +40,11 @@ function EditAccount() {
       <Input
         data-cy="last-name"
         value={account.lastName}
+      />
+
+      <Input
+        data-cy="middle-name"
+        value={account.middleName}
       />
 
     </ContentCard>
