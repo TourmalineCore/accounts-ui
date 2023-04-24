@@ -46,6 +46,12 @@ describe('EditAccount', () => {
     cy.getByData('middle-name')
       .should('have.value', '');
   });
+
+  it('SHOULD call the backend to get data WHEN it wants to render roles with selected values', () => {
+    cy.get('.tc-checkfield :checked')
+      .should('be.checked')
+      .and('have.value', 'CEO');
+  });
 });
 
 function mountComponent() {
