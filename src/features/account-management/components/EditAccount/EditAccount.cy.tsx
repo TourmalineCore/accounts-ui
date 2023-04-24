@@ -9,7 +9,7 @@ describe('EditAccount', () => {
       {
         corporateEmail: 'test@tourmalinecore.com',
         firstName: 'TestName',
-        lastName: '',
+        lastName: 'TestLastName',
         roles: [
           {
             id: 1,
@@ -35,6 +35,11 @@ describe('EditAccount', () => {
   it('SHOULD call the backend to get data WHEN it wants to render first name input with value', () => {
     cy.getByData('first-name')
       .should('have.value', 'TestName');
+  });
+
+  it('SHOULD call the backend to get data WHEN it wants to render last name input with value', () => {
+    cy.getByData('last-name')
+      .should('have.value', 'TestLastName');
   });
 });
 
