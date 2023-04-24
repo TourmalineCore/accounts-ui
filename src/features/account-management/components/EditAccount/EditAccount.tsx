@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Input } from '@tourmalinecore/react-tc-ui-kit';
 import ContentCard from '../../../../components/ContentCard/ContentCard';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config';
 import { api } from '../../../../common/api';
@@ -30,6 +31,11 @@ function EditAccount() {
       <section data-cy="edit-account" />
 
       <span data-cy="corporate-email">{account.corporateEmail}</span>
+
+      <Input
+        data-cy="first-name"
+        value={account.firstName}
+      />
 
     </ContentCard>
   );
