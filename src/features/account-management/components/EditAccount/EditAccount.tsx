@@ -84,6 +84,12 @@ function EditAccount() {
         Cancel
       </Button>
 
+      <Button
+        data-cy="save-button"
+      >
+        Save Changes
+      </Button>
+
     </ContentCard>
   );
 
