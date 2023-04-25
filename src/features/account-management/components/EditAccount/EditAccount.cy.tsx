@@ -54,6 +54,15 @@ describe('EditAccount', () => {
   });
 });
 
+describe('Button', () => {
+  it('SHOULD render cancel button no the edit page WHEN there is component', () => {
+    mountComponent();
+
+    cy.getByData('cancel-button')
+      .should('exist');
+  });
+});
+
 function mountComponent() {
   cy.mount(
     <EditAccount />,
