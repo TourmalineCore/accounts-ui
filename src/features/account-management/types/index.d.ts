@@ -6,6 +6,17 @@ export type AccountCreate = {
   roleIds: number[];
 };
 
+export type AccountEdit = {
+  corporateEmail: string;
+  firstName: string;
+  lastName: string;
+  middleName?: string;
+  roles: {
+    id: number;
+    name: string;
+  }[]
+};
+
 export type Accounts = {
   id: number;
   corporateEmail: string;

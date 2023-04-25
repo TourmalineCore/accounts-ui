@@ -3,6 +3,7 @@ import { ReactComponent as IconAnalyticsActive } from '../../assets/icons/analyt
 
 import AccountManagementPage from './AccountManagementPage';
 import CreateAccount from './components/CreateAccount/CreateAccount';
+import EditAccount from './components/EditAccount/EditAccount';
 
 export const accountManagementRoutes = [
   {
@@ -14,6 +15,11 @@ export const accountManagementRoutes = [
     path: '/add',
     breadcrumb: 'Add an employee',
     Component: CreateAccount,
+  },
+  {
+    path: '/edit/:id',
+    breadcrumb: 'Edit an employee',
+    Component: EditAccount,
   },
 ];
 
