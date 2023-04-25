@@ -1,22 +1,25 @@
 import { LINK_TO_ACCOUNT_SERVICE, API_ROOT } from '../../../../common/config/config';
 import EditAccount from './EditAccount';
 
-describe('EditAccount', () => {
+const START_ROOT = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}accounts/1`;
+const MOCK_DATA = {
+  corporateEmail: 'test@tourmalinecore.com',
+  firstName: 'TestName',
+  lastName: 'TestLastName',
+  roles: [
+    {
+      id: 1,
+      name: 'CEO',
+    },
+  ],
+};
+
+describe('render elements EditAccount components', () => {
   beforeEach(() => {
     cy.intercept(
       'GET',
-      `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}accounts/1`,
-      {
-        corporateEmail: 'test@tourmalinecore.com',
-        firstName: 'TestName',
-        lastName: 'TestLastName',
-        roles: [
-          {
-            id: 1,
-            name: 'CEO',
-          },
-        ],
-      },
+      START_ROOT,
+      MOCK_DATA,
     );
 
     mountComponent();
@@ -52,44 +55,30 @@ describe('EditAccount', () => {
       .should('be.checked')
       .and('have.value', 'CEO');
   });
-});
 
-describe('Button', () => {
   it('SHOULD render cancel button no the edit page WHEN there is component', () => {
-    mountComponent();
-
     cy.getByData('cancel-button')
       .should('exist');
   });
 
   it('SHOULD render save button no the edit page WHEN there is component', () => {
-    mountComponent();
-
     cy.getByData('save-button')
       .should('exist');
   });
 });
 
 describe('entering EditAccount component data', () => {
-  it('SHOULD render error messages WHEN click save button with empty inputs required', () => {
+  beforeEach(() => {
     cy.intercept(
       'GET',
-      `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}accounts/1`,
-      {
-        corporateEmail: 'test@tourmalinecore.com',
-        firstName: 'TestName',
-        lastName: 'TestLastName',
-        roles: [
-          {
-            id: 1,
-            name: 'CEO',
-          },
-        ],
-      },
+      START_ROOT,
+      MOCK_DATA,
     );
 
     mountComponent();
+  });
 
+  it('SHOULD render error messages WHEN click save button with empty inputs required', () => {
     cy.getByData('first-name')
       .clear();
 
@@ -110,24 +99,6 @@ describe('entering EditAccount component data', () => {
   });
 
   it('SHOULD not render error messages WHEN click save button with not empty inputs required', () => {
-    cy.intercept(
-      'GET',
-      `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}accounts/1`,
-      {
-        corporateEmail: 'test@tourmalinecore.com',
-        firstName: 'TestName',
-        lastName: 'TestLastName',
-        roles: [
-          {
-            id: 1,
-            name: 'CEO',
-          },
-        ],
-      },
-    );
-
-    mountComponent();
-
     cy.getByData('first-name')
       .clear()
       .type('First name');
