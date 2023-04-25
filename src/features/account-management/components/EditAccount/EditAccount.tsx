@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Input, CheckField, Button } from '@tourmalinecore/react-tc-ui-kit';
 import ContentCard from '../../../../components/ContentCard/ContentCard';
@@ -46,6 +46,7 @@ function EditAccount() {
         validationMessages={['This first name is required. Please fill it up.']}
         value={account.firstName}
         isInvalid={!account.firstName && triedToSubmit}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setAccount({ ...account, firstName: e.target.value.trim() })}
       />
 
       <Input
@@ -53,11 +54,13 @@ function EditAccount() {
         validationMessages={['This last name is required. Please fill it up.']}
         value={account.lastName}
         isInvalid={!account.lastName && triedToSubmit}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setAccount({ ...account, lastName: e.target.value.trim() })}
       />
 
       <Input
         data-cy="middle-name"
         value={account.middleName}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setAccount({ ...account, middleName: e.target.value.trim() })}
       />
 
       <div className="roles">
