@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Input } from '@tourmalinecore/react-tc-ui-kit';
+import { Input, CheckField } from '@tourmalinecore/react-tc-ui-kit';
 import ContentCard from '../../../../components/ContentCard/ContentCard';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config';
 import { api } from '../../../../common/api';
@@ -16,11 +16,19 @@ type EditAccountType = {
   }[]
 };
 
+const checkFieldsData = {
+  Admin: 'Admin',
+  CEO: 'CEO',
+  Manager: 'Manager',
+  Employee: 'Employee',
+};
+
 function EditAccount() {
   const { id } = useParams();
 
   // @ts-ignore
   const [account, setAccount] = useState<EditAccountType>({});
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState(new Set<string>([]));
 
   useEffect(() => {
     getEditAccountLoad();
@@ -47,6 +55,29 @@ function EditAccount() {
         value={account.middleName}
       />
 
+      <div className="roles">
+        {Object.entries(checkFieldsData).map(([value, label]) => (
+          <CheckField
+            key={value}
+            style={{
+              marginBottom: 16,
+            }}
+            label={label}
+            checked={selectedCheckboxes.has(value)}
+            value={value}
+            onChange={() => {
+              setSelectedCheckboxes((prevSelected) => {
+                if (prevSelected.has(value)) {
+                  return new Set([...prevSelected].filter((x) => x !== value));
+                }
+
+                return new Set([...prevSelected, value]);
+              });
+            }}
+          />
+        ))}
+      </div>
+
     </ContentCard>
   );
 
@@ -54,6 +85,7 @@ function EditAccount() {
     const { data } = await api.get<EditAccountType>(`${LINK_TO_ACCOUNT_SERVICE}accounts/${id || 1}`);
 
     setAccount(data);
+    setSelectedCheckboxes(new Set([...data.roles.map(({ name }) => name)]));
   }
 }
 
