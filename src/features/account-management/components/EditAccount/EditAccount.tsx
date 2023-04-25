@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Input, CheckField } from '@tourmalinecore/react-tc-ui-kit';
+import { Input, CheckField, Button } from '@tourmalinecore/react-tc-ui-kit';
 import ContentCard from '../../../../components/ContentCard/ContentCard';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config';
 import { api } from '../../../../common/api';
@@ -77,6 +77,12 @@ function EditAccount() {
           />
         ))}
       </div>
+
+      <Button
+        data-cy="cancel-button"
+      >
+        Cancel
+      </Button>
 
     </ContentCard>
   );
