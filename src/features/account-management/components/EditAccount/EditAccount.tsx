@@ -29,6 +29,7 @@ function EditAccount() {
   // @ts-ignore
   const [account, setAccount] = useState<EditAccountType>({});
   const [selectedCheckboxes, setSelectedCheckboxes] = useState(new Set<string>([]));
+  const [triedToSubmit, setTriedToSubmit] = useState(false);
 
   useEffect(() => {
     getEditAccountLoad();
@@ -42,12 +43,16 @@ function EditAccount() {
 
       <Input
         data-cy="first-name"
+        validationMessages={['This first name is required. Please fill it up.']}
         value={account.firstName}
+        isInvalid={!account.firstName && triedToSubmit}
       />
 
       <Input
         data-cy="last-name"
+        validationMessages={['This last name is required. Please fill it up.']}
         value={account.lastName}
+        isInvalid={!account.lastName && triedToSubmit}
       />
 
       <Input
@@ -62,6 +67,7 @@ function EditAccount() {
             style={{
               marginBottom: 16,
             }}
+            data-cy="role"
             label={label}
             checked={selectedCheckboxes.has(value)}
             value={value}
@@ -76,6 +82,14 @@ function EditAccount() {
             }}
           />
         ))}
+
+        <div>
+          {[...selectedCheckboxes].length === 0 && triedToSubmit && (
+            <>
+              Select at least one role
+            </>
+          )}
+        </div>
       </div>
 
       <Button
@@ -86,6 +100,7 @@ function EditAccount() {
 
       <Button
         data-cy="save-button"
+        onClick={() => editAccountAsync()}
       >
         Save Changes
       </Button>
@@ -98,6 +113,24 @@ function EditAccount() {
 
     setAccount(data);
     setSelectedCheckboxes(new Set([...data.roles.map(({ name }) => name)]));
+  }
+
+  async function editAccountAsync() {
+    setTriedToSubmit(true);
+
+    try {
+      await api.post(`${LINK_TO_ACCOUNT_SERVICE}accounts/edit`, {
+        id,
+        firstName: account.firstName,
+        middleName: account.middleName,
+        lastName: account.lastName,
+        roles: [...selectedCheckboxes].map((item) => item),
+      });
+
+      setTriedToSubmit(false);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
 
