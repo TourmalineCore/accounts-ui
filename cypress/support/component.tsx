@@ -1,5 +1,10 @@
 /// <reference types="cypress" />
 
+import '@tourmalinecore/react-tc-ui-kit/es/index.css';
+import '@tourmalinecore/react-tc-modal/es/index.css';
+import '@tourmalinecore/react-table-responsive/es/index.css';
+import 'react-toastify/ReactToastify.min.css';
+
 import '../../src/styles/index.scss';
 import './commands';
 
