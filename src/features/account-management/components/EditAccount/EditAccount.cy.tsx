@@ -61,6 +61,13 @@ describe('Button', () => {
     cy.getByData('cancel-button')
       .should('exist');
   });
+
+  it('SHOULD render save button no the edit page WHEN there is component', () => {
+    mountComponent();
+
+    cy.getByData('save-button')
+      .should('exist');
+  });
 });
 
 function mountComponent() {
