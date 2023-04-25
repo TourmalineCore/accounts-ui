@@ -108,6 +108,46 @@ describe('entering EditAccount component data', () => {
 
     cy.contains('Select at least one role');
   });
+
+  it('SHOULD not render error messages WHEN click save button with not empty inputs required', () => {
+    cy.intercept(
+      'GET',
+      `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}accounts/1`,
+      {
+        corporateEmail: 'test@tourmalinecore.com',
+        firstName: 'TestName',
+        lastName: 'TestLastName',
+        roles: [
+          {
+            id: 1,
+            name: 'CEO',
+          },
+        ],
+      },
+    );
+
+    mountComponent();
+
+    cy.getByData('first-name')
+      .clear()
+      .type('First name');
+
+    cy.getByData('last-name')
+      .clear()
+      .type('Last name');
+
+    cy.getByData('role')
+      .check(['Admin'], { force: true });
+
+    cy.getByData('save-button')
+      .click();
+
+    cy.should('not.contain', 'This first name is required. Please fill it up.');
+
+    cy.should('not.contain', 'This last name is required. Please fill it up.');
+
+    cy.should('not.contain', 'Select at least one role');
+  });
 });
 
 function mountComponent() {
