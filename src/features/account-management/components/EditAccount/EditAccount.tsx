@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Input, CheckField, Button } from '@tourmalinecore/react-tc-ui-kit';
 import ContentCard from '../../../../components/ContentCard/ContentCard';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config';
@@ -16,6 +16,7 @@ const checkFieldsData = {
 };
 
 function EditAccount() {
+  const navigation = useNavigate();
   const { id } = useParams();
 
   // @ts-ignore
@@ -47,7 +48,7 @@ function EditAccount() {
           </div>
 
           <div className="edit-account__box">
-            <span>First Name</span>
+            <span>First Name*</span>
             <Input
               data-cy="first-name"
               validationMessages={['This first name is required. Please fill it up.']}
@@ -70,7 +71,7 @@ function EditAccount() {
           </div>
 
           <div className="edit-account__box">
-            <span>Last Name</span>
+            <span>Last Name*</span>
             <Input
               data-cy="last-name"
               validationMessages={['This last name is required. Please fill it up.']}
@@ -81,7 +82,7 @@ function EditAccount() {
           </div>
 
           <div className="edit-account__box">
-            <span>Role</span>
+            <span>Role*</span>
             <div className="edit-account__roles">
               {Object.entries(checkFieldsData).map(([value, label]) => (
                 <CheckField
@@ -118,6 +119,7 @@ function EditAccount() {
           <div className="edit-account__inner-button">
             <Button
               data-cy="cancel-button"
+              onClick={() => navigation('/account-management')}
             >
               Cancel
             </Button>
