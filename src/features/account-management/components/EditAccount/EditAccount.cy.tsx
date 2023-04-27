@@ -30,27 +30,27 @@ describe('render elements EditAccount components', () => {
       .should('exist');
   });
 
-  it('SHOULD call the backend to get data WHEN it wants to render corporate email', () => {
+  it(' AFTER render', () => {
     cy.getByData('corporate-email')
       .should('have.text', 'test@tourmalinecore.com');
   });
 
-  it('SHOULD call the backend to get data WHEN it wants to render first name input with value', () => {
+  it('first name input SHOULD have value AFTER render', () => {
     cy.getByData('first-name')
       .should('have.value', 'TestName');
   });
 
-  it('SHOULD call the backend to get data WHEN it wants to render last name input with value', () => {
+  it('last name input SHOULD have value AFTER render', () => {
     cy.getByData('last-name')
       .should('have.value', 'TestLastName');
   });
 
-  it('SHOULD call the backend to get data WHEN it wants to render middle name input with not have value', () => {
+  it('middle name input SHOULD have value AFTER render', () => {
     cy.getByData('middle-name')
       .should('have.value', '');
   });
 
-  it('SHOULD call the backend to get data WHEN it wants to render roles with selected values', () => {
+  it('role checkboxs SHOULD have value AFTER render', () => {
     cy.get('.tc-checkfield :checked')
       .should('be.checked')
       .and('have.value', 'CEO');
@@ -91,11 +91,11 @@ describe('entering EditAccount component data', () => {
     cy.getByData('save-button')
       .click();
 
-    cy.contains('This first name is required. Please fill it up.');
+    cy.contains('This first name is required. Please fill it up.').should('exist');
 
-    cy.contains('This last name is required. Please fill it up.');
+    cy.contains('This last name is required. Please fill it up.').should('exist');
 
-    cy.contains('Select at least one role');
+    cy.contains('Select at least one role').should('exist');
   });
 
   it('SHOULD not render error messages WHEN click save button with not empty inputs required', () => {
@@ -113,11 +113,11 @@ describe('entering EditAccount component data', () => {
     cy.getByData('save-button')
       .click();
 
-    cy.should('not.contain', 'This first name is required. Please fill it up.');
+    cy.contains('This first name is required. Please fill it up.').should('not.exist');
 
-    cy.should('not.contain', 'This last name is required. Please fill it up.');
+    cy.contains('This last name is required. Please fill it up.').should('not.exist');
 
-    cy.should('not.contain', 'Select at least one role');
+    cy.contains('Select at least one role').should('not.exist');
   });
 });
 
