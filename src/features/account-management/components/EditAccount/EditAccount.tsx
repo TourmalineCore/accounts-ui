@@ -19,8 +19,13 @@ function EditAccount() {
   const navigation = useNavigate();
   const { id } = useParams();
 
-  // @ts-ignore
-  const [account, setAccount] = useState<AccountEdit>({});
+  const [account, setAccount] = useState<AccountEdit>({
+    corporateEmail: '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    roles: [],
+  });
   const [selectedCheckboxes, setSelectedCheckboxes] = useState(new Set<string>([]));
   const [triedToSubmit, setTriedToSubmit] = useState(false);
 
@@ -65,7 +70,7 @@ function EditAccount() {
             </div>
             <Input
               data-cy="middle-name"
-              value={account.middleName}
+              value={account.middleName ?? ''}
               onChange={(event: ChangeEvent<HTMLInputElement>) => setAccount({ ...account, middleName: event.target.value.trim() })}
             />
           </div>
@@ -138,7 +143,7 @@ function EditAccount() {
   );
 
   async function getEditAccountLoad() {
-    const { data } = await api.get<AccountEdit>(`${LINK_TO_ACCOUNT_SERVICE}accounts/${id || 1}`);
+    const { data } = await api.get<AccountEdit>(`${LINK_TO_ACCOUNT_SERVICE}accounts/${id}`);
 
     setAccount(data);
     setSelectedCheckboxes(new Set([...data.roles.map(({ name }) => name)]));
