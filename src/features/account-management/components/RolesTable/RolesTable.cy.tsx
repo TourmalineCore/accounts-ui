@@ -14,6 +14,19 @@ describe('RolesTable', () => {
       <RolesTable />,
     );
 
-    cy.getByData('role-name-row').children().contains('Admin');
+    cy.getByData('role-name-row')
+      .children()
+      .contains('Admin');
+  });
+
+  it('SHOULD show non-empty profile section WHEN visit roles page', () => {
+    cy.mount(
+      <RolesTable />,
+    );
+
+    cy.getByData('profile-section-content')
+      .children()
+      .its('length')
+      .should('be.at.least', 1);
   });
 });
