@@ -20,6 +20,17 @@ describe('RolesTable', () => {
 
     cy.getByData('permission-group').first().contains('My Profile');
   });
+
+  it('SHOULD show role columns and permission group rows WHEN there are roles, permission groups, and no permissions', () => {
+    mountComponent({
+      permissionGroups: ['My Profile', 'Employees', 'Analytics', 'Account Management'],
+      roles: ['Admin', 'Employee'],
+      permissions: [],
+    });
+
+    cy.getByData('role-column').first().contains('Admin');
+    cy.getByData('permission-group').first().contains('My Profile');
+  });
 });
 
 function mountComponent({
