@@ -38,9 +38,14 @@ function RolesTable(
       </tr>
       {
         permissionGroups.map(({ groupName, permissions }) => (
-          <tr data-cy="permission-group">
-            {groupName}
-          </tr>
+          <>
+            <tr data-cy="permission-group">
+              {groupName}
+            </tr>
+            {permissions.map(({ name }) => (
+              <tr data-cy="permission">{name}</tr>
+            ))}
+          </>
         ))
       }
     </table>
