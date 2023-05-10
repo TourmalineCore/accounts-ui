@@ -4,7 +4,18 @@ describe('RolesTable', () => {
   it('SHOULD show role columns and no permission rows WHEN there are roles and no permissions', () => {
     mountComponent({
       permissionGroups: [],
-      roles: ['Admin', 'Employee'],
+      rolePermissions: [
+        {
+          id: 1,
+          name: 'Admin',
+          permissions: [],
+        },
+        {
+          id: 2,
+          name: 'Employee',
+          permissions: [],
+        },
+      ],
     });
 
     cy.getByData('role-column').first().contains('Admin');
@@ -15,18 +26,18 @@ describe('RolesTable', () => {
       permissionGroups: [
         {
           groupName: 'My Profile',
-          permissions: [],
+          children: [],
         },
         {
           groupName: 'Employees',
-          permissions: [],
+          children: [],
         },
         {
           groupName: 'Analytics',
-          permissions: [],
+          children: [],
         },
       ],
-      roles: [],
+      rolePermissions: [],
     });
 
     cy.getByData('permission-group').first().contains('My Profile');
@@ -37,18 +48,29 @@ describe('RolesTable', () => {
       permissionGroups: [
         {
           groupName: 'My Profile',
-          permissions: [],
+          children: [],
         },
         {
           groupName: 'Employees',
-          permissions: [],
+          children: [],
         },
         {
           groupName: 'Analytics',
+          children: [],
+        },
+      ],
+      rolePermissions: [
+        {
+          id: 1,
+          name: 'Admin',
+          permissions: [],
+        },
+        {
+          id: 2,
+          name: 'Employee',
           permissions: [],
         },
       ],
-      roles: ['Admin', 'Employee'],
     });
 
     cy.getByData('role-column').first().contains('Admin');
@@ -60,21 +82,32 @@ describe('RolesTable', () => {
       permissionGroups: [
         {
           groupName: 'My Profile',
-          permissions: [
-            { id: 1, name: 'View personal profile' },
-            { id: 2, name: 'Edit personal profile' },
+          children: [
+            { id: 'viewPersonalProfile', name: 'View personal profile' },
+            { id: 'editPersonalProfile', name: 'Edit personal profile' },
           ],
         },
         {
           groupName: 'Employees',
-          permissions: [
-            { id: 3, name: 'View contacts' },
-            { id: 4, name: 'View salary and documents data' },
-            { id: 5, name: 'Edit full employees data' },
+          children: [
+            { id: 'viewContacts', name: 'View contacts' },
+            { id: 'viewSalaryAndDocumentsData', name: 'View salary and documents data' },
+            { id: 'editFullEmployeesData', name: 'Edit full employees data' },
           ],
         },
       ],
-      roles: ['Admin', 'Employee'],
+      rolePermissions: [
+        {
+          id: 1,
+          name: 'Admin',
+          permissions: ['viewPersonalProfile', 'editPersonalProfile'],
+        },
+        {
+          id: 2,
+          name: 'Employee',
+          permissions: ['viewContacts', 'viewSalaryAndDocumentsData', 'editFullEmployeesData'],
+        },
+      ],
     });
     cy.getByData('role-column').first().contains('Admin');
     cy.getByData('permission-group').first().contains('My Profile');
@@ -84,15 +117,15 @@ describe('RolesTable', () => {
 
 function mountComponent({
   permissionGroups,
-  roles,
+  rolePermissions,
 }: {
   permissionGroups: PermissionGroup[];
-  roles: string[];
+  rolePermissions: RolePermission[];
 }) {
   cy.mount(
     <RolesTable
       permissionGroups={permissionGroups}
-      roles={roles}
+      rolePermissions={rolePermissions}
     />,
   );
 }
