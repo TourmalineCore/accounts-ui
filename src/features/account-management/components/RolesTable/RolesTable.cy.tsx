@@ -147,7 +147,7 @@ describe('RolesTable', () => {
       ],
     });
 
-    cy.getByData('permission-indicator').first().contains('check');
+    cy.getByData('permission-indicator').first().children().should('have.class', 'roles-table__permission-indicator--checked');
   });
 });
 

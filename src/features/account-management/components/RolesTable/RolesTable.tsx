@@ -30,14 +30,16 @@ function RolesTable(
         permissionGroups.map(({ groupName, children }) => (
           <>
             <tr data-cy="permission-group" style={{ backgroundColor: '#e2e2e2' }}>
-              {groupName}
+              <td colSpan={3}>{groupName}</td>
             </tr>
             {children.map(({ id, name }) => (
               <tr data-cy="permission">
                 <td>{name}</td>
                 {rolePermissions.map(({ permissions }) => (
                   <td data-cy="permission-indicator">
-                    {permissions.some((item) => item === id) ? 'check' : 'not'}
+                    {permissions.some((item) => item === id)
+                      ? <span className="roles-table__permission-indicator roles-table__permission-indicator--checked" />
+                      : <span className="roles-table__permission-indicator roles-table__permission-indicator--unchecked" />}
                   </td>
                 ))}
               </tr>
