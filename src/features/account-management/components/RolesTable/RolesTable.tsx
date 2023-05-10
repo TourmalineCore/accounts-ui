@@ -9,16 +9,6 @@ import React from 'react';
 // When press Edit button, the id of the role should be sent to mobX class (to __editId field)
 // based on this field, we will show either inputs or spans
 
-type Permission = {
-  id: number;
-  name: string;
-};
-
-type PermissionGroup = {
-  groupName: string;
-  permissions: Permission[];
-};
-
 function RolesTable(
   {
     permissionGroups,

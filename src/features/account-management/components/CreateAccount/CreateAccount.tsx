@@ -7,7 +7,6 @@ import { api } from '../../../../common/api';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config';
 
 import ContentCard from '../../../../components/ContentCard/ContentCard';
-import { AccountCreate } from '../../types';
 
 const checkFieldsData = {
   1: 'Admin',

@@ -10,7 +10,6 @@ import { api } from '../../common/api';
 
 import ContentCard from '../../components/ContentCard/ContentCard';
 import { Table } from '../../types';
-import { Accounts } from './types';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
 
 function AccountManagementPage() {
