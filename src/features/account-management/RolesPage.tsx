@@ -4,7 +4,7 @@ import RolesTable from './components/RolesTable/RolesTable';
 function RolesPage() {
   return (
     <div>
-      <RolesTable roles={[]} permissionGroups={[]} />
+      <RolesTable rolePermissions={[]} permissionGroups={[]} />
     </div>
   );
 }
