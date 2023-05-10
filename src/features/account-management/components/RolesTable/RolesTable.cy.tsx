@@ -113,6 +113,42 @@ describe('RolesTable', () => {
     cy.getByData('permission-group').first().contains('My Profile');
     cy.getByData('permission').first().contains('View personal profile');
   });
+
+  it('SHOULD show that the permission is checked for a role WHEN it is in the list of permissions for this role', () => {
+    mountComponent({
+      permissionGroups: [
+        {
+          groupName: 'My Profile',
+          children: [
+            { id: 'viewPersonalProfile', name: 'View personal profile' },
+            { id: 'editPersonalProfile', name: 'Edit personal profile' },
+          ],
+        },
+        {
+          groupName: 'Employees',
+          children: [
+            { id: 'viewContacts', name: 'View contacts' },
+            { id: 'viewSalaryAndDocumentsData', name: 'View salary and documents data' },
+            { id: 'editFullEmployeesData', name: 'Edit full employees data' },
+          ],
+        },
+      ],
+      rolePermissions: [
+        {
+          id: 1,
+          name: 'Admin',
+          permissions: ['viewPersonalProfile', 'editPersonalProfile'],
+        },
+        {
+          id: 2,
+          name: 'Employee',
+          permissions: ['viewContacts', 'viewSalaryAndDocumentsData', 'editFullEmployeesData'],
+        },
+      ],
+    });
+
+    cy.getByData('permission-indicator').first().contains('check');
+  });
 });
 
 function mountComponent({
