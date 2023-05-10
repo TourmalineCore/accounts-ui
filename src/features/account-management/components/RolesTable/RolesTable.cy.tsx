@@ -5,7 +5,6 @@ describe('RolesTable', () => {
     mountComponent({
       permissionGroups: [],
       roles: ['Admin', 'Employee'],
-      permissions: [],
     });
 
     cy.getByData('role-column').first().contains('Admin');
@@ -13,9 +12,21 @@ describe('RolesTable', () => {
 
   it('SHOULD show permission group rows WHEN there are permission groups and no roles or permissions', () => {
     mountComponent({
-      permissionGroups: ['My Profile', 'Employees', 'Analytics', 'Account Management'],
+      permissionGroups: [
+        {
+          groupName: 'My Profile',
+          permissions: [],
+        },
+        {
+          groupName: 'Employees',
+          permissions: [],
+        },
+        {
+          groupName: 'Analytics',
+          permissions: [],
+        },
+      ],
       roles: [],
-      permissions: [],
     });
 
     cy.getByData('permission-group').first().contains('My Profile');
@@ -23,9 +34,21 @@ describe('RolesTable', () => {
 
   it('SHOULD show role columns and permission group rows WHEN there are roles, permission groups, and no permissions', () => {
     mountComponent({
-      permissionGroups: ['My Profile', 'Employees', 'Analytics', 'Account Management'],
+      permissionGroups: [
+        {
+          groupName: 'My Profile',
+          permissions: [],
+        },
+        {
+          groupName: 'Employees',
+          permissions: [],
+        },
+        {
+          groupName: 'Analytics',
+          permissions: [],
+        },
+      ],
       roles: ['Admin', 'Employee'],
-      permissions: [],
     });
 
     cy.getByData('role-column').first().contains('Admin');
@@ -33,20 +56,27 @@ describe('RolesTable', () => {
   });
 });
 
+type Permission = {
+  id: number;
+  name: string;
+};
+
+  type PermissionGroup = {
+    groupName: string;
+    permissions: Permission[];
+  };
+
 function mountComponent({
   permissionGroups,
   roles,
-  permissions,
 }: {
-  permissionGroups: string[];
+  permissionGroups: PermissionGroup[];
   roles: string[];
-  permissions: string[];
 }) {
   cy.mount(
     <RolesTable
       permissionGroups={permissionGroups}
       roles={roles}
-      permissions={permissions}
     />,
   );
 }

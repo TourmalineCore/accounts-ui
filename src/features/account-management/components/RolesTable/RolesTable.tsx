@@ -9,20 +9,25 @@ import React from 'react';
 // When press Edit button, the id of the role should be sent to mobX class (to __editId field)
 // based on this field, we will show either inputs or spans
 
+type Permission = {
+  id: number;
+  name: string;
+};
+
+type PermissionGroup = {
+  groupName: string;
+  permissions: Permission[];
+};
+
 function RolesTable(
   {
     permissionGroups,
     roles,
-    permissions,
   }: {
-    permissionGroups: string[];
+    permissionGroups: PermissionGroup[];
     roles: string[];
-    permissions: string[];
   },
 ) {
-  console.log(roles);
-  console.log(permissions);
-
   return (
     <table data-cy="roles-table" className="roles-table">
       <tr>
@@ -32,8 +37,10 @@ function RolesTable(
         ))}
       </tr>
       {
-        permissionGroups.map((permissionGroup) => (
-          <tr data-cy="permission-group">{permissionGroup}</tr>
+        permissionGroups.map(({ groupName, permissions }) => (
+          <tr data-cy="permission-group">
+            {groupName}
+          </tr>
         ))
       }
     </table>
