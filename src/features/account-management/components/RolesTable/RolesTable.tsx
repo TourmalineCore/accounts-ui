@@ -11,9 +11,11 @@ import React from 'react';
 
 function RolesTable(
   {
+    permissionGroups,
     roles,
     permissions,
   }: {
+    permissionGroups: string[];
     roles: string[];
     permissions: string[];
   },
@@ -24,10 +26,16 @@ function RolesTable(
   return (
     <table data-cy="roles-table" className="roles-table">
       <tr>
+        <th>Permissions</th>
         {roles.map((role) => (
           <th data-cy="role-column">{role}</th>
         ))}
       </tr>
+      {
+        permissionGroups.map((permissionGroup) => (
+          <tr data-cy="permission-group">{permissionGroup}</tr>
+        ))
+      }
     </table>
   );
 }
