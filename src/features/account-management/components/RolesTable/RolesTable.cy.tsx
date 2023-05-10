@@ -3,7 +3,12 @@ import RolesTable from './RolesTable';
 const mockData = [{
   id: 1,
   name: 'Admin',
-  permissions: ['ViewPersonalProfile', 'EditPersonalProfile', 'ViewContacts'],
+  permissions: ['ViewPersonalProfile', 'EditPersonalProfile'],
+},
+{
+  id: 2,
+  name: 'Employee',
+  permissions: ['ViewPersonalProfile'],
 }];
 
 describe('RolesTable', () => {
@@ -20,6 +25,8 @@ describe('RolesTable', () => {
   });
 
   it('SHOULD show non-empty profile section WHEN visit roles page', () => {
+    cy.intercept('GET', '*/api/roles', mockData);
+
     cy.mount(
       <RolesTable />,
     );
@@ -28,5 +35,16 @@ describe('RolesTable', () => {
       .children()
       .its('length')
       .should('be.at.least', 1);
+  });
+
+  it('SHOULD show checked state for a permission WHEN this permission is in the list for this role', () => {
+    cy.intercept('GET', '*/api/roles', mockData);
+
+    cy.mount(
+      <RolesTable />,
+    );
+
+    cy.getByData('ViewPersonalProfile')
+      .contains('yes');
   });
 });
