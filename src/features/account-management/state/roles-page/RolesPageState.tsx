@@ -18,6 +18,14 @@ class RolesPageState {
   get roles() {
     return this._roles;
   }
+
+  addNewRole() {
+    this._roles.unshift({
+      id: 0,
+      name: '',
+      permissions: [],
+    });
+  }
 }
 
 export default RolesPageState;

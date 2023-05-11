@@ -12,7 +12,7 @@ describe('RolesPage', () => {
 });
 
 describe('AddNewRole', () => {
-  it('SHOULD show "add new role" button WHEN there showing the table', () => {
+  it('SHOULD show "add new role" button WHEN showing the table', () => {
     cy.mount(
       <RolesPage />,
     );
