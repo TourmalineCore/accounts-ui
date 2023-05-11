@@ -10,3 +10,13 @@ describe('RolesPage', () => {
     cy.getByData('roles-table').should('exist');
   });
 });
+
+describe('AddNewRole', () => {
+  it('SHOULD show "add new role" button WHEN there showing the table', () => {
+    cy.mount(
+      <RolesPage />,
+    );
+
+    cy.getByData('add-new-role-button').should('exist');
+  });
+});
