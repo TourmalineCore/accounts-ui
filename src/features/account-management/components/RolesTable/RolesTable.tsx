@@ -23,7 +23,14 @@ function RolesTable(
       <tr>
         <th>Permissions</th>
         {rolePermissions.map(({ name }) => (
-          <th data-cy="role-column">{name}</th>
+          <th data-cy="role-column">
+            <span>{name}</span>
+            {
+              name !== 'Admin'
+            && <button data-cy="role-column" type="button">Edit</button>
+            }
+
+          </th>
         ))}
       </tr>
       {
