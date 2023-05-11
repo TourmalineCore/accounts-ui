@@ -149,6 +149,26 @@ describe('RolesTable', () => {
 
     cy.getByData('permission-indicator').first().children().should('have.class', 'roles-table__permission-indicator--checked');
   });
+
+  it('SHOULD show edit button for roles except Admin WHEN displaying roles', () => {
+    mountComponent({
+      permissionGroups: [],
+      rolePermissions: [
+        {
+          id: 1,
+          name: 'Admin',
+          permissions: [],
+        },
+        {
+          id: 2,
+          name: 'Employee',
+          permissions: [],
+        },
+      ],
+    });
+    cy.getByData('role-column').last().contains('Edit');
+    cy.getByData('role-column').first().should('not.contain', 'Edit');
+  });
 });
 
 function mountComponent({
