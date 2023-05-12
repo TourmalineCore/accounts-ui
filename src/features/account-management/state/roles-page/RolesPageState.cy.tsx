@@ -17,7 +17,7 @@ const INITIAL_STATE = {
 };
 
 describe('RolesPageState', () => {
-  it('SHOULD return all galleries WHEN initialized', () => {
+  it('SHOULD return all roles WHEN initialized', () => {
     const rolesPageState = new RolesPageState();
 
     rolesPageState.initialize(INITIAL_STATE);
@@ -59,5 +59,34 @@ describe('RolesPageState', () => {
     });
 
     expect(rolesPageState.roles[1].name).eq('Manager');
+  });
+
+  it('SHOULD reset changes to role name that is being edited WHEN editing was canceled', () => {
+    const rolesPageState = new RolesPageState();
+
+    rolesPageState.initialize({
+      loadedRoles: [
+        {
+          id: 2,
+          name: 'Employee',
+          permissions: [],
+        },
+      ],
+    });
+
+    rolesPageState.editRole(2);
+
+    expect(rolesPageState.isInEditMode).eq(true);
+    expect(rolesPageState.roleIdThatIsBeingEditedNow).eq(2);
+
+    rolesPageState.changeRoleName('Manager');
+
+    expect(rolesPageState.roles[0].name).eq('Manager');
+
+    rolesPageState.cancelRoleEditing();
+
+    expect(rolesPageState.roles[0].name).eq('Employee');
+    expect(rolesPageState.isInEditMode).eq(false);
+    expect(rolesPageState.roleIdThatIsBeingEditedNow).eq(null);
   });
 });
