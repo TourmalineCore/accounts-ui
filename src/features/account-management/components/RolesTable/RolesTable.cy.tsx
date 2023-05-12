@@ -176,7 +176,7 @@ function mountComponent({
   rolePermissions,
 }: {
   permissionGroups: PermissionGroup[];
-  rolePermissions: RolePermission[];
+  rolePermissions: Role[];
 }) {
   cy.mount(
     <RolesTable

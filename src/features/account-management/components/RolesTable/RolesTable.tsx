@@ -15,7 +15,7 @@ function RolesTable(
     rolePermissions,
   }: {
     permissionGroups: PermissionGroup[];
-    rolePermissions: RolePermission[];
+    rolePermissions: Role[];
   },
 ) {
   return (

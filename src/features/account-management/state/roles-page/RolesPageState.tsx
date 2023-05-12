@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 class RolesPageState {
-  private _roles: RolePermission[] = [];
+  private _roles: Role[] = [];
 
   private _roleIdThatIsBeingEditedNow: number | null = null;
 
@@ -14,7 +14,7 @@ class RolesPageState {
   initialize({
     loadedRoles,
   }: {
-    loadedRoles: RolePermission[];
+    loadedRoles: Role[];
   }) {
     this._roles = loadedRoles;
   }

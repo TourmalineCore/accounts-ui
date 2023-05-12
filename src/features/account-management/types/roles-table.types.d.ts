@@ -8,7 +8,7 @@ type PermissionGroup = {
   children: Permission[];
 };
 
-type RolePermission = {
+type Role = {
   id: number;
   name: string;
   permissions: string[];
