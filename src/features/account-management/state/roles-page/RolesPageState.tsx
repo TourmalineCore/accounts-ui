@@ -45,6 +45,20 @@ class RolesPageState {
     this._roleIdThatIsBeingEditedNow = roleId;
     this._isInEditMode = true;
   }
+
+  applyChanges({ name, permissions } : { name: string; permissions: string[] }) {
+    this._roles = this._roles.map((role) => {
+      if (role.id === this._roleIdThatIsBeingEditedNow) {
+        return {
+          id: this._roleIdThatIsBeingEditedNow,
+          name,
+          permissions,
+        };
+      }
+
+      return role;
+    });
+  }
 }
 
 export default RolesPageState;
