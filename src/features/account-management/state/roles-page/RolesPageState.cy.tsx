@@ -46,4 +46,18 @@ describe('RolesPageState', () => {
     rolesPageState.editRole(2);
     expect(rolesPageState.roleIdThatIsBeingEditedNow).eq(2);
   });
+
+  it('SHOULD apply changes to a role WHEN saving was called for it', () => {
+    const rolesPageState = new RolesPageState();
+
+    rolesPageState.initialize(INITIAL_STATE);
+
+    rolesPageState.editRole(2);
+    rolesPageState.applyChanges({
+      name: 'Manager',
+      permissions: [],
+    });
+
+    expect(rolesPageState.roles[1].name).eq('Manager');
+  });
 });
