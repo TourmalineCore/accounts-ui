@@ -1,4 +1,11 @@
-import React from 'react';
+import { toJS } from 'mobx';
+import { observer } from 'mobx-react-lite';
+import React, {
+  ChangeEvent, useContext, useEffect, useRef,
+} from 'react';
+import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext';
+// import React, { useContext, useEffect } from 'react';
+// import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext';
 
 // ToDo
 // When create a new role, its object should be added to the beginning of the array using unshift method
@@ -17,14 +24,48 @@ function RolesTable(
     permissionGroups: PermissionGroup[];
     rolePermissions: Role[];
   },
+
 ) {
+  const rolesPageStateContext = useContext(RolesPageStateContext);
+
+  // useEffect(() => {
+  //   function loadData() {
+  //     console.log('123');
+  //   }
+
+  //   if (!rolesPageState.isInEditMode) {
+  //     loadData();
+  //   }
+  // }, [rolesPageState.isInEditMode]);
+
+  console.log(toJS(rolesPageStateContext.roles));
+
+  const nameRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (nameRef.current) {
+      nameRef.current.focus();
+    }
+  }, [rolesPageStateContext.roleIdThatIsBeingEditedNow]);
+
   return (
     <table data-cy="roles-table" className="roles-table">
       <tr>
         <th>Permissions</th>
-        {rolePermissions.map(({ name }) => (
+        {rolePermissions.map(({ id, name }) => (
+
           <th data-cy="role-column">
-            <span>{name}</span>
+            {
+              id === rolesPageStateContext.roleIdThatIsBeingEditedNow
+                ? (
+                  <input
+                    data-cy="role-name-input"
+                    type="text"
+                    ref={nameRef}
+                  />
+                )
+                : <span>{name}</span>
+            }
             {
               name !== 'Admin'
             && <button data-cy="role-column" type="button">Edit</button>
@@ -42,11 +83,30 @@ function RolesTable(
             {children.map(({ id, name }) => (
               <tr data-cy="permission">
                 <td>{name}</td>
-                {rolePermissions.map(({ permissions }) => (
+                {rolePermissions.map(({ id: roleId, permissions }) => (
                   <td data-cy="permission-indicator">
-                    {permissions.some((item) => item === id)
-                      ? <span className="roles-table__permission-indicator roles-table__permission-indicator--checked" />
-                      : <span className="roles-table__permission-indicator roles-table__permission-indicator--unchecked" />}
+
+                    <div>
+                      {roleId === rolesPageStateContext.roleIdThatIsBeingEditedNow
+                        ? (
+                          <input
+                            type="checkbox"
+                            defaultChecked={permissions.some((item) => item === id)}
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                              console.log(permissions[0], event.target.checked);
+                              return rolesPageStateContext.applyChanges({ name: '', permissions: [] });
+                            }}
+                          />
+                        )
+                        : (
+                          <span>
+                            {permissions.some((item) => item === id)
+                              ? <span className="roles-table__permission-indicator roles-table__permission-indicator--checked" />
+                              : <span className="roles-table__permission-indicator roles-table__permission-indicator--unchecked" />}
+                          </span>
+                        )}
+                    </div>
+
                   </td>
                 ))}
               </tr>
@@ -58,4 +118,4 @@ function RolesTable(
   );
 }
 
-export default RolesTable;
+export default observer(RolesTable);
