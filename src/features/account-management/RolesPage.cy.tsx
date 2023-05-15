@@ -19,4 +19,18 @@ describe('AddNewRole', () => {
 
     cy.getByData('add-new-role-button').should('exist');
   });
+
+  it('SHOULD add a new role to the table WHEN adding is called', () => {
+    cy.intercept('GET', '*/roles', []).as('call-1');
+
+    cy.mount(
+      <RolesPage />,
+    );
+
+    cy.getByData('add-new-role-button')
+      .click();
+
+    cy.getByData('role-column')
+      .should('exist');
+  });
 });
