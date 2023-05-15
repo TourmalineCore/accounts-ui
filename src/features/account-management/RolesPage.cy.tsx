@@ -33,4 +33,18 @@ describe('AddNewRole', () => {
     cy.getByData('role-column')
       .should('exist');
   });
+
+  it('SHOULD switch to edit mode WHEN adding a role is called', () => {
+    cy.intercept('GET', '*/roles', []).as('call-1');
+
+    cy.mount(
+      <RolesPage />,
+    );
+
+    cy.getByData('add-new-role-button')
+      .click();
+
+    cy.getByData('role-name-input')
+      .should('exist');
+  });
 });
