@@ -1,3 +1,5 @@
+import RolesPageState from '../../state/roles-page/RolesPageState';
+import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext';
 import RolesTable from './RolesTable';
 
 describe('RolesTable', () => {
@@ -109,6 +111,7 @@ describe('RolesTable', () => {
         },
       ],
     });
+
     cy.getByData('role-column').first().contains('Admin');
     cy.getByData('permission-group').first().contains('My Profile');
     cy.getByData('permission').first().contains('View personal profile');
@@ -147,7 +150,9 @@ describe('RolesTable', () => {
       ],
     });
 
-    cy.getByData('permission-indicator').first().children().should('have.class', 'roles-table__permission-indicator--checked');
+    cy.getByData('permission-indicator-checked')
+      .first()
+      .should('exist');
   });
 
   it('SHOULD show edit button for roles except Admin WHEN displaying roles', () => {
@@ -166,8 +171,29 @@ describe('RolesTable', () => {
         },
       ],
     });
+
     cy.getByData('role-column').last().contains('Edit');
     cy.getByData('role-column').first().should('not.contain', 'Edit');
+  });
+
+  it('SHOULD make the name input focused WHEN adding a role', () => {
+    mountComponent({
+      permissionGroups: [],
+      rolePermissions: [
+        {
+          id: 2,
+          name: 'Employee',
+          permissions: [],
+        },
+      ],
+    });
+
+    cy.get<RolesPageState>('@rolesPageState')
+      .then((rolesPageState) => {
+        rolesPageState.addNewRole();
+      });
+
+    cy.getByData('role-name-input').should('be.focused');
   });
 });
 
@@ -178,10 +204,21 @@ function mountComponent({
   permissionGroups: PermissionGroup[];
   rolePermissions: Role[];
 }) {
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
+  const rolesPageState = new RolesPageState();
+
+  rolesPageState.initialize({
+    loadedRoles: rolePermissions,
+  });
+
+  cy.wrap(rolesPageState).as('rolesPageState');
+
   cy.mount(
-    <RolesTable
-      permissionGroups={permissionGroups}
-      rolePermissions={rolePermissions}
-    />,
+    <RolesPageStateContext.Provider value={rolesPageState}>
+      <RolesTable
+        permissionGroups={permissionGroups}
+        rolePermissions={rolesPageState.roles}
+      />
+    </RolesPageStateContext.Provider>,
   );
 }
