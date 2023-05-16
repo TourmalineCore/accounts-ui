@@ -49,11 +49,11 @@ function RolesTable(
   }, [rolesPageStateContext.roleIdThatIsBeingEditedNow]);
 
   return (
+
     <table data-cy="roles-table" className="roles-table">
       <tr>
         <th>Permissions</th>
         {rolePermissions.map(({ id, name }) => (
-
           <th data-cy="role-column">
             {
               id === rolesPageStateContext.roleIdThatIsBeingEditedNow
@@ -86,26 +86,24 @@ function RolesTable(
                 {rolePermissions.map(({ id: roleId, permissions }) => (
                   <td data-cy="permission-indicator">
 
-                    <div>
-                      {roleId === rolesPageStateContext.roleIdThatIsBeingEditedNow
-                        ? (
-                          <input
-                            type="checkbox"
-                            defaultChecked={permissions.some((item) => item === id)}
-                            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                              console.log(permissions[0], event.target.checked);
-                              return rolesPageStateContext.applyChanges({ name: '', permissions: [] });
-                            }}
-                          />
-                        )
-                        : (
-                          <span>
-                            {permissions.some((item) => item === id)
-                              ? <span className="roles-table__permission-indicator roles-table__permission-indicator--checked" />
-                              : <span className="roles-table__permission-indicator roles-table__permission-indicator--unchecked" />}
-                          </span>
-                        )}
-                    </div>
+                    {roleId === rolesPageStateContext.roleIdThatIsBeingEditedNow
+                      ? (
+                        <input
+                          type="checkbox"
+                          defaultChecked={permissions.some((item) => item === id)}
+                          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                            console.log(permissions[0], event.target.checked);
+                            return rolesPageStateContext.applyChanges({ name: '', permissions: [] });
+                          }}
+                        />
+                      )
+                      : (
+                        <span>
+                          {permissions.some((item) => item === id)
+                            ? <span data-cy="permission-indicator-checked" className="roles-table__permission-indicator roles-table__permission-indicator--checked" />
+                            : <span data-cy="permission-indicator-unchecked" className="roles-table__permission-indicator roles-table__permission-indicator--unchecked" />}
+                        </span>
+                      )}
 
                   </td>
                 ))}
@@ -115,6 +113,7 @@ function RolesTable(
         ))
       }
     </table>
+
   );
 }
 
