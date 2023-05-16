@@ -1,7 +1,6 @@
-import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React, {
-  ChangeEvent, useContext, useEffect, useRef,
+  ChangeEvent, useContext, useEffect, useRef, useState,
 } from 'react';
 import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext';
 // import React, { useContext, useEffect } from 'react';
@@ -38,7 +37,11 @@ function RolesTable(
   //   }
   // }, [rolesPageState.isInEditMode]);
 
-  console.log(toJS(rolesPageStateContext.roles));
+  const [newRole, setNewRole] = useState<Role>({
+    id: 0,
+    name: '',
+    permissions: [],
+  });
 
   const nameRef = useRef<HTMLInputElement>(null);
 
@@ -46,6 +49,8 @@ function RolesTable(
     if (nameRef.current) {
       nameRef.current.focus();
     }
+
+    setNewRole(rolePermissions.find((item) => item.id === rolesPageStateContext.roleIdThatIsBeingEditedNow) || newRole);
   }, [rolesPageStateContext.roleIdThatIsBeingEditedNow]);
 
   return (
@@ -62,6 +67,10 @@ function RolesTable(
                     data-cy="role-name-input"
                     type="text"
                     ref={nameRef}
+                    onChange={(event) => {
+                      setNewRole({ ...newRole, name: event.target.value });
+                    }}
+                    defaultValue={name}
                   />
                 )
                 : <span>{name}</span>
@@ -89,11 +98,23 @@ function RolesTable(
                     {roleId === rolesPageStateContext.roleIdThatIsBeingEditedNow
                       ? (
                         <input
+                          id={id}
                           type="checkbox"
                           defaultChecked={permissions.some((item) => item === id)}
                           onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                            console.log(permissions[0], event.target.checked);
-                            return rolesPageStateContext.applyChanges({ name: '', permissions: [] });
+                            const permissionsCopy = [...newRole.permissions];
+                            const permissionIndexInArray = permissionsCopy.indexOf(event.target.id);
+
+                            if (permissionsCopy.includes(event.target.id)) {
+                              permissionsCopy.splice(permissionIndexInArray, 1);
+                            } else {
+                              permissionsCopy.push(event.target.id);
+                            }
+
+                            setNewRole({
+                              ...newRole,
+                              permissions: permissionsCopy,
+                            });
                           }}
                         />
                       )
@@ -104,7 +125,6 @@ function RolesTable(
                             : <span data-cy="permission-indicator-unchecked" className="roles-table__permission-indicator roles-table__permission-indicator--unchecked" />}
                         </span>
                       )}
-
                   </td>
                 ))}
               </tr>
