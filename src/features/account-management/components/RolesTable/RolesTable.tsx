@@ -77,7 +77,7 @@ function RolesTable(
               }
               {
                 (name !== 'Admin' && (!rolesPageStateContext.isInEditMode))
-            && <button data-cy="edit-role-button" type="button">Edit</button>
+            && <button data-cy={`edit-role-button-${name}`} type="button">Edit</button>
               }
 
             </td>

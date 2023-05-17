@@ -157,7 +157,23 @@ describe('RolesTable', () => {
 
   it('SHOULD show edit button for roles except Admin WHEN displaying roles', () => {
     mountComponent({
-      permissionGroups: [],
+      permissionGroups: [
+        {
+          groupName: 'My Profile',
+          children: [
+            { id: 'viewPersonalProfile', name: 'View personal profile' },
+            { id: 'editPersonalProfile', name: 'Edit personal profile' },
+          ],
+        },
+        {
+          groupName: 'Employees',
+          children: [
+            { id: 'viewContacts', name: 'View contacts' },
+            { id: 'viewSalaryAndDocumentsData', name: 'View salary and documents data' },
+            { id: 'editFullEmployeesData', name: 'Edit full employees data' },
+          ],
+        },
+      ],
       rolePermissions: [
         {
           id: 1,
@@ -208,14 +224,14 @@ describe('RolesTable', () => {
       ],
     });
 
-    cy.getByData('edit-role-button').should('have.length', 1);
+    cy.getByData('edit-role-button-Employee').should('have.length', 1);
 
     cy.get<RolesPageState>('@rolesPageState')
       .then((rolesPageState) => {
         rolesPageState.addNewRole();
       });
 
-    cy.getByData('edit-role-button').should('not.exist');
+    cy.getByData('edit-role-button-Employee').should('not.exist');
   });
 });
 
