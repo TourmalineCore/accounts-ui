@@ -195,6 +195,28 @@ describe('RolesTable', () => {
 
     cy.getByData('role-name-input').should('be.focused');
   });
+
+  it('SHOULD hide role edit buttons WHEN in edit mode', () => {
+    mountComponent({
+      permissionGroups: [],
+      rolePermissions: [
+        {
+          id: 2,
+          name: 'Employee',
+          permissions: [],
+        },
+      ],
+    });
+
+    cy.getByData('edit-role-button').should('have.length', 1);
+
+    cy.get<RolesPageState>('@rolesPageState')
+      .then((rolesPageState) => {
+        rolesPageState.addNewRole();
+      });
+
+    cy.getByData('edit-role-button').should('not.exist');
+  });
 });
 
 function mountComponent({
