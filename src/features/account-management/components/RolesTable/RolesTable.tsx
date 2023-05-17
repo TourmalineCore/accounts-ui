@@ -4,7 +4,6 @@ import React, {
 } from 'react';
 import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext';
 // import React, { useContext, useEffect } from 'react';
-// import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext';
 
 // ToDo
 // When create a new role, its object should be added to the beginning of the array using unshift method
@@ -77,8 +76,8 @@ function RolesTable(
                   : <span>{name}</span>
               }
               {
-                name !== 'Admin'
-            && <button data-cy="role-column" type="button">Edit</button>
+                (name !== 'Admin' && (!rolesPageStateContext.isInEditMode))
+            && <button data-cy="edit-role-button" type="button">Edit</button>
               }
 
             </td>
