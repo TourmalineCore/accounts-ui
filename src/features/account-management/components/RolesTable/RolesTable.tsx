@@ -56,82 +56,87 @@ function RolesTable(
   return (
 
     <table data-cy="roles-table" className="roles-table">
-      <tr>
-        <th>Permissions</th>
-        {rolePermissions.map(({ id, name }) => (
-          <th data-cy="role-column">
-            {
-              id === rolesPageStateContext.roleIdThatIsBeingEditedNow
-                ? (
-                  <input
-                    data-cy="role-name-input"
-                    type="text"
-                    ref={nameRef}
-                    onChange={(event) => {
-                      setNewRole({ ...newRole, name: event.target.value });
-                    }}
-                    defaultValue={name}
-                  />
-                )
-                : <span>{name}</span>
-            }
-            {
-              name !== 'Admin'
+      <thead>
+        <tr>
+          <td>Permissions</td>
+          {rolePermissions.map(({ id, name }) => (
+            <td data-cy="role-column">
+              {
+                id === rolesPageStateContext.roleIdThatIsBeingEditedNow
+                  ? (
+                    <input
+                      data-cy="role-name-input"
+                      type="text"
+                      ref={nameRef}
+                      onChange={(event) => {
+                        setNewRole({ ...newRole, name: event.target.value });
+                      }}
+                      defaultValue={name}
+                    />
+                  )
+                  : <span>{name}</span>
+              }
+              {
+                name !== 'Admin'
             && <button data-cy="role-column" type="button">Edit</button>
-            }
+              }
 
-          </th>
-        ))}
-      </tr>
-      {
-        permissionGroups.map(({ groupName, children }) => (
-          <>
-            <tr data-cy="permission-group" style={{ backgroundColor: '#e2e2e2' }}>
-              <td colSpan={3}>{groupName}</td>
-            </tr>
-            {children.map(({ id, name }) => (
-              <tr data-cy="permission">
-                <td>{name}</td>
-                {rolePermissions.map(({ id: roleId, permissions }) => (
-                  <td data-cy="permission-indicator">
+            </td>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {
 
-                    {roleId === rolesPageStateContext.roleIdThatIsBeingEditedNow
-                      ? (
-                        <input
-                          id={id}
-                          type="checkbox"
-                          defaultChecked={permissions.some((item) => item === id)}
-                          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                            const permissionsCopy = [...newRole.permissions];
-                            const permissionIndexInArray = permissionsCopy.indexOf(event.target.id);
-
-                            if (permissionsCopy.includes(event.target.id)) {
-                              permissionsCopy.splice(permissionIndexInArray, 1);
-                            } else {
-                              permissionsCopy.push(event.target.id);
-                            }
-
-                            setNewRole({
-                              ...newRole,
-                              permissions: permissionsCopy,
-                            });
-                          }}
-                        />
-                      )
-                      : (
-                        <span>
-                          {permissions.some((item) => item === id)
-                            ? <span data-cy="permission-indicator-checked" className="roles-table__permission-indicator roles-table__permission-indicator--checked" />
-                            : <span data-cy="permission-indicator-unchecked" className="roles-table__permission-indicator roles-table__permission-indicator--unchecked" />}
-                        </span>
-                      )}
-                  </td>
-                ))}
+          permissionGroups.map(({ groupName, children }) => (
+            <>
+              <tr data-cy="permission-group" style={{ backgroundColor: '#e2e2e2' }}>
+                <td colSpan={3}>{groupName}</td>
               </tr>
-            ))}
-          </>
-        ))
-      }
+              {children.map(({ id, name }) => (
+                <tr data-cy="permission">
+                  <td>{name}</td>
+                  {rolePermissions.map(({ id: roleId, permissions }) => (
+                    <td data-cy="permission-indicator">
+
+                      {roleId === rolesPageStateContext.roleIdThatIsBeingEditedNow
+                        ? (
+                          <input
+                            id={id}
+                            type="checkbox"
+                            defaultChecked={permissions.some((item) => item === id)}
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                              const permissionsCopy = [...newRole.permissions];
+                              const permissionIndexInArray = permissionsCopy.indexOf(event.target.id);
+
+                              if (permissionsCopy.includes(event.target.id)) {
+                                permissionsCopy.splice(permissionIndexInArray, 1);
+                              } else {
+                                permissionsCopy.push(event.target.id);
+                              }
+
+                              setNewRole({
+                                ...newRole,
+                                permissions: permissionsCopy,
+                              });
+                            }}
+                          />
+                        )
+                        : (
+                          <span>
+                            {permissions.some((item) => item === id)
+                              ? <span data-cy="permission-indicator-checked" className="roles-table__permission-indicator roles-table__permission-indicator--checked" />
+                              : <span data-cy="permission-indicator-unchecked" className="roles-table__permission-indicator roles-table__permission-indicator--unchecked" />}
+                          </span>
+                        )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </>
+          ))
+        }
+      </tbody>
     </table>
 
   );
