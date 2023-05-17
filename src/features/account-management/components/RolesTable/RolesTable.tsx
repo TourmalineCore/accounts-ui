@@ -60,7 +60,7 @@ function RolesTable(
         <tr>
           <td>Permissions</td>
           {rolePermissions.map(({ id, name }) => (
-            <td data-cy="role-column">
+            <td data-cy="role-column" key={id}>
               {
                 id === rolesPageStateContext.roleIdThatIsBeingEditedNow
                   ? (
@@ -90,11 +90,11 @@ function RolesTable(
 
           permissionGroups.map(({ groupName, children }) => (
             <>
-              <tr data-cy="permission-group" style={{ backgroundColor: '#e2e2e2' }}>
+              <tr data-cy="permission-group" style={{ backgroundColor: '#e2e2e2' }} key={groupName}>
                 <td colSpan={3}>{groupName}</td>
               </tr>
               {children.map(({ id, name }) => (
-                <tr data-cy="permission">
+                <tr data-cy="permission" key={id}>
                   <td>{name}</td>
                   {rolePermissions.map(({ id: roleId, permissions }) => (
                     <td data-cy="permission-indicator">
