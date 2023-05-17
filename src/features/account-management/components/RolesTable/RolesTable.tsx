@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, {
-  ChangeEvent, useContext, useEffect, useRef, useState,
+  ChangeEvent, Fragment, useContext, useEffect, useRef, useState,
 } from 'react';
 import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext';
 // import React, { useContext, useEffect } from 'react';
@@ -59,7 +59,7 @@ function RolesTable(
         <tr>
           <td>Permissions</td>
           {rolePermissions.map(({ id, name }) => (
-            <td data-cy="role-column" key={id}>
+            <td data-cy="role-column" key={name}>
               {
                 id === rolesPageStateContext.roleIdThatIsBeingEditedNow
                   ? (
@@ -85,56 +85,53 @@ function RolesTable(
         </tr>
       </thead>
       <tbody>
-        {
+        {permissionGroups.map(({ groupName, children }) => (
+          <Fragment key={groupName}>
+            <tr data-cy="permission-group" style={{ backgroundColor: '#e2e2e2' }}>
+              <td colSpan={3}>{groupName}</td>
+            </tr>
+            {children.map(({ id, name }) => (
+              <tr data-cy="permission" key={id}>
+                <td>{name}</td>
+                {rolePermissions.map(({ id: roleId, permissions }) => (
+                  <td data-cy="permission-indicator" key={roleId}>
 
-          permissionGroups.map(({ groupName, children }) => (
-            <>
-              <tr data-cy="permission-group" style={{ backgroundColor: '#e2e2e2' }} key={groupName}>
-                <td colSpan={3}>{groupName}</td>
+                    {roleId === rolesPageStateContext.roleIdThatIsBeingEditedNow
+                      ? (
+                        <input
+                          id={id}
+                          type="checkbox"
+                          defaultChecked={permissions.some((item) => item === id)}
+                          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                            const permissionsCopy = [...newRole.permissions];
+                            const permissionIndexInArray = permissionsCopy.indexOf(event.target.id);
+
+                            if (permissionsCopy.includes(event.target.id)) {
+                              permissionsCopy.splice(permissionIndexInArray, 1);
+                            } else {
+                              permissionsCopy.push(event.target.id);
+                            }
+
+                            setNewRole({
+                              ...newRole,
+                              permissions: permissionsCopy,
+                            });
+                          }}
+                        />
+                      )
+                      : (
+                        <span>
+                          {permissions.some((item) => item === id)
+                            ? <span data-cy="permission-indicator-checked" className="roles-table__permission-indicator roles-table__permission-indicator--checked" />
+                            : <span data-cy="permission-indicator-unchecked" className="roles-table__permission-indicator roles-table__permission-indicator--unchecked" />}
+                        </span>
+                      )}
+                  </td>
+                ))}
               </tr>
-              {children.map(({ id, name }) => (
-                <tr data-cy="permission" key={id}>
-                  <td>{name}</td>
-                  {rolePermissions.map(({ id: roleId, permissions }) => (
-                    <td data-cy="permission-indicator">
-
-                      {roleId === rolesPageStateContext.roleIdThatIsBeingEditedNow
-                        ? (
-                          <input
-                            id={id}
-                            type="checkbox"
-                            defaultChecked={permissions.some((item) => item === id)}
-                            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                              const permissionsCopy = [...newRole.permissions];
-                              const permissionIndexInArray = permissionsCopy.indexOf(event.target.id);
-
-                              if (permissionsCopy.includes(event.target.id)) {
-                                permissionsCopy.splice(permissionIndexInArray, 1);
-                              } else {
-                                permissionsCopy.push(event.target.id);
-                              }
-
-                              setNewRole({
-                                ...newRole,
-                                permissions: permissionsCopy,
-                              });
-                            }}
-                          />
-                        )
-                        : (
-                          <span>
-                            {permissions.some((item) => item === id)
-                              ? <span data-cy="permission-indicator-checked" className="roles-table__permission-indicator roles-table__permission-indicator--checked" />
-                              : <span data-cy="permission-indicator-unchecked" className="roles-table__permission-indicator roles-table__permission-indicator--unchecked" />}
-                          </span>
-                        )}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </>
-          ))
-        }
+            ))}
+          </Fragment>
+        ))}
       </tbody>
     </table>
 
