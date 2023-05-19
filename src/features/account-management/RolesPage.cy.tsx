@@ -78,4 +78,37 @@ describe('AddNewRole', () => {
       permissions: [],
     }]).as('call-5');
   });
+
+  it('SHOULD discard changes made to a role WHEN cancel is called', () => {
+    cy.intercept(
+      'GET',
+      'https://innercircle.dev.tourmalinecore.com/api/account-management/roles',
+      [
+        {
+          id: 1,
+          name: 'Admin',
+          permissions: [],
+        },
+        {
+          id: 2,
+          name: 'Manager',
+          permissions: [],
+        },
+      ],
+    ).as('call-6');
+
+    cy.mount(
+      <RolesPage />,
+    );
+    cy.getByData('edit-role-button-Manager')
+      .click();
+
+    cy.getByData('role-name-input')
+      .type('Barmaley');
+
+    cy.getByData('cancel-changes-button')
+      .click();
+
+    cy.getByData('role-name-Manager').should('exist');
+  });
 });
