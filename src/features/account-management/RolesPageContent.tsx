@@ -1,6 +1,6 @@
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { api } from '../../common/api';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
 import RolesTable from './components/RolesTable/RolesTable';
@@ -10,6 +10,10 @@ function RolesPageContent() {
   const rolesPageStateContext = useContext(RolesPageStateContext);
 
   console.log(toJS(rolesPageStateContext.updatedRole));
+
+  useEffect(() => {
+    getRoles();
+  }, []);
 
   return (
     <div>
@@ -29,7 +33,7 @@ function RolesPageContent() {
               <button
                 type="button"
                 data-cy="cancel-changes-button"
-                onClick={() => { }}
+                onClick={() => { rolesPageStateContext.cancelRoleEditing(); }}
               >
                 Cancel
               </button>
