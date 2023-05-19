@@ -75,9 +75,10 @@ class RolesPageState {
   }
 
   editRole(roleId: number) {
+    const index = this._roles.map((element) => element.id).indexOf(roleId);
+
     this._roleIdThatIsBeingEditedNow = roleId;
     this._isInEditMode = true;
-    const index = this._roles.map((element) => element.id).indexOf(roleId);
     this._updatedRole = this._roles[index];
     this._roleBeforeEditing = { ...this._roles[0] };
   }

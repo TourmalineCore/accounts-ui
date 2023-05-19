@@ -89,4 +89,29 @@ describe('RolesPageState', () => {
     expect(rolesPageState.isInEditMode).eq(false);
     expect(rolesPageState.roleIdThatIsBeingEditedNow).eq(null);
   });
+
+  it('SHOULD have the same object in private field WHEN editing this object', () => {
+    const rolesPageState = new RolesPageState();
+
+    rolesPageState.initialize({
+      loadedRoles: [
+        {
+          id: 2,
+          name: 'Employee',
+          permissions: [],
+        },
+      ],
+    });
+
+    rolesPageState.editRole(2);
+
+    expect(rolesPageState.isInEditMode).eq(true);
+    expect(rolesPageState.roleIdThatIsBeingEditedNow).eq(2);
+
+    expect(rolesPageState.updatedRole).to.deep.equal({
+      id: 2,
+      name: 'Employee',
+      permissions: [],
+    });
+  });
 });
