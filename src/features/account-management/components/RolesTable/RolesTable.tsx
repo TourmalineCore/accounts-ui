@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, {
-  ChangeEvent, Fragment, useContext, useEffect, useRef, useState,
+  ChangeEvent, Fragment, useContext, useEffect, useRef,
 } from 'react';
 import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext';
 // import React, { useContext, useEffect } from 'react';
@@ -36,20 +36,12 @@ function RolesTable(
   //   }
   // }, [rolesPageState.isInEditMode]);
 
-  // const [newRole, setNewRole] = useState<Role>({
-  //   id: 0,
-  //   name: '',
-  //   permissions: [],
-  // });
-
   const nameRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (nameRef.current) {
       nameRef.current.focus();
     }
-
-    // setNewRole(rolePermissions.find((item) => item.id === rolesPageStateContext.roleIdThatIsBeingEditedNow) || newRole);
   }, [rolesPageStateContext.roleIdThatIsBeingEditedNow]);
 
   return (
