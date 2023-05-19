@@ -49,7 +49,7 @@ describe('AddNewRole', () => {
   });
 
   it('SHOULD send changes made to a role to server WHEN saving them', () => {
-    cy.intercept('GET', '*/roles', []).as('call-3');
+    cy.intercept('GET', 'https://innercircle.dev.tourmalinecore.com/api/account-management/roles', []).as('call-3');
 
     cy.mount(
       <RolesPage />,

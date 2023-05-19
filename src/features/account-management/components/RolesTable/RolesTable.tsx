@@ -42,7 +42,7 @@ function RolesTable(
     if (nameRef.current) {
       nameRef.current.focus();
     }
-  }, [rolesPageStateContext.roleIdThatIsBeingEditedNow]);
+  }, [rolesPageStateContext.updatedRole]);
 
   return (
 
@@ -53,7 +53,7 @@ function RolesTable(
           {rolePermissions.map(({ id, name }) => (
             <td data-cy="role-column" key={name}>
               {
-                id === rolesPageStateContext.roleIdThatIsBeingEditedNow
+                id === rolesPageStateContext.updatedRole.id
                   ? (
                     <input
                       data-cy="role-name-input"
@@ -88,7 +88,7 @@ function RolesTable(
                 {rolePermissions.map(({ id: roleId, permissions }) => (
                   <td data-cy="permission-indicator" key={roleId}>
 
-                    {roleId === rolesPageStateContext.roleIdThatIsBeingEditedNow
+                    {roleId === rolesPageStateContext.updatedRole.id
                       ? (
                         <input
                           id={id}

@@ -35,7 +35,7 @@ describe('RolesPageState', () => {
     expect(rolesPageState.roles).to.has.lengthOf(3);
     expect(rolesPageState.roles[0].name).eq('');
     expect(rolesPageState.isInEditMode).eq(true);
-    expect(rolesPageState.roleIdThatIsBeingEditedNow).eq(0);
+    expect(rolesPageState.updatedRole.id).eq(0);
   });
 
   it('SHOULD turn on edit mode for a role WHEN editing was called for it', () => {
@@ -44,7 +44,7 @@ describe('RolesPageState', () => {
     rolesPageState.initialize(INITIAL_STATE);
 
     rolesPageState.editRole(2);
-    expect(rolesPageState.roleIdThatIsBeingEditedNow).eq(2);
+    expect(rolesPageState.updatedRole.id).eq(2);
   });
 
   it('SHOULD apply changes to a role WHEN saving was called for it', () => {
@@ -77,7 +77,7 @@ describe('RolesPageState', () => {
     rolesPageState.editRole(2);
 
     expect(rolesPageState.isInEditMode).eq(true);
-    expect(rolesPageState.roleIdThatIsBeingEditedNow).eq(2);
+    expect(rolesPageState.updatedRole.id).eq(2);
 
     rolesPageState.changeRoleName('Manager');
 
@@ -87,7 +87,6 @@ describe('RolesPageState', () => {
 
     expect(rolesPageState.roles[0].name).eq('Employee');
     expect(rolesPageState.isInEditMode).eq(false);
-    expect(rolesPageState.roleIdThatIsBeingEditedNow).eq(null);
   });
 
   it('SHOULD have the same object in private field WHEN editing this object', () => {
@@ -106,7 +105,7 @@ describe('RolesPageState', () => {
     rolesPageState.editRole(2);
 
     expect(rolesPageState.isInEditMode).eq(true);
-    expect(rolesPageState.roleIdThatIsBeingEditedNow).eq(2);
+    expect(rolesPageState.updatedRole.id).eq(2);
 
     expect(rolesPageState.updatedRole).to.deep.equal({
       id: 2,

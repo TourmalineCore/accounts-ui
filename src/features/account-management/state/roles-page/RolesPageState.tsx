@@ -5,8 +5,6 @@ class RolesPageState {
 
   private _roleBeforeEditing: Role | null = null;
 
-  private _roleIdThatIsBeingEditedNow: number | null = null;
-
   private _isInEditMode: boolean = false;
 
   private _newRoleName: string = '';
@@ -37,28 +35,21 @@ class RolesPageState {
     return this._isInEditMode;
   }
 
-  get roleIdThatIsBeingEditedNow() {
-    return this._roleIdThatIsBeingEditedNow;
-  }
-
   get updatedRole() {
     return this._updatedRole;
   }
 
   changeRole({
+    id,
     name,
     permissions,
   }:{
+    id: number;
     name: string,
     permissions: string[]
   }) {
-    // return {
-    //   id: this._roleIdThatIsBeingEditedNow,
-    //   name: newName,
-    //   permissions: newPermissions,
-    // };
     this._updatedRole = {
-      id: this._roleIdThatIsBeingEditedNow!,
+      id,
       name,
       permissions,
     };
@@ -77,12 +68,12 @@ class RolesPageState {
   editRole(roleId: number) {
     const index = this._roles.map((element) => element.id).indexOf(roleId);
 
-    this._roleIdThatIsBeingEditedNow = roleId;
     this._isInEditMode = true;
     this._updatedRole = this._roles[index];
     this._roleBeforeEditing = { ...this._roles[0] };
   }
 
+  // check if needed
   applyChanges({
     name,
     permissions,
@@ -92,9 +83,9 @@ class RolesPageState {
   }) {
     this._roles = this._roles
       .map((role) => {
-        if (role.id === this._roleIdThatIsBeingEditedNow) {
+        if (role.id === this._updatedRole.id) {
           return {
-            id: this._roleIdThatIsBeingEditedNow,
+            id: this._updatedRole.id,
             name,
             permissions,
           };
@@ -105,21 +96,20 @@ class RolesPageState {
   }
 
   changeRoleName(newRoleName: string) {
-    const roleToChangeName = this._roles.find(({ id }) => id === this._roleIdThatIsBeingEditedNow);
+    const roleToChangeName = this._roles.find(({ id }) => id === this._updatedRole.id);
     roleToChangeName!.name = newRoleName;
   }
 
   cancelRoleEditing() {
     this._roles = this._roles
       .map((role) => {
-        if (role.id === this._roleIdThatIsBeingEditedNow) {
+        if (role.id === this._updatedRole.id) {
           return this._roleBeforeEditing!;
         }
 
         return role;
       });
 
-    this._roleIdThatIsBeingEditedNow = null;
     this._isInEditMode = false;
     this._roleBeforeEditing = null;
   }
