@@ -36,11 +36,11 @@ function RolesTable(
   //   }
   // }, [rolesPageState.isInEditMode]);
 
-  const [newRole, setNewRole] = useState<Role>({
-    id: 0,
-    name: '',
-    permissions: [],
-  });
+  // const [newRole, setNewRole] = useState<Role>({
+  //   id: 0,
+  //   name: '',
+  //   permissions: [],
+  // });
 
   const nameRef = useRef<HTMLInputElement>(null);
 
@@ -49,7 +49,7 @@ function RolesTable(
       nameRef.current.focus();
     }
 
-    setNewRole(rolePermissions.find((item) => item.id === rolesPageStateContext.roleIdThatIsBeingEditedNow) || newRole);
+    // setNewRole(rolePermissions.find((item) => item.id === rolesPageStateContext.roleIdThatIsBeingEditedNow) || newRole);
   }, [rolesPageStateContext.roleIdThatIsBeingEditedNow]);
 
   return (
@@ -68,7 +68,7 @@ function RolesTable(
                       type="text"
                       ref={nameRef}
                       onChange={(event) => {
-                        setNewRole({ ...newRole, name: event.target.value });
+                        rolesPageStateContext.changeRole({ ...rolesPageStateContext.updatedRole, name: event.target.value });
                       }}
                       defaultValue={name}
                     />
@@ -103,7 +103,7 @@ function RolesTable(
                           type="checkbox"
                           defaultChecked={permissions.some((item) => item === id)}
                           onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                            const permissionsCopy = [...newRole.permissions];
+                            const permissionsCopy = [...rolesPageStateContext.updatedRole.permissions];
                             const permissionIndexInArray = permissionsCopy.indexOf(event.target.id);
 
                             if (permissionsCopy.includes(event.target.id)) {
@@ -111,11 +111,7 @@ function RolesTable(
                             } else {
                               permissionsCopy.push(event.target.id);
                             }
-
-                            setNewRole({
-                              ...newRole,
-                              permissions: permissionsCopy,
-                            });
+                            rolesPageStateContext.changeRole({ ...rolesPageStateContext.updatedRole, permissions: permissionsCopy });
                           }}
                         />
                       )

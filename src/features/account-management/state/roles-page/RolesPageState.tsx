@@ -11,6 +11,12 @@ class RolesPageState {
 
   private _newRoleName: string = '';
 
+  private _updatedRole: Role = {
+    id: 0,
+    name: '',
+    permissions: [],
+  };
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -35,6 +41,29 @@ class RolesPageState {
     return this._roleIdThatIsBeingEditedNow;
   }
 
+  get updatedRole() {
+    return this._updatedRole;
+  }
+
+  changeRole({
+    name,
+    permissions,
+  }:{
+    name: string,
+    permissions: string[]
+  }) {
+    // return {
+    //   id: this._roleIdThatIsBeingEditedNow,
+    //   name: newName,
+    //   permissions: newPermissions,
+    // };
+    this._updatedRole = {
+      id: this._roleIdThatIsBeingEditedNow!,
+      name,
+      permissions,
+    };
+  }
+
   addNewRole() {
     this._roles.unshift({
       id: 0,
@@ -48,6 +77,8 @@ class RolesPageState {
   editRole(roleId: number) {
     this._roleIdThatIsBeingEditedNow = roleId;
     this._isInEditMode = true;
+    const index = this._roles.map((element) => element.id).indexOf(roleId);
+    this._updatedRole = this._roles[index];
     this._roleBeforeEditing = { ...this._roles[0] };
   }
 

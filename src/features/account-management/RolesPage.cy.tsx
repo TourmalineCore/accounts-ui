@@ -66,14 +66,14 @@ describe('AddNewRole', () => {
 
     cy.intercept(
       'POST',
-      '*/roles/create',
+      'https://innercircle.dev.tourmalinecore.com/api/account-management/roles/create',
       {
         name: 'Manager',
         permissions: [],
       },
     ).as('call-4');
 
-    cy.intercept('GET', '*/roles', [{
+    cy.intercept('GET', 'https://innercircle.dev.tourmalinecore.com/api/account-management/roles', [{
       name: 'Manager',
       permissions: [],
     }]).as('call-5');

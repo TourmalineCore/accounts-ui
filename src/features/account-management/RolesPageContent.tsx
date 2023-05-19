@@ -1,10 +1,15 @@
+import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
+import { api } from '../../common/api';
+import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
 import RolesTable from './components/RolesTable/RolesTable';
 import RolesPageStateContext from './state/roles-page/RolesPageStateContext';
 
 function RolesPageContent() {
   const rolesPageStateContext = useContext(RolesPageStateContext);
+
+  console.log(toJS(rolesPageStateContext.updatedRole));
 
   return (
     <div>
@@ -31,7 +36,7 @@ function RolesPageContent() {
               <button
                 type="button"
                 data-cy="save-changes-button"
-                onClick={() => { }}
+                onClick={() => { saveChangesToRole(); }}
               >
                 Save Changes
               </button>
@@ -42,6 +47,17 @@ function RolesPageContent() {
       <RolesTable rolePermissions={rolesPageStateContext.roles} permissionGroups={[]} />
     </div>
   );
+
+  async function saveChangesToRole() {
+    await api.post(`${LINK_TO_ACCOUNT_SERVICE}roles/create`, rolesPageStateContext.updatedRole);
+
+    getRoles();
+  }
+
+  async function getRoles() {
+    const { data } = await api.get(`${LINK_TO_ACCOUNT_SERVICE}roles`);
+    rolesPageStateContext.initialize({ loadedRoles: data });
+  }
 }
 
 export default observer(RolesPageContent);
