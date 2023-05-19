@@ -9,11 +9,7 @@ class RolesPageState {
 
   private _newRoleName: string = '';
 
-  private _updatedRole: Role = {
-    id: 0,
-    name: '',
-    permissions: [],
-  };
+  private _updatedRole: Role | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -70,48 +66,43 @@ class RolesPageState {
 
     this._isInEditMode = true;
     this._updatedRole = this._roles[index];
-    this._roleBeforeEditing = { ...this._roles[0] };
+    // this._roleBeforeEditing = { ...this._roles[0] };
   }
 
   // check if needed
-  applyChanges({
-    name,
-    permissions,
-  } : {
-    name: string;
-    permissions: string[]
-  }) {
-    this._roles = this._roles
-      .map((role) => {
-        if (role.id === this._updatedRole.id) {
-          return {
-            id: this._updatedRole.id,
-            name,
-            permissions,
-          };
-        }
+  // applyChanges({
+  //   name,
+  //   permissions,
+  // } : {
+  //   name: string;
+  //   permissions: string[]
+  // }) {
+  //   this._roles = this._roles
+  //     .map((role) => {
+  //       if (role.id === this._updatedRole!.id) {
+  //         return {
+  //           id: this._updatedRole!.id,
+  //           name,
+  //           permissions,
+  //         };
+  //       }
 
-        return role;
-      });
-  }
+  //       return role;
+  //     });
+  // }
 
-  changeRoleName(newRoleName: string) {
-    const roleToChangeName = this._roles.find(({ id }) => id === this._updatedRole.id);
-    roleToChangeName!.name = newRoleName;
-  }
+  // changeRoleName(newRoleName: string) {
+  //   const roleToChangeName = this._roles.find(({ id }) => id === this._updatedRole!.id);
+  //   roleToChangeName!.name = newRoleName;
+  // }
 
   cancelRoleEditing() {
-    this._roles = this._roles
-      .map((role) => {
-        if (role.id === this._updatedRole.id) {
-          return this._roleBeforeEditing!;
-        }
+    this._roles = this._roles.filter((role) => role.id !== 0);
 
-        return role;
-      });
+    // this._roles.shift();
 
+    this._updatedRole = null;
     this._isInEditMode = false;
-    this._roleBeforeEditing = null;
   }
 }
 

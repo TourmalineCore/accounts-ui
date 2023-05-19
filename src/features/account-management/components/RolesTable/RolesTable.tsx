@@ -53,23 +53,31 @@ function RolesTable(
           {rolePermissions.map(({ id, name }) => (
             <td data-cy="role-column" key={name}>
               {
-                id === rolesPageStateContext.updatedRole.id
+                id === rolesPageStateContext.updatedRole?.id
                   ? (
                     <input
                       data-cy="role-name-input"
                       type="text"
                       ref={nameRef}
                       onChange={(event) => {
-                        rolesPageStateContext.changeRole({ ...rolesPageStateContext.updatedRole, name: event.target.value });
+                        rolesPageStateContext.changeRole({ ...rolesPageStateContext.updatedRole!, name: event.target.value });
                       }}
                       defaultValue={name}
                     />
                   )
-                  : <span>{name}</span>
+                  : <span data-cy={`role-name-${name}`}>{name}</span>
               }
               {
                 (name !== 'Admin' && (!rolesPageStateContext.isInEditMode))
-            && <button data-cy={`edit-role-button-${name}`} type="button">Edit</button>
+            && (
+              <button
+                data-cy={`edit-role-button-${name}`}
+                type="button"
+                onClick={() => { rolesPageStateContext.editRole(id); }}
+              >
+                Edit
+              </button>
+            )
               }
 
             </td>
@@ -88,14 +96,14 @@ function RolesTable(
                 {rolePermissions.map(({ id: roleId, permissions }) => (
                   <td data-cy="permission-indicator" key={roleId}>
 
-                    {roleId === rolesPageStateContext.updatedRole.id
+                    {roleId === rolesPageStateContext.updatedRole!.id
                       ? (
                         <input
                           id={id}
                           type="checkbox"
                           defaultChecked={permissions.some((item) => item === id)}
                           onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                            const permissionsCopy = [...rolesPageStateContext.updatedRole.permissions];
+                            const permissionsCopy = [...rolesPageStateContext.updatedRole!.permissions];
                             const permissionIndexInArray = permissionsCopy.indexOf(event.target.id);
 
                             if (permissionsCopy.includes(event.target.id)) {
@@ -103,7 +111,7 @@ function RolesTable(
                             } else {
                               permissionsCopy.push(event.target.id);
                             }
-                            rolesPageStateContext.changeRole({ ...rolesPageStateContext.updatedRole, permissions: permissionsCopy });
+                            rolesPageStateContext.changeRole({ ...rolesPageStateContext.updatedRole!, permissions: permissionsCopy });
                           }}
                         />
                       )
