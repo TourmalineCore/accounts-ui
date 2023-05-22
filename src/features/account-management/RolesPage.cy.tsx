@@ -1,5 +1,8 @@
 import '../../../cypress/support/commands';
+import { API_ROOT, LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
 import RolesPage from './RolesPage';
+
+const GET_ROLES = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}roles`;
 
 describe('RolesPage', () => {
   it('SHOULD render roles table WHEN visit roles page', () => {
@@ -21,11 +24,13 @@ describe('AddNewRole', () => {
   });
 
   it('SHOULD add a new role to the table WHEN adding is called', () => {
-    cy.intercept('GET', '*/roles', []).as('call-1');
+    cy.intercept('GET', GET_ROLES, []).as('call-1');
 
     cy.mount(
       <RolesPage />,
     );
+
+    cy.wait('@call-1');
 
     cy.getByData('add-new-role-button')
       .click();
@@ -35,11 +40,13 @@ describe('AddNewRole', () => {
   });
 
   it('SHOULD switch to edit mode WHEN adding a role is called', () => {
-    cy.intercept('GET', '*/roles', []).as('call-2');
+    cy.intercept('GET', GET_ROLES, []).as('call-2');
 
     cy.mount(
       <RolesPage />,
     );
+
+    cy.wait('@call-2');
 
     cy.getByData('add-new-role-button')
       .click();
@@ -49,11 +56,13 @@ describe('AddNewRole', () => {
   });
 
   it('SHOULD send changes made to a role to server WHEN saving them', () => {
-    cy.intercept('GET', 'https://innercircle.dev.tourmalinecore.com/api/account-management/roles', []).as('call-3');
+    cy.intercept('GET', GET_ROLES, []).as('call-3');
 
     cy.mount(
       <RolesPage />,
     );
+
+    cy.wait('@call-3');
 
     cy.getByData('add-new-role-button')
       .click();
@@ -61,19 +70,21 @@ describe('AddNewRole', () => {
     cy.getByData('role-name-input')
       .type('Manager');
 
-    cy.getByData('save-changes-button')
-      .click();
-
     cy.intercept(
       'POST',
-      'https://innercircle.dev.tourmalinecore.com/api/account-management/roles/create',
+      'api/account-management/roles/create',
       {
         name: 'Manager',
         permissions: [],
       },
     ).as('call-4');
 
-    cy.intercept('GET', 'https://innercircle.dev.tourmalinecore.com/api/account-management/roles', [{
+    cy.getByData('save-changes-button')
+      .click();
+
+    cy.wait('@call-4');
+
+    cy.intercept('GET', GET_ROLES, [{
       name: 'Manager',
       permissions: [],
     }]).as('call-5');
@@ -82,7 +93,7 @@ describe('AddNewRole', () => {
   it('SHOULD discard changes made to a role WHEN cancel is called', () => {
     cy.intercept(
       'GET',
-      'https://innercircle.dev.tourmalinecore.com/api/account-management/roles',
+      GET_ROLES,
       [
         {
           id: 1,
@@ -100,6 +111,7 @@ describe('AddNewRole', () => {
     cy.mount(
       <RolesPage />,
     );
+    cy.wait('@call-6');
     cy.getByData('edit-role-button-Manager')
       .click();
 
@@ -109,6 +121,7 @@ describe('AddNewRole', () => {
     cy.getByData('cancel-changes-button')
       .click();
 
-    cy.getByData('role-name-Manager').should('exist');
+    cy.getByData('role-name-Manager')
+      .should('exist');
   });
 });

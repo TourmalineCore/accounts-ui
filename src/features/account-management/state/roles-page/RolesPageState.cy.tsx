@@ -53,12 +53,14 @@ describe('RolesPageState', () => {
     rolesPageState.initialize(INITIAL_STATE);
 
     rolesPageState.editRole(2);
-    // rolesPageState.applyChanges({
-    //   name: 'Manager',
-    //   permissions: [],
-    // });
 
-    // expect(rolesPageState.roles[1].name).eq('Manager');
+    rolesPageState.changeRole({
+      id: 2,
+      name: 'Manager',
+      permissions: [],
+    });
+
+    expect(rolesPageState.updatedRole!.name).eq('Manager');
   });
 
   it('SHOULD reset changes to role name that is being edited WHEN editing was canceled', () => {
@@ -79,9 +81,14 @@ describe('RolesPageState', () => {
     expect(rolesPageState.isInEditMode).eq(true);
     expect(rolesPageState.updatedRole!.id).eq(2);
 
-    // rolesPageState.changeRoleName('Manager');
-
-    expect(rolesPageState.roles[0].name).eq('Manager');
+    rolesPageState.changeRole(
+      {
+        id: 2,
+        name: 'Manager',
+        permissions: [],
+      },
+    );
+    expect(rolesPageState.updatedRole!.name).eq('Manager');
 
     rolesPageState.cancelRoleEditing();
 

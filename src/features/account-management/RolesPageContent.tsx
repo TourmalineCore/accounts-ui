@@ -1,4 +1,3 @@
-import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect } from 'react';
 import { api } from '../../common/api';
@@ -8,8 +7,6 @@ import RolesPageStateContext from './state/roles-page/RolesPageStateContext';
 
 function RolesPageContent() {
   const rolesPageStateContext = useContext(RolesPageStateContext);
-
-  console.log(toJS(rolesPageStateContext.updatedRole));
 
   useEffect(() => {
     getRoles();
@@ -60,6 +57,7 @@ function RolesPageContent() {
 
   async function getRoles() {
     const { data } = await api.get(`${LINK_TO_ACCOUNT_SERVICE}roles`);
+
     rolesPageStateContext.initialize({ loadedRoles: data });
   }
 }

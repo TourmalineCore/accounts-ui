@@ -3,7 +3,6 @@ import React, {
   ChangeEvent, Fragment, useContext, useEffect, useRef,
 } from 'react';
 import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext';
-// import React, { useContext, useEffect } from 'react';
 
 // ToDo
 // When create a new role, its object should be added to the beginning of the array using unshift method
@@ -25,16 +24,6 @@ function RolesTable(
 
 ) {
   const rolesPageStateContext = useContext(RolesPageStateContext);
-
-  // useEffect(() => {
-  //   function loadData() {
-  //     console.log('123');
-  //   }
-
-  //   if (!rolesPageState.isInEditMode) {
-  //     loadData();
-  //   }
-  // }, [rolesPageState.isInEditMode]);
 
   const nameRef = useRef<HTMLInputElement>(null);
 
@@ -79,7 +68,6 @@ function RolesTable(
               </button>
             )
               }
-
             </td>
           ))}
         </tr>
@@ -96,7 +84,7 @@ function RolesTable(
                 {rolePermissions.map(({ id: roleId, permissions }) => (
                   <td data-cy="permission-indicator" key={roleId}>
 
-                    {roleId === rolesPageStateContext.updatedRole!.id
+                    {roleId === rolesPageStateContext.updatedRole?.id
                       ? (
                         <input
                           id={id}
