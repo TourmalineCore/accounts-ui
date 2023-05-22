@@ -14,6 +14,7 @@ export type AccountEdit = {
   roles: {
     id: number;
     name: string;
+    permissions: string[];
   }[]
 };
 
@@ -27,5 +28,6 @@ export type Accounts = {
   roles: {
     id: number;
     name: string;
+    permissions: string[];
   }[];
 };

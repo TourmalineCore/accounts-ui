@@ -8,13 +8,6 @@ import { api } from '../../../../common/api';
 import { ReactComponent as IconEmail } from '../../../../assets/icons/icon-email.svg';
 import { AccountEdit } from '../../types';
 
-const checkFieldsData = {
-  Admin: 'Admin',
-  CEO: 'CEO',
-  Manager: 'Manager',
-  Employee: 'Employee',
-};
-
 function EditAccount() {
   const navigation = useNavigate();
   const { id } = useParams();
@@ -26,8 +19,10 @@ function EditAccount() {
     lastName: '',
     roles: [],
   });
+
   const [selectedCheckboxes, setSelectedCheckboxes] = useState(new Set<string>([]));
   const [triedToSubmit, setTriedToSubmit] = useState(false);
+  const [rolesData, setRolesData] = useState<{ [key: number]: string }>({});
 
   useEffect(() => {
     getEditAccountLoad();
@@ -89,7 +84,7 @@ function EditAccount() {
           <div className="edit-account__box">
             <span>Role*</span>
             <div className="edit-account__roles">
-              {Object.entries(checkFieldsData).map(([value, label]) => (
+              {Object.entries(rolesData).map(([value, label]) => (
                 <CheckField
                   key={value}
                   style={{
@@ -144,9 +139,11 @@ function EditAccount() {
 
   async function getEditAccountLoad() {
     const { data } = await api.get<AccountEdit>(`${LINK_TO_ACCOUNT_SERVICE}accounts/${id}`);
+    const { data: roles } = await api.get<{ id: number, name: string, permissions: [] }[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`);
 
     setAccount(data);
-    setSelectedCheckboxes(new Set([...data.roles.map(({ name }) => name)]));
+    setSelectedCheckboxes(new Set([...data.roles.map((role) => String(role.id))]));
+    setRolesData(Object.assign({}, ...roles.map((role) => ({ [role.id]: role.name }))));
   }
 
   async function editAccountAsync() {
@@ -158,7 +155,7 @@ function EditAccount() {
         firstName: account.firstName,
         middleName: account.middleName,
         lastName: account.lastName,
-        roles: [...selectedCheckboxes].map((item) => item),
+        roles: [...selectedCheckboxes].map((item) => Number(item)),
       });
 
       setTriedToSubmit(false);
