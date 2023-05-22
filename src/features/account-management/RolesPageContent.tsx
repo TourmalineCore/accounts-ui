@@ -5,6 +5,24 @@ import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
 import RolesTable from './components/RolesTable/RolesTable';
 import RolesPageStateContext from './state/roles-page/RolesPageStateContext';
 
+const PERMISSION_GROUPS = [
+  {
+    groupName: 'My Profile',
+    children: [
+      { id: 'viewPersonalProfile', name: 'View personal profile' },
+      { id: 'editPersonalProfile', name: 'Edit personal profile' },
+    ],
+  },
+  {
+    groupName: 'Employees',
+    children: [
+      { id: 'viewContacts', name: 'View contacts' },
+      { id: 'viewSalaryAndDocumentsData', name: 'View salary and documents data' },
+      { id: 'editFullEmployeesData', name: 'Edit full employees data' },
+    ],
+  },
+];
+
 function RolesPageContent() {
   const rolesPageStateContext = useContext(RolesPageStateContext);
 
@@ -45,13 +63,20 @@ function RolesPageContent() {
           )
       }
 
-      <RolesTable rolePermissions={rolesPageStateContext.roles} permissionGroups={[]} />
+      <RolesTable rolePermissions={rolesPageStateContext.roles} permissionGroups={PERMISSION_GROUPS} />
     </div>
   );
 
   async function saveChangesToRole() {
-    await api.post(`${LINK_TO_ACCOUNT_SERVICE}roles/create`, rolesPageStateContext.updatedRole);
+    if (rolesPageStateContext.updatedRole?.id === 0) {
+      const { name, permissions } = rolesPageStateContext.updatedRole;
 
+      await api.post(`${LINK_TO_ACCOUNT_SERVICE}roles/create`, { name, permissions });
+    } else {
+      await api.post(`${LINK_TO_ACCOUNT_SERVICE}roles/edit`, rolesPageStateContext.updatedRole);
+    }
+
+    rolesPageStateContext.cancelRoleEditing();
     getRoles();
   }
 
