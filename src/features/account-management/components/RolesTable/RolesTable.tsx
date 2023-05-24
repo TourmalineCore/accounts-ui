@@ -2,7 +2,11 @@ import { observer } from 'mobx-react-lite';
 import React, {
   ChangeEvent, Fragment, useContext, useEffect, useRef,
 } from 'react';
+import { Input, CheckField } from '@tourmalinecore/react-tc-ui-kit';
 import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext';
+import { ReactComponent as IconCheck } from '../../../../assets/icons/check.svg';
+import { ReactComponent as IconUncheck } from '../../../../assets/icons/uncheck.svg';
+import { ReactComponent as IconThreeDots } from '../../../../assets/icons/three-dots.svg';
 
 // ToDo
 // When create a new role, its object should be added to the beginning of the array using unshift method
@@ -40,15 +44,16 @@ function RolesTable(
         <tr>
           <td>Permissions</td>
           {rolePermissions.map(({ id, name }) => (
-            <td data-cy="role-column" key={name}>
+            <td data-cy="role-column" key={name} className="roles-table__role-column">
               {
                 id === rolesPageStateContext.updatedRole?.id
                   ? (
-                    <input
+                    <Input
                       data-cy="role-name-input"
+                      className="roles-table__name-input"
                       type="text"
                       ref={nameRef}
-                      onChange={(event) => {
+                      onChange={(event: { target: { value: any; }; }) => {
                         rolesPageStateContext.changeRole({ ...rolesPageStateContext.updatedRole!, name: event.target.value });
                       }}
                       defaultValue={name}
@@ -62,9 +67,10 @@ function RolesTable(
               <button
                 data-cy={`edit-role-button-${name}`}
                 type="button"
+                className="roles-table__role-action-button"
                 onClick={() => { rolesPageStateContext.editRole(id); }}
               >
-                Edit
+                <IconThreeDots />
               </button>
             )
               }
@@ -75,18 +81,21 @@ function RolesTable(
       <tbody>
         {permissionGroups.map(({ groupName, children }) => (
           <Fragment key={groupName}>
-            <tr data-cy="permission-group" style={{ backgroundColor: '#e2e2e2' }}>
-              <td colSpan={3}>{groupName}</td>
+            <tr data-cy="permission-group" className="roles-table__permission-group">
+              <td colSpan={rolesPageStateContext.roles.length + 1}>{groupName}</td>
             </tr>
             {children.map(({ id, name }) => (
               <tr data-cy="permission" key={id}>
                 <td>{name}</td>
                 {rolePermissions.map(({ id: roleId, permissions }) => (
-                  <td data-cy="permission-indicator" key={roleId}>
+                  <td
+                    data-cy="permission-indicator"
+                    key={roleId}
+                  >
 
                     {roleId === rolesPageStateContext.updatedRole?.id
                       ? (
-                        <input
+                        <CheckField
                           id={id}
                           type="checkbox"
                           defaultChecked={permissions.some((item) => item === id)}
@@ -106,8 +115,8 @@ function RolesTable(
                       : (
                         <span>
                           {permissions.some((item) => item === id)
-                            ? <span data-cy="permission-indicator-checked" className="roles-table__permission-indicator roles-table__permission-indicator--checked" />
-                            : <span data-cy="permission-indicator-unchecked" className="roles-table__permission-indicator roles-table__permission-indicator--unchecked" />}
+                            ? <IconCheck data-cy="permission-indicator-checked" />
+                            : <IconUncheck data-cy="permission-indicator-unchecked" />}
                         </span>
                       )}
                   </td>

@@ -1,4 +1,12 @@
 .roles-table {
+  border-style: hidden; /* hide standard table (collapsed) border */
+  border-radius: 5px;
+  border-collapse: collapse;
+  width: 100%;
+  box-shadow: 0 0 0 0.5px #a0a0a0; /* this draws the table border  */
+  font-size: 20px;
+  line-height: 1.4;
+
   &__permission-indicator {
     position: relative;
     display: inline-block;
@@ -34,5 +42,42 @@
         content: "\274c";
       }
     }
+  }
+
+  &__role-action-button {
+    margin-left: 25px;
+    border: none;
+    padding: 0 10px;
+    background-color: transparent;
+  }
+
+  &__role-column {
+    // display: flex;
+    flex-shrink: 0;
+  }
+
+  td {
+    padding: 21px 24px;
+  }
+
+  &__permission-group {
+    background-color: #e2e2e2;
+
+    td {
+      padding: 6px 16px;
+    }
+  }
+
+  th,
+  td {
+    border: 0.5px solid #a0a0a0;
+  }
+
+  tr td {
+    text-align: center;
+  }
+
+  tr td:first-child {
+    text-align: left;
   }
 }
