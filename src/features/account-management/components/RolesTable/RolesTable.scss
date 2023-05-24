@@ -80,4 +80,26 @@
   tr td:first-child {
     text-align: left;
   }
+
+  &__permission-checkbox-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__actions-dropdown {
+    margin-left: 20px;
+    width: auto;
+
+    button {
+      border: none;
+      padding: 0 10px;
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+
+  &__role-column-div {
+    display: flex;
+    justify-content: center;
+  }
 }

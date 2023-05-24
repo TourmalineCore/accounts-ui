@@ -6,7 +6,7 @@ import { CheckField } from '@tourmalinecore/react-tc-ui-kit';
 import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext';
 import { ReactComponent as IconCheck } from '../../../../assets/icons/check.svg';
 import { ReactComponent as IconUncheck } from '../../../../assets/icons/uncheck.svg';
-import { ReactComponent as IconThreeDots } from '../../../../assets/icons/three-dots.svg';
+import ActionsDropdown from '../ActionsDropdown/ActionsDropdown';
 
 // ToDo
 // When create a new role, its object should be added to the beginning of the array using unshift method
@@ -30,6 +30,7 @@ function RolesTable(
   const rolesPageStateContext = useContext(RolesPageStateContext);
 
   const nameRef = useRef<HTMLInputElement>(null);
+  const columnRef = useRef<HTMLTableDataCellElement>(null);
 
   useEffect(() => {
     if (nameRef.current) {
@@ -44,36 +45,39 @@ function RolesTable(
         <tr>
           <td>Permissions</td>
           {rolePermissions.map(({ id, name }) => (
-            <td data-cy="role-column" key={name} className="roles-table__role-column">
-              {
-                id === rolesPageStateContext.updatedRole?.id
-                  ? (
-                    <input
-                      data-cy="role-name-input"
-                      className="roles-table__name-input"
-                      type="text"
-                      ref={nameRef}
-                      onChange={(event: { target: { value: any; }; }) => {
-                        rolesPageStateContext.changeRole({ ...rolesPageStateContext.updatedRole!, name: event.target.value });
-                      }}
-                      defaultValue={name}
-                    />
-                  )
-                  : <span data-cy={`role-name-${name}`}>{name}</span>
-              }
-              {
-                (name !== 'Admin' && (!rolesPageStateContext.isInEditMode))
+            <td data-cy="role-column" key={name} className="roles-table__role-column" ref={columnRef}>
+              <div className="roles-table__role-column-div">
+                {
+                  id === rolesPageStateContext.updatedRole?.id
+                    ? (
+                      <input
+                        data-cy="role-name-input"
+                        className="roles-table__name-input"
+                        type="text"
+                        ref={nameRef}
+                        onChange={(event: { target: { value: any; }; }) => {
+                          rolesPageStateContext.changeRole({ ...rolesPageStateContext.updatedRole!, name: event.target.value });
+                        }}
+                        defaultValue={name}
+                      />
+                    )
+                    : <span data-cy={`role-name-${name}`}>{name}</span>
+                }
+                {
+                  (name !== 'Admin' && (!rolesPageStateContext.isInEditMode))
             && (
-              <button
-                data-cy={`edit-role-button-${name}`}
-                type="button"
-                className="roles-table__role-action-button"
-                onClick={() => { rolesPageStateContext.editRole(id); }}
-              >
-                <IconThreeDots />
-              </button>
+              <ActionsDropdown
+                className="roles-table__actions-dropdown"
+                tableContainerRef={columnRef}
+                actions={[{
+                  text: 'Edit',
+                  onClick: () => { rolesPageStateContext.editRole(id); },
+                  dataAttr: `edit-role-button-${name}`,
+                }]}
+              />
             )
-              }
+                }
+              </div>
             </td>
           ))}
         </tr>
@@ -95,22 +99,24 @@ function RolesTable(
 
                     {roleId === rolesPageStateContext.updatedRole?.id
                       ? (
-                        <CheckField
-                          id={id}
-                          type="checkbox"
-                          defaultChecked={permissions.some((item) => item === id)}
-                          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                            const permissionsCopy = [...rolesPageStateContext.updatedRole!.permissions];
-                            const permissionIndexInArray = permissionsCopy.indexOf(event.target.id);
+                        <div className="roles-table__permission-checkbox-wrapper">
+                          <CheckField
+                            id={id}
+                            type="checkbox"
+                            defaultChecked={permissions.some((item) => item === id)}
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                              const permissionsCopy = [...rolesPageStateContext.updatedRole!.permissions];
+                              const permissionIndexInArray = permissionsCopy.indexOf(event.target.id);
 
-                            if (permissionsCopy.includes(event.target.id)) {
-                              permissionsCopy.splice(permissionIndexInArray, 1);
-                            } else {
-                              permissionsCopy.push(event.target.id);
-                            }
-                            rolesPageStateContext.changeRole({ ...rolesPageStateContext.updatedRole!, permissions: permissionsCopy });
-                          }}
-                        />
+                              if (permissionsCopy.includes(event.target.id)) {
+                                permissionsCopy.splice(permissionIndexInArray, 1);
+                              } else {
+                                permissionsCopy.push(event.target.id);
+                              }
+                              rolesPageStateContext.changeRole({ ...rolesPageStateContext.updatedRole!, permissions: permissionsCopy });
+                            }}
+                          />
+                        </div>
                       )
                       : (
                         <span>
