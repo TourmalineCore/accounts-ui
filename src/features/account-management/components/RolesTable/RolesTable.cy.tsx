@@ -188,8 +188,8 @@ describe('RolesTable', () => {
       ],
     });
 
-    cy.getByData('role-column').last().contains('Edit');
-    cy.getByData('role-column').first().should('not.contain', 'Edit');
+    cy.getByData('role-column').last().should('contain.html', 'button');
+    cy.getByData('role-column').first().should('not.contain.html', 'button');
   });
 
   it('SHOULD make the name input focused WHEN adding a role', () => {

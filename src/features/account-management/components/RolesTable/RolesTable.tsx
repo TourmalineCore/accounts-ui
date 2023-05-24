@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, {
   ChangeEvent, Fragment, useContext, useEffect, useRef,
 } from 'react';
-import { Input, CheckField } from '@tourmalinecore/react-tc-ui-kit';
+import { CheckField } from '@tourmalinecore/react-tc-ui-kit';
 import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext';
 import { ReactComponent as IconCheck } from '../../../../assets/icons/check.svg';
 import { ReactComponent as IconUncheck } from '../../../../assets/icons/uncheck.svg';
@@ -48,7 +48,7 @@ function RolesTable(
               {
                 id === rolesPageStateContext.updatedRole?.id
                   ? (
-                    <Input
+                    <input
                       data-cy="role-name-input"
                       className="roles-table__name-input"
                       type="text"
