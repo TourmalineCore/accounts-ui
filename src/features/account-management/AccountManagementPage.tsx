@@ -15,7 +15,6 @@ import { api } from '../../common/api';
 import { Table } from '../../types';
 import { Accounts } from './types';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
-import { mock } from './context/mock';
 
 import ContentCard from '../../components/ContentCard/ContentCard';
 import FilterMenu from './components/FilterMenu/FilterMenu';
@@ -197,8 +196,8 @@ function AccountManagementPage() {
   async function getAccountsAsync() {
     setIsLoading(true);
     try {
-      // const { data } = await api.get<Accounts[]>(`${LINK_TO_ACCOUNT_SERVICE}accounts/all`);
-      accountManagementState.getAccounts(mock);
+      const { data } = await api.get<Accounts[]>(`${LINK_TO_ACCOUNT_SERVICE}accounts/all`);
+      accountManagementState.getAccounts(data);
     } finally {
       setIsLoading(true);
     }
