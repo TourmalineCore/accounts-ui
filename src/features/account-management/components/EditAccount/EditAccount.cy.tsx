@@ -61,7 +61,7 @@ describe('render elements EditAccount components', () => {
       .should('exist');
   });
 
-  it('SHOULD render save button no the edit page WHEN there is component', () => {
+  it('SHOULD render save button on the edit page WHEN there is component', () => {
     cy.getByData('save-button')
       .should('exist');
   });
