@@ -2,7 +2,6 @@
 import {
   MouseEventHandler, useEffect, useMemo, useState,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import moment from 'moment';
 import clsx from 'clsx';
@@ -11,6 +10,7 @@ import { Button } from '@tourmalinecore/react-tc-ui-kit';
 import { ClientTable } from '@tourmalinecore/react-table-responsive';
 import { observer } from 'mobx-react-lite';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import { api } from '../../common/api';
 import { Table } from '../../types';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
@@ -29,7 +29,7 @@ function AccountManagementPage() {
   const accountManagementState = useMemo(() => new AccountManagementState(), []);
   const [isLoading, setIsLoading] = useState(false);
 
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAccountsAsync();
@@ -134,7 +134,7 @@ function AccountManagementPage() {
         return !isBlocked;
       },
       renderText: () => 'Edit',
-      onClick: (e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => console.log(`Opening Dictionaries for ${row.original.lastName}`),
+      onClick: (e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => navigate(`/account-management/edit/${row.original.id}`),
     },
     {
       name: 'block',
@@ -169,7 +169,7 @@ function AccountManagementPage() {
 
           <Button
             style={{ marginBottom: 20 }}
-            onClick={() => history('/account-management/add')}
+            onClick={() => navigate('/account-management/add')}
           >
             Add New Account
           </Button>

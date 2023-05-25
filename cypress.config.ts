@@ -1,5 +1,6 @@
 import { defineConfig } from 'cypress';
-import mochawesomeWriter from 'cypress-mochawesome-reporter/plugin';
+// @ts-ignore
+import mochawesomeWriter from 'cypress-mochawesome-reporter';
 
 export default defineConfig({
   e2e: {
