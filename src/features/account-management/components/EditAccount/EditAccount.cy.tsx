@@ -56,7 +56,7 @@ describe('render elements EditAccount components', () => {
       .and('have.value', 'CEO');
   });
 
-  it('SHOULD render cancel button no the edit page WHEN there is component', () => {
+  it('SHOULD render cancel button on the edit page WHEN there is component', () => {
     cy.getByData('cancel-button')
       .should('exist');
   });

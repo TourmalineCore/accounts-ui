@@ -138,8 +138,10 @@ function EditAccount() {
   );
 
   async function getEditAccountLoad() {
-    const { data } = await api.get<AccountEdit>(`${LINK_TO_ACCOUNT_SERVICE}accounts/${id}`);
-    const { data: roles } = await api.get<{ id: number, name: string, permissions: [] }[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`);
+    const { data } = await api.get<AccountEdit>(`${LINK_TO_ACCOUNT_SERVICE}accounts/findById/${id}`);
+    const { data: roles } = await api.get<{
+      id: number, name: string, permissions: []
+    }[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`);
 
     setAccount(data);
     setSelectedCheckboxes(new Set([...data.roles.map((role) => String(role.id))]));
@@ -153,11 +155,12 @@ function EditAccount() {
       await api.post(`${LINK_TO_ACCOUNT_SERVICE}accounts/edit`, {
         id,
         firstName: account.firstName,
-        middleName: account.middleName,
+        middleName: account.middleName ? account.middleName : null,
         lastName: account.lastName,
         roles: [...selectedCheckboxes].map((item) => Number(item)),
       });
 
+      navigation('/account-management');
       setTriedToSubmit(false);
     } catch (e) {
       console.log(e);
