@@ -26,7 +26,8 @@
     "**/*.d.ts",
     "src",
     "cypress",
-    "cypress.config.js",
-    "helpers"
+    "cypress.config.ts",
+    "helpers",
+    "global-types.d.ts"
   ]
 }

@@ -13,7 +13,6 @@ import { observer } from 'mobx-react-lite';
 import { toast } from 'react-toastify';
 import { api } from '../../common/api';
 import { Table } from '../../types';
-import { Accounts } from './types';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
 
 import ContentCard from '../../components/ContentCard/ContentCard';
