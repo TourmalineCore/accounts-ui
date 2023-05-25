@@ -27,6 +27,7 @@
     "src",
     "cypress",
     "cypress.config.ts",
-    "helpers"
+    "helpers",
+    "global-types.d.ts"
   ]
 }

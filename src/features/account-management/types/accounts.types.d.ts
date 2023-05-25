@@ -1,4 +1,4 @@
-export type AccountCreate = {
+type AccountCreate = {
   firstName: string;
   lastName: string;
   middleName?: string;
@@ -6,7 +6,7 @@ export type AccountCreate = {
   roleIds: number[];
 };
 
-export type AccountEdit = {
+type AccountEdit = {
   corporateEmail: string;
   firstName: string;
   lastName: string;
@@ -18,7 +18,7 @@ export type AccountEdit = {
   }[]
 };
 
-export type Accounts = {
+type Accounts = {
   id: number;
   corporateEmail: string;
   creationDate: Date | string;

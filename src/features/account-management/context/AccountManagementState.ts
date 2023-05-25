@@ -1,7 +1,4 @@
 import { makeAutoObservable } from 'mobx';
-import { Accounts } from '../types';
-// import { Employee } from '../types';
-// import { getFiltering, getSearch, getSorted } from '../utils/utils';
 
 class AccountManagementState {
   private _allAccounts: Accounts[] = [];
@@ -53,11 +50,9 @@ class AccountManagementState {
       return account;
     });
 
-    // const [deletedGallery] = this._allAccounts.splice(this._lastBlockAccontIndex, 1);
-    const deletedGallery = this._allAccounts.find((account, index) => index === this._lastBlockAccontIndex);
+    const deletedAccount = this._allAccounts.find((account, index) => index === this._lastBlockAccontIndex);
 
-    // this._lastBlockAccount = deletedGallery;
-    this._lastBlockAccount = deletedGallery || null;
+    this._lastBlockAccount = deletedAccount || null;
   }
 
   unblockAccont({

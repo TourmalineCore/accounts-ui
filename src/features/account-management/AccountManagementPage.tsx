@@ -13,7 +13,6 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../common/api';
 import { Table } from '../../types';
-import { Accounts } from './types';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
 
 import ContentCard from '../../components/ContentCard/ContentCard';

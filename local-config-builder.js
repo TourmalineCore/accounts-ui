@@ -18,4 +18,3 @@ const variables = data.toString().split("\n")
 
 fs.writeFileSync(filepath, `window.__ENV__ = { ${variables} }`);
 fs.writeFileSync(fileCypressPath, `window.__ENV__ = { ${variables} }`);
- 

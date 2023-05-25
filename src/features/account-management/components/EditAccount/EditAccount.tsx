@@ -6,7 +6,6 @@ import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config';
 import { api } from '../../../../common/api';
 
 import { ReactComponent as IconEmail } from '../../../../assets/icons/icon-email.svg';
-import { AccountEdit } from '../../types';
 
 function EditAccount() {
   const navigation = useNavigate();
