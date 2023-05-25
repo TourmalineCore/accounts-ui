@@ -1,22 +1,36 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { useEffect, useState } from 'react';
+import {
+  MouseEventHandler, useEffect, useMemo, useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import moment from 'moment';
+import clsx from 'clsx';
 
 import { Button } from '@tourmalinecore/react-tc-ui-kit';
 import { ClientTable } from '@tourmalinecore/react-table-responsive';
-
-import moment from 'moment';
+import { observer } from 'mobx-react-lite';
+import { toast } from 'react-toastify';
 import { api } from '../../common/api';
-
-import ContentCard from '../../components/ContentCard/ContentCard';
 import { Table } from '../../types';
 import { Accounts } from './types';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
 
-function AccountManagementPage() {
-  const history = useNavigate();
+import ContentCard from '../../components/ContentCard/ContentCard';
+import FilterMenu from './components/FilterMenu/FilterMenu';
+import AccountManagementState from './context/AccountManagementState';
+import AccountManagementStateContext from './context/AccountManagementStateContext';
 
-  const [accounts, setAccounts] = useState<Accounts[]>([]);
+export type Row<TypeProps> = {
+  original: TypeProps;
+  values: TypeProps;
+};
+
+function AccountManagementPage() {
+  const accountManagementState = useMemo(() => new AccountManagementState(), []);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const history = useNavigate();
 
   useEffect(() => {
     getAccountsAsync();
@@ -27,9 +41,14 @@ function AccountManagementPage() {
       Header: 'Name',
       accessor: 'lastName',
       Cell: ({ row }: Table<Accounts>) => {
-        const { firstName, lastName, middleName } = row.original;
+        const {
+          firstName, lastName, middleName, isBlocked,
+        } = row.original;
         return (
-          <div>
+          <div className={clsx('account-management-page__account', {
+            'account-management-page__account--isBlocked': isBlocked,
+          })}
+          >
             {lastName}
             {' '}
             {middleName || ''}
@@ -45,15 +64,18 @@ function AccountManagementPage() {
       disableSortBy: true,
       disableFilters: true,
       Cell: ({ row }: Table<Accounts>) => {
-        const { roles } = row.original;
+        const { roles, isBlocked } = row.original;
         return (
-          <div>
+          <span className={clsx('account-management-page__account', {
+            'account-management-page__account--isBlocked': isBlocked,
+          })}
+          >
             {roles.map((role, index) => (
               <span key={role.id}>
                 {index > 0 ? `, ${role.name}` : role.name}
               </span>
             ))}
-          </div>
+          </span>
         );
       },
     },
@@ -62,55 +84,169 @@ function AccountManagementPage() {
       accessor: 'corporateEmail',
       disableFilters: true,
       disableSortBy: true,
+      Cell: ({ row }: Table<Accounts>) => {
+        const { corporateEmail, isBlocked } = row.original;
+        return (
+          <span className={clsx('account-management-page__account', {
+            'account-management-page__account--isBlocked': isBlocked,
+          })}
+          >
+            {corporateEmail}
+          </span>
+        );
+      },
     },
     {
       Header: 'Creation date (UTC)',
       accessor: 'creationDate',
       disableFilters: true,
       Cell: ({ row }: Table<Accounts>) => {
-        const { creationDate } = row.original;
+        const { creationDate, isBlocked } = row.original;
         const formattedDate = moment(creationDate).format('DD.MM.YYYY HH:mm');
 
-        return (<div>{formattedDate}</div>);
+        return (
+          <span className={clsx('account-management-page__account', {
+            'account-management-page__account--isBlocked': isBlocked,
+          })}
+          >
+            {formattedDate}
+          </span>
+        );
+      },
+    },
+    {
+      Header: 'Status',
+      accessor: 'isBlocked',
+      disableFilters: true,
+      disableSortBy: true,
+      Cell: ({ row }: Table<Accounts>) => {
+        const { isBlocked } = row.original;
+
+        return (<div className="account-management-page__status">{!isBlocked ? 'Active' : 'Blocked'}</div>);
+      },
+    },
+  ];
+
+  const actions = [
+    {
+      name: 'edit',
+      show: (row: Row<Accounts>) => {
+        const { isBlocked } = row.original;
+        return !isBlocked;
+      },
+      renderText: () => 'Edit',
+      onClick: (e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => console.log(`Opening Dictionaries for ${row.original.lastName}`),
+    },
+    {
+      name: 'block',
+      show: (row: Row<Accounts>) => {
+        const { isBlocked } = row.original;
+        return !isBlocked;
+      },
+      renderText: () => 'Block',
+      onClick: (e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => blockAccountsAsync(row.original.id),
+    },
+    {
+      name: 'unblock',
+      show: (row: Row<Accounts>) => {
+        const { isBlocked } = row.original;
+        return isBlocked;
+      },
+      renderText: () => 'Unblock',
+      onClick: (e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => {
+        unblockAccountsAsync(row.original.id);
+        toast.dismiss(row.original.id);
       },
     },
   ];
 
   return (
-    <ContentCard>
-      <div className="account-management-page">
+    <AccountManagementStateContext.Provider value={accountManagementState}>
+      <ContentCard className="account-management-page">
         <h1>Account`s list</h1>
-        <Button
-          style={{ marginBottom: 20 }}
-          onClick={() => history('/account-management/add')}
-        >
-          Add New Account
-        </Button>
+
+        <div className="account-management-page__inner">
+          <FilterMenu />
+
+          <Button
+            style={{ marginBottom: 20 }}
+            onClick={() => history('/account-management/add')}
+          >
+            Add New Account
+          </Button>
+        </div>
 
         <ClientTable
           tableId="account-table"
-          data={accounts}
+          data={accountManagementState.allAccounts}
+          renderMobileTitle={(row: Row<{ lastName: string }>) => row.original.lastName}
           order={{
             id: 'lastName',
             desc: false,
           }}
-          actions={[]}
+          actions={actions}
           columns={columns}
+          isLoading={isLoading}
         />
 
-      </div>
-    </ContentCard>
+      </ContentCard>
+    </AccountManagementStateContext.Provider>
   );
 
   async function getAccountsAsync() {
+    setIsLoading(true);
     try {
       const { data } = await api.get<Accounts[]>(`${LINK_TO_ACCOUNT_SERVICE}accounts/all`);
-
-      setAccounts(data);
-    } catch (e) {
-      console.log(e);
+      accountManagementState.getAccounts(data);
+    } finally {
+      setIsLoading(true);
     }
+  }
+
+  async function blockAccountsAsync(accountId: number) {
+    // remove all notifications, it is necessary to delete the previous notification
+    toast.dismiss();
+
+    toast(() => (
+      <div className="account-management-page__notification">
+        {accountManagementState.accountToUnblock?.middleName ? (
+          <span>
+            {`${accountManagementState.accountToUnblock?.lastName}
+              ${accountManagementState.accountToUnblock?.firstName} 
+              ${accountManagementState.accountToUnblock?.middleName}`}
+          </span>
+        ) : (
+          <span>
+            {`${accountManagementState.accountToUnblock?.firstName} ${accountManagementState.accountToUnblock?.lastName}`}
+          </span>
+        )}
+
+        <button
+          type="button"
+          className="account-management-page__unblock-button"
+          onClick={() => {
+            toast.dismiss(accountManagementState.accountToUnblock!.id);
+            unblockAccountsAsync(accountManagementState.accountToUnblock!.id);
+          }}
+        >
+          Unblock
+        </button>
+      </div>
+    ), {
+      position: 'top-center',
+      type: 'info',
+      icon: false,
+      toastId: accountId,
+    });
+
+    accountManagementState.blockAccount({ accountId });
+    await api.post<Accounts[]>(`${LINK_TO_ACCOUNT_SERVICE}accounts/${accountId}/block`);
+  }
+
+  async function unblockAccountsAsync(accountId: number) {
+    accountManagementState.unblockAccont({ accountId });
+    await api.post<Accounts[]>(`${LINK_TO_ACCOUNT_SERVICE}accounts/${accountId}/unblock`);
   }
 }
 
-export default AccountManagementPage;
+export default observer(AccountManagementPage);

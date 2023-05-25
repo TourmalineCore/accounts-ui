@@ -21,7 +21,8 @@ export type AccountEdit = {
 export type Accounts = {
   id: number;
   corporateEmail: string;
-  creationDate: Date;
+  creationDate: Date | string;
+  isBlocked?: boolean;
   firstName: string;
   middleName?: string;
   lastName: string;
