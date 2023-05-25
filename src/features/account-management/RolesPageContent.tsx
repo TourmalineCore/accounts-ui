@@ -22,6 +22,21 @@ const PERMISSION_GROUPS = [
       { id: 'EditFullEmployeesData', name: 'Edit full employees data' },
     ],
   },
+  {
+    groupName: 'Analytics',
+    children: [
+      { id: 'AccessAnalyticalForecastsPage', name: 'Access to analytical forecasts page' },
+    ],
+  },
+  {
+    groupName: 'Account Management',
+    children: [
+      { id: 'ViewAccounts', name: 'View accounts' },
+      { id: 'ManageAccounts', name: 'Manage accounts' },
+      { id: 'ViewRoles', name: 'View roles' },
+      { id: 'ManageRoles', name: 'Manage roles' },
+    ],
+  },
 ];
 
 function RolesPageContent() {
