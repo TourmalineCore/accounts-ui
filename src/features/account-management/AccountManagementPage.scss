@@ -1,0 +1,40 @@
+.account-management-page {
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__account {
+    font-weight: 500;
+
+    &--isBlocked {
+      opacity: 0.5;
+    }
+  }
+
+  &__status {
+    border-radius: 10px;
+    padding: 8px;
+    font-weight: 500;
+    background-color: $color-white-smoke;
+  }
+
+  &__notification {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__unblock-button {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #000;
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    background-color: transparent;
+    cursor: pointer;
+    appearance: none;
+  }
+}
