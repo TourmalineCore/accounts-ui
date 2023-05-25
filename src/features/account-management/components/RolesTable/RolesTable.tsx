@@ -46,7 +46,7 @@ function RolesTable(
           <td>Permissions</td>
           {rolePermissions.map(({ id, name }) => (
             <td data-cy="role-column" key={name} className="roles-table__role-column" ref={columnRef}>
-              <div className="roles-table__role-column-div">
+              <div className="roles-table__role-column-inner">
                 {
                   id === rolesPageStateContext.updatedRole?.id
                     ? (

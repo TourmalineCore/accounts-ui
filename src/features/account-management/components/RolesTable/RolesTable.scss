@@ -54,6 +54,7 @@
   &__role-column {
     // display: flex;
     flex-shrink: 0;
+    background-color: #fff;
   }
 
   td {
@@ -98,8 +99,36 @@
     }
   }
 
-  &__role-column-div {
+  &__role-column-inner {
     display: flex;
     justify-content: center;
+  }
+
+  tbody td {
+    background-color: #fff;
+  }
+
+  thead tr td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background-color: #fff;
+  }
+
+  tr td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background-color: #fff;
+  }
+
+  &__permission-group {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+
+    td {
+      background-color: #e2e2e2 !important;
+    }
   }
 }
