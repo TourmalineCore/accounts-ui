@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import {
-  MouseEventHandler, useEffect, useMemo, useState,
+  MouseEventHandler, useContext, useEffect, useState,
 } from 'react';
 
 import moment from 'moment';
@@ -17,16 +17,17 @@ import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
 
 import ContentCard from '../../components/ContentCard/ContentCard';
 import FilterMenu from './components/FilterMenu/FilterMenu';
-import AccountManagementState from './context/AccountManagementState';
 import AccountManagementStateContext from './context/AccountManagementStateContext';
+import RoutesStateContext from '../../routes/state/RoutesStateContext';
 
 export type Row<TypeProps> = {
   original: TypeProps;
   values: TypeProps;
 };
 
-function AccountManagementPage() {
-  const accountManagementState = useMemo(() => new AccountManagementState(), []);
+function AccountsPageContent() {
+  const accountManagementState = useContext(AccountManagementStateContext);
+  const accessToChanges = useContext(RoutesStateContext);
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -160,36 +161,36 @@ function AccountManagementPage() {
   ];
 
   return (
-    <AccountManagementStateContext.Provider value={accountManagementState}>
-      <ContentCard className="account-management-page">
-        <h1>Account`s list</h1>
+    <ContentCard className="account-management-page">
+      <h1>Account`s list</h1>
 
-        <div className="account-management-page__inner">
-          <FilterMenu />
+      <div className="account-management-page__inner">
+        <FilterMenu />
 
+        {accessToChanges.checkPermissionForRole('ManageAccounts') && (
           <Button
             style={{ marginBottom: 20 }}
             onClick={() => navigate('/account-management/add')}
           >
             Add New Account
           </Button>
-        </div>
+        )}
+      </div>
 
-        <ClientTable
-          tableId="account-table"
-          data={accountManagementState.allAccounts}
-          renderMobileTitle={(row: Row<{ lastName: string }>) => row.original.lastName}
-          order={{
-            id: 'lastName',
-            desc: false,
-          }}
-          actions={actions}
-          columns={columns}
-          isLoading={isLoading}
-        />
+      <ClientTable
+        tableId="account-table"
+        data={accountManagementState.allAccounts}
+        renderMobileTitle={(row: Row<{ lastName: string }>) => row.original.lastName}
+        order={{
+          id: 'lastName',
+          desc: false,
+        }}
+        actions={accessToChanges.checkPermissionForRole('ManageAccounts') ? actions : []}
+        columns={columns}
+        isLoading={isLoading}
+      />
 
-      </ContentCard>
-    </AccountManagementStateContext.Provider>
+    </ContentCard>
   );
 
   async function getAccountsAsync() {
@@ -248,4 +249,4 @@ function AccountManagementPage() {
   }
 }
 
-export default observer(AccountManagementPage);
+export default observer(AccountsPageContent);

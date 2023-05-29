@@ -7,6 +7,7 @@ import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext'
 import { ReactComponent as IconCheck } from '../../../../assets/icons/check.svg';
 import { ReactComponent as IconUncheck } from '../../../../assets/icons/uncheck.svg';
 import ActionsDropdown from '../ActionsDropdown/ActionsDropdown';
+import RoutesStateContext from '../../../../routes/state/RoutesStateContext';
 
 // ToDo
 // When create a new role, its object should be added to the beginning of the array using unshift method
@@ -28,6 +29,7 @@ function RolesTable(
 
 ) {
   const rolesPageStateContext = useContext(RolesPageStateContext);
+  const accessToChanges = useContext(RoutesStateContext);
 
   const nameRef = useRef<HTMLInputElement>(null);
   const columnRef = useRef<HTMLTableDataCellElement>(null);
@@ -64,7 +66,7 @@ function RolesTable(
                     : <span data-cy={`role-name-${name}`}>{name}</span>
                 }
                 {
-                  (name !== 'Admin' && (!rolesPageStateContext.isInEditMode))
+                  accessToChanges.checkPermissionForRole('ManageRoles') && (name !== 'Admin' && (!rolesPageStateContext.isInEditMode))
             && (
               <ActionsDropdown
                 className="roles-table__actions-dropdown"

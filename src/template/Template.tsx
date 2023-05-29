@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import {
+  useContext, useState,
+} from 'react';
 import useBreadcrumbs, { BreadcrumbsRoute } from 'use-react-router-breadcrumbs';
 import clsx from 'clsx';
 
@@ -16,12 +18,31 @@ import TemplatePages from './components/TemplatePages/TemplatePages';
 
 import { useSidebarRoutes } from './hooks/useSidebarRoutes';
 
-import { adminRoutes, sidebarRoutes } from '../routes/adminRoutes';
+import {
+  // a2,
+  adminRoutes,
+  sidebarRoutes,
+} from '../routes/adminRoutes';
+import RoutesStateContext from '../routes/state/RoutesStateContext';
+// import { MockPermissionsAdmin } from '../routes/MockPermissions';
+// import { authService } from '../common/authService';
+import { MockPermissionsEmployee } from '../routes/MockPermissions';
 
 function Template() {
   const location = useLocation();
+  const routesStateContext = useContext(RoutesStateContext);
 
+  // const token = authService.getAuthToken();
+  // routesStateContext.initPermissions(parseJwt(token).permissions);
+  routesStateContext.initPermissions(MockPermissionsEmployee);
+
+  // const testBool = useRef(false);
+  // useEffect(() => {
+  //   testBool.current = routesStateContext.checkPermissionForRole('ViewAccounts');
+  // }, [routesStateContext.checkPermissionForRole('ViewAccounts')]);
   const parsedSidebarRoutes = useSidebarRoutes(sidebarRoutes, location);
+
+  console.log('adminRoutes', adminRoutes);
 
   const breadcrumbs = useBreadcrumbs(adminRoutes as BreadcrumbsRoute<string>[], { excludePaths: ['/'] });
 
