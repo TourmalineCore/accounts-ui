@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { BreadcrumbComponentProps } from 'use-react-router-breadcrumbs';
 
@@ -23,4 +24,4 @@ function TemplatePages({
   );
 }
 
-export default TemplatePages;
+export default memo(TemplatePages);

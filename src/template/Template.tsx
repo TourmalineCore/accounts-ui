@@ -1,10 +1,12 @@
 import {
+  memo,
   useContext, useState,
 } from 'react';
 import useBreadcrumbs, { BreadcrumbsRoute } from 'use-react-router-breadcrumbs';
 import clsx from 'clsx';
 
 import { useLocation } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 import { ReactComponent as IconLogout } from '../assets/icons/logout.svg';
 import { ReactComponent as IconLogoutActive } from '../assets/icons/logout-active.svg';
 
@@ -18,31 +20,19 @@ import TemplatePages from './components/TemplatePages/TemplatePages';
 
 import { useSidebarRoutes } from './hooks/useSidebarRoutes';
 
-import {
-  // a2,
-  adminRoutes,
-  sidebarRoutes,
-} from '../routes/adminRoutes';
+import { adminRoutes, sidebarRoutes } from '../routes/adminRoutes';
 import RoutesStateContext from '../routes/state/RoutesStateContext';
-// import { MockPermissionsAdmin } from '../routes/MockPermissions';
-// import { authService } from '../common/authService';
-import { MockPermissionsEmployee } from '../routes/MockPermissions';
+import { authService } from '../common/authService';
+import { parseJwt } from '../common/utils/utilsForPermissions';
 
 function Template() {
   const location = useLocation();
   const routesStateContext = useContext(RoutesStateContext);
 
-  // const token = authService.getAuthToken();
-  // routesStateContext.initPermissions(parseJwt(token).permissions);
-  routesStateContext.initPermissions(MockPermissionsEmployee);
+  const token = authService.getAuthToken();
+  routesStateContext.initPermissions(parseJwt(token).permissions);
 
-  // const testBool = useRef(false);
-  // useEffect(() => {
-  //   testBool.current = routesStateContext.checkPermissionForRole('ViewAccounts');
-  // }, [routesStateContext.checkPermissionForRole('ViewAccounts')]);
   const parsedSidebarRoutes = useSidebarRoutes(sidebarRoutes, location);
-
-  console.log('adminRoutes', adminRoutes);
 
   const breadcrumbs = useBreadcrumbs(adminRoutes as BreadcrumbsRoute<string>[], { excludePaths: ['/'] });
 
@@ -111,4 +101,4 @@ function Template() {
   );
 }
 
-export default Template;
+export default memo(observer(Template));

@@ -5,7 +5,10 @@ import CreateAccount from './components/CreateAccount/CreateAccount';
 import RolesPage from './RolesPage';
 import EditAccount from './components/EditAccount/EditAccount';
 
-import { getAccessRights, parseJwt } from '../../common/utils/utilsForPermissions';
+import {
+  getAccessRights,
+  parseJwt,
+} from '../../common/utils/utilsForPermissions';
 import AccountsPage from './AccountsPage';
 import NotFoundPage from '../not-found/NotFoundPage';
 import { authService } from '../../common/authService';
@@ -14,6 +17,7 @@ function routerPermissions() {
   const token = authService.getAuthToken();
 
   let arr: any[] = [];
+  console.log('routerPermissions', getAccessRights(parseJwt(token).permissions));
   switch (getAccessRights(parseJwt(token).permissions)) {
     case 'full access':
       arr = [
@@ -113,8 +117,10 @@ function routerSidebarPermissions() {
   const token = authService.getAuthToken();
 
   let arr: any[] = [];
+  console.log('routerSidebarPermissions', getAccessRights(parseJwt(token).permissions));
   switch (getAccessRights(parseJwt(token).permissions)) {
     case 'full access':
+    case 'limited access to accounts and roles':
       arr = [
         {
           path: '/',
@@ -137,6 +143,7 @@ function routerSidebarPermissions() {
       ];
       break;
     case 'full access to accounts':
+    case 'limited access to accounts':
       arr = [
         {
           path: '/',
