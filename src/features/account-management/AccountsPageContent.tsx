@@ -167,7 +167,7 @@ function AccountsPageContent() {
       <div className="account-management-page__inner">
         <FilterMenu />
 
-        {accessToChanges.checkPermissionForRole('ManageAccounts') && (
+        {accessToChanges.accessPermissions.get('ManageAccounts') && (
           <Button
             style={{ marginBottom: 20 }}
             onClick={() => navigate('/account-management/add')}
@@ -185,7 +185,7 @@ function AccountsPageContent() {
           id: 'lastName',
           desc: false,
         }}
-        actions={accessToChanges.checkPermissionForRole('ManageAccounts') ? actions : []}
+        actions={accessToChanges.accessPermissions.get('ManageAccounts') ? actions : []}
         columns={columns}
         isLoading={isLoading}
       />

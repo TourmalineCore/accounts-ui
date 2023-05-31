@@ -48,7 +48,6 @@ function RolesPageContent() {
     getRoles();
   }, []);
 
-  console.log('fdsfdsa', accessToChanges.checkPermissionForRole('ManageRoles'));
   return (
     <div className="roles-page">
       <div className="roles-page__intro">
@@ -60,7 +59,7 @@ function RolesPageContent() {
           </div>
         </div>
 
-        {accessToChanges.checkPermissionForRole('ManageRoles') && (
+        {accessToChanges.accessPermissions.get('ManageRoles') && (
           <div className="roles-page__buttons">
             {
               !rolesPageStateContext.isInEditMode

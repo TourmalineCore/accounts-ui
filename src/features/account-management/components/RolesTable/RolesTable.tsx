@@ -3,6 +3,7 @@ import React, {
   ChangeEvent, Fragment, useContext, useEffect, useRef,
 } from 'react';
 import { CheckField } from '@tourmalinecore/react-tc-ui-kit';
+import { toJS } from 'mobx';
 import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext';
 import { ReactComponent as IconCheck } from '../../../../assets/icons/check.svg';
 import { ReactComponent as IconUncheck } from '../../../../assets/icons/uncheck.svg';
@@ -40,6 +41,7 @@ function RolesTable(
     }
   }, [rolesPageStateContext.updatedRole]);
 
+  console.log('accessToChanges.accessPermissions', toJS(accessToChanges.accessPermissions.get('ViewAccounts')));
   return (
 
     <table data-cy="roles-table" className="roles-table">
@@ -66,7 +68,7 @@ function RolesTable(
                     : <span data-cy={`role-name-${name}`}>{name}</span>
                 }
                 {
-                  accessToChanges.checkPermissionForRole('ManageRoles') && (name !== 'Admin' && (!rolesPageStateContext.isInEditMode))
+                  accessToChanges.accessPermissions.get('ViewAccounts') && (name !== 'Admin' && (!rolesPageStateContext.isInEditMode))
             && (
               <ActionsDropdown
                 className="roles-table__actions-dropdown"

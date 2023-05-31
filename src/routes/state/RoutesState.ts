@@ -14,26 +14,28 @@ enum Permission {
 }
 
 class RoutesState {
-  private _permissions: string[] = [];
+  private _accessPermissions = new Map<keyof typeof Permission, boolean>();
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  get isEditAccount() {
-    return this._permissions.includes('EditAccount');
+  get accessPermissions() {
+    return this._accessPermissions;
   }
 
-  get isAccount() {
-    return this._permissions.includes('ViewAccounts');
-  }
+  checkPermissionFromToken(permissionsFromToken: Array<keyof typeof Permission>) {
+    const permissionsList = Object.keys(Permission) as Array<keyof typeof Permission>;
 
-  initPermissions(tokenPermissions: string[]) {
-    this._permissions = tokenPermissions;
-  }
+    permissionsList.forEach((item) => {
+      if (permissionsFromToken.includes(item)) {
+        this._accessPermissions.set(item, true);
 
-  checkPermissionForRole(permissionName: keyof typeof Permission) {
-    return this._permissions.includes(permissionName);
+        return item;
+      }
+
+      return item;
+    });
   }
 }
 export default RoutesState;

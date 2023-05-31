@@ -1,6 +1,11 @@
-import { memo } from 'react';
+import { memo, useContext, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { BreadcrumbComponentProps } from 'use-react-router-breadcrumbs';
+import { authService } from '../../../common/authService';
+import RoutesStateContext from '../../../routes/state/RoutesStateContext';
+import { parseJwt } from '../../../common/utils/utilsForPermissions';
+
+const token = authService.getAuthToken();
 
 function TemplatePages({
   routes = [],
@@ -11,6 +16,12 @@ function TemplatePages({
     Component: () => JSX.Element;
   }[];
 }) {
+  const routesStateContext = useContext(RoutesStateContext);
+
+  useEffect(() => {
+    routesStateContext.checkPermissionFromToken(parseJwt(token).permissions);
+  }, []);
+
   return (
     <Routes>
       {routes.map(({ path, Component }) => (

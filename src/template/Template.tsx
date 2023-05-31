@@ -1,12 +1,8 @@
-import {
-  memo,
-  useContext, useState,
-} from 'react';
+import { memo, useState } from 'react';
 import useBreadcrumbs, { BreadcrumbsRoute } from 'use-react-router-breadcrumbs';
 import clsx from 'clsx';
 
 import { useLocation } from 'react-router-dom';
-import { observer } from 'mobx-react-lite';
 import { ReactComponent as IconLogout } from '../assets/icons/logout.svg';
 import { ReactComponent as IconLogoutActive } from '../assets/icons/logout-active.svg';
 
@@ -21,16 +17,9 @@ import TemplatePages from './components/TemplatePages/TemplatePages';
 import { useSidebarRoutes } from './hooks/useSidebarRoutes';
 
 import { adminRoutes, sidebarRoutes } from '../routes/adminRoutes';
-import RoutesStateContext from '../routes/state/RoutesStateContext';
-import { authService } from '../common/authService';
-import { parseJwt } from '../common/utils/utilsForPermissions';
 
 function Template() {
   const location = useLocation();
-  const routesStateContext = useContext(RoutesStateContext);
-
-  const token = authService.getAuthToken();
-  routesStateContext.initPermissions(parseJwt(token).permissions);
 
   const parsedSidebarRoutes = useSidebarRoutes(sidebarRoutes, location);
 
@@ -101,4 +90,4 @@ function Template() {
   );
 }
 
-export default memo(observer(Template));
+export default memo(Template);
