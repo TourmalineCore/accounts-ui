@@ -1,19 +1,12 @@
 import { Input, Button, CheckField } from '@tourmalinecore/react-tc-ui-kit';
 import clsx from 'clsx';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { api } from '../../../../common/api';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config';
 
 import ContentCard from '../../../../components/ContentCard/ContentCard';
-
-const checkFieldsData = {
-  1: 'Admin',
-  2: 'CEO',
-  3: 'Manager',
-  4: 'Employee',
-};
 
 function CreateAccount() {
   const history = useNavigate();
@@ -27,7 +20,13 @@ function CreateAccount() {
     corporateEmail: '',
   });
 
+  const [rolesData, setRolesData] = useState<{ [key: number]: string }>({});
+
   const isCorporateEmailError = !formData.corporateEmail && triedToSubmit;
+
+  useEffect(() => {
+    getRolesAccountLoad();
+  }, []);
 
   return (
     <ContentCard>
@@ -96,7 +95,7 @@ function CreateAccount() {
           <div className="create-account__box">
             <span>Role</span>
             <div>
-              {Object.entries(checkFieldsData).map(([value, label]) => (
+              {Object.entries(rolesData).map(([value, label]) => (
                 <CheckField
                   key={value}
                   style={{
@@ -135,6 +134,14 @@ function CreateAccount() {
       </div>
     </ContentCard>
   );
+
+  async function getRolesAccountLoad() {
+    const { data } = await api.get<{
+      id: number, name: string, permissions: []
+    }[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`);
+
+    setRolesData(Object.assign({}, ...data.map((role) => ({ [role.id]: role.name }))));
+  }
 
   async function createAccountAsync() {
     setTriedToSubmit(true);
