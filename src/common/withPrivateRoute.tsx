@@ -4,12 +4,16 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { authService } from './authService';
 import { ENV_KEY } from './config/config';
+import RoutesStateContext from '../routes/state/RoutesStateContext';
+import { parseJwt } from './utils/utilsForPermissions';
 
 const isProduction = ENV_KEY !== 'local';
 
 export const withPrivateRoute = <Type extends Record<string, unknown>>(ComposedComponent: FunctionComponent<Type>) => function RequireAuthentication(props: Type) {
   // @ts-ignore
   const [token] = useContext(authService.AuthContext);
+
+  const routesStateContext = useContext(RoutesStateContext);
 
   const navigation = useNavigate();
 
@@ -22,6 +26,10 @@ export const withPrivateRoute = <Type extends Record<string, unknown>>(ComposedC
       }
     }
   }, [token]);
+
+  if (token) {
+    routesStateContext.checkPermissionFromToken(parseJwt(token).permissions);
+  }
 
   return token ? <ComposedComponent {...props} /> : null;
 };

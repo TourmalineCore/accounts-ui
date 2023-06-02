@@ -9,7 +9,6 @@ import { withPrivateRoute } from './common/withPrivateRoute';
 import Template from './template/Template';
 import RoutesState from './routes/state/RoutesState';
 import RoutesStateContext from './routes/state/RoutesStateContext';
-// import { MockPermissionsAdmin } from './routes/MockPermissions';
 
 const WithPrivateRoute = withPrivateRoute(Template);
 
@@ -18,10 +17,6 @@ export default function App() {
     () => new RoutesState(),
     [],
   );
-
-  // const routesStateContext = useContext(RoutesStateContext);
-
-  // routesStateContext.initPermissions(MockPermissionsAdmin);
 
   return (
     <RoutesStateContext.Provider value={routesState}>
