@@ -1,31 +1,53 @@
-export function getAccessRights(value: string[]) {
-  if (value.includes('ViewAccounts') && value.includes('ManageAccounts') && value.includes('ViewRoles')) {
-    return 'full access';
-  }
+import { authService } from '../authService';
 
-  if (value.includes('ViewAccounts') && value.includes('ManageAccounts')) {
-    return 'full access to accounts';
-  }
-
-  if (value.includes('ViewAccounts') && value.includes('ViewRoles')) {
-    return 'limited access to accounts and roles';
-  }
-
-  if (value.includes('ViewAccounts')) {
-    return 'limited access to accounts';
-  }
-
-  if (value.includes('ViewRoles')) {
-    return 'limited access to roles';
-  }
-
-  return 'no access';
-}
-
-export function parseJwt(tokensss: string) {
-  const base64Url = tokensss.split('.')[1];
+export function parseJwt(token: string): {
+  permissions: string[];
+} {
+  const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   const jsonPayload = decodeURIComponent(window.atob(base64).split('').map((c) => `%${(`00${c.charCodeAt(0).toString(16)}`).slice(-2)}`).join(''));
 
   return JSON.parse(jsonPayload);
+}
+
+const token = authService.getAuthToken();
+
+export function getAccessRights() {
+  const { permissions } = parseJwt(token);
+
+  if (permissions.includes('ViewAccounts')
+  && permissions.includes('ManageAccounts')
+  && permissions.includes('ViewRoles')
+  && permissions.includes('AccessAnalyticalForecastsPage')) {
+    return 'full access';
+  }
+
+  if (permissions.includes('ViewAccounts')
+  && permissions.includes('ManageAccounts')
+  && permissions.includes('ViewRoles')
+  && permissions.includes('AccessAnalyticalForecastsPage')) {
+    return 'full access';
+  }
+
+  if (permissions.includes('AccessAnalyticalForecastsPage')) {
+    return 'full access to analytics';
+  }
+
+  if (permissions.includes('ViewAccounts') && permissions.includes('ManageAccounts')) {
+    return 'full access to accounts';
+  }
+
+  if (permissions.includes('ViewAccounts') && permissions.includes('ViewRoles')) {
+    return 'limited access to accounts and roles';
+  }
+
+  if (permissions.includes('ViewAccounts')) {
+    return 'limited access to accounts';
+  }
+
+  if (permissions.includes('ViewRoles')) {
+    return 'limited access to roles';
+  }
+
+  return 'no access';
 }

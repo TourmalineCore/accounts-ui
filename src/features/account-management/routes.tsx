@@ -7,18 +7,46 @@ import EditAccount from './components/EditAccount/EditAccount';
 
 import {
   getAccessRights,
-  parseJwt,
+  // parseJwt,
 } from '../../common/utils/utilsForPermissions';
 import AccountsPage from './AccountsPage';
 import NotFoundPage from '../not-found/NotFoundPage';
-import { authService } from '../../common/authService';
+// import { authService } from '../../common/authService';
+
+export const accountManagementRoutess = [
+  {
+    path: '/accounts/add',
+    breadcrumb: 'Add an employee',
+    Component: CreateAccount,
+  },
+  {
+    path: '/accounts/edit/:id',
+    breadcrumb: 'Edit an employee',
+    Component: EditAccount,
+  },
+];
+
+export const accountRoutes = [
+  {
+    path: '/accounts',
+    breadcrumb: 'Accounts',
+    Component: AccountsPage,
+  },
+];
+
+export const roleRoutes = [
+  {
+    path: '/roles',
+    breadcrumb: 'Roles',
+    Component: RolesPage,
+  },
+];
 
 function routerPermissions() {
-  const token = authService.getAuthToken();
+  // const token = authService.getAuthToken();
 
   let arr: any[] = [];
-  console.log('routerPermissions', getAccessRights(parseJwt(token).permissions));
-  switch (getAccessRights(parseJwt(token).permissions)) {
+  switch (getAccessRights()) {
     case 'full access':
       arr = [
         {
@@ -114,11 +142,11 @@ export const accountManagementRoutes = [
 ];
 
 function routerSidebarPermissions() {
-  const token = authService.getAuthToken();
+  // const token = authService.getAuthToken();
 
   let arr: any[] = [];
-  console.log('routerSidebarPermissions', getAccessRights(parseJwt(token).permissions));
-  switch (getAccessRights(parseJwt(token).permissions)) {
+  // console.log('routerSidebarPermissions', getAccessRights(parseJwt(token).permissions));
+  switch (getAccessRights()) {
     case 'full access':
     case 'limited access to accounts and roles':
       arr = [
@@ -186,5 +214,35 @@ function routerSidebarPermissions() {
 
   return arr;
 }
+
+export const sidebarAccountManagements : {
+  path: string;
+  label: string,
+  icon: JSX.Element,
+  iconActive: JSX.Element,
+  routes: {
+    path: string,
+    label: string,
+    iconMini: JSX.Element,
+  }[]
+} = {
+  path: '/',
+  label: 'Account management',
+  icon: <IconAnalytics />,
+  iconActive: <IconAnalyticsActive />,
+  routes: [],
+};
+
+export const sidebarRoles = {
+  path: '/account-management/roles',
+  label: 'Roles',
+  iconMini: <IconAnalyticsActive />,
+};
+
+export const sidebarAccounts = {
+  path: '/account-management/accounts',
+  label: 'Accounts',
+  iconMini: <IconAnalyticsActive />,
+};
 
 export const accountManagementSidebarRoutes = routerSidebarPermissions();

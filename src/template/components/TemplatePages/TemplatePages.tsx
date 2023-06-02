@@ -1,4 +1,8 @@
-import { memo, useContext, useEffect } from 'react';
+import {
+  memo,
+  useContext,
+  useEffect,
+} from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { BreadcrumbComponentProps } from 'use-react-router-breadcrumbs';
 import { authService } from '../../../common/authService';
@@ -19,6 +23,7 @@ function TemplatePages({
   const routesStateContext = useContext(RoutesStateContext);
 
   useEffect(() => {
+    // @ts-ignore
     routesStateContext.checkPermissionFromToken(parseJwt(token).permissions);
   }, []);
 

@@ -1,8 +1,9 @@
-import { memo, useState } from 'react';
+import { memo, useContext, useState } from 'react';
 import useBreadcrumbs, { BreadcrumbsRoute } from 'use-react-router-breadcrumbs';
 import clsx from 'clsx';
 
 import { useLocation } from 'react-router-dom';
+import { toJS } from 'mobx';
 import { ReactComponent as IconLogout } from '../assets/icons/logout.svg';
 import { ReactComponent as IconLogoutActive } from '../assets/icons/logout-active.svg';
 
@@ -16,11 +17,63 @@ import TemplatePages from './components/TemplatePages/TemplatePages';
 
 import { useSidebarRoutes } from './hooks/useSidebarRoutes';
 
-import { adminRoutes, sidebarRoutes } from '../routes/adminRoutes';
+import { adminRoutes, checkSidebarRoutes, sidebarRoutes } from '../routes/adminRoutes';
+import RoutesStateContext from '../routes/state/RoutesStateContext';
+// import { SidebarRoutesProps } from '../types';
+
+// function checkSidebarRoutes(objAccess: { [key: string]: boolean }) {
+//   const arr: any[] = [];
+
+//   // const profile = arr.findIndex((a) => a.path === '/profile');
+//   // const analytics = arr.findIndex((a) => a.path === '/analytics');
+//   // const accountManagerView = arr.findIndex((a) => a.path === '/');
+//   // const role = arr[accountManagerView].routes?.findIndex((item) => item.path === '/account-management/roles');
+//   // const account = arr[accountManagerView].routes?.findIndex((item) => item.path === '/account-management/accounts');
+//   // // const rolesView = arr.findIndex((a) => a.path === '/roles');
+
+//   // console.log(role, account);
+//   // if (objAccess.isViewAccount) {
+//   //   delete arr[profile];
+//   //   delete arr[analytics];
+//   // }
+
+//   // console.log(arr);
+
+//   if (objAccess.isViewAccount) {
+//     arr.unshift({ name: 'accounts' });
+//   }
+
+//   if (objAccess.isEditAccount) {
+//     arr.unshift({ name: 'add' }, { name: 'edit/:id' });
+//   }
+
+//   if (objAccess.isViewRoles) {
+//     arr.unshift({ name: 'role' });
+//   }
+
+//   if (objAccess.isViewAnalytics) {
+//     arr.unshift({ name: 'analytics' });
+//   }
+
+//   if (objAccess.isViewProfile) {
+//     arr.unshift({ name: 'profile' });
+//   }
+
+//   if (objAccess.isViewEmployee) {
+//     arr.unshift({ name: 'employee' });
+//   }
+
+//   return arr;
+// }
 
 function Template() {
   const location = useLocation();
 
+  const routesStateContext = useContext(RoutesStateContext);
+
+  console.log(toJS(routesStateContext.accessPermissions));
+  // @ts-ignore
+  console.log('checkSidebarRoutes({ isViewAccount: true })', checkSidebarRoutes(routesStateContext.accessPermissions));
   const parsedSidebarRoutes = useSidebarRoutes(sidebarRoutes, location);
 
   const breadcrumbs = useBreadcrumbs(adminRoutes as BreadcrumbsRoute<string>[], { excludePaths: ['/'] });
