@@ -6,6 +6,7 @@ import RolesPage from './RolesPage';
 import EditAccount from './components/EditAccount/EditAccount';
 
 import AccountsPage from './AccountsPage';
+import AccountManagementPage from './AccountManagementPage';
 
 export const accountManagementRoutes = [
   {
@@ -25,6 +26,11 @@ export const accountRoutes = [
     path: '/accounts',
     breadcrumb: 'Accounts',
     Component: AccountsPage,
+  },
+  {
+    path: '/',
+    breadcrumb: 'Account management',
+    Component: AccountManagementPage,
   },
 ];
 

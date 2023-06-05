@@ -135,7 +135,7 @@ function AccountsPageContent() {
         return !isBlocked;
       },
       renderText: () => 'Edit',
-      onClick: (e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => navigate(`/account-management/edit/${row.original.id}`),
+      onClick: (e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => navigate(`/account-management/accounts/edit/${row.original.id}`),
     },
     {
       name: 'block',
@@ -170,7 +170,7 @@ function AccountsPageContent() {
         {accessToChanges.accessPermissions.get('ManageAccounts') && (
           <Button
             style={{ marginBottom: 20 }}
-            onClick={() => navigate('/account-management/add')}
+            onClick={() => navigate('/account-management/accounts/add')}
           >
             Add New Account
           </Button>

@@ -1,6 +1,4 @@
-import {
-  useMemo,
-} from 'react';
+import { useMemo } from 'react';
 
 import AccountManagementState from './context/AccountManagementState';
 import AccountManagementStateContext from './context/AccountManagementStateContext';
