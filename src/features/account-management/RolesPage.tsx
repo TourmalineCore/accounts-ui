@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import RolesPageContent from './RolesPageContent';
 import RolesPageState from './state/roles-page/RolesPageState';
 import RolesPageStateContext from './state/roles-page/RolesPageStateContext';

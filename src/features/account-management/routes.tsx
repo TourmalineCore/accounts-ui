@@ -1,47 +1,73 @@
 import { ReactComponent as IconAnalytics } from '../../assets/icons/analytics.svg';
 import { ReactComponent as IconAnalyticsActive } from '../../assets/icons/analytics-active.svg';
 
-import AccountManagementPage from './AccountManagementPage';
 import CreateAccount from './components/CreateAccount/CreateAccount';
 import RolesPage from './RolesPage';
 import EditAccount from './components/EditAccount/EditAccount';
 
+import AccountsPage from './AccountsPage';
+import AccountManagementPage from './AccountManagementPage';
+
 export const accountManagementRoutes = [
   {
-    path: '/',
-    breadcrumb: 'Account management',
-    Component: AccountManagementPage,
-  },
-  {
-    path: '/add',
+    path: '/accounts/add',
     breadcrumb: 'Add an employee',
     Component: CreateAccount,
   },
   {
-    path: '/roles',
-    breadcrumb: 'Roles',
-    Component: RolesPage,
-  },
-  {
-    path: '/edit/:id',
+    path: '/accounts/edit/:id',
     breadcrumb: 'Edit an employee',
     Component: EditAccount,
   },
 ];
 
-export const accountManagementSidebarRoutes = [
+export const accountRoutes = [
+  {
+    path: '/accounts',
+    breadcrumb: 'Accounts',
+    Component: AccountsPage,
+  },
   {
     path: '/',
-    label: 'Account management',
-    icon: <IconAnalytics />,
-    iconActive: <IconAnalyticsActive />,
-    routes: [
-      {
-        path: '/account-management/roles',
-        label: 'Roles',
-        iconMini: <IconAnalyticsActive />,
-      },
-    ],
+    breadcrumb: 'Account management',
+    Component: AccountManagementPage,
   },
-
 ];
+
+export const roleRoutes = [
+  {
+    path: '/roles',
+    breadcrumb: 'Roles',
+    Component: RolesPage,
+  },
+];
+
+export const sidebarAccountManagements : {
+  path: string;
+  label: string,
+  icon: JSX.Element,
+  iconActive: JSX.Element,
+  routes: {
+    path: string,
+    label: string,
+    iconMini: JSX.Element,
+  }[]
+} = {
+  path: '/',
+  label: 'Account management',
+  icon: <IconAnalytics />,
+  iconActive: <IconAnalyticsActive />,
+  routes: [],
+};
+
+export const sidebarRoles = {
+  path: '/account-management/roles',
+  label: 'Roles',
+  iconMini: <IconAnalyticsActive />,
+};
+
+export const sidebarAccounts = {
+  path: '/account-management/accounts',
+  label: 'Accounts',
+  iconMini: <IconAnalyticsActive />,
+};

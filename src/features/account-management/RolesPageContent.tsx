@@ -5,6 +5,7 @@ import { api } from '../../common/api';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
 import RolesTable from './components/RolesTable/RolesTable';
 import RolesPageStateContext from './state/roles-page/RolesPageStateContext';
+import AccessBasedOnPemissionsStateContext from '../../routes/state/AccessBasedOnPemissionsStateContext';
 
 const PERMISSION_GROUPS = [
   {
@@ -41,6 +42,7 @@ const PERMISSION_GROUPS = [
 
 function RolesPageContent() {
   const rolesPageStateContext = useContext(RolesPageStateContext);
+  const accessToChanges = useContext(AccessBasedOnPemissionsStateContext);
 
   useEffect(() => {
     getRoles();
@@ -57,41 +59,43 @@ function RolesPageContent() {
           </div>
         </div>
 
-        <div className="roles-page__buttons">
-          {
-            !rolesPageStateContext.isInEditMode
-              ? (
-                <Button
-                  type="button"
-                  data-cy="add-new-role-button"
-                  className="roles-page__button"
-                  onClick={() => { rolesPageStateContext.addNewRole(); }}
-                >
-                  Add new role
-                </Button>
-              )
-              : (
-                <>
+        {accessToChanges.accessPermissions.get('ManageRoles') && (
+          <div className="roles-page__buttons">
+            {
+              !rolesPageStateContext.isInEditMode
+                ? (
                   <Button
                     type="button"
-                    data-cy="cancel-changes-button"
+                    data-cy="add-new-role-button"
                     className="roles-page__button"
-                    onClick={() => { rolesPageStateContext.cancelRoleEditing(); }}
+                    onClick={() => { rolesPageStateContext.addNewRole(); }}
                   >
-                    Cancel
+                    Add new role
                   </Button>
-                  <Button
-                    type="button"
-                    data-cy="save-changes-button"
-                    className="roles-page__button"
-                    onClick={() => { saveChangesToRole(); }}
-                  >
-                    Save Changes
-                  </Button>
-                </>
-              )
-          }
-        </div>
+                )
+                : (
+                  <>
+                    <Button
+                      type="button"
+                      data-cy="cancel-changes-button"
+                      className="roles-page__button"
+                      onClick={() => { rolesPageStateContext.cancelRoleEditing(); }}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      type="button"
+                      data-cy="save-changes-button"
+                      className="roles-page__button"
+                      onClick={() => { saveChangesToRole(); }}
+                    >
+                      Save Changes
+                    </Button>
+                  </>
+                )
+            }
+          </div>
+        )}
 
       </div>
 
