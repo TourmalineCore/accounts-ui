@@ -68,7 +68,7 @@ function RolesTable(
                     : <span data-cy={`role-name-${name}`}>{name}</span>
                 }
                 {
-                  accessToChanges.accessPermissions.get('ViewAccounts') && (name !== 'Admin' && (!rolesPageStateContext.isInEditMode))
+                  accessToChanges.accessPermissions.get('ManageRoles') && (name !== 'Admin' && (!rolesPageStateContext.isInEditMode))
             && (
               <ActionsDropdown
                 className="roles-table__actions-dropdown"
