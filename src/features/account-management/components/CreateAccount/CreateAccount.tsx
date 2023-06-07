@@ -1,18 +1,12 @@
 import { Input, Button, CheckField } from '@tourmalinecore/react-tc-ui-kit';
 import clsx from 'clsx';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { api } from '../../../../common/api';
+import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config';
 
 import ContentCard from '../../../../components/ContentCard/ContentCard';
-
-const checkFieldsData = {
-  1: 'Admin',
-  2: 'CEO',
-  3: 'Manager',
-  4: 'Employee',
-};
 
 function CreateAccount() {
   const history = useNavigate();
@@ -22,41 +16,57 @@ function CreateAccount() {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
+    middleName: '',
     corporateEmail: '',
   });
 
+  const [rolesData, setRolesData] = useState<{ [key: number]: string }>({});
+
   const isCorporateEmailError = !formData.corporateEmail && triedToSubmit;
+
+  useEffect(() => {
+    getRolesAccountLoad();
+  }, []);
 
   return (
     <ContentCard>
       <div className="create-account">
         <h1 className="create-account__title">Add New Account</h1>
 
-        <div className="create-account__box">
-          <span className="create-account__label">First Name</span>
-          <Input
-            value={formData.firstName}
-            isInvalid={!formData.firstName && triedToSubmit}
-            validationMessages={['This field is required. Please fill it up.']}
-            isMessagesAbsolute
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, firstName: e.target.value.trim() })}
-          />
-        </div>
-
-        <div className="create-account__box">
-          <span className="create-account__label">Last Name</span>
-          <Input
-            value={formData.lastName}
-            isInvalid={!formData.lastName && triedToSubmit}
-            validationMessages={['This field is required. Please fill it up.']}
-            isMessagesAbsolute
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, lastName: e.target.value.trim() })}
-          />
-        </div>
-
-        <div style={{ margin: '34px 0 0 12px', position: 'relative' }}>
+        <div className="create-account__inner">
           <div className="create-account__box">
-            <span className="create-account__label">Corporate Email</span>
+            <span>First Name</span>
+            <Input
+              value={formData.firstName}
+              isInvalid={!formData.firstName && triedToSubmit}
+              validationMessages={['This field is required. Please fill it up.']}
+              isMessagesAbsolute
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, firstName: e.target.value.trim() })}
+            />
+          </div>
+
+          <div className="create-account__box">
+            <span>Middle Name</span>
+            <Input
+              value={formData.middleName}
+              isMessagesAbsolute
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, middleName: e.target.value.trim() })}
+            />
+          </div>
+
+          <div className="create-account__box">
+            <span>Last Name</span>
+            <Input
+              value={formData.lastName}
+              isInvalid={!formData.lastName && triedToSubmit}
+              validationMessages={['This field is required. Please fill it up.']}
+              isMessagesAbsolute
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, lastName: e.target.value.trim() })}
+            />
+          </div>
+
+          <div className="create-account__box">
+            <span>Corporate Email</span>
             <div>
               <div className="create-account__input-domain">
                 <Input
@@ -81,57 +91,66 @@ function CreateAccount() {
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="create-account__box">
-          <span className="create-account__label">Role</span>
-          <div>
-            {Object.entries(checkFieldsData).map(([value, label]) => (
-              <CheckField
-                key={value}
-                style={{
-                  marginBottom: 16,
-                }}
-                label={label}
-                checked={selectedCheckboxes.has(value)}
-                onChange={() => {
-                  setSelectedCheckboxes((prevSelected) => {
-                    if (prevSelected.has(value)) {
-                      return new Set([...prevSelected].filter((x) => x !== value));
-                    }
+          <div className="create-account__box">
+            <span>Role</span>
+            <div>
+              {Object.entries(rolesData).map(([value, label]) => (
+                <CheckField
+                  key={value}
+                  style={{
+                    marginBottom: 16,
+                  }}
+                  label={label}
+                  checked={selectedCheckboxes.has(value)}
+                  onChange={() => {
+                    setSelectedCheckboxes((prevSelected) => {
+                      if (prevSelected.has(value)) {
+                        return new Set([...prevSelected].filter((x) => x !== value));
+                      }
 
-                    return new Set([...prevSelected, value]);
-                  });
-                }}
-              />
-            ))}
+                      return new Set([...prevSelected, value]);
+                    });
+                  }}
+                />
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className="create-account__inner-button">
-          <Button
-            onClick={() => history('/account-management')}
-          >
-            Cancel
-          </Button>
+          <div className="create-account__inner-button">
+            <Button
+              onClick={() => history('/account-management')}
+            >
+              Cancel
+            </Button>
 
-          <Button
-            onClick={() => createAccountAsync()}
-          >
-            Add
-          </Button>
+            <Button
+              onClick={() => createAccountAsync()}
+            >
+              Add
+            </Button>
+          </div>
         </div>
       </div>
     </ContentCard>
   );
 
+  async function getRolesAccountLoad() {
+    const { data } = await api.get<{
+      id: number, name: string, permissions: []
+    }[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`);
+
+    setRolesData(Object.assign({}, ...data.map((role) => ({ [role.id]: role.name }))));
+  }
+
   async function createAccountAsync() {
     setTriedToSubmit(true);
 
     try {
-      await api.post('/accounts/create', {
+      await api.post<AccountCreate>(`${LINK_TO_ACCOUNT_SERVICE}accounts/create`, {
         ...formData,
         corporateEmail: `${formData.corporateEmail}@tourmalinecore.com`,
+        middleName: formData.middleName || undefined,
         roleIds: [...selectedCheckboxes].map((item) => Number(item)),
       });
 
