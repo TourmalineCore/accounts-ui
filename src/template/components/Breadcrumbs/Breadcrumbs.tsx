@@ -1,7 +1,5 @@
 import clsx from 'clsx';
-import {
-  useEffect, useRef,
-} from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { BreadcrumbData } from 'use-react-router-breadcrumbs';
 import { ReactComponent as IconBreadcrumbs } from '../../../assets/icons/icon-arrow-breadcrumbs.svg';
@@ -31,14 +29,14 @@ function Breadcrumbs({
             {
               i !== list.length - 1
                 ? (
-                  <span>
+                  <>
                     <Link className="breadcrumbs__link" to={key}>{breadcrumb}</Link>
                     {list.length > 1 && (
                       <span className="breadcrumbs__icon">
                         <IconBreadcrumbs />
                       </span>
                     )}
-                  </span>
+                  </>
                 )
                 : (
                   <span
