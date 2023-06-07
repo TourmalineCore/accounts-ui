@@ -115,6 +115,8 @@ describe('AddNewRole', () => {
     cy.getByData('edit-role-button-Manager')
       .click();
 
+    cy.contains('Edit').click();
+
     cy.getByData('role-name-input')
       .type('Barmaley');
 

@@ -8,10 +8,12 @@ export default function ActionsDropdown({
   tableContainerRef,
   actions,
   className,
+  dataAttr,
 }:{
   tableContainerRef: RefObject<HTMLTableDataCellElement>,
-  actions: { text: string, dataAttr: string, onClick: ()=> unknown }[],
+  actions: { text: string, onClick: ()=> unknown }[],
   className?: string,
+  dataAttr: string,
 
 }) {
   const dropdownContainer = useRef<HTMLDivElement | null>(null);
@@ -26,6 +28,7 @@ export default function ActionsDropdown({
     <div ref={dropdownContainer} className={clsx('tc-table-desktop-actions-dropdown', className)}>
 
       <button
+        data-cy={dataAttr}
         type="button"
         style={{ position: 'relative' }}
         onClick={() => setIsOpened(!isOpened)}
@@ -45,9 +48,8 @@ export default function ActionsDropdown({
             actions
               .map((action) => (
                 <button
-                  key={`${action.text}-${action.dataAttr}`}
+                  key={`${action.text}`}
                   type="button"
-                  data-cy={action.dataAttr}
                   className="tc-table-desktop-actions-dropdown__action"
                   onClick={() => { action.onClick(); }}
                 >

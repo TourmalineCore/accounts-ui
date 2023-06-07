@@ -120,4 +120,22 @@ describe('RolesPageState', () => {
       permissions: [],
     });
   });
+
+  it('SHOULD change value of private field isNameFilled to true WHEN receiving valid string', () => {
+    const rolesPageState = new RolesPageState();
+
+    rolesPageState.initialize(INITIAL_STATE);
+
+    rolesPageState.addNewRole();
+
+    expect(!!rolesPageState.updatedRole!.name).eq(false);
+
+    rolesPageState.changeRole({
+      id: 2,
+      name: 'Employee',
+      permissions: [],
+    });
+
+    expect(!!rolesPageState.updatedRole!.name).eq(true);
+  });
 });

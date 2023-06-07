@@ -1,9 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import React, {
-  ChangeEvent, Fragment, useContext, useEffect, useRef,
+  ChangeEvent, Fragment, useContext, useRef,
 } from 'react';
 import { CheckField } from '@tourmalinecore/react-tc-ui-kit';
-import { toJS } from 'mobx';
 import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext';
 import { ReactComponent as IconCheck } from '../../../../assets/icons/check.svg';
 import { ReactComponent as IconUncheck } from '../../../../assets/icons/uncheck.svg';
@@ -32,16 +31,8 @@ function RolesTable(
   const rolesPageStateContext = useContext(RolesPageStateContext);
   const accessToChanges = useContext(AccessBasedOnPemissionsStateContext);
 
-  const nameRef = useRef<HTMLInputElement>(null);
   const columnRef = useRef<HTMLTableDataCellElement>(null);
 
-  useEffect(() => {
-    if (nameRef.current) {
-      nameRef.current.focus();
-    }
-  }, [rolesPageStateContext.updatedRole]);
-
-  console.log('accessToChanges.accessPermissions', toJS(accessToChanges.accessPermissions.get('ViewAccounts')));
   return (
 
     <table data-cy="roles-table" className="roles-table">
@@ -55,10 +46,11 @@ function RolesTable(
                   id === rolesPageStateContext.updatedRole?.id
                     ? (
                       <input
+                        // eslint-disable-next-line jsx-a11y/no-autofocus
+                        autoFocus
                         data-cy="role-name-input"
                         className="roles-table__name-input"
                         type="text"
-                        ref={nameRef}
                         onChange={(event: { target: { value: any; }; }) => {
                           rolesPageStateContext.changeRole({ ...rolesPageStateContext.updatedRole!, name: event.target.value });
                         }}
@@ -73,10 +65,10 @@ function RolesTable(
               <ActionsDropdown
                 className="roles-table__actions-dropdown"
                 tableContainerRef={columnRef}
+                dataAttr={`edit-role-button-${name}`}
                 actions={[{
                   text: 'Edit',
                   onClick: () => { rolesPageStateContext.editRole(id); },
-                  dataAttr: `edit-role-button-${name}`,
                 }]}
               />
             )
