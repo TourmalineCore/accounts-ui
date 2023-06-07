@@ -128,10 +128,14 @@ describe('RolesPageState', () => {
 
     rolesPageState.addNewRole();
 
-    expect(rolesPageState.isNameFilled).eq(false);
+    expect(!!rolesPageState.updatedRole!.name).eq(false);
 
-    rolesPageState.checkIsNameFilled('Employee');
+    rolesPageState.changeRole({
+      id: 2,
+      name: 'Employee',
+      permissions: [],
+    });
 
-    expect(rolesPageState.isNameFilled).eq(true);
+    expect(!!rolesPageState.updatedRole!.name).eq(true);
   });
 });

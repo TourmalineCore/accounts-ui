@@ -7,8 +7,6 @@ class RolesPageState {
 
   private _updatedRole: Role | null = null;
 
-  private _isNameFilled: boolean = false;
-
   constructor() {
     makeAutoObservable(this);
   }
@@ -31,10 +29,6 @@ class RolesPageState {
 
   get updatedRole() {
     return this._updatedRole;
-  }
-
-  get isNameFilled() {
-    return this._isNameFilled;
   }
 
   changeRole({
@@ -74,12 +68,6 @@ class RolesPageState {
     this._roles = this._roles.filter((role) => role.id !== 0);
     this._updatedRole = null;
     this._isInEditMode = false;
-  }
-
-  checkIsNameFilled(name: string) {
-    if (name.length) {
-      this._isNameFilled = true;
-    }
   }
 }
 

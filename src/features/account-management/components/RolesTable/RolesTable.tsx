@@ -53,7 +53,6 @@ function RolesTable(
                         type="text"
                         onChange={(event: { target: { value: any; }; }) => {
                           rolesPageStateContext.changeRole({ ...rolesPageStateContext.updatedRole!, name: event.target.value });
-                          rolesPageStateContext.checkIsNameFilled(event.target.value);
                         }}
                         defaultValue={name}
                       />
