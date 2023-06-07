@@ -87,6 +87,7 @@ function RolesPageContent() {
                       type="button"
                       data-cy="save-changes-button"
                       className="roles-page__button"
+                      disabled={!rolesPageStateContext.isNameFilled}
                       onClick={() => { saveChangesToRole(); }}
                     >
                       Save Changes
