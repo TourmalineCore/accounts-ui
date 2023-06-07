@@ -5,7 +5,7 @@ import { api } from '../../common/api';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
 import RolesTable from './components/RolesTable/RolesTable';
 import RolesPageStateContext from './state/roles-page/RolesPageStateContext';
-import RoutesStateContext from '../../routes/state/RoutesStateContext';
+import AccessBasedOnPemissionsStateContext from '../../routes/state/AccessBasedOnPemissionsStateContext';
 
 const PERMISSION_GROUPS = [
   {
@@ -42,7 +42,7 @@ const PERMISSION_GROUPS = [
 
 function RolesPageContent() {
   const rolesPageStateContext = useContext(RolesPageStateContext);
-  const accessToChanges = useContext(RoutesStateContext);
+  const accessToChanges = useContext(AccessBasedOnPemissionsStateContext);
 
   useEffect(() => {
     getRoles();

@@ -12,7 +12,7 @@ import {
   sidebarRoles,
 } from '../features/account-management/routes';
 import { SidebarRoutesProps } from '../types';
-import { Permission } from './state/RoutesState';
+import { Permission } from './state/AccessBasedOnPemissionsState';
 
 export function getAdminRoutes(accessPermissions: Map<keyof typeof Permission, boolean>) {
   const routes: {

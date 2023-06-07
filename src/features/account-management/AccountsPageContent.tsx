@@ -18,7 +18,7 @@ import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
 import ContentCard from '../../components/ContentCard/ContentCard';
 import FilterMenu from './components/FilterMenu/FilterMenu';
 import AccountManagementStateContext from './context/AccountManagementStateContext';
-import RoutesStateContext from '../../routes/state/RoutesStateContext';
+import AccessBasedOnPemissionsStateContext from '../../routes/state/AccessBasedOnPemissionsStateContext';
 
 export type Row<TypeProps> = {
   original: TypeProps;
@@ -27,7 +27,7 @@ export type Row<TypeProps> = {
 
 function AccountsPageContent() {
   const accountManagementState = useContext(AccountManagementStateContext);
-  const accessToChanges = useContext(RoutesStateContext);
+  const accessToChanges = useContext(AccessBasedOnPemissionsStateContext);
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
