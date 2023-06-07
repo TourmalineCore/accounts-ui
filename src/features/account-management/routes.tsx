@@ -1,11 +1,11 @@
-import { ReactComponent as IconAnalytics } from '../../assets/icons/icon-analytics.svg';
-import { ReactComponent as IconAnalyticsActive } from '../../assets/icons/icon-analytics-active.svg';
+import { ReactComponent as IconAccountManagement } from '../../assets/icons/icon-account-management.svg';
 
 import CreateAccount from './components/CreateAccount/CreateAccount';
 import RolesPage from './RolesPage';
 import EditAccount from './components/EditAccount/EditAccount';
 
 import AccountsPage from './AccountsPage';
+import AccountManagementPage from './AccountManagementPage';
 
 export const accountManagementRoutes = [
   {
@@ -54,19 +54,19 @@ export const sidebarAccountManagements : {
 } = {
   path: '/',
   label: 'Account management',
-  icon: <IconAnalytics />,
-  iconActive: <IconAnalyticsActive />,
+  icon: <IconAccountManagement />,
+  iconActive: <IconAccountManagement />,
   routes: [],
 };
 
 export const sidebarRoles = {
   path: '/account-management/roles',
   label: 'Roles',
-  iconMini: <IconAnalyticsActive />,
+  iconMini: <IconAccountManagement />,
 };
 
 export const sidebarAccounts = {
   path: '/account-management/accounts',
   label: 'Accounts',
-  iconMini: <IconAnalyticsActive />,
+  iconMini: <IconAccountManagement />,
 };

@@ -1,6 +1,14 @@
 .create-account {
   $error-color: #e11961;
 
+  &__title {
+    text-align: center;
+  }
+
+  &__button {
+    @include tc-button-reset;
+  }
+
   &__inner {
     margin: 0 auto;
     max-width: 700px;
@@ -46,7 +54,7 @@
   }
 
   &__inner-button {
-    margin-top: 40px;
+    margin: 40px 0;
     text-align: center;
 
     button + button {

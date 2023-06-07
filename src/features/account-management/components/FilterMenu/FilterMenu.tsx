@@ -1,7 +1,6 @@
 import {
   MouseEvent, useContext,
 } from 'react';
-// import { useSearchParams } from 'react-router-dom';
 
 import { Button } from '@tourmalinecore/react-tc-ui-kit';
 import clsx from 'clsx';
@@ -26,27 +25,12 @@ const filterElements = [
 function FilterMenu() {
   const accountManagementState = useContext(AccountManagementStateContext);
 
-  // const [params, setParams] = useSearchParams();
-
-  // useEffect(() => {
-  //   if (accountManagementState.filterTerm === 'blank' && !accountManagementState.isBlankEmployees) {
-  //     params.delete('filter');
-  //     setParams(params, {
-  //       replace: true,
-  //     });
-  //   }
-  // }, [accountManagementState.isBlankEmployees, accountManagementState.filterTerm]);
-
-  // useEffect(() => {
-  //   accountManagementState.updateFilterTerm(params.get('filter') || 'current');
-  // }, [accountManagementState.filterTerm]);
-
   return (
     <div className="filter-menu">
       {filterElements.map((item) => (
         <Button
           type="button"
-          className={clsx({
+          className={clsx('filter-menu__button', {
             'filter-menu__button-active': item.id === accountManagementState.filterTerm,
           })}
           key={item.id}

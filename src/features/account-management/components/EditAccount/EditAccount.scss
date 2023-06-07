@@ -54,11 +54,15 @@
   }
 
   &__inner-button {
-    margin-top: 40px;
+    margin: 40px 0;
     text-align: center;
 
     button + button {
       margin-left: 40px;
     }
+  }
+
+  &__button {
+    @include tc-button-reset;
   }
 }
