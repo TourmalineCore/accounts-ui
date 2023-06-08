@@ -38,6 +38,7 @@ function CreateAccount() {
             isInvalid={!formData.firstName && triedToSubmit}
             validationMessages={['This field is required. Please fill it up.']}
             isMessagesAbsolute
+            maxLength={50}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, firstName: e.target.value.trim() })}
           />
         </div>
@@ -47,6 +48,7 @@ function CreateAccount() {
           <Input
             value={formData.middleName}
             isMessagesAbsolute
+            maxLength={50}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, middleName: e.target.value.trim() })}
           />
         </div>
@@ -58,6 +60,7 @@ function CreateAccount() {
             isInvalid={!formData.lastName && triedToSubmit}
             validationMessages={['This field is required. Please fill it up.']}
             isMessagesAbsolute
+            maxLength={50}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, lastName: e.target.value.trim() })}
           />
         </div>
@@ -71,6 +74,7 @@ function CreateAccount() {
                   'create-account__input--error': !isCorporateEmailError,
                 })}
                 value={formData.corporateEmail}
+                maxLength={31}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, corporateEmail: e.target.value.trim() })}
               />
               <span>@tourmalinecore.com</span>
