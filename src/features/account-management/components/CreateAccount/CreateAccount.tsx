@@ -115,6 +115,14 @@ function CreateAccount() {
                 }}
               />
             ))}
+
+            <div className="create-account__error-message">
+              {[...selectedCheckboxes].length === 0 && triedToSubmit && (
+                <>
+                  Select at least one role
+                </>
+              )}
+            </div>
           </div>
         </div>
 
