@@ -132,8 +132,9 @@ function AccountsPageContent() {
     {
       name: 'edit',
       show: (row: Row<Accounts>) => {
-        const { isBlocked } = row.original;
-        return !isBlocked;
+        const { isBlocked, canChangeAccountState } = row.original;
+
+        return !isBlocked && canChangeAccountState;
       },
       renderText: () => 'Edit',
       onClick: (e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => navigate(`/account-management/accounts/edit/${row.original.id}`),
@@ -141,8 +142,9 @@ function AccountsPageContent() {
     {
       name: 'block',
       show: (row: Row<Accounts>) => {
-        const { isBlocked } = row.original;
-        return !isBlocked;
+        const { isBlocked, canChangeAccountState } = row.original;
+
+        return !isBlocked && canChangeAccountState;
       },
       renderText: () => 'Block',
       onClick: (e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => blockAccountsAsync(row.original.id),
@@ -150,8 +152,12 @@ function AccountsPageContent() {
     {
       name: 'unblock',
       show: (row: Row<Accounts>) => {
-        const { isBlocked } = row.original;
-        return isBlocked;
+        const { isBlocked, canChangeAccountState } = row.original;
+
+        console.log('isBlocked && canChangeAccountState', isBlocked && canChangeAccountState);
+        console.log('canChangeAccountState', canChangeAccountState);
+
+        return isBlocked && canChangeAccountState;
       },
       renderText: () => 'Unblock',
       onClick: (e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => {
