@@ -10,7 +10,7 @@ function CreateAccount() {
   const history = useNavigate();
 
   const [triedToSubmit, setTriedToSubmit] = useState(false);
-  const [selectedCheckboxes, setSelectedCheckboxes] = useState(new Set(['4']));
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState(new Set<string>([]));
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
