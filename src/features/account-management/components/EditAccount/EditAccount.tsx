@@ -1,7 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Input, CheckField, Button } from '@tourmalinecore/react-tc-ui-kit';
-import ContentCard from '../../../../components/ContentCard/ContentCard';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config';
 import { api } from '../../../../common/api';
 
@@ -28,112 +27,112 @@ function EditAccount() {
   }, []);
 
   return (
-    <ContentCard>
-      <section data-cy="edit-account" className="edit-account">
-        <h1 className="edit-account__title">Edit Account</h1>
+    <section data-cy="edit-account" className="edit-account">
+      <h1 className="heading edit-account__title">Edit Account</h1>
 
-        <div className="edit-account__inner">
-          <div className="edit-account__info-box">
-            <div className="edit-account__icon">
-              <IconEmail />
-            </div>
-
-            <div
-              data-cy="corporate-email"
-              className="edit-account__email"
-            >
-              {account.corporateEmail}
-            </div>
+      <div className="edit-account__inner">
+        <div className="edit-account__info-box">
+          <div className="edit-account__icon">
+            <IconEmail />
           </div>
 
-          <div className="edit-account__box">
-            <span>First Name*</span>
-            <Input
-              data-cy="first-name"
-              validationMessages={['This first name is required. Please fill it up.']}
-              value={account.firstName}
-              isInvalid={!account.firstName && triedToSubmit}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => setAccount({ ...account, firstName: event.target.value.trim() })}
-            />
+          <div
+            data-cy="corporate-email"
+            className="edit-account__email"
+          >
+            {account.corporateEmail}
           </div>
-
-          <div className="edit-account__box">
-            <div>
-              <div>Middle Name</div>
-              <div className="edit-account__available">(if available)</div>
-            </div>
-            <Input
-              data-cy="middle-name"
-              value={account.middleName ?? ''}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => setAccount({ ...account, middleName: event.target.value.trim() })}
-            />
-          </div>
-
-          <div className="edit-account__box">
-            <span>Last Name*</span>
-            <Input
-              data-cy="last-name"
-              validationMessages={['This last name is required. Please fill it up.']}
-              value={account.lastName}
-              isInvalid={!account.lastName && triedToSubmit}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => setAccount({ ...account, lastName: event.target.value.trim() })}
-            />
-          </div>
-
-          <div className="edit-account__box">
-            <span>Role*</span>
-            <div className="edit-account__roles">
-              {Object.entries(rolesData).map(([value, label]) => (
-                <CheckField
-                  key={value}
-                  style={{
-                    marginBottom: 16,
-                  }}
-                  data-cy="role"
-                  label={label}
-                  checked={selectedCheckboxes.has(value)}
-                  value={value}
-                  onChange={() => {
-                    setSelectedCheckboxes((prevSelected) => {
-                      if (prevSelected.has(value)) {
-                        return new Set([...prevSelected].filter((x) => x !== value));
-                      }
-
-                      return new Set([...prevSelected, value]);
-                    });
-                  }}
-                />
-              ))}
-
-              <div className="edit-account__error-roles">
-                {[...selectedCheckboxes].length === 0 && triedToSubmit && (
-                  <>
-                    Select at least one role
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div className="edit-account__inner-button">
-            <Button
-              data-cy="cancel-button"
-              onClick={() => navigation('/account-management')}
-            >
-              Cancel
-            </Button>
-
-            <Button
-              data-cy="save-button"
-              onClick={() => editAccountAsync()}
-            >
-              Save Changes
-            </Button>
-          </div>
-
         </div>
-      </section>
-    </ContentCard>
+
+        <div className="edit-account__box">
+          <span>First Name*</span>
+          <Input
+            data-cy="first-name"
+            validationMessages={['This first name is required. Please fill it up.']}
+            value={account.firstName}
+            isInvalid={!account.firstName && triedToSubmit}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => setAccount({ ...account, firstName: event.target.value.trim() })}
+          />
+        </div>
+
+        <div className="edit-account__box">
+          <div>
+            <div>Middle Name</div>
+            <div className="edit-account__available">(if available)</div>
+          </div>
+          <Input
+            data-cy="middle-name"
+            value={account.middleName ?? ''}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => setAccount({ ...account, middleName: event.target.value.trim() })}
+          />
+        </div>
+
+        <div className="edit-account__box">
+          <span>Last Name*</span>
+          <Input
+            data-cy="last-name"
+            validationMessages={['This last name is required. Please fill it up.']}
+            value={account.lastName}
+            isInvalid={!account.lastName && triedToSubmit}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => setAccount({ ...account, lastName: event.target.value.trim() })}
+          />
+        </div>
+
+        <div className="edit-account__box">
+          <span>Role*</span>
+          <div className="edit-account__roles">
+            {Object.entries(rolesData).map(([value, label]) => (
+              <CheckField
+                key={value}
+                style={{
+                  marginBottom: 16,
+                }}
+                data-cy="role"
+                label={label}
+                checked={selectedCheckboxes.has(value)}
+                value={value}
+                onChange={() => {
+                  setSelectedCheckboxes((prevSelected) => {
+                    if (prevSelected.has(value)) {
+                      return new Set([...prevSelected].filter((x) => x !== value));
+                    }
+
+                    return new Set([...prevSelected, value]);
+                  });
+                }}
+              />
+            ))}
+
+            <div className="edit-account__error-roles">
+              {[...selectedCheckboxes].length === 0 && triedToSubmit && (
+                <>
+                  Select at least one role
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="edit-account__inner-button">
+          <Button
+            className="edit-account__button"
+            data-cy="cancel-button"
+            onClick={() => navigation('/account-management')}
+          >
+            Cancel
+          </Button>
+
+          <Button
+            className="edit-account__button"
+            data-cy="save-button"
+            onClick={() => editAccountAsync()}
+          >
+            Save Changes
+          </Button>
+        </div>
+
+      </div>
+    </section>
   );
 
   async function getEditAccountLoad() {

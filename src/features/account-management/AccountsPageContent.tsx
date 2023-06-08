@@ -15,7 +15,6 @@ import { api } from '../../common/api';
 import { Table } from '../../types';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
 
-import ContentCard from '../../components/ContentCard/ContentCard';
 import FilterMenu from './components/FilterMenu/FilterMenu';
 import AccountManagementStateContext from './context/AccountManagementStateContext';
 import AccessBasedOnPemissionsStateContext from '../../routes/state/AccessBasedOnPemissionsStateContext';
@@ -84,6 +83,7 @@ function AccountsPageContent() {
       accessor: 'corporateEmail',
       disableFilters: true,
       disableSortBy: true,
+      minWidth: 300,
       Cell: ({ row }: Table<Accounts>) => {
         const { corporateEmail, isBlocked } = row.original;
         return (
@@ -100,6 +100,7 @@ function AccountsPageContent() {
       Header: 'Creation date (UTC)',
       accessor: 'creationDate',
       disableFilters: true,
+      minWidth: 250,
       Cell: ({ row }: Table<Accounts>) => {
         const { creationDate, isBlocked } = row.original;
         const formattedDate = moment(creationDate).format('DD.MM.YYYY HH:mm');
@@ -161,15 +162,15 @@ function AccountsPageContent() {
   ];
 
   return (
-    <ContentCard className="account-management-page">
-      <h1>Account`s list</h1>
+    <section className="account-management-page">
+      <h1 className="heading">Account`s list</h1>
 
       <div className="account-management-page__inner">
         <FilterMenu />
 
         {accessToChanges.accessPermissions.get('ManageAccounts') && (
           <Button
-            style={{ marginBottom: 20 }}
+            className="account-management-page__button"
             onClick={() => navigate('/account-management/accounts/add')}
           >
             Add New Account
@@ -190,7 +191,7 @@ function AccountsPageContent() {
         isLoading={isLoading}
       />
 
-    </ContentCard>
+    </section>
   );
 
   async function getAccountsAsync() {
