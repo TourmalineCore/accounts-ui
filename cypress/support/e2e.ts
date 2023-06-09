@@ -1,8 +1,5 @@
 import './commands';
-import 'cypress-mochawesome-reporter/register';
 
-// Import commands.js using ES2015 syntax:
-import './commands';
 import { MailSlurp } from 'mailslurp-client';
 
 // Alternatively you can use CommonJS syntax:
@@ -17,7 +14,3 @@ if (!apiKey) {
   );
 }
 // create an instance of mailslurp-client
-const mailslurp = new MailSlurp({ apiKey, basePath: 'https://cypress.api.mailslurp.com' });
-// register MailSlurp with cypress under "mailslurp" command
-// afterwards you can access it in tests using `cy.mailslurp().then(mailslurp => /* do stuff */)`
-Cypress.Commands.add('mailslurp', () => Promise.resolve(mailslurp));

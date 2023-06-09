@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 describe('Adding a new user in the system via email sending', () => {
   it('SHOULD successfully add a new user in the acccount management', () => {
     cy.viewport(1920, 1080);
