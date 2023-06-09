@@ -42,6 +42,7 @@
     "@typescript-eslint/parser": "^5.13.0",
     "api": "^4.5.2",
     "cypress": "^12.10.0",
+    "cypress-mailslurp": "^1.7.0",
     "cypress-mochawesome-reporter": "^3.3.0",
     "cypress-multi-reporters": "^1.6.1",
     "cypress-qase-reporter": "^1.4.2-alpha.2",

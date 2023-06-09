@@ -44,6 +44,7 @@ describe('Adding a new user in the system via email sending', () => {
               .then((mailslurp) => mailslurp.waitForLatestEmail(mailSlurpEmailId, 30000, true))
               .then((email) => {
                 const regex = /(https:\/\/innercircle\.dev\.tourmalinecore\.com\/auth\/change-password\?passwordResetToken=[\w%\-]+&corporateEmail=[\w%\-]+@mailslurp\.com)/;
+                // @ts-ignore
                 const verificationLink = email.body.match(regex)[0];
 
                 // visit the verification link and complete registration
@@ -63,24 +64,31 @@ describe('Adding a new user in the system via email sending', () => {
                   .then((mailslurp) => mailslurp.waitForLatestEmail(mailSlurpEmailId, 30000, true))
                   .then((email2) => {
                     const regex2 = /(https:\/\/innercircle\.dev\.tourmalinecore\.com\/auth\/change-password\?passwordResetToken=[\w%\-]+&corporateEmail=[\w%\-]+@mailslurp\.com)/;
+                    // @ts-ignore
                     const verificationLink2 = email2.body.match(regex2)[0];
 
                     const newPassword2 = 'Testtest1234!';
                     cy.visit(verificationLink2);
-                    cy.get('#password').type(newPassword2);
+                    cy.get('#password')
+                      .type(newPassword2);
                     cy.contains('Done')
                       .click();
                     cy.contains('Sign Out')
                       .click();
-                    cy.get('#login').type(mailSlurpEmail);
-                    cy.get('#password').type(newPassword);
+                    cy.get('#login')
+                      .type(mailSlurpEmail);
+                    cy.get('#password')
+                      .type(newPassword);
                     cy.contains('Log In')
                       .click();
-                    cy.get('.auth-page__result-message').should('have.text', 'Error: Invalid email or password. Check the correctness of the entered data.');
-                    cy.get('#password').type(newPassword2);
+                    cy.get('.auth-page__result-message')
+                      .should('have.text', 'Error: Invalid email or password. Check the correctness of the entered data.');
+                    cy.get('#password')
+                      .type(newPassword2);
                     cy.contains('Log In')
                       .click();
-                    cy.get(':nth-child(1) > .sidebar-item').should('have.text', 'Profile');
+                    cy.get(':nth-child(1) > .sidebar-item')
+                      .should('have.text', 'Profile');
                   });
               });
           });

@@ -1,11 +1,12 @@
 /// <reference types="cypress" />
 
-import MailSlurp from 'mailslurp-client';
+// import { MailSlurp } from 'mailslurp-client';
 
 declare namespace Cypress {
   interface Chainable {
+    // mailslurp: () => Promise<MailSlurp>;
     getByData(dataTestAttribute: string): Chainable<JQuery<HTMLElement>>;
-    auth(): Chainable<JQuery<HTMLElement>>;
-    mailslurp(): Chainable<Promise<MailSlurp>>
+    // mailSlurp()x
+    // mailslurp(): Chainable<Promise<MailSlurp>>;
   }
 }
