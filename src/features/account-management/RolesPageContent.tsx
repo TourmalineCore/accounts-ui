@@ -12,7 +12,6 @@ const PERMISSION_GROUPS = [
     groupName: 'My Profile',
     children: [
       { id: 'ViewPersonalProfile', name: 'View personal profile' },
-      { id: 'EditPersonalProfile', name: 'Edit personal profile' },
     ],
   },
   {

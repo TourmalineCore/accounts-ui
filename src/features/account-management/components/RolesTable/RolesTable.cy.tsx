@@ -86,7 +86,6 @@ describe('RolesTable', () => {
           groupName: 'My Profile',
           children: [
             { id: 'viewPersonalProfile', name: 'View personal profile' },
-            { id: 'editPersonalProfile', name: 'Edit personal profile' },
           ],
         },
         {
@@ -102,7 +101,7 @@ describe('RolesTable', () => {
         {
           id: 1,
           name: 'Admin',
-          permissions: ['viewPersonalProfile', 'editPersonalProfile'],
+          permissions: ['viewPersonalProfile'],
         },
         {
           id: 2,
@@ -124,7 +123,6 @@ describe('RolesTable', () => {
           groupName: 'My Profile',
           children: [
             { id: 'viewPersonalProfile', name: 'View personal profile' },
-            { id: 'editPersonalProfile', name: 'Edit personal profile' },
           ],
         },
         {
@@ -140,7 +138,7 @@ describe('RolesTable', () => {
         {
           id: 1,
           name: 'Admin',
-          permissions: ['viewPersonalProfile', 'editPersonalProfile'],
+          permissions: ['viewPersonalProfile'],
         },
         {
           id: 2,
@@ -162,7 +160,6 @@ describe('RolesTable', () => {
           groupName: 'My Profile',
           children: [
             { id: 'viewPersonalProfile', name: 'View personal profile' },
-            { id: 'editPersonalProfile', name: 'Edit personal profile' },
           ],
         },
         {
