@@ -1,7 +1,6 @@
 export const Permissions = {
   // ViewPersonalProfile: { key: 'ViewPersonalProfile', label: 'View personal profile' },
   ViewPersonalProfile: 'View personal profile',
-  EditPersonalProfile: 'Edit personal profile',
   ViewContacts: 'View contacts',
   ViewSalaryAndDocumentsData: 'View salary and documents data',
   EditFullEmployeesData: 'Edit full employees data',
