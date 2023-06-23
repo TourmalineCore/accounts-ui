@@ -38,12 +38,11 @@
 
   &__button {
     flex-shrink: 0;
-    border: 1px solid #838383;
-    border-radius: 0;
     font-size: 20px;
 
     &::before {
-      content: none;
+      border-style: #838383;
+      border-radius: 0;
     }
 
     & + & {

@@ -28,7 +28,7 @@ export const accountRoutes = [
   },
   {
     path: '/',
-    breadcrumb: 'Account management',
+    breadcrumb: 'Management',
     Component: AccountManagementPage,
   },
 ];

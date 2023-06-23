@@ -50,9 +50,9 @@ function AccountsPageContent() {
           >
             {lastName}
             {' '}
-            {middleName || ''}
-            {' '}
             {firstName}
+            {' '}
+            {middleName || ''}
           </div>
         );
       },
