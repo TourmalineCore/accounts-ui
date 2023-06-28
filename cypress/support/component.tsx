@@ -6,9 +6,13 @@ import '@tourmalinecore/react-tc-modal/es/index.css';
 import '@tourmalinecore/react-table-responsive/es/index.css';
 import 'react-toastify/ReactToastify.min.css';
 
-import '../../src/styles/index.scss';
+// custom commands
 import './commands';
 
+// styles
+import '../../src/styles/index.scss';
+
+// env-config
 import '../env-config';
 
 import { ReactNode } from 'react';

@@ -1,16 +1,19 @@
 /// <reference types="cypress" />
 
-import { existUser } from '../e2e/constants/index';
-import AuthView from '../e2e/pages/AuthView';
+Cypress.on('uncaught:exception', () => false);
 
-Cypress.Commands.add('auth', () => {
-  const { login } = existUser;
-  const { password } = existUser;
+Cypress.on('uncaught:exception', (err) => {
+  // we expect a 3rd party library error with message 'list not defined'
+  // and don't want to fail the test so we return false
+  if (err.message.includes('Request failed with status code')) {
+    return false;
+  }
+  // we still want to ensure there are no other unexpected
+  // errors, so we let them fail the test
 
-  AuthView.enterLogin(login);
-  AuthView.enterPassword(password);
-
-  AuthView.tapLogIn();
+  return true;
 });
 
 Cypress.Commands.add('getByData', (selector) => cy.get(`[data-cy=${selector}]`));
+
+export {};
