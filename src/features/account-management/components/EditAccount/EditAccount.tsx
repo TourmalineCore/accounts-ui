@@ -52,6 +52,7 @@ function EditAccount() {
             value={account.firstName}
             isInvalid={!account.firstName && triedToSubmit}
             onChange={(event: ChangeEvent<HTMLInputElement>) => setAccount({ ...account, firstName: event.target.value.trim() })}
+            maxLength={50}
           />
         </div>
 
@@ -64,6 +65,7 @@ function EditAccount() {
             data-cy="middle-name"
             value={account.middleName ?? ''}
             onChange={(event: ChangeEvent<HTMLInputElement>) => setAccount({ ...account, middleName: event.target.value.trim() })}
+            maxLength={50}
           />
         </div>
 
@@ -75,6 +77,7 @@ function EditAccount() {
             value={account.lastName}
             isInvalid={!account.lastName && triedToSubmit}
             onChange={(event: ChangeEvent<HTMLInputElement>) => setAccount({ ...account, lastName: event.target.value.trim() })}
+            maxLength={50}
           />
         </div>
 
