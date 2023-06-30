@@ -22,6 +22,8 @@ function CreateAccount() {
 
   const isCorporateEmailError = !formData.corporateEmail && triedToSubmit;
 
+  const [hasError, setHasError] = useState(false);
+
   useEffect(() => {
     getRolesAccountLoad();
   }, []);
@@ -71,7 +73,7 @@ function CreateAccount() {
             <div className="create-account__input-domain">
               <Input
                 className={clsx('create-account__input', {
-                  'create-account__input--error': !isCorporateEmailError,
+                  'create-account__input--error': !isCorporateEmailError || hasError,
                 })}
                 value={formData.corporateEmail}
                 maxLength={31}
@@ -80,15 +82,15 @@ function CreateAccount() {
               <span>@tourmalinecore.com</span>
             </div>
             <div className={clsx('create-account__important-info', {
-              'create-account__important-info--error': isCorporateEmailError,
+              'create-account__important-info--error': isCorporateEmailError || hasError,
             })}
             >
-              {!isCorporateEmailError ? (
+              {!hasError ? (
                 <>
                   <b>Сheck the entered data</b>
                   , it will be impossible to edit this field.
                 </>
-              ) : (<>Account with such Corpotare Email is already exists. Check the correctness of the entered data, it must be unique.</>)}
+              ) : (<>Account with such Corpotare Email  already exists. Check the correctness of the entered data, it must be unique.</>)}
             </div>
           </div>
         </div>
@@ -156,25 +158,28 @@ function CreateAccount() {
   async function createAccountAsync() {
     setTriedToSubmit(true);
 
-    try {
-      await api.post<AccountCreate>(`${LINK_TO_ACCOUNT_SERVICE}accounts/create`, {
-        ...formData,
-        corporateEmail: `${formData.corporateEmail}@tourmalinecore.com`,
-        middleName: formData.middleName || undefined,
-        roleIds: [...selectedCheckboxes].map((item) => Number(item)),
-      });
+    if (formData.firstName && formData.lastName && formData.corporateEmail && [...selectedCheckboxes].length > 0) {
+      try {
+        await api.post<AccountCreate>(`${LINK_TO_ACCOUNT_SERVICE}accounts/create`, {
+          ...formData,
+          corporateEmail: `${formData.corporateEmail}@tourmalinecore.com`,
+          middleName: formData.middleName || undefined,
+          roleIds: [...selectedCheckboxes].map((item) => Number(item)),
+        });
 
-      setTriedToSubmit(false);
-      history('/account-management');
+        setTriedToSubmit(false);
+        history('/account-management');
 
-      toast('New account added successfully', {
-        type: 'success',
-        position: 'bottom-center',
-        autoClose: 5000,
-        pauseOnHover: false,
-      });
-    } catch (e) {
-      console.log(e);
+        toast('New account added successfully', {
+          type: 'success',
+          position: 'bottom-center',
+          autoClose: 5000,
+          pauseOnHover: false,
+        });
+      } catch (e) {
+        console.log(e);
+        setHasError(true);
+      }
     }
   }
 }

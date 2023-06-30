@@ -149,19 +149,21 @@ function EditAccount() {
   async function editAccountAsync() {
     setTriedToSubmit(true);
 
-    try {
-      await api.post(`${LINK_TO_ACCOUNT_SERVICE}accounts/edit`, {
-        id,
-        firstName: account.firstName,
-        middleName: account.middleName ? account.middleName : null,
-        lastName: account.lastName,
-        roles: [...selectedCheckboxes].map((item) => Number(item)),
-      });
+    if (account.firstName && account.lastName && [...selectedCheckboxes].length > 0) {
+      try {
+        await api.post(`${LINK_TO_ACCOUNT_SERVICE}accounts/edit`, {
+          id,
+          firstName: account.firstName,
+          middleName: account.middleName ? account.middleName : null,
+          lastName: account.lastName,
+          roles: [...selectedCheckboxes].map((item) => Number(item)),
+        });
 
-      navigation('/account-management');
-      setTriedToSubmit(false);
-    } catch (e) {
-      console.log(e);
+        navigation('/account-management');
+        setTriedToSubmit(false);
+      } catch (e) {
+        console.log(e);
+      }
     }
   }
 }
