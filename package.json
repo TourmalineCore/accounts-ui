@@ -63,7 +63,7 @@
     "start": "run-s create-config:dev start-devserver",
     "start:local": "run-s create-config:local start-devserver",
     "start-devserver": "react-scripts start",
-    "build": "cross-env DISABLE_ESLINT_PLUGIN=true react-scripts build",
+    "build": "cross-env DISABLE_ESLINT_PLUGIN=true CI=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "release": "standard-version",
@@ -78,7 +78,8 @@
     "create-config:local": "node local-config-builder local",
     "prepare": "husky install",
     "cy:open": "npx cypress open",
-    "cy:run": "npx cypress run"
+    "cy:e2e": "npx cypress run -e2e",
+    "cy:component": "npx cypress run --component"
   },
   "browserslist": {
     "production": [
