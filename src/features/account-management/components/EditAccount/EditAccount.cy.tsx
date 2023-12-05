@@ -1,7 +1,9 @@
 import { LINK_TO_ACCOUNT_SERVICE, API_ROOT } from '../../../../common/config/config';
 import EditAccount from './EditAccount';
 
-const START_ROOT = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}accounts/*`;
+const START_ROOT = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}accounts/findById/*`;
+const START_ROOT_ROLES = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}roles`;
+
 const MOCK_DATA = {
   corporateEmail: 'test@tourmalinecore.com',
   firstName: 'TestName',
@@ -14,12 +16,26 @@ const MOCK_DATA = {
   ],
 };
 
+const MOCK_DATA_ROLES = [
+  {
+    id: 1,
+    name: 'CEO',
+    permissions: ['ViewPersonalProfile', 'EditPersonalProfile', 'ViewContacts'],
+  },
+];
+
 describe('render elements EditAccount components', () => {
   beforeEach(() => {
     cy.intercept(
       'GET',
       START_ROOT,
       MOCK_DATA,
+    );
+
+    cy.intercept(
+      'GET',
+      START_ROOT_ROLES,
+      MOCK_DATA_ROLES,
     );
 
     mountComponent();
@@ -73,6 +89,12 @@ describe('entering EditAccount component data', () => {
       'GET',
       START_ROOT,
       MOCK_DATA,
+    );
+
+    cy.intercept(
+      'GET',
+      START_ROOT_ROLES,
+      MOCK_DATA_ROLES,
     );
 
     mountComponent();
