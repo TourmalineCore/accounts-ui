@@ -46,5 +46,5 @@ jobs:
             --set "extraConfigMapEnvVars.LINK_TO_DASHBOARD=${{ secrets.DEV_LINK_TO_DASHBOARD }}" \
             --set "extraConfigMapEnvVars.LINK_TO_SALARY_SERVICE=${{ secrets.DEV_LINK_TO_SALARY_SERVICE }}" \
             "${RELEASE_NAME}" \
-            bitnami/nginx
+            bitnami/nginx --version 15.0.2
           kubeconfig: "${{ secrets.DEV_KUBECONFIG }}"
