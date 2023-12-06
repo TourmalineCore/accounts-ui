@@ -69,7 +69,7 @@ describe('render elements EditAccount components', () => {
   it('role checkboxs SHOULD have value AFTER render', () => {
     cy.get('.tc-checkfield :checked')
       .should('be.checked')
-      .and('have.value', 'CEO');
+      .and('have.value', '1');
   });
 
   it('SHOULD render cancel button on the edit page WHEN there is component', () => {
@@ -108,7 +108,7 @@ describe('entering EditAccount component data', () => {
       .clear();
 
     cy.getByData('role')
-      .uncheck(['CEO'], { force: true });
+      .uncheck(['1'], { force: true });
 
     cy.getByData('save-button')
       .click();
@@ -130,7 +130,7 @@ describe('entering EditAccount component data', () => {
       .type('Last name');
 
     cy.getByData('role')
-      .check(['Admin'], { force: true });
+      .check(['1'], { force: true });
 
     cy.getByData('save-button')
       .click();

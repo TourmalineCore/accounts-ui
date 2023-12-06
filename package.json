@@ -77,7 +77,7 @@
     "create-config:dev": "node local-config-builder dev",
     "create-config:local": "node local-config-builder local",
     "prepare": "husky install",
-    "cy:open": "npx cypress open",
+    "cy:open": "cypress open --component --browser chrome",
     "cy:e2e": "npx cypress run -e2e",
     "cy:component": "npx cypress run --component"
   },
