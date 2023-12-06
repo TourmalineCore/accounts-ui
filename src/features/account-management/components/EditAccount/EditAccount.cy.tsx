@@ -89,7 +89,7 @@ describe('entering EditAccount component data', () => {
       'GET',
       START_ROOT,
       MOCK_DATA,
-    );
+    ).as('findById');
 
     cy.intercept(
       'GET',
@@ -101,6 +101,7 @@ describe('entering EditAccount component data', () => {
   });
 
   it('SHOULD render error messages WHEN click save button with empty inputs required', () => {
+    cy.wait('@findById');
     cy.getByData('first-name')
       .clear();
 
