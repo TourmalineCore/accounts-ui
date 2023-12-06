@@ -37,6 +37,13 @@ const PERMISSION_GROUPS = [
       { id: 'ManageRoles', name: 'Manage roles' },
     ],
   },
+  {
+    groupName: 'Compensations',
+    children: [
+      { id: 'ViewPersonalCompensations', name: 'View Personal Compensations' },
+      { id: 'CanManageCompensations', name: 'Can Manage Compensations' },
+    ],
+  },
 ];
 
 function RolesPageContent() {
