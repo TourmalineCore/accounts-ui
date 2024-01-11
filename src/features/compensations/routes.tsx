@@ -11,3 +11,46 @@ export const compensationsSidebarRoutes = [
     iconActive: <IconProfileActive />,
   },
 ];
+
+export function getRouteForCompensations(permission: string) {
+  if (permission === 'ViewPersonalCompensations') {
+    return [{
+      isWindowRedirectNecessary: true,
+      path: `${LINK_TO_DASHBOARD}compensations/personal`,
+      label: 'Compensations',
+      icon: <IconProfile />,
+      iconActive: <IconProfileActive />,
+    }];
+  }
+
+  return [{
+    isWindowRedirectNecessary: true,
+    path: `${LINK_TO_DASHBOARD}compensations/all`,
+    label: 'Compensations',
+    icon: <IconProfile />,
+    iconActive: <IconProfileActive />,
+  }];
+}
+
+export const compensationsAllAccessSidebarRoutes = [
+  {
+    isWindowRedirectNecessary: true,
+    path: `${LINK_TO_DASHBOARD}compensations`,
+    label: 'Compensations',
+    icon: <IconProfile />,
+    iconActive: <IconProfile />,
+    routes: [
+      {
+        isWindowRedirectNecessary: true,
+        path: `${LINK_TO_DASHBOARD}compensations/personal`,
+        label: 'Personal',
+        iconMini: <IconProfile />,
+      },
+      {
+        isWindowRedirectNecessary: true,
+        path: `${LINK_TO_DASHBOARD}compensations/all`,
+        label: 'All',
+        iconMini: <IconProfile />,
+      }],
+  },
+];

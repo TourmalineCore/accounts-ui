@@ -13,7 +13,7 @@ import {
 } from '../features/account-management/routes';
 import { SidebarRoutesProps } from '../types';
 import { Permission } from './state/AccessBasedOnPemissionsState';
-import { compensationsSidebarRoutes } from '../features/compensations/routes';
+import { compensationsAllAccessSidebarRoutes, getRouteForCompensations } from '../features/compensations/routes';
 
 export function getAdminRoutes(accessPermissions: Map<keyof typeof Permission, boolean>) {
   const routes: {
@@ -54,8 +54,16 @@ export function getSidebarRoutes(accessPermissions: Map<keyof typeof Permission,
     routes.push(...employeesSidebarRoutes);
   }
 
-  if (accessPermissions.get('ViewPersonalCompensations') || accessPermissions.get('CanManageCompensations')) {
-    routes.push(...compensationsSidebarRoutes);
+  if (accessPermissions.get('ViewPersonalCompensations') && accessPermissions.get('CanManageCompensations')) {
+    routes.push(...compensationsAllAccessSidebarRoutes);
+  }
+
+  if (accessPermissions.get('ViewPersonalCompensations') && !accessPermissions.get('CanManageCompensations')) {
+    routes.push(...getRouteForCompensations('ViewPersonalCompensations'));
+  }
+
+  if (accessPermissions.get('CanManageCompensations') && !accessPermissions.get('ViewPersonalCompensations')) {
+    routes.push(...getRouteForCompensations('CanManageCompensations'));
   }
 
   if (accessPermissions.get('ViewAccounts') && accessPermissions.get('ViewRoles')) {

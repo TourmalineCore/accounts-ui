@@ -53,7 +53,7 @@ export const sidebarAccountManagements : {
   }[]
 } = {
   path: '/',
-  label: 'Account management',
+  label: 'Management',
   icon: <IconAccountManagement />,
   iconActive: <IconAccountManagement />,
   routes: [],
