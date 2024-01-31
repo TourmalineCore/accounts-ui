@@ -9,6 +9,6 @@ export const Permissions = {
   EditAccounts: 'Edit accounts',
   ViewRoles: 'View roles',
   EditRoles: 'Edit roles',
-  ViewPersonalCompensations: 'View Personal Compensations',
+  CanRequestCompensations: 'Can Request Compensations',
   CanManageCompensations: 'Can Manage Compensations',
 };

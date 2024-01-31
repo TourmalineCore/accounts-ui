@@ -40,7 +40,7 @@ const PERMISSION_GROUPS = [
   {
     groupName: 'Compensations',
     children: [
-      { id: 'ViewPersonalCompensations', name: 'View Personal Compensations' },
+      { id: 'CanRequestCompensations', name: 'Can Request Compensations' },
       { id: 'CanManageCompensations', name: 'Can Manage Compensations' },
     ],
   },
