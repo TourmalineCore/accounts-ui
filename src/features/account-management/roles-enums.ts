@@ -11,4 +11,5 @@ export const Permissions = {
   EditRoles: 'Edit roles',
   CanRequestCompensations: 'Can Request Compensations',
   CanManageCompensations: 'Can Manage Compensations',
+  CanManageDocuments: 'Can Manage Documents',
 };
