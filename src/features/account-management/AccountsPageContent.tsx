@@ -98,6 +98,26 @@ function AccountsPageContent() {
       },
     },
     {
+      Header: 'Tenant',
+      accessor: 'tenantName',
+      disableFilters: true,
+      disableSortBy: true,
+      minWidth: 300,
+      Cell: ({ row }: Table<Accounts>) => {
+        const { tenantName, isBlocked } = row.original;
+        return (
+          <span
+            className={clsx('account-management-page__account', {
+              'account-management-page__account--isBlocked': isBlocked,
+            })}
+            data-cy="accounts-page-tenant-column"
+          >
+            {tenantName}
+          </span>
+        );
+      },
+    },
+    {
       Header: 'Creation date (UTC)',
       accessor: 'creationDate',
       disableFilters: true,
@@ -124,7 +144,14 @@ function AccountsPageContent() {
       Cell: ({ row }: Table<Accounts>) => {
         const { isBlocked } = row.original;
 
-        return (<div className="account-management-page__status">{!isBlocked ? 'Active' : 'Blocked'}</div>);
+        return (
+          <div
+            className="account-management-page__status"
+            data-cy="accounts-page-status-column"
+          >
+            {!isBlocked ? 'Active' : 'Blocked'}
+          </div>
+        );
       },
     },
   ];
@@ -169,7 +196,7 @@ function AccountsPageContent() {
   ];
 
   return (
-    <section className="account-management-page">
+    <section className="account-management-page" data-cy="accounts-page-content">
       <h1 className="heading">Account`s list</h1>
 
       <div className="account-management-page__inner">

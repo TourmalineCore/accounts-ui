@@ -7,6 +7,9 @@ import EditAccount from './components/EditAccount/EditAccount';
 import AccountsPage from './AccountsPage';
 import AccountManagementPage from './AccountManagementPage';
 
+import CreateTenant from './components/CreateTenant/CreateTenant';
+import { TenantsPage } from './TenantsPage';
+
 export const accountManagementRoutes = [
   {
     path: '/accounts/add',
@@ -18,6 +21,12 @@ export const accountManagementRoutes = [
     breadcrumb: 'Edit an employee',
     Component: EditAccount,
   },
+  {
+    path: '/tenants/add',
+    breadcrumb: 'Add a tenant',
+    Component: CreateTenant,
+  },
+
 ];
 
 export const accountRoutes = [
@@ -38,6 +47,14 @@ export const roleRoutes = [
     path: '/roles',
     breadcrumb: 'Roles',
     Component: RolesPage,
+  },
+];
+
+export const tenantRoutes = [
+  {
+    path: '/tenants',
+    breadcrumb: 'Tenants',
+    Component: TenantsPage,
   },
 ];
 
@@ -68,5 +85,11 @@ export const sidebarRoles = {
 export const sidebarAccounts = {
   path: '/account-management/accounts',
   label: 'Accounts',
+  iconMini: <IconAccountManagement />,
+};
+
+export const sidebarTenants = {
+  path: '/account-management/tenants',
+  label: 'Tenants',
   iconMini: <IconAccountManagement />,
 };

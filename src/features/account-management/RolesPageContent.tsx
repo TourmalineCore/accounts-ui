@@ -35,6 +35,8 @@ const PERMISSION_GROUPS = [
       { id: 'ManageAccounts', name: 'Manage accounts' },
       { id: 'ViewRoles', name: 'View roles' },
       { id: 'ManageRoles', name: 'Manage roles' },
+      { id: 'CanManageTenants', name: 'Can Manage Tenants' },
+      { id: 'IsTenantsHardDeleteAllowed', name: 'Is Tenants Hard Delete Allowed' },
     ],
   },
   {
