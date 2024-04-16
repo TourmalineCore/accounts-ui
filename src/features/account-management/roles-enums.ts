@@ -9,6 +9,8 @@ export const Permissions = {
   EditAccounts: 'Edit accounts',
   ViewRoles: 'View roles',
   EditRoles: 'Edit roles',
+  CanManageTenants: 'Can Manage Tenants',
+  IsTenantsHardDeleteAllowed: 'Is Tenants Hard Delete Allowed',
   CanRequestCompensations: 'Can Request Compensations',
   CanManageCompensations: 'Can Manage Compensations',
   CanManageDocuments: 'Can Manage Documents',

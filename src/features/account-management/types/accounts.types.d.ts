@@ -27,6 +27,7 @@ type Accounts = {
   firstName: string;
   middleName?: string;
   lastName: string;
+  tenantName: string;
   roles: {
     id: number;
     name: string;

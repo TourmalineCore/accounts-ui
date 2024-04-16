@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { api } from '../../../../common/api';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config';
+import { Tenants } from '../Tenants/Tenants';
 
 function CreateAccount() {
   const history = useNavigate();
@@ -16,9 +17,12 @@ function CreateAccount() {
     lastName: '',
     middleName: '',
     corporateEmail: '',
+    tenantId: '',
   });
 
   const [rolesData, setRolesData] = useState<{ [key: number]: string }>({});
+
+  const [tenantsData, setTenantsData] = useState < Tenants[] >([]);
 
   const isCorporateEmailError = !formData.corporateEmail && triedToSubmit;
 
@@ -28,14 +32,19 @@ function CreateAccount() {
     getRolesAccountLoad();
   }, []);
 
+  useEffect(() => {
+    getTenantsAccountLoad();
+  }, []);
+
   return (
-    <div className="create-account">
+    <div className="create-account" data-cy="create-account-page">
       <h1 className="heading create-account__title">Add New Account</h1>
 
       <div className="create-account__inner">
         <div className="create-account__box">
           <span>First Name</span>
           <Input
+            data-cy="create-account-page-input-firstName"
             value={formData.firstName}
             isInvalid={!formData.firstName && triedToSubmit}
             validationMessages={['This field is required. Please fill it up.']}
@@ -48,6 +57,7 @@ function CreateAccount() {
         <div className="create-account__box">
           <span>Middle Name</span>
           <Input
+            data-cy="create-account-page-input-middleName"
             value={formData.middleName}
             isMessagesAbsolute
             maxLength={50}
@@ -58,6 +68,7 @@ function CreateAccount() {
         <div className="create-account__box">
           <span>Last Name</span>
           <Input
+            data-cy="create-account-page-input-lastName"
             value={formData.lastName}
             isInvalid={!formData.lastName && triedToSubmit}
             validationMessages={['This field is required. Please fill it up.']}
@@ -72,6 +83,7 @@ function CreateAccount() {
           <div>
             <div className="create-account__input-domain">
               <Input
+                data-cy="create-account-page-input-email"
                 className={clsx('create-account__input', {
                   'create-account__input--error': !isCorporateEmailError || hasError,
                 })}
@@ -97,7 +109,7 @@ function CreateAccount() {
 
         <div className="create-account__box">
           <span>Role</span>
-          <div>
+          <div data-cy="create-account__role-checkbox">
             {Object.entries(rolesData).map(([value, label]) => (
               <CheckField
                 key={value}
@@ -111,7 +123,6 @@ function CreateAccount() {
                     if (prevSelected.has(value)) {
                       return new Set([...prevSelected].filter((x) => x !== value));
                     }
-
                     return new Set([...prevSelected, value]);
                   });
                 }}
@@ -128,8 +139,41 @@ function CreateAccount() {
           </div>
         </div>
 
+        <div className="create-account__box">
+          <span>Tenant</span>
+          <select
+            data-cy="create-account-page-select-tenant"
+            className="create-account__select"
+            defaultValue=""
+            value={formData.tenantId}
+            onChange={(e) => setFormData({ ...formData, tenantId: e.target.value.trim() })}
+          >
+            <option
+              value=""
+              disabled
+            >
+              Select tenant
+            </option>
+            {tenantsData.length !== 0
+              ? tenantsData.map(({ id, name }) => (
+                <option
+                  key={id}
+                  value={id}
+                >
+                  {name}
+                </option>
+              ))
+              : (
+                <option>
+                  No tenants
+                </option>
+              )}
+          </select>
+        </div>
+
         <div className="create-account__inner-button">
           <Button
+            data-cy="create-account-page-button-cancel"
             className="create-account__button"
             onClick={() => history('/account-management')}
           >
@@ -137,6 +181,7 @@ function CreateAccount() {
           </Button>
 
           <Button
+            data-cy="create-account-page-button-add"
             className="create-account__button"
             onClick={() => createAccountAsync()}
           >
@@ -155,10 +200,16 @@ function CreateAccount() {
     setRolesData(Object.assign({}, ...data.map((role) => ({ [role.id]: role.name }))));
   }
 
+  async function getTenantsAccountLoad() {
+    const { data } = await api.get(`${LINK_TO_ACCOUNT_SERVICE}tenants/all`);
+
+    setTenantsData(data);
+  }
+
   async function createAccountAsync() {
     setTriedToSubmit(true);
 
-    if (formData.firstName && formData.lastName && formData.corporateEmail && [...selectedCheckboxes].length > 0) {
+    if (formData.firstName && formData.lastName && formData.corporateEmail && [...selectedCheckboxes].length > 0 && formData.tenantId) {
       try {
         await api.post<AccountCreate>(`${LINK_TO_ACCOUNT_SERVICE}accounts/create`, {
           ...formData,
