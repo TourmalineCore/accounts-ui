@@ -101,7 +101,6 @@ function AccountsPageContent() {
       Header: 'Tenant',
       accessor: 'tenantName',
       disableFilters: true,
-      disableSortBy: true,
       minWidth: 300,
       Cell: ({ row }: Table<Accounts>) => {
         const { tenantName, isBlocked } = row.original;
