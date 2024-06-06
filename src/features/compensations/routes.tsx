@@ -1,5 +1,5 @@
-import { ReactComponent as IconProfile } from '../../assets/icons/icon-profile.svg';
-import { ReactComponent as IconProfileActive } from '../../assets/icons/icon-profile-active.svg';
+import { ReactComponent as IconCompensations } from '../../assets/icons/icon-compensations.svg';
+import { ReactComponent as IconCompensationsActive } from '../../assets/icons/icon-compensations-active.svg';
 import { LINK_TO_DASHBOARD } from '../../common/config/config';
 
 export const compensationsSidebarRoutes = [
@@ -7,8 +7,8 @@ export const compensationsSidebarRoutes = [
     isWindowRedirectNecessary: true,
     path: `${LINK_TO_DASHBOARD}compensations`,
     label: 'Compensations',
-    icon: <IconProfile />,
-    iconActive: <IconProfileActive />,
+    icon: <IconCompensations />,
+    iconActive: <IconCompensationsActive />,
   },
 ];
 
@@ -18,8 +18,8 @@ export function getRouteForCompensations(permission: string) {
       isWindowRedirectNecessary: true,
       path: `${LINK_TO_DASHBOARD}compensations/my`,
       label: 'Compensations',
-      icon: <IconProfile />,
-      iconActive: <IconProfileActive />,
+      icon: <IconCompensations />,
+      iconActive: <IconCompensationsActive />,
     }];
   }
 
@@ -27,8 +27,8 @@ export function getRouteForCompensations(permission: string) {
     isWindowRedirectNecessary: true,
     path: `${LINK_TO_DASHBOARD}compensations/all`,
     label: 'Compensations',
-    icon: <IconProfile />,
-    iconActive: <IconProfileActive />,
+    icon: <IconCompensations />,
+    iconActive: <IconCompensationsActive />,
   }];
 }
 
@@ -37,20 +37,20 @@ export const compensationsAllAccessSidebarRoutes = [
     isWindowRedirectNecessary: true,
     path: `${LINK_TO_DASHBOARD}compensations`,
     label: 'Compensations',
-    icon: <IconProfile />,
-    iconActive: <IconProfile />,
+    icon: <IconCompensations />,
+    iconActive: <IconCompensationsActive />,
     routes: [
       {
         isWindowRedirectNecessary: true,
         path: `${LINK_TO_DASHBOARD}compensations/my`,
         label: 'My',
-        iconMini: <IconProfile />,
+        iconMini: <IconCompensations />,
       },
       {
         isWindowRedirectNecessary: true,
         path: `${LINK_TO_DASHBOARD}compensations/all`,
         label: 'All',
-        iconMini: <IconProfile />,
+        iconMini: <IconCompensations />,
       }],
   },
 ];
