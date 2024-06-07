@@ -3,7 +3,6 @@ import {
   useContext,
 } from 'react';
 
-import { Button } from '@tourmalinecore/react-tc-ui-kit';
 import { ClientTable } from '@tourmalinecore/react-table-responsive';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
@@ -44,13 +43,15 @@ export const TenantsPageContent = observer(({
       <h1 className="heading">Tenant`s list</h1>
 
       <div className="account-management-page__inner">
-        <Button
+        <div />
+        <button
+          type="button"
           className="account-management-page__button"
           data-cy="tenants-page-content-button"
           onClick={() => navigate('/account-management/tenants/add')}
         >
-          Add New Tenant
-        </Button>
+          + Add New Tenant
+        </button>
 
       </div>
 

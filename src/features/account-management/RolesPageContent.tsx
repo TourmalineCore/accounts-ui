@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { useContext, useEffect } from 'react';
-import { Button } from '@tourmalinecore/react-tc-ui-kit';
+import { useContext, useEffect } from 'react';
 import { api } from '../../common/api';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
 import RolesTable from './components/RolesTable/RolesTable';
@@ -78,34 +77,34 @@ function RolesPageContent() {
             {
               !rolesPageStateContext.isInEditMode
                 ? (
-                  <Button
+                  <button
                     type="button"
                     data-cy="add-new-role-button"
-                    className="roles-page__button"
+                    className="account-management-page__button"
                     onClick={() => { rolesPageStateContext.addNewRole(); }}
                   >
-                    Add new role
-                  </Button>
+                    + Add new role
+                  </button>
                 )
                 : (
                   <>
-                    <Button
+                    <button
                       type="button"
                       data-cy="cancel-changes-button"
-                      className="roles-page__button"
+                      className="account-management-page__button"
                       onClick={() => { rolesPageStateContext.cancelRoleEditing(); }}
                     >
                       Cancel
-                    </Button>
-                    <Button
+                    </button>
+                    <button
                       type="button"
                       data-cy="save-changes-button"
-                      className="roles-page__button"
+                      className="account-management-page__button"
                       disabled={!rolesPageStateContext.updatedRole?.name}
                       onClick={() => { saveChangesToRole(); }}
                     >
                       Save Changes
-                    </Button>
+                    </button>
                   </>
                 )
             }

@@ -6,7 +6,6 @@ import {
 import moment from 'moment';
 import clsx from 'clsx';
 
-import { Button } from '@tourmalinecore/react-tc-ui-kit';
 import { ClientTable } from '@tourmalinecore/react-table-responsive';
 import { observer } from 'mobx-react-lite';
 import { toast } from 'react-toastify';
@@ -202,12 +201,13 @@ function AccountsPageContent() {
         <FilterMenu />
 
         {accessToChanges.accessPermissions.get('ManageAccounts') && (
-          <Button
+          <button
+            type="button"
             className="account-management-page__button"
             onClick={() => navigate('/account-management/accounts/add')}
           >
-            Add New Account
-          </Button>
+            + Add New Account
+          </button>
         )}
       </div>
 
