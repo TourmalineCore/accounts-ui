@@ -1,4 +1,4 @@
-import { Input, Button } from '@tourmalinecore/react-tc-ui-kit';
+import { Input } from '@tourmalinecore/react-tc-ui-kit';
 import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -31,21 +31,23 @@ function CreateTenant() {
           />
         </div>
         <div className="create-tenant__inner-button">
-          <Button
+          <button
+            type="button"
             data-cy="create-tenant-page-button-cancel"
-            className="create-tenant__button"
+            className="create-account__button"
             onClick={() => history('/account-management/tenants')}
           >
             Cancel
-          </Button>
+          </button>
 
-          <Button
+          <button
+            type="button"
             data-cy="create-tenant-page-button-add"
-            className="create-tenant__button"
+            className="create-account__button"
             onClick={() => createTenantAsync()}
           >
             Add
-          </Button>
+          </button>
         </div>
       </div>
     </div>

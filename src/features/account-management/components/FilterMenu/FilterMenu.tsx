@@ -2,7 +2,6 @@ import {
   MouseEvent, useContext,
 } from 'react';
 
-import { Button } from '@tourmalinecore/react-tc-ui-kit';
 import clsx from 'clsx';
 import { observer } from 'mobx-react-lite';
 import AccountManagementStateContext from '../../context/AccountManagementStateContext';
@@ -28,17 +27,17 @@ function FilterMenu() {
   return (
     <div className="filter-menu">
       {filterElements.map((item) => (
-        <Button
+        <button
           type="button"
           className={clsx('filter-menu__button', {
-            'filter-menu__button-active': item.id === accountManagementState.filterTerm,
+            'filter-menu__button--active': item.id === accountManagementState.filterTerm,
           })}
           key={item.id}
           id={item.id}
           onClick={(event: MouseEvent<HTMLButtonElement>) => accountManagementState.updateFilterTerm(event.currentTarget.id)}
         >
           {item.name}
-        </Button>
+        </button>
       ))}
     </div>
   );

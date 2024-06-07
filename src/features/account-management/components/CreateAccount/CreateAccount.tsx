@@ -1,4 +1,4 @@
-import { Input, Button, CheckField } from '@tourmalinecore/react-tc-ui-kit';
+import { Input, CheckField } from '@tourmalinecore/react-tc-ui-kit';
 import clsx from 'clsx';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -172,21 +172,23 @@ function CreateAccount() {
         </div>
 
         <div className="create-account__inner-button">
-          <Button
+          <button
+            type="button"
             data-cy="create-account-page-button-cancel"
             className="create-account__button"
             onClick={() => history('/account-management')}
           >
             Cancel
-          </Button>
+          </button>
 
-          <Button
+          <button
+            type="button"
             data-cy="create-account-page-button-add"
             className="create-account__button"
             onClick={() => createAccountAsync()}
           >
             Add
-          </Button>
+          </button>
         </div>
       </div>
     </div>
