@@ -37,7 +37,7 @@ describe('TenantsPageContent', () => {
 
     cy.getByData('tenants-page-content-button')
       .should('exist')
-      .should('have.text', 'Add New Tenant');
+      .should('have.text', '+ Add New Tenant');
   });
 
   it(`
