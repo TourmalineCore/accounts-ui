@@ -33,6 +33,10 @@
     gap: 12px;
     grid-template-columns: 1fr 4fr;
 
+    &--email {
+      min-height: 96px;
+    }
+
     & + & {
       margin-top: 34px;
     }
