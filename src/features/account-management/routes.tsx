@@ -10,20 +10,22 @@ import AccountManagementPage from './AccountManagementPage';
 import CreateTenant from './components/CreateTenant/CreateTenant';
 import { TenantsPage } from './TenantsPage';
 
+const DEFAULT_PATH = '/account-management';
+
 export const accountManagementRoutes = [
   {
-    path: '/accounts/add',
-    breadcrumb: 'Add an employee',
+    path: `${DEFAULT_PATH}/accounts/add`,
+    breadcrumb: 'Add new account',
     Component: CreateAccount,
   },
   {
-    path: '/accounts/edit/:id',
-    breadcrumb: 'Edit an employee',
+    path: `${DEFAULT_PATH}/accounts/edit/:id`,
+    breadcrumb: 'Edit an account',
     Component: EditAccount,
   },
   {
-    path: '/tenants/add',
-    breadcrumb: 'Add a tenant',
+    path: `${DEFAULT_PATH}/tenants/add`,
+    breadcrumb: 'Add new tenant',
     Component: CreateTenant,
   },
 
@@ -31,12 +33,12 @@ export const accountManagementRoutes = [
 
 export const accountRoutes = [
   {
-    path: '/accounts',
+    path: `${DEFAULT_PATH}/accounts`,
     breadcrumb: 'Accounts',
     Component: AccountsPage,
   },
   {
-    path: '/',
+    path: `${DEFAULT_PATH}/`,
     breadcrumb: 'Management',
     Component: AccountManagementPage,
   },
@@ -44,7 +46,7 @@ export const accountRoutes = [
 
 export const roleRoutes = [
   {
-    path: '/roles',
+    path: `${DEFAULT_PATH}/roles`,
     breadcrumb: 'Roles',
     Component: RolesPage,
   },
@@ -52,7 +54,7 @@ export const roleRoutes = [
 
 export const tenantRoutes = [
   {
-    path: '/tenants',
+    path: `${DEFAULT_PATH}/tenants`,
     breadcrumb: 'Tenants',
     Component: TenantsPage,
   },
@@ -77,19 +79,19 @@ export const sidebarAccountManagements : {
 };
 
 export const sidebarRoles = {
-  path: '/account-management/roles',
+  path: `${DEFAULT_PATH}/roles`,
   label: 'Roles',
   iconMini: <IconAccountManagement />,
 };
 
 export const sidebarAccounts = {
-  path: '/account-management/accounts',
+  path: `${DEFAULT_PATH}/accounts`,
   label: 'Accounts',
   iconMini: <IconAccountManagement />,
 };
 
 export const sidebarTenants = {
-  path: '/account-management/tenants',
+  path: `${DEFAULT_PATH}/tenants`,
   label: 'Tenants',
   iconMini: <IconAccountManagement />,
 };
