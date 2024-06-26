@@ -78,7 +78,7 @@ function CreateAccount() {
           />
         </div>
 
-        <div className="create-account__box">
+        <div className="create-account__box create-account__box--email">
           <span>Corporate Email</span>
           <div>
             <div className="create-account__input-domain">
@@ -97,12 +97,18 @@ function CreateAccount() {
               'create-account__important-info--error': isCorporateEmailError || hasError,
             })}
             >
+              {isCorporateEmailError && (
+                <>
+                  <span>This field is required. Please fill it up.</span>
+                  <br />
+                </>
+              )}
               {!hasError ? (
                 <>
                   <b>Сheck the entered data</b>
                   , it will be impossible to edit this field.
                 </>
-              ) : (<>Account with such Corpotare Email  already exists. Check the correctness of the entered data, it must be unique.</>)}
+              ) : (<>Account with such Corpotare Email already exists. Check the correctness of the entered data, it must be unique.</>)}
             </div>
           </div>
         </div>
