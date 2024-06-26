@@ -24,7 +24,13 @@ function Template() {
   const parsedSidebarRoutes = useSidebarRoutes(getSidebarRoutes(accessBasedOnPemissionsStateContext.accessPermissions), location);
   const adminRoutes = getAdminRoutes(accessBasedOnPemissionsStateContext.accessPermissions);
 
-  const breadcrumbs = useBreadcrumbs(adminRoutes as BreadcrumbsRoute<string>[], { excludePaths: ['/'] });
+  const breadcrumbs = useBreadcrumbs(adminRoutes as BreadcrumbsRoute<string>[], {
+    excludePaths: [
+      '/',
+      '/account-management/',
+      '/account-management/accounts/edit',
+    ],
+  });
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileSidebarOpened, setIsMobileSidebarOpened] = useState(false);
