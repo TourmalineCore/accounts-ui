@@ -1,10 +1,9 @@
-name: deploy UI to dev k8s
+name: deploy UI to prod k8s
 
 on:
   push:
     branches:
-      - develop
-      - feature/decrease-limits
+      - master
 
 env:
   GITHUB_REGISTRY: ghcr.io
@@ -22,9 +21,9 @@ jobs:
           docker build -t $GITHUB_REGISTRY/tourmalinecore/inner-circle/account-management-ui:latest -t $GITHUB_REGISTRY/tourmalinecore/inner-circle/account-management-ui:${{ github.sha }} .
           docker push $GITHUB_REGISTRY/tourmalinecore/inner-circle/account-management-ui:latest
           docker push $GITHUB_REGISTRY/tourmalinecore/inner-circle/account-management-ui:${{ github.sha }}
-  deploy-to-dev-k8s:
+  deploy-to-prod-k8s:
     needs: build-image
-    name: Deploy service to k8s for development environment  
+    name: Deploy service to k8s for prod environment  
     if: github.event_name == 'push'
     runs-on: ubuntu-22.04
     steps:
