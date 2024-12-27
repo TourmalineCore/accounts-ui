@@ -11,7 +11,9 @@ export const Permissions = {
   EditRoles: 'Edit roles',
   CanManageTenants: 'Can Manage Tenants',
   IsTenantsHardDeleteAllowed: 'Is Tenants Hard Delete Allowed',
+  IsBooksHardDeleteAllowed: 'Is Books Hard Delete Allowed',
   CanRequestCompensations: 'Can Request Compensations',
   CanManageCompensations: 'Can Manage Compensations',
+  CanManageBooks: 'Can Manage Books',
   CanManageDocuments: 'Can Manage Documents',
 };

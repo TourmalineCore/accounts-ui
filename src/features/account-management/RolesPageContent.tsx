@@ -46,6 +46,13 @@ const PERMISSION_GROUPS = [
     ],
   },
   {
+    groupName: 'Books',
+    children: [
+      { id: 'IsBooksHardDeleteAllowed', name: 'Is Books Hard Delete Allowed' },
+      { id: 'CanManageBooks', name: 'Can Manage Books' },
+    ],
+  },
+  {
     groupName: 'Documents',
     children: [
       { id: 'CanManageDocuments', name: 'Can Manage Documents' },

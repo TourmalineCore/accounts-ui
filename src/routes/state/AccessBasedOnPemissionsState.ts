@@ -12,9 +12,11 @@ export enum Permission {
   ManageRoles = 'ManageRoles',
   CanRequestCompensations = 'CanRequestCompensations',
   CanManageCompensations = 'CanManageCompensations',
+  CanManageBooks = 'CanManageBooks',
   CanManageDocuments = 'CanManageDocuments',
   CanManageTenants = 'Can Manage Tenants',
   IsTenantsHardDeleteAllowed = 'Is Tenants Hard Delete Allowed',
+  IsBooksHardDeleteAllowed = 'Is Books Hard Delete Allowed',
 }
 
 class AccessBasedOnPemissionsState {
