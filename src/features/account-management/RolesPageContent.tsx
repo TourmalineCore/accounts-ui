@@ -43,6 +43,7 @@ const PERMISSION_GROUPS = [
     children: [
       { id: 'CanRequestCompensations', name: 'Can Request Compensations' },
       { id: 'CanManageCompensations', name: 'Can Manage Compensations' },
+      { id: 'IsCompensationsHardDeleteAllowed', name: 'Is Compensations Hard Delete Allowed' },
     ],
   },
   {

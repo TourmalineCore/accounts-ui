@@ -13,5 +13,6 @@ export const Permissions = {
   IsTenantsHardDeleteAllowed: 'Is Tenants Hard Delete Allowed',
   CanRequestCompensations: 'Can Request Compensations',
   CanManageCompensations: 'Can Manage Compensations',
+  IsCompensationsHardDeleteAllowed: 'Is Compensations Hard Delete Allowed',
   CanManageDocuments: 'Can Manage Documents',
 };
