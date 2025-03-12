@@ -15,4 +15,7 @@ export const Permissions = {
   CanManageCompensations: 'Can Manage Compensations',
   IsCompensationsHardDeleteAllowed: 'Is Compensations Hard Delete Allowed',
   CanManageDocuments: 'Can Manage Documents',
+  CanViewBooks: 'Can View Books',
+  CanManageBooks: 'Can Manage Books',
+  IsBooksHardDeleteAllowed: 'Is Books Hard Delete Allowed',
 };

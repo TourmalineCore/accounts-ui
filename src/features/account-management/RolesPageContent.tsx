@@ -52,6 +52,14 @@ const PERMISSION_GROUPS = [
       { id: 'CanManageDocuments', name: 'Can Manage Documents' },
     ],
   },
+  {
+    groupName: 'Books',
+    children: [
+      { id: 'CanViewBooks', name: 'Can View Books' },
+      { id: 'CanManageBooks', name: 'Can Manage Books' },
+      { id: 'IsBooksHardDeleteAllowed', name: 'Is Books Hard Delete Allowed' },
+    ],
+  },
 ];
 
 function RolesPageContent() {
