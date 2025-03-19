@@ -19,6 +19,7 @@ export enum Permission {
   CanViewBooks = 'CanViewBooks',
   CanManageBooks = 'CanManageBooks',
   IsBooksHardDeleteAllowed = 'IsBooksHardDeleteAllowed',
+  IsAccountsHardDeleteAllowed = 'IsAccountsHardDeleteAllowed',
 }
 
 class AccessBasedOnPemissionsState {
