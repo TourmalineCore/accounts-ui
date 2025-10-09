@@ -1,5 +1,5 @@
-import { ReactComponent as IconAnalytics } from '../../assets/icons/icon-analytics.svg';
-import { ReactComponent as IconAnalyticsActive } from '../../assets/icons/icon-analytics-active.svg';
+import IconAnalytics from '../../assets/icons/icon-analytics.svg?react';
+import IconAnalyticsActive from '../../assets/icons/icon-analytics-active.svg?react';
 import { LINK_TO_DASHBOARD } from '../../common/config/config';
 
 export const analyticsSidebarRoutes = [

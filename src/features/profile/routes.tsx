@@ -1,5 +1,5 @@
-import { ReactComponent as IconProfile } from '../../assets/icons/icon-profile.svg';
-import { ReactComponent as IconProfileActive } from '../../assets/icons/icon-profile-active.svg';
+import IconProfile from '../../assets/icons/icon-profile.svg?react';
+import IconProfileActive from '../../assets/icons/icon-profile-active.svg?react';
 import { LINK_TO_DASHBOARD } from '../../common/config/config';
 
 export const profileSidebarRoutes = [

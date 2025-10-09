@@ -4,7 +4,7 @@ import { Input, CheckField, Button } from '@tourmalinecore/react-tc-ui-kit';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config';
 import { api } from '../../../../common/api';
 
-import { ReactComponent as IconEmail } from '../../../../assets/icons/icon-email.svg';
+import IconEmail from '../../../../assets/icons/icon-email.svg?react';
 
 function EditAccount() {
   const navigation = useNavigate();

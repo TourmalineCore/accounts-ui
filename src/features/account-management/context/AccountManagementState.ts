@@ -50,7 +50,7 @@ class AccountManagementState {
       return account;
     });
 
-    const deletedAccount = this._allAccounts.find((account, index) => index === this._lastBlockAccontIndex);
+    const deletedAccount = this._allAccounts.find((_account, index) => index === this._lastBlockAccontIndex);
 
     this._lastBlockAccount = deletedAccount || null;
   }

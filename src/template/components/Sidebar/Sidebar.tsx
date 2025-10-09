@@ -6,8 +6,8 @@ import SidebarItem from './components/SidebarItem/SidebarItem';
 import { useSidebarSwipe } from '../../hooks/useSidebarSwipe';
 import { SidebarProps } from '../../types/Template';
 import SidebarLogo from './components/SidebarLogo/SidebarLogo';
-import { ReactComponent as IconAngleDoubleRight } from '../../../assets/icons/icon-angle-double-right.svg';
-import { ReactComponent as IconAngleDoubleLight } from '../../../assets/icons/icon-angle-double-left.svg';
+import IconAngleDoubleRight from '../../../assets/icons/icon-angle-double-right.svg?react';
+import IconAngleDoubleLight from '../../../assets/icons/icon-angle-double-left.svg?react';
 import { SidebarInfoBox } from './components/SidebarInfoBox/SidebarInfoBox';
 
 const OPENED_DOCUMENT_CLASSNAME = 'is-sidebar-mobile-opened';

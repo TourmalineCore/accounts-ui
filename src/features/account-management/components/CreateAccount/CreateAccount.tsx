@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { api } from '../../../../common/api';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config';
-import { Tenants } from '../Tenants/Tenants';
+// import { Tenants } from '../Tenants/Tenants';
 
 function CreateAccount() {
   const history = useNavigate();

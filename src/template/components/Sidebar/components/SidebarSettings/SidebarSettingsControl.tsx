@@ -3,8 +3,8 @@ import {
 } from 'react';
 import ReactDOM from 'react-dom';
 
-import { ReactComponent as IconSetting } from '../../../../../assets/icons/icon-settings.svg';
-import { ReactComponent as IconSettingActive } from '../../../../../assets/icons/icon-settings-active.svg';
+import IconSetting from '../../../../../assets/icons/icon-settings.svg?react';
+import IconSettingActive from '../../../../../assets/icons/icon-settings-active.svg?react';
 
 import SidebarItem from '../SidebarItem/SidebarItem';
 import SidebarSettingsMenu from './SidebarSettingsMenu/SidebarSettingsMenu';

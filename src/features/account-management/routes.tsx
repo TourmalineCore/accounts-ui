@@ -1,4 +1,4 @@
-import { ReactComponent as IconAccountManagement } from '../../assets/icons/icon-account-management.svg';
+import IconAccountManagement from '../../assets/icons/icon-account-management.svg?react';
 
 import CreateAccount from './components/CreateAccount/CreateAccount';
 import RolesPage from './RolesPage';

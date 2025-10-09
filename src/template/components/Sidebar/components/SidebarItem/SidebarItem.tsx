@@ -92,9 +92,7 @@ function SidebarItem({
                 <div className="sidebar-item__icon">
                   {iconActive
                     ? (
-                      <span>
-                        {iconActive }
-                      </span>
+                        <span>{typeof iconActive === `function` ? iconActive() : iconActive}</span>
                     )
                     : (
                       <span>

@@ -1,8 +1,8 @@
-import React, { useState, useRef, RefObject } from 'react';
+import { useState, useRef, RefObject } from 'react';
 import clsx from 'clsx';
 import { getRelativePosition } from '../../../../common/utils/getRelativePosition';
 import useOnClickOutside from '../../../../common/hooks/useOnClickOutside';
-import { ReactComponent as IconThreeDots } from '../../../../assets/icons/three-dots.svg';
+import IconThreeDots from '../../../../assets/icons/three-dots.svg?react';
 
 export default function ActionsDropdown({
   tableContainerRef,

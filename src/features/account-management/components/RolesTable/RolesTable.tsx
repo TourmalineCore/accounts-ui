@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react-lite';
-import React, {
+import {
   ChangeEvent, Fragment, useContext, useRef,
 } from 'react';
 import { CheckField } from '@tourmalinecore/react-tc-ui-kit';
 import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext';
-import { ReactComponent as IconCheck } from '../../../../assets/icons/check.svg';
-import { ReactComponent as IconUncheck } from '../../../../assets/icons/uncheck.svg';
+import IconCheck from '../../../../assets/icons/check.svg?react';
+import IconUncheck from '../../../../assets/icons/uncheck.svg?react';
 import ActionsDropdown from '../ActionsDropdown/ActionsDropdown';
 import AccessBasedOnPemissionsStateContext from '../../../../routes/state/AccessBasedOnPemissionsStateContext';
 
