@@ -6,8 +6,30 @@ npm ci
 
 npm start
 ```
-## Run UI and unit tests by Jest
+
+## Create local docker container to connect it with local-env
 
 ```
-npm test
+npm run docker:build:local-env
+```
+
+## Create local docker container to work in it (local docker container for layout-ui service must run too)
+
+```
+npm run docker:build
+npm run docker:run
+```
+
+## Component tests
+
+To run component tests in console you need to enter the command
+
+```
+npm run cypress:run:component
+```
+
+To open Cypress UI to run component tests you need to enter the command
+
+```
+npm run cypress:open:component
 ```
