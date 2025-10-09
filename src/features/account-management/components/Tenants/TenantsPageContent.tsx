@@ -24,10 +24,10 @@ export const TenantsPageContent = observer(({
 
   const columns = [
     {
-      Header: 'Name',
-      accessor: 'name',
-      minWidth: 300,
-      Cell: ({ row }: Table<Tenants>) => {
+      header: 'Name',
+      accessorFn: (row: Row<{ name: string }>) => row.original.name,
+      minSize: 300,
+      cell: ({ row }: Table<Tenants>) => {
         const { name } = row.original;
         return (
           <span data-cy="tenant-table-row">
@@ -58,13 +58,13 @@ export const TenantsPageContent = observer(({
       <ClientTable
         tableId="tenant-table"
         data={tenantManagementState.allTenants}
-        renderMobileTitle={(row: Row<{ name: string }>) => row.original.name}
-        order={{
+        tcRenderMobileTitle={(row: Row<{ name: string }>) => row.original.name}
+        tcOrder={{
           id: 'name',
           desc: false,
         }}
         columns={columns}
-        isLoading={isLoading}
+        tcLoading={isLoading}
       />
 
     </section>

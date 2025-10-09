@@ -36,10 +36,11 @@ function AccountsPageContent() {
 
   const columns = [
     {
-      Header: 'Name',
-      accessor: 'lastName',
-      minWidth: 300,
-      Cell: ({ row }: Table<Accounts>) => {
+      header: 'Name',
+      accessorFn: (row: Row<{ lastName: string }>) => row.original.lastName,
+      enableSorting: true,
+      minSize: 300,
+      cell: ({ row }: Table<Accounts>) => {
         const {
           firstName, lastName, middleName, isBlocked,
         } = row.original;
@@ -58,11 +59,10 @@ function AccountsPageContent() {
       },
     },
     {
-      Header: 'Roles',
-      accessor: 'roles',
-      disableSortBy: true,
-      disableFilters: true,
-      Cell: ({ row }: Table<Accounts>) => {
+      header: 'Roles',
+      accessorFn: (row: Row<{ roles: string }>) => row.original.roles,
+      enableColumnFilter: false,
+      cell: ({ row }: Table<Accounts>) => {
         const { roles, isBlocked } = row.original;
         return (
           <span className={clsx('account-management-page__account', {
@@ -79,12 +79,11 @@ function AccountsPageContent() {
       },
     },
     {
-      Header: 'Corporate Email',
-      accessor: 'corporateEmail',
-      disableFilters: true,
-      disableSortBy: true,
-      minWidth: 300,
-      Cell: ({ row }: Table<Accounts>) => {
+      header: 'Corporate Email',
+      accessorFn: (row: Row<{ corporateEmail: string }>) => row.original.corporateEmail,
+      enableColumnFilter: false,
+      minSize: 300,
+      cell: ({ row }: Table<Accounts>) => {
         const { corporateEmail, isBlocked } = row.original;
         return (
           <span className={clsx('account-management-page__account', {
@@ -97,11 +96,12 @@ function AccountsPageContent() {
       },
     },
     {
-      Header: 'Tenant',
-      accessor: 'tenantName',
-      disableFilters: true,
-      minWidth: 300,
-      Cell: ({ row }: Table<Accounts>) => {
+      header: 'Tenant',
+      accessorFn: (row: Row<{ tenantName: string }>) => row.original.tenantName,
+      enableColumnFilter: false,
+      enableSorting: true,
+      minSize: 300,
+      cell: ({ row }: Table<Accounts>) => {
         const { tenantName, isBlocked } = row.original;
         return (
           <span
@@ -116,11 +116,12 @@ function AccountsPageContent() {
       },
     },
     {
-      Header: 'Creation date (UTC)',
-      accessor: 'creationDate',
-      disableFilters: true,
-      minWidth: 250,
-      Cell: ({ row }: Table<Accounts>) => {
+      header: 'Creation date (UTC)',
+      accessorFn: (row: Row<{ creationDate: string }>) => row.original.creationDate,
+      enableColumnFilter: false,
+      enableSorting: true,
+      minSize: 250,
+      cell: ({ row }: Table<Accounts>) => {
         const { creationDate, isBlocked } = row.original;
         const formattedDate = moment(creationDate).format('DD.MM.YYYY HH:mm');
 
@@ -135,11 +136,10 @@ function AccountsPageContent() {
       },
     },
     {
-      Header: 'Status',
-      accessor: 'isBlocked',
-      disableFilters: true,
-      disableSortBy: true,
-      Cell: ({ row }: Table<Accounts>) => {
+      header: 'Status',
+      accessorFn: (row: Row<{ isBlocked: string }>) => row.original.isBlocked, 
+      enableColumnFilter: false,
+      cell: ({ row }: Table<Accounts>) => {
         const { isBlocked } = row.original;
 
         return (
@@ -163,7 +163,7 @@ function AccountsPageContent() {
         return !isBlocked && canChangeAccountState;
       },
       renderText: () => 'Edit',
-      onClick: (e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => navigate(`/account-management/accounts/edit/${row.original.id}`),
+      onClick: (_e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => navigate(`/account-management/accounts/edit/${row.original.id}`),
     },
     {
       name: 'block',
@@ -173,7 +173,7 @@ function AccountsPageContent() {
         return !isBlocked && canChangeAccountState;
       },
       renderText: () => 'Block',
-      onClick: (e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => blockAccountsAsync(row.original.id),
+      onClick: (_e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => blockAccountsAsync(row.original.id),
     },
     {
       name: 'unblock',
@@ -186,7 +186,7 @@ function AccountsPageContent() {
         return isBlocked && canChangeAccountState;
       },
       renderText: () => 'Unblock',
-      onClick: (e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => {
+      onClick: (_e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => {
         unblockAccountsAsync(row.original.id);
         toast.dismiss(row.original.id);
       },
@@ -214,14 +214,14 @@ function AccountsPageContent() {
       <ClientTable
         tableId="account-table"
         data={accountManagementState.allAccounts}
-        renderMobileTitle={(row: Row<{ lastName: string }>) => row.original.lastName}
-        order={{
+        tcRenderMobileTitle={(row: Row<{ lastName: string }>) => row.original.lastName}
+        tcOrder={{
           id: 'lastName',
           desc: false,
         }}
-        actions={accessToChanges.accessPermissions.get('ManageAccounts') ? actions : []}
+        tcActions={accessToChanges.accessPermissions.get('ManageAccounts') ? actions : []}
         columns={columns}
-        isLoading={isLoading}
+        tcLoading={isLoading}
       />
 
     </section>
@@ -233,7 +233,7 @@ function AccountsPageContent() {
       const { data } = await api.get<Accounts[]>(`${LINK_TO_ACCOUNT_SERVICE}accounts/all`);
       accountManagementState.getAccounts(data);
     } finally {
-      setIsLoading(true);
+      setIsLoading(false);
     }
   }
 
