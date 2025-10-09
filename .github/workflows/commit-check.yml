@@ -11,10 +11,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up Node.js 18.14.1
+      - name: Set up Node.js 22.18.0
         uses: actions/setup-node@v3
         with:
-          node-version: 18.14.1
+          node-version: 22.18.0
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-22.04
     needs: check-lint
     container:
-      image: cypress/browsers:node-18.14.1-chrome-111.0.5563.146-1-ff-111.0.1-edge-111.0.1661.54-1
+      image: cypress/browsers:node-22.18.0-chrome-138.0.7204.183-1-ff-141.0-edge-138.0.3351.121-1
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -47,16 +47,16 @@ jobs:
           runTests: false
           build: npm run build
 
-      - name: Save build folder
+      - name: Save dist folder
         uses: actions/upload-artifact@v4
         with:
-          name: build
+          name: dist
           if-no-files-found: error
-          path: build
+          path: dist
   
   components-test:
     runs-on: ubuntu-22.04 
-    container: cypress/browsers:node-18.14.1-chrome-111.0.5563.146-1-ff-111.0.1-edge-111.0.1661.54-1
+    container: cypress/browsers:node-22.18.0-chrome-138.0.7204.183-1-ff-141.0-edge-138.0.3351.121-1
     strategy:
       fail-fast: false
       matrix:
@@ -67,18 +67,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Download the build folders
+      - name: Download the dist folders
         uses: actions/download-artifact@v4
         with:
-          name: build
-          path: build
+          name: dist
+          path: dist
 
       - name: Components test
         uses: cypress-io/github-action@v5
         with:
           component: true
           start: npm start
-          browser: chrome
+          browser: electron
           record: true
           parallel: true
           group: "Chrome component"
