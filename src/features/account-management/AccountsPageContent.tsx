@@ -1,27 +1,22 @@
 /* eslint-disable react/no-unstable-nested-components */
 import {
-  MouseEventHandler, useContext, useEffect, useState,
+  useContext, useEffect, useState,
 } from 'react';
 
 import moment from 'moment';
 import clsx from 'clsx';
 
-import { ClientTable } from '@tourmalinecore/react-table-responsive';
+import { ActionsType, ClientTable } from '@tourmalinecore/react-table-responsive';
 import { observer } from 'mobx-react-lite';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../common/api';
-import { Table } from '../../types';
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config';
 
 import FilterMenu from './components/FilterMenu/FilterMenu';
 import AccountManagementStateContext from './context/AccountManagementStateContext';
 import AccessBasedOnPemissionsStateContext from '../../routes/state/AccessBasedOnPemissionsStateContext';
-
-export type Row<TypeProps> = {
-  original: TypeProps;
-  values: TypeProps;
-};
+import { ColumnDef } from '@tanstack/table-core';
 
 function AccountsPageContent() {
   const accountManagementState = useContext(AccountManagementStateContext);
@@ -34,13 +29,15 @@ function AccountsPageContent() {
     getAccountsAsync();
   }, []);
 
-  const columns = [
+  const columns: ColumnDef<Accounts>[] = [
     {
       header: 'Name',
-      accessorFn: (row: Row<{ lastName: string }>) => row.original.lastName,
+      id: `lastName`,
+      accessorFn: (row) => row.lastName,
       enableSorting: true,
+      enableColumnFilter: true,
       minSize: 300,
-      cell: ({ row }: Table<Accounts>) => {
+      cell: ({ row }) => {
         const {
           firstName, lastName, middleName, isBlocked,
         } = row.original;
@@ -60,9 +57,9 @@ function AccountsPageContent() {
     },
     {
       header: 'Roles',
-      accessorFn: (row: Row<{ roles: string }>) => row.original.roles,
-      enableColumnFilter: false,
-      cell: ({ row }: Table<Accounts>) => {
+      id: 'roles',
+      accessorFn: (row) => row.roles,
+      cell: ({ row }) => {
         const { roles, isBlocked } = row.original;
         return (
           <span className={clsx('account-management-page__account', {
@@ -80,10 +77,10 @@ function AccountsPageContent() {
     },
     {
       header: 'Corporate Email',
-      accessorFn: (row: Row<{ corporateEmail: string }>) => row.original.corporateEmail,
-      enableColumnFilter: false,
+      id: `corporateEmail`,
+      accessorFn: (row) => row.corporateEmail,
       minSize: 300,
-      cell: ({ row }: Table<Accounts>) => {
+      cell: ({ row }) => {
         const { corporateEmail, isBlocked } = row.original;
         return (
           <span className={clsx('account-management-page__account', {
@@ -97,11 +94,11 @@ function AccountsPageContent() {
     },
     {
       header: 'Tenant',
-      accessorFn: (row: Row<{ tenantName: string }>) => row.original.tenantName,
-      enableColumnFilter: false,
+      id: `tenantName`,
+      accessorFn: (row) => row.tenantName,
       enableSorting: true,
       minSize: 300,
-      cell: ({ row }: Table<Accounts>) => {
+      cell: ({ row }) => {
         const { tenantName, isBlocked } = row.original;
         return (
           <span
@@ -117,11 +114,11 @@ function AccountsPageContent() {
     },
     {
       header: 'Creation date (UTC)',
-      accessorFn: (row: Row<{ creationDate: string }>) => row.original.creationDate,
-      enableColumnFilter: false,
+      id:`creationDate`,
+      accessorFn: (row) => row.creationDate,
       enableSorting: true,
       minSize: 250,
-      cell: ({ row }: Table<Accounts>) => {
+      cell: ({ row }) => {
         const { creationDate, isBlocked } = row.original;
         const formattedDate = moment(creationDate).format('DD.MM.YYYY HH:mm');
 
@@ -137,9 +134,9 @@ function AccountsPageContent() {
     },
     {
       header: 'Status',
-      accessorFn: (row: Row<{ isBlocked: string }>) => row.original.isBlocked, 
-      enableColumnFilter: false,
-      cell: ({ row }: Table<Accounts>) => {
+      id: `isBlocked`,
+      accessorFn: (row) => row.isBlocked, 
+      cell: ({ row }) => {
         const { isBlocked } = row.original;
 
         return (
@@ -154,30 +151,30 @@ function AccountsPageContent() {
     },
   ];
 
-  const actions = [
+  const actions: ActionsType<Accounts> = [
     {
       name: 'edit',
-      show: (row: Row<Accounts>) => {
+      show: (row) => {
         const { isBlocked, canChangeAccountState } = row.original;
 
         return !isBlocked && canChangeAccountState;
       },
       renderText: () => 'Edit',
-      onClick: (_e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => navigate(`/account-management/accounts/edit/${row.original.id}`),
+      onClick: (_e, row) => navigate(`/account-management/accounts/edit/${row.original.id}`),
     },
     {
       name: 'block',
-      show: (row: Row<Accounts>) => {
+      show: (row) => {
         const { isBlocked, canChangeAccountState } = row.original;
 
         return !isBlocked && canChangeAccountState;
       },
       renderText: () => 'Block',
-      onClick: (_e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => blockAccountsAsync(row.original.id),
+      onClick: (_e, row) => blockAccountsAsync(row.original.id),
     },
     {
       name: 'unblock',
-      show: (row: Row<Accounts>) => {
+      show: (row) => {
         const { isBlocked, canChangeAccountState } = row.original;
 
         console.log('isBlocked && canChangeAccountState', isBlocked && canChangeAccountState);
@@ -186,7 +183,7 @@ function AccountsPageContent() {
         return isBlocked && canChangeAccountState;
       },
       renderText: () => 'Unblock',
-      onClick: (_e: MouseEventHandler<HTMLInputElement>, row: Row<Accounts>) => {
+      onClick: (_e, row) => {
         unblockAccountsAsync(row.original.id);
         toast.dismiss(row.original.id);
       },
@@ -211,10 +208,11 @@ function AccountsPageContent() {
         )}
       </div>
 
-      <ClientTable
+     
+      <ClientTable<Accounts>
         tableId="account-table"
         data={accountManagementState.allAccounts}
-        tcRenderMobileTitle={(row: Row<{ lastName: string }>) => row.original.lastName}
+        tcRenderMobileTitle={(row) => row.original.lastName}
         tcOrder={{
           id: 'lastName',
           desc: false,

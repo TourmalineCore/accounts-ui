@@ -11,6 +11,7 @@ const initialData: Accounts[] = [
     firstName: '1',
     lastName: '1',
     middleName: '1',
+    isBlocked: false,
     tenantName: 'Black',
     roles: [
       {
@@ -32,6 +33,8 @@ const initialData: Accounts[] = [
     firstName: '2',
     lastName: '2',
     middleName: '2',
+    isBlocked: false,
+    canChangeAccountState: false,
     tenantName: 'Blue',
     roles: [
       {
@@ -44,7 +47,6 @@ const initialData: Accounts[] = [
         ],
       },
     ],
-    canChangeAccountState: false,
   },
 ];
 

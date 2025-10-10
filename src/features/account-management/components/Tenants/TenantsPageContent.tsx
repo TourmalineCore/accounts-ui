@@ -6,13 +6,8 @@ import {
 import { ClientTable } from '@tourmalinecore/react-table-responsive';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
-import { Table } from '../../../../types';
 import { TenantManagementStateContext } from './state/TenantManagementStateContext';
-
-export type Row<TypeProps> = {
-  original: TypeProps;
-  values: TypeProps;
-};
+import { ColumnDef } from '@tanstack/table-core';
 
 export const TenantsPageContent = observer(({
   isLoading,
@@ -22,12 +17,13 @@ export const TenantsPageContent = observer(({
   const tenantManagementState = useContext(TenantManagementStateContext);
   const navigate = useNavigate();
 
-  const columns = [
+  const columns: ColumnDef<Tenants>[] = [
     {
       header: 'Name',
-      accessorFn: (row: Row<{ name: string }>) => row.original.name,
+      id: 'name',
+      accessorFn: (row) => row.name,
       minSize: 300,
-      cell: ({ row }: Table<Tenants>) => {
+      cell: ({ row }) => {
         const { name } = row.original;
         return (
           <span data-cy="tenant-table-row">
@@ -55,10 +51,10 @@ export const TenantsPageContent = observer(({
 
       </div>
 
-      <ClientTable
+      <ClientTable<Tenants>
         tableId="tenant-table"
         data={tenantManagementState.allTenants}
-        tcRenderMobileTitle={(row: Row<{ name: string }>) => row.original.name}
+        tcRenderMobileTitle={(row) => row.original.name}
         tcOrder={{
           id: 'name',
           desc: false,
