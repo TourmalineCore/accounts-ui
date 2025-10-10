@@ -1,39 +1,45 @@
-import {
-  MutableRefObject,
-  useEffect, useState,
-} from 'react';
+import {MutableRefObject,
+  useEffect, useState} from 'react'
 
 export const useStickyHeader = (topSentinelRef: MutableRefObject<HTMLElement | null>) => {
-  const [isHeaderStuck, setIsHeaderStuck] = useState(false);
+  const [
+    isHeaderStuck,
+    setIsHeaderStuck,
+  ] = useState(false)
 
   useEffect(() => {
     const topObserver = new IntersectionObserver((records) => {
       for (const record of records) {
-        const targetInfo = record.boundingClientRect;
-        const rootBoundsInfo = record.rootBounds;
+        const targetInfo = record.boundingClientRect
+        const rootBoundsInfo = record.rootBounds
 
         if (!rootBoundsInfo || !targetInfo) {
-          return;
+          return
         }
 
         // Started sticking.
         if (targetInfo.bottom < rootBoundsInfo.top) {
-          setIsHeaderStuck(true);
+          setIsHeaderStuck(true)
         }
 
         // Stopped sticking.
         if (targetInfo.bottom >= rootBoundsInfo.top && targetInfo.bottom < rootBoundsInfo.bottom) {
-          setIsHeaderStuck(false);
+          setIsHeaderStuck(false)
         }
       }
-    }, { threshold: [0], root: null });
+    }, {
+      threshold: [
+        0,
+      ],
+      root: null, 
+    })
 
-    topObserver.observe(topSentinelRef.current!);
+    topObserver.observe(topSentinelRef.current!)
 
     return () => {
-      topObserver.disconnect();
-    };
-  }, []);
+      topObserver.disconnect()
+    }
+  }, [])
 
-  return isHeaderStuck;
-};
+  return isHeaderStuck
+}

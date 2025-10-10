@@ -1,12 +1,12 @@
 // @ts-ignore
-import { defineConfig } from 'cypress';
+import { defineConfig } from 'cypress'
 
 export default defineConfig({
   e2e: {
     viewportWidth: 1200,
     viewportHeight: 660,
-    specPattern: 'cypress/e2e/**/*.cy.{js,ts}',
-    baseUrl: 'https://tourmalinecore.github.io/React-Admin-Template',
+    specPattern: `cypress/e2e/**/*.cy.{js,ts}`,
+    baseUrl: `https://tourmalinecore.github.io/React-Admin-Template`,
     video: false,
     setupNodeEvents(on, config) {
     },
@@ -14,8 +14,8 @@ export default defineConfig({
 
   component: {
     devServer: {
-      framework: 'react',
-      bundler: 'vite',
+      framework: `react`,
+      bundler: `vite`,
     },
   },
-});
+})

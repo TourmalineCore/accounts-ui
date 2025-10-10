@@ -1,29 +1,35 @@
-import { useContext, useEffect, useState } from 'react';
-import { observer } from 'mobx-react-lite';
-import { api } from '../../../../common/api';
-import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config';
+import { useContext, useEffect, useState } from 'react'
+import { observer } from 'mobx-react-lite'
+import { api } from '../../../../common/api'
+import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config'
 
-import { TenantsPageContent } from './TenantsPageContent';
-import { TenantManagementStateContext } from './state/TenantManagementStateContext';
+import { TenantsPageContent } from './TenantsPageContent'
+import { TenantManagementStateContext } from './state/TenantManagementStateContext'
 
 export const TenantsContainer = observer(() => {
-  const [isLoading, setIsLoading] = useState(false);
-  const tenantManagementState = useContext(TenantManagementStateContext);
+  const [
+    isLoading,
+    setIsLoading,
+  ] = useState(false)
+  const tenantManagementState = useContext(TenantManagementStateContext)
 
   useEffect(() => {
-    getTenantsAsync();
-  }, []);
+    getTenantsAsync()
+  }, [])
 
   return (
     <TenantsPageContent isLoading={isLoading} />
-  );
+  )
   async function getTenantsAsync() {
-    setIsLoading(true);
+    setIsLoading(true)
     try {
-      const { data } = await api.get<Tenants[]>(`${LINK_TO_ACCOUNT_SERVICE}tenants/all`);
-      tenantManagementState.getTenants(data);
-    } finally {
-      setIsLoading(false);
+      const {
+        data, 
+      } = await api.get<Tenants[]>(`${LINK_TO_ACCOUNT_SERVICE}tenants/all`)
+      tenantManagementState.getTenants(data)
+    }
+    finally {
+      setIsLoading(false)
     }
   }
-});
+})

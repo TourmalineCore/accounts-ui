@@ -1,39 +1,40 @@
-import { Link, useLocation } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faArrowLeft,
-} from '@fortawesome/free-solid-svg-icons';
-import IconAnalytics from '../../../assets/icons/icon-analytics.svg?react';
-import IconAnalyticsActive from '../../../assets/icons/icon-analytics-active.svg?react';
-import IconBurger from '../../../assets/icons/icon-burger.svg?react';
-import IconCross from '../../../assets/icons/icon-cross.svg?react';
+import { Link, useLocation } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import IconAnalytics from '../../../assets/icons/icon-analytics.svg?react'
+import IconAnalyticsActive from '../../../assets/icons/icon-analytics-active.svg?react'
+import IconBurger from '../../../assets/icons/icon-burger.svg?react'
+import IconCross from '../../../assets/icons/icon-cross.svg?react'
 
 function MobileControlsPanel({
   prevPath,
-  homePath = '/',
-  homePageName = 'Home',
+  homePath = `/`,
+  homePageName = `Home`,
   isToggled,
   onToggleClick = () => {},
 }: {
-  prevPath?: string | null;
-  homePath?: string;
-  homePageName?: string;
-  isToggled: boolean;
-  onToggleClick?: () => unknown;
+  prevPath?: string | null,
+  homePath?: string,
+  homePageName?: string,
+  isToggled: boolean,
+  onToggleClick?: () => unknown,
 }) {
-  const location = useLocation();
+  const location = useLocation()
 
   return (
     <div className="mobile-controls-panel">
       {prevPath ? (
-        <Link to={prevPath} className="mobile-controls-panel__item">
-          <FontAwesomeIcon className="mobile-controls-panel__item-icon" icon={faArrowLeft} />
+        <Link to={prevPath}
+          className="mobile-controls-panel__item">
+          <FontAwesomeIcon className="mobile-controls-panel__item-icon"
+            icon={faArrowLeft} />
         </Link>
       ) : (
         <div className="mobile-controls-panel__item" />
       )}
 
-      <Link to={homePath} className="mobile-controls-panel__item">
+      <Link to={homePath}
+        className="mobile-controls-panel__item">
         <div className="mobile-controls-panel__icon-location">
           {
             location.pathname === homePath
@@ -54,7 +55,7 @@ function MobileControlsPanel({
         </div>
       </button>
     </div>
-  );
+  )
 }
 
-export default MobileControlsPanel;
+export default MobileControlsPanel

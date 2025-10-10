@@ -2,7 +2,7 @@ function Copyright() {
   return (
     <div className="copyright">
       made by
-      {' '}
+      {` `}
       <a
         className="copyright__link"
         href="https://tourmalinecore.com/"
@@ -11,12 +11,13 @@ function Copyright() {
       >
         Tourmaline Core
       </a>
-      {' '}
+      {` `}
       2022 -
-      {' '}
-      {new Date().getFullYear()}
+      {` `}
+      {new Date()
+        .getFullYear()}
     </div>
-  );
+  )
 }
 
-export default Copyright;
+export default Copyright

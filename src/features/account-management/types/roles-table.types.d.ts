@@ -1,15 +1,15 @@
 type Permission = {
-  id: string;
-  name: string;
+  id: string,
+  name: string,
 };
 
 type PermissionGroup = {
-  groupName: string;
-  children: Permission[];
+  groupName: string,
+  children: Permission[],
 };
 
 type Role = {
-  id: number;
-  name: string;
-  permissions: string[];
+  id: number,
+  name: string,
+  permissions: string[],
 };

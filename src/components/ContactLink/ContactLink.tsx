@@ -1,6 +1,6 @@
 function ContactLink({
   contact,
-  link = '',
+  link = ``,
 }:{
   contact: string | null,
   link?: string,
@@ -8,9 +8,11 @@ function ContactLink({
   return (
     (!contact
       ? (<div>Not specified</div>)
-      : (<a href={link} target="_blank" rel="noreferrer">{contact}</a>)
+      : (<a href={link}
+        target="_blank"
+        rel="noreferrer">{contact}</a>)
     )
-  );
+  )
 }
 
-export default ContactLink;
+export default ContactLink

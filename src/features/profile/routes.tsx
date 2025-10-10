@@ -1,13 +1,13 @@
-import IconProfile from '../../assets/icons/icon-profile.svg?react';
-import IconProfileActive from '../../assets/icons/icon-profile-active.svg?react';
-import { LINK_TO_DASHBOARD } from '../../common/config/config';
+import IconProfile from '../../assets/icons/icon-profile.svg?react'
+import IconProfileActive from '../../assets/icons/icon-profile-active.svg?react'
+import { LINK_TO_DASHBOARD } from '../../common/config/config'
 
 export const profileSidebarRoutes = [
   {
     isWindowRedirectNecessary: true,
     path: `${LINK_TO_DASHBOARD}profile`,
-    label: 'Profile',
+    label: `Profile`,
     icon: <IconProfile />,
     iconActive: <IconProfileActive />,
   },
-];
+]

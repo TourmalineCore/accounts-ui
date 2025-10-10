@@ -1,13 +1,13 @@
-import IconAnalytics from '../../assets/icons/icon-analytics.svg?react';
-import IconAnalyticsActive from '../../assets/icons/icon-analytics-active.svg?react';
-import { LINK_TO_DASHBOARD } from '../../common/config/config';
+import IconAnalytics from '../../assets/icons/icon-analytics.svg?react'
+import IconAnalyticsActive from '../../assets/icons/icon-analytics-active.svg?react'
+import { LINK_TO_DASHBOARD } from '../../common/config/config'
 
 export const analyticsSidebarRoutes = [
   {
     isWindowRedirectNecessary: true,
     path: `${LINK_TO_DASHBOARD}analytics`,
-    label: 'Analytics',
+    label: `Analytics`,
     icon: <IconAnalytics />,
     iconActive: <IconAnalyticsActive />,
   },
-];
+]
