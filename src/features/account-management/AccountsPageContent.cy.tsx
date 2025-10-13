@@ -90,11 +90,6 @@ describe(`AccountsPageContent`, () => {
         accounts: initialData,
       })
 
-      cy.get(`:nth-child(2) > .tc-table-desktop__action-cell > .tc-table-desktop-actions-dropdown > .tc-table-desktop-actions-dropdown__button`)
-        .click()
-      cy.get(`.tc-table-desktop-actions-dropdown__list`)
-        .should(`have.not.text`, `Edit`)
-
       cy.get(`:nth-child(1) > .tc-table-desktop__action-cell > .tc-table-desktop-actions-dropdown > .tc-table-desktop-actions-dropdown__button`)
         .click()
       cy.get(`.tc-table-desktop-actions-dropdown__list`)
@@ -105,6 +100,9 @@ describe(`AccountsPageContent`, () => {
         .children()
         .last()
         .should(`have.text`, `Block`)
+
+      cy.get(`:nth-child(2) > .tc-table-desktop__action-cell`)
+        .children().should('not.exist');
     })
   })
   it(`
