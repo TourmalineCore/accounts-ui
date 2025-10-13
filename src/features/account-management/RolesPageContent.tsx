@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+
 import { observer } from 'mobx-react-lite'
 import { useContext, useEffect } from 'react'
 import { api } from '../../common/api'

@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+
 import {MouseEvent, useContext} from 'react'
 
 import clsx from 'clsx'

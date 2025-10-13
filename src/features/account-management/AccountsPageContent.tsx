@@ -1,5 +1,7 @@
  
 /* eslint-disable no-console */
+/* eslint-disable react-refresh/only-export-components */
+
 import {useContext, useEffect, useState} from 'react'
 
 import moment from 'moment'
