@@ -6,7 +6,7 @@ import IconAnalyticsActive from '../../../assets/icons/icon-analytics-active.svg
 import IconBurger from '../../../assets/icons/icon-burger.svg?react'
 import IconCross from '../../../assets/icons/icon-cross.svg?react'
 
-function MobileControlsPanel({
+export function MobileControlsPanel({
   prevPath,
   homePath = `/`,
   homePageName = `Home`,
@@ -57,5 +57,3 @@ function MobileControlsPanel({
     </div>
   )
 }
-
-export default MobileControlsPanel

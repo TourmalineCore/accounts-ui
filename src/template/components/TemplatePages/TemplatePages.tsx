@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { BreadcrumbComponentProps } from 'use-react-router-breadcrumbs'
 
-function TemplatePages({
+export function TemplatePages({
   routes = [],
 }: {
   routes: {
@@ -24,5 +24,3 @@ function TemplatePages({
     </Routes>
   )
 }
-
-export default TemplatePages

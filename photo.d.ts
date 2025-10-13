@@ -1,3 +1,5 @@
+/* eslint-disable import/no-default-export */
+
 declare module '*.svg' {
 
   export const ReactComponent: React.SFC<React.SVGProps<SVGSVGElement>>

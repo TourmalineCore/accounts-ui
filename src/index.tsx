@@ -13,7 +13,7 @@ import './styles/index.scss'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { ToastContainer } from 'react-toastify'
-import reportWebVitals from './reportWebVitals'
+import {reportWebVitals} from './reportWebVitals'
 
 import App from './App'
 

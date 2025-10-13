@@ -1,6 +1,6 @@
-import RolesPageState from '../../state/roles-page/RolesPageState'
-import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext'
-import RolesTable from './RolesTable'
+import {RolesPageState} from '../../state/roles-page/RolesPageState'
+import {RolesPageStateContext} from '../../state/roles-page/RolesPageStateContext'
+import {RolesTable} from './RolesTable'
 
 describe(`RolesTable`, () => {
   it(`SHOULD show role columns and no permission rows WHEN there are roles and no permissions`, () => {

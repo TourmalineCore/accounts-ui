@@ -1,4 +1,5 @@
  
+/* eslint-disable no-console */
 import {useContext, useEffect, useState} from 'react'
 
 import moment from 'moment'
@@ -12,8 +13,8 @@ import { api } from '../../common/api'
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 
 import FilterMenu from './components/FilterMenu/FilterMenu'
-import AccountManagementStateContext from './context/AccountManagementStateContext'
-import AccessBasedOnPemissionsStateContext from '../../routes/state/AccessBasedOnPemissionsStateContext'
+import {AccountManagementStateContext} from './context/AccountManagementStateContext'
+import {AccessBasedOnPemissionsStateContext} from '../../routes/state/AccessBasedOnPemissionsStateContext'
 import { ColumnDef } from '@tanstack/table-core'
 
 function AccountsPageContent() {
@@ -318,4 +319,5 @@ function AccountsPageContent() {
   }
 }
 
+// eslint-disable-next-line import/no-default-export
 export default observer(AccountsPageContent)

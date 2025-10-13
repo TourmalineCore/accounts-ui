@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import { api } from '../../../../common/api'
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config'
 
-function CreateTenant() {
+export function CreateTenant() {
   const history = useNavigate()
 
   const [
@@ -85,10 +85,9 @@ function CreateTenant() {
         })
       }
       catch (e) {
+        // eslint-disable-next-line no-console
         console.log(e)
       }
     }
   }
 }
-
-export default CreateTenant

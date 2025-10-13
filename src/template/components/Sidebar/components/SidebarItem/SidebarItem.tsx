@@ -7,10 +7,10 @@ import clsx from 'clsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
-import SidebarTooltip from './components/SidebarTooltip/SidebarTooltip'
+import {SidebarTooltip} from './components/SidebarTooltip/SidebarTooltip'
 import { SidebarProps } from '../../../../types/Template'
 
-function SidebarItem({
+export function SidebarItem({
   tagName = `div`,
   itemRef,
   sidebarContainerRef,
@@ -49,6 +49,7 @@ function SidebarItem({
 }) {
   const hasNestedElements = routes && !!routes.length
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const currentItemRef = itemRef || useRef<HTMLElement>(null)
 
   const [
@@ -198,5 +199,3 @@ function SidebarItem({
     return resultTagName
   }
 }
-
-export default SidebarItem

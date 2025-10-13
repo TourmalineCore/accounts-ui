@@ -1,7 +1,7 @@
 import logoCore from '../../../../../assets/img/logo-core.png'
 import logoText from '../../../../../assets/img/logo-text.png'
 
-export default function SidebarLogo() {
+export function SidebarLogo() {
   return (
     <a href="/employees"
       className="sidebar-logo">

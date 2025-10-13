@@ -1,7 +1,7 @@
 import {MutableRefObject,
   ReactNode} from 'react'
 
-function SidebarTooltip({
+export function SidebarTooltip({
   sidebarItemRef,
   sidebarContainerRef,
   content,
@@ -23,5 +23,3 @@ function SidebarTooltip({
       }}>{content}</div>
   )
 }
-
-export default SidebarTooltip

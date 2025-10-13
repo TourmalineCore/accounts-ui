@@ -1,11 +1,10 @@
-import { observer } from 'mobx-react-lite'
 import {ChangeEvent, Fragment, useContext, useRef} from 'react'
 import { CheckField } from '@tourmalinecore/react-tc-ui-kit'
-import RolesPageStateContext from '../../state/roles-page/RolesPageStateContext'
+import {RolesPageStateContext} from '../../state/roles-page/RolesPageStateContext'
 import IconCheck from '../../../../assets/icons/check.svg?react'
 import IconUncheck from '../../../../assets/icons/uncheck.svg?react'
-import ActionsDropdown from '../ActionsDropdown/ActionsDropdown'
-import AccessBasedOnPemissionsStateContext from '../../../../routes/state/AccessBasedOnPemissionsStateContext'
+import {ActionsDropdown} from '../ActionsDropdown/ActionsDropdown'
+import {AccessBasedOnPemissionsStateContext} from '../../../../routes/state/AccessBasedOnPemissionsStateContext'
 
 // ToDo
 // When create a new role, its object should be added to the beginning of the array using unshift method
@@ -16,7 +15,7 @@ import AccessBasedOnPemissionsStateContext from '../../../../routes/state/Access
 // When press Edit button, the id of the role should be sent to mobX class (to __editId field)
 // based on this field, we will show either inputs or spans
 
-function RolesTable(
+export function RolesTable(
   {
     permissionGroups,
     rolePermissions,
@@ -50,7 +49,6 @@ function RolesTable(
                   id === rolesPageStateContext.updatedRole?.id
                     ? (
                       <input
-                        // eslint-disable-next-line jsx-a11y/no-autofocus
                         autoFocus
                         data-cy="role-name-input"
                         className="roles-table__name-input"
@@ -157,5 +155,3 @@ function RolesTable(
 
   )
 }
-
-export default observer(RolesTable)

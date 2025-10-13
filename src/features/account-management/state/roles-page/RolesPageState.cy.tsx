@@ -1,5 +1,5 @@
 import '../../../../../cypress/support/commands'
-import RolesPageState from './RolesPageState'
+import {RolesPageState} from './RolesPageState'
 
 const INITIAL_STATE = {
   loadedRoles: [

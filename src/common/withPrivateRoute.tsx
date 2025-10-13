@@ -2,7 +2,7 @@ import {FunctionComponent, useContext, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { authService } from './authService'
 import { ENV_KEY } from './config/config'
-import AccessBasedOnPemissionsStateContext from '../routes/state/AccessBasedOnPemissionsStateContext'
+import {AccessBasedOnPemissionsStateContext} from '../routes/state/AccessBasedOnPemissionsStateContext'
 import { parseJwt } from './utils/utilsForPermissions'
 
 const isProduction = ENV_KEY !== `local`

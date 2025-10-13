@@ -1,5 +1,5 @@
 import '../../../../../cypress/support/commands'
-import CreateTenant from './CreateTenant'
+import {CreateTenant} from './CreateTenant'
 
 describe(`TenantsPageContent`, () => {
   it(`

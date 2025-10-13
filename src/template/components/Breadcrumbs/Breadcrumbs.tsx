@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { BreadcrumbData } from 'use-react-router-breadcrumbs'
 import IconBreadcrumbs from '../../../assets/icons/icon-arrow-breadcrumbs.svg?react'
 
-function Breadcrumbs({
+export function Breadcrumbs({
   list = [],
 }: {
   list: BreadcrumbData[],
@@ -59,5 +59,3 @@ function Breadcrumbs({
       </ul>
     )
 }
-
-export default Breadcrumbs

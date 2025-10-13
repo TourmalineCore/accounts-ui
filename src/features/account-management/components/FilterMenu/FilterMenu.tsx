@@ -2,7 +2,7 @@ import {MouseEvent, useContext} from 'react'
 
 import clsx from 'clsx'
 import { observer } from 'mobx-react-lite'
-import AccountManagementStateContext from '../../context/AccountManagementStateContext'
+import {AccountManagementStateContext} from '../../context/AccountManagementStateContext'
 
 const filterElements = [
   {
@@ -41,4 +41,5 @@ function FilterMenu() {
   )
 }
 
+// eslint-disable-next-line import/no-default-export
 export default observer(FilterMenu)

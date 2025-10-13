@@ -5,7 +5,7 @@ import { useStickyHeader } from './hooks/useStickyHeader'
 
 const isIE = window.MSInputMethodContext && document.DOCUMENT_NODE
 
-function ContentCard({
+export function ContentCard({
   style = {},
   className = ``,
   isStickyHead,
@@ -21,6 +21,7 @@ function ContentCard({
   const topSentinelRef = useRef<HTMLDivElement>(null)
   const bottomSentinelRef = useRef<HTMLDivElement>(null)
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const isHeaderStuck = isStickyHead && !isIE ? useStickyHeader(topSentinelRef) : false
 
   return (
@@ -55,5 +56,3 @@ function ContentCard({
     </div>
   )
 }
-
-export default ContentCard

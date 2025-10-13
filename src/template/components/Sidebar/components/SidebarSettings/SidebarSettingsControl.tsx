@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom'
 import IconSetting from '../../../../../assets/icons/icon-settings.svg?react'
 import IconSettingActive from '../../../../../assets/icons/icon-settings-active.svg?react'
 
-import SidebarItem from '../SidebarItem/SidebarItem'
-import SidebarSettingsMenu from './SidebarSettingsMenu/SidebarSettingsMenu'
+import {SidebarItem} from '../SidebarItem/SidebarItem'
+import {SidebarSettingsMenu} from './SidebarSettingsMenu/SidebarSettingsMenu'
 
-function SidebarSettingsControl({
+export function SidebarSettingsControl({
   portalTarget,
 }: {
   portalTarget: HTMLDivElement | null,
@@ -68,5 +68,3 @@ function SidebarSettingsControl({
     </>
   )
 }
-
-export default SidebarSettingsControl

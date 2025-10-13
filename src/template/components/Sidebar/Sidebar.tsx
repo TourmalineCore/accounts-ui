@@ -1,16 +1,16 @@
 import {useRef, useEffect, CSSProperties, ReactNode, MouseEvent} from 'react'
 import clsx from 'clsx'
-import SidebarItem from './components/SidebarItem/SidebarItem'
+import {SidebarItem} from './components/SidebarItem/SidebarItem'
 import { useSidebarSwipe } from '../../hooks/useSidebarSwipe'
 import { SidebarProps } from '../../types/Template'
-import SidebarLogo from './components/SidebarLogo/SidebarLogo'
+import {SidebarLogo} from './components/SidebarLogo/SidebarLogo'
 import IconAngleDoubleRight from '../../../assets/icons/icon-angle-double-right.svg?react'
 import IconAngleDoubleLight from '../../../assets/icons/icon-angle-double-left.svg?react'
 import { SidebarInfoBox } from './components/SidebarInfoBox/SidebarInfoBox'
 
 const OPENED_DOCUMENT_CLASSNAME = `is-sidebar-mobile-opened`
 
-function Sidebar({
+export function Sidebar({
   style = {},
   className,
   isMobileOpened = false,
@@ -146,5 +146,3 @@ function Sidebar({
     }
   }
 }
-
-export default Sidebar

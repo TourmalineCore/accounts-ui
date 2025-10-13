@@ -22,7 +22,7 @@ export enum Permission {
   IsAccountsHardDeleteAllowed = `IsAccountsHardDeleteAllowed`,
 }
 
-class AccessBasedOnPemissionsState {
+export class AccessBasedOnPemissionsState {
   private _accessPermissions = new Map<keyof typeof Permission, boolean>()
 
   constructor() {
@@ -47,4 +47,3 @@ class AccessBasedOnPemissionsState {
     })
   }
 }
-export default AccessBasedOnPemissionsState

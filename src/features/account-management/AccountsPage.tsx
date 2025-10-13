@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
 
-import AccountManagementState from './context/AccountManagementState'
-import AccountManagementStateContext from './context/AccountManagementStateContext'
+import {AccountManagementState} from './context/AccountManagementState'
+import {AccountManagementStateContext} from './context/AccountManagementStateContext'
 import AccountsPageContent from './AccountsPageContent'
 
-function AccountsPage() {
+export function AccountsPage() {
   const accountManagementState = useMemo(
     () => new AccountManagementState(),
     [],
@@ -16,5 +16,3 @@ function AccountsPage() {
     </AccountManagementStateContext.Provider>
   )
 }
-
-export default AccountsPage

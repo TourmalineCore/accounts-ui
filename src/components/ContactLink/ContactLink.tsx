@@ -1,4 +1,4 @@
-function ContactLink({
+export function ContactLink({
   contact,
   link = ``,
 }:{
@@ -14,5 +14,3 @@ function ContactLink({
     )
   )
 }
-
-export default ContactLink

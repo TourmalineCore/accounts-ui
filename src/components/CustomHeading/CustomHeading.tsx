@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-function CustomHeading({
+export function CustomHeading({
   children,
 }: {
   children: ReactNode,
@@ -9,5 +9,3 @@ function CustomHeading({
     <div className="custom-heading">{children}</div>
   )
 }
-
-export default CustomHeading

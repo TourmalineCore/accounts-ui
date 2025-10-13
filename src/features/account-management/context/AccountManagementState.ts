@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 
-class AccountManagementState {
+export class AccountManagementState {
   private _allAccounts: Accounts[] = []
 
   private _lastBlockAccount: Accounts | null = null
@@ -77,8 +77,6 @@ class AccountManagementState {
     this._lastBlockAccount = null
   }
 }
-
-export default AccountManagementState
 
 export function getFiltering(employee: Accounts, filterTerm: string) {
   if (filterTerm === `active`) {

@@ -7,7 +7,7 @@ import { api } from '../../../../common/api'
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config'
 // import { Tenants } from '../Tenants/Tenants';
 
-function CreateAccount() {
+export function CreateAccount() {
   const history = useNavigate()
 
   const [
@@ -298,11 +298,10 @@ function CreateAccount() {
         })
       }
       catch (e) {
+        // eslint-disable-next-line no-console
         console.log(e)
         setHasError(true)
       }
     }
   }
 }
-
-export default CreateAccount

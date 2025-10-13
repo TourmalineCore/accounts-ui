@@ -2,7 +2,7 @@ import {useEffect, RefObject, useCallback} from 'react'
 
 type Event = MouseEvent | TouchEvent;
 
-export default function useOnClickOutside(refs: RefObject<HTMLElement>[], handler: (event: Event) => unknown) {
+export function useOnClickOutside(refs: RefObject<HTMLElement>[], handler: (event: Event) => unknown) {
   const listener = useCallback((event: Event) => {
     if (refs.some((ref) => !ref.current)) {
       return

@@ -20,10 +20,11 @@ import { MemoryRouter, MemoryRouterProps } from 'react-router-dom'
 
 import { MountReturn, mount, MountOptions } from 'cypress/react'
 
-import AccessBasedOnPemissionsState, { Permission } from '../../src/routes/state/AccessBasedOnPemissionsState'
-import AccessBasedOnPemissionsStateContext from '../../src/routes/state/AccessBasedOnPemissionsStateContext'
+import { AccessBasedOnPemissionsState, Permission } from '../../src/routes/state/AccessBasedOnPemissionsState'
+import {AccessBasedOnPemissionsStateContext} from '../../src/routes/state/AccessBasedOnPemissionsStateContext'
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     interface Chainable {
       mount(

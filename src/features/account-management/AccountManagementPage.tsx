@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function AccountManagementPage() {
+export function AccountManagementPage() {
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -12,5 +12,3 @@ function AccountManagementPage() {
     <div>AccountManagementPage</div>
   )
 }
-
-export default AccountManagementPage

@@ -1,6 +1,8 @@
 // @ts-ignore
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { defineConfig } from 'cypress'
 
+// eslint-disable-next-line import/no-default-export  
 export default defineConfig({
   e2e: {
     viewportWidth: 1200,

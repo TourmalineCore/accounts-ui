@@ -1,4 +1,4 @@
-function Copyright() {
+export function Copyright() {
   return (
     <div className="copyright">
       made by
@@ -19,5 +19,3 @@ function Copyright() {
     </div>
   )
 }
-
-export default Copyright

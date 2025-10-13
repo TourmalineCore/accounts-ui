@@ -6,7 +6,7 @@ import { api } from '../../../../common/api'
 
 import IconEmail from '../../../../assets/icons/icon-email.svg?react'
 
-function EditAccount() {
+export function EditAccount() {
   const navigation = useNavigate()
   const {
     id, 
@@ -217,10 +217,9 @@ function EditAccount() {
         setTriedToSubmit(false)
       }
       catch (e) {
+        // eslint-disable-next-line no-console
         console.log(e)
       }
     }
   }
 }
-
-export default EditAccount

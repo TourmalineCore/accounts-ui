@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { ThemeContext } from '../../theme/themeContext'
 
-function ThemeColorPicker() {
+export function ThemeColorPicker() {
   const {
     setThemeColor, themeColors, 
   } = useContext(ThemeContext)
@@ -25,5 +25,3 @@ function ThemeColorPicker() {
     </div>
   )
 }
-
-export default ThemeColorPicker

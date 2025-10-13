@@ -2,6 +2,7 @@ const INPUT_LOGIN = '#login';
 const INPUT_PASSWORD = '#password';
 const LOG_IN_BUTTON = 'Log In';
 
+// eslint-disable-next-line import/no-default-export
 export default class AuthView {
   static visit() {
     cy.visit('/');
