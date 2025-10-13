@@ -102,7 +102,8 @@ describe(`AccountsPageContent`, () => {
         .should(`have.text`, `Block`)
 
       cy.get(`:nth-child(2) > .tc-table-desktop__action-cell`)
-        .children().should('not.exist');
+        .children()
+        .should(`not.exist`)
     })
   })
   it(`
