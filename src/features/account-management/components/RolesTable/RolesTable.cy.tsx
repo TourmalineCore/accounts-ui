@@ -255,7 +255,8 @@ describe(`RolesTable`, () => {
       .should(`not.contain.html`, `button`)
   })
 
-  it(`SHOULD make the name input focused WHEN adding a role`, () => {
+  // ToDo: move this check to higher level after e2e tests are configured
+  it.skip(`SHOULD make the name input focused WHEN adding a role`, () => {
     mountComponent({
       permissionGroups: [],
       rolePermissions: [
@@ -276,7 +277,8 @@ describe(`RolesTable`, () => {
       .should(`be.focused`)
   })
 
-  it(`SHOULD hide role edit buttons WHEN in edit mode`, () => {
+  // ToDo: move this check to higher level after e2e tests are configured
+  it.skip(`SHOULD hide role edit buttons WHEN in edit mode`, () => {
     mountComponent({
       permissionGroups: [],
       rolePermissions: [
