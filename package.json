@@ -74,6 +74,7 @@
     "create-config:local": "node local-config-builder local",
     "cy:open": "cypress open --component --browser chrome",
     "cy:e2e": "npx cypress run --e2e",
+    "cy:open:e2e": "cypress open --e2e --browser electron",
     "cy:component": "npx cypress run --component",
     "cypress:open": "cypress open",
     "cypress:open:component": "cypress open --component --browser electron",
