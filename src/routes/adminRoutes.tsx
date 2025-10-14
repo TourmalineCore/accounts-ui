@@ -1,8 +1,6 @@
- 
 import { BreadcrumbComponentProps } from 'use-react-router-breadcrumbs'
 import { profileSidebarRoutes } from '../features/profile/routes'
 import { employeesSidebarRoutes } from '../features/employees/routes'
-// import { analyticsSidebarRoutes } from '../features/analytics/routes';
 import {accountManagementRoutes,
   accountRoutes,
   roleRoutes,
@@ -50,10 +48,6 @@ export function getSidebarRoutes(accessPermissions: Map<keyof typeof Permission,
   if (accessPermissions.get(`ViewPersonalProfile`)) {
     routes.push(...profileSidebarRoutes)
   }
-
-  // if (accessPermissions.get('AccessAnalyticalForecastsPage')) {
-  //   routes.push(...analyticsSidebarRoutes);
-  // }
 
   if (accessPermissions.get(`ViewContacts`) || accessPermissions.get(`ViewSalaryAndDocumentsData`)) {
     routes.push(...employeesSidebarRoutes)
