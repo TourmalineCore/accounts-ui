@@ -4,7 +4,7 @@ import IconDocumentsActive from '../../assets/icons/icon-documents-active.svg?re
 export const documentsSidebarRoutes = [
   {
     isWindowRedirectNecessary: true,
-    path: `documents`,
+    path: `/documents`,
     label: `Documents`,
     icon: <IconDocuments />,
     iconActive: <IconDocumentsActive />,

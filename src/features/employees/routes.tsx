@@ -4,7 +4,7 @@ import IconEmployeesActive from '../../assets/icons/icon-employees-active.svg?re
 export const employeesSidebarRoutes = [
   {
     isWindowRedirectNecessary: true,
-    path: `employees`,
+    path: `/employees`,
     label: `Employees`,
     icon: <IconEmployees />,
     iconActive: <IconEmployeesActive />,

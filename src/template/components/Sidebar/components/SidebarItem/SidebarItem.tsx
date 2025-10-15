@@ -63,13 +63,13 @@ export function SidebarItem({
 
   const TagName = getProperTagName()
 
-  const linkProps = {
-    to: path,
-  }
+  // const linkProps = {
+  //   to: path,
+  // }
 
-  const windowLinkProps = {
-    href: path,
-  }
+  // const windowLinkProps = {
+  //   href: path,
+  // }
 
   return (
     <>
@@ -82,8 +82,8 @@ export function SidebarItem({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
-        {...linkProps}
-        {...windowLinkProps}
+        // {...linkProps}
+        // {...windowLinkProps}
       >
         {icon && (
           <span className="sidebar-item__icon-container">
@@ -171,6 +171,7 @@ export function SidebarItem({
     }
 
     onItemClick()
+    window.location.href = `${path}`
   }
 
   function handleMouseEnter() {

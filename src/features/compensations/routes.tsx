@@ -4,7 +4,7 @@ import IconCompensationsActive from '../../assets/icons/icon-compensations-activ
 export const compensationsSidebarRoutes = [
   {
     isWindowRedirectNecessary: true,
-    path: `compensations`,
+    path: `/compensations`,
     label: `Compensations`,
     icon: <IconCompensations />,
     iconActive: <IconCompensationsActive />,
@@ -16,7 +16,7 @@ export function getRouteForCompensations(permission: string) {
     return [
       {
         isWindowRedirectNecessary: true,
-        path: `compensations/my`,
+        path: `/compensations/my`,
         label: `Compensations`,
         icon: <IconCompensations />,
         iconActive: <IconCompensationsActive />,
@@ -27,7 +27,7 @@ export function getRouteForCompensations(permission: string) {
   return [
     {
       isWindowRedirectNecessary: true,
-      path: `compensations/all`,
+      path: `/compensations/all`,
       label: `Compensations`,
       icon: <IconCompensations />,
       iconActive: <IconCompensationsActive />,
@@ -38,20 +38,20 @@ export function getRouteForCompensations(permission: string) {
 export const compensationsAllAccessSidebarRoutes = [
   {
     isWindowRedirectNecessary: true,
-    path: `compensations`,
+    path: `/compensations`,
     label: `Compensations`,
     icon: <IconCompensations />,
     iconActive: <IconCompensationsActive />,
     routes: [
       {
         isWindowRedirectNecessary: true,
-        path: `compensations/my`,
+        path: `/compensations/my`,
         label: `My`,
         iconMini: <IconCompensations />,
       },
       {
         isWindowRedirectNecessary: true,
-        path: `compensations/all`,
+        path: `/compensations/all`,
         label: `All`,
         iconMini: <IconCompensations />,
       },
