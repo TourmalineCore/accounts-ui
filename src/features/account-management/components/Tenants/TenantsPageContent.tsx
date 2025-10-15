@@ -3,7 +3,6 @@ import {useContext} from 'react'
 
 import { ClientTable } from '@tourmalinecore/react-table-responsive'
 import { observer } from 'mobx-react-lite'
-import { useNavigate } from 'react-router-dom'
 import { TenantManagementStateContext } from './state/TenantManagementStateContext'
 import { ColumnDef } from '@tanstack/table-core'
 
@@ -13,7 +12,6 @@ export const TenantsPageContent = observer(({
   isLoading: boolean,
 }) => {
   const tenantManagementState = useContext(TenantManagementStateContext)
-  const navigate = useNavigate()
 
   const columns: ColumnDef<Tenants>[] = [
     {
@@ -47,7 +45,7 @@ export const TenantsPageContent = observer(({
           type="button"
           className="account-management-page__button"
           data-cy="tenants-page-content-button"
-          onClick={() => navigate(`/account-management/tenants/add`)}
+          onClick={() => (window.location.href = `/account-management/tenants/add`)}
         >
           + Add New Tenant
         </button>

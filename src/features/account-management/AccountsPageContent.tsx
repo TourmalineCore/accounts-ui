@@ -1,19 +1,14 @@
- 
 /* eslint-disable no-console */
 /* eslint-disable react-refresh/only-export-components */
 
-import {useContext, useEffect, useState} from 'react'
-
+import {useContext, useEffect, useState} from 'react' 
 import moment from 'moment'
 import clsx from 'clsx'
-
 import { ActionsType, ClientTable } from '@tourmalinecore/react-table-responsive'
 import { observer } from 'mobx-react-lite'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
 import { api } from '../../common/api'
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
-
 import FilterMenu from './components/FilterMenu/FilterMenu'
 import {AccountManagementStateContext} from './context/AccountManagementStateContext'
 import {AccessBasedOnPemissionsStateContext} from '../../routes/state/AccessBasedOnPemissionsStateContext'
@@ -26,8 +21,6 @@ function AccountsPageContent() {
     isLoading,
     setIsLoading,
   ] = useState(false)
-
-  const navigate = useNavigate()
 
   useEffect(() => {
     getAccountsAsync()
@@ -189,7 +182,7 @@ function AccountsPageContent() {
         return !isBlocked && canChangeAccountState
       },
       renderText: () => `Edit`,
-      onClick: (_e, row) => navigate(`/account-management/accounts/edit/${row.original.id}`),
+      onClick: (_e, row) => window.location.href = `/account-management/accounts/edit/${row.original.id}`,
     },
     {
       name: `block`,
@@ -226,7 +219,7 @@ function AccountsPageContent() {
   return (
     <section className="account-management-page"
       data-cy="accounts-page-content">
-      <h1 className="heading">Account`s list</h1>
+      <h1 className="heading">Account`s list^^::</h1>
 
       <div className="account-management-page__inner">
         <FilterMenu />
@@ -235,7 +228,7 @@ function AccountsPageContent() {
           <button
             type="button"
             className="account-management-page__button"
-            onClick={() => navigate(`/account-management/accounts/add`)}
+            onClick={() => window.location.href = `/account-management/accounts/add`}
           >
             + Add New Account
           </button>

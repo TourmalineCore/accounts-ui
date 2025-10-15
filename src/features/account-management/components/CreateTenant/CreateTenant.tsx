@@ -1,12 +1,10 @@
 import { Input } from '@tourmalinecore/react-tc-ui-kit'
 import { ChangeEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { api } from '../../../../common/api'
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config'
 
 export function CreateTenant() {
-  const history = useNavigate()
 
   const [
     triedToSubmit,
@@ -47,7 +45,7 @@ export function CreateTenant() {
             type="button"
             data-cy="create-tenant-page-button-cancel"
             className="create-account__button"
-            onClick={() => history(`/account-management/tenants`)}
+            onClick={() => window.location.href =`/account-management/tenants`}
           >
             Cancel
           </button>
@@ -75,7 +73,7 @@ export function CreateTenant() {
         })
 
         setTriedToSubmit(false)
-        history(`/account-management/tenants`)
+        window.location.href = `/account-management/tenants`
 
         toast(`New tenant added successfully`, {
           type: `success`,

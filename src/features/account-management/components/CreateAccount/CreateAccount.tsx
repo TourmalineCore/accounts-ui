@@ -1,14 +1,12 @@
 import { Input, CheckField } from '@tourmalinecore/react-tc-ui-kit'
 import clsx from 'clsx'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { api } from '../../../../common/api'
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config'
 // import { Tenants } from '../Tenants/Tenants';
 
 export function CreateAccount() {
-  const history = useNavigate()
 
   const [
     triedToSubmit,
@@ -233,7 +231,7 @@ export function CreateAccount() {
             type="button"
             data-cy="create-account-page-button-cancel"
             className="create-account__button"
-            onClick={() => history(`/account-management`)}
+            onClick={() => window.location.href =`/account-management`}
           >
             Cancel
           </button>
@@ -288,7 +286,7 @@ export function CreateAccount() {
         })
 
         setTriedToSubmit(false)
-        history(`/account-management`)
+        window.location.href = `/account-management`
 
         toast(`New account added successfully`, {
           type: `success`,
