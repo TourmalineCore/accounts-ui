@@ -44,7 +44,6 @@ jobs:
             --set "extraConfigMapEnvVars.API_ROOT_AUTH=${{ secrets.DEV_API_ROOT_AUTH }}" \
             --set "extraConfigMapEnvVars.ENV_KEY=${{ secrets.DEV_ENV_KEY }}" \
             --set "extraConfigMapEnvVars.LINK_TO_ACCOUNT_SERVICE=${{ secrets.DEV_LINK_TO_ACCOUNT_SERVICE }}" \
-            --set "extraConfigMapEnvVars.LINK_TO_DASHBOARD=${{ secrets.DEV_LINK_TO_DASHBOARD }}" \
             --set "extraConfigMapEnvVars.LINK_TO_SALARY_SERVICE=${{ secrets.DEV_LINK_TO_SALARY_SERVICE }}" \
             --set "extraConfigMapEnvVars.VITE_BASE_URL=${{ secrets.BASE_URL }}" \
             "${RELEASE_NAME}" \

@@ -4,5 +4,4 @@ export const {
   API_ROOT_AUTH,
   LINK_TO_SALARY_SERVICE,
   LINK_TO_ACCOUNT_SERVICE,
-  LINK_TO_DASHBOARD,
 } = window.__ENV__;
