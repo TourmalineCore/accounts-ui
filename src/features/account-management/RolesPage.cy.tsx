@@ -25,7 +25,7 @@ describe(`AddNewRole`, () => {
       .should(`exist`)
   })
 
-  it.skip(`SHOULD add a new role to the table WHEN adding is called`, () => {
+  it(`SHOULD add a new role to the table WHEN adding is called`, () => {
     cy.intercept(`GET`, GET_ROLES, [])
       .as(`call-1`)
 
@@ -42,7 +42,7 @@ describe(`AddNewRole`, () => {
       .should(`exist`)
   })
 
-  it.skip(`SHOULD switch to edit mode WHEN adding a role is called`, () => {
+  it(`SHOULD switch to edit mode WHEN adding a role is called`, () => {
     cy.intercept(`GET`, GET_ROLES, [])
       .as(`call-2`)
 
