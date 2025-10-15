@@ -1,10 +1,10 @@
 type TenantCreate = {
-  name: string;
+  name: string,
 };
   type TenantEdit = {
-    name: string;
+    name: string,
   };
   type Tenants = {
-    id: number;
-    name: string;
+    id: number,
+    name: string,
   };

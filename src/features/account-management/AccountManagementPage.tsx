@@ -1,16 +1,12 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react'
 
-function AccountManagementPage() {
-  const navigate = useNavigate();
+export function AccountManagementPage() {
 
   useEffect(() => {
-    navigate('/account-management/accounts');
-  }, []);
+    window.location.href = `/account-management/accounts`
+  }, [])
 
   return (
     <div>AccountManagementPage</div>
-  );
+  )
 }
-
-export default AccountManagementPage;

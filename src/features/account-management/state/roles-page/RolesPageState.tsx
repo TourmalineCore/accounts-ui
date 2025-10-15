@@ -1,34 +1,34 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable } from 'mobx'
 
-class RolesPageState {
-  private _roles: Role[] = [];
+export class RolesPageState {
+  private _roles: Role[] = []
 
-  private _isInEditMode: boolean = false;
+  private _isInEditMode: boolean = false
 
-  private _updatedRole: Role | null = null;
+  private _updatedRole: Role | null = null
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this)
   }
 
   initialize({
     loadedRoles,
   }: {
-    loadedRoles: Role[];
+    loadedRoles: Role[],
   }) {
-    this._roles = loadedRoles;
+    this._roles = loadedRoles
   }
 
   get roles() {
-    return this._roles;
+    return this._roles
   }
 
   get isInEditMode() {
-    return this._isInEditMode;
+    return this._isInEditMode
   }
 
   get updatedRole() {
-    return this._updatedRole;
+    return this._updatedRole
   }
 
   changeRole({
@@ -36,39 +36,38 @@ class RolesPageState {
     name,
     permissions,
   }:{
-    id: number;
+    id: number,
     name: string,
-    permissions: string[]
+    permissions: string[],
   }) {
     this._updatedRole = {
       id,
       name,
       permissions,
-    };
+    }
   }
 
   addNewRole() {
     this._roles.unshift({
       id: 0,
-      name: '',
+      name: ``,
       permissions: [],
-    });
+    })
 
-    this.editRole(0);
+    this.editRole(0)
   }
 
   editRole(roleId: number) {
-    const index = this._roles.map((element) => element.id).indexOf(roleId);
+    const index = this._roles.map((element) => element.id)
+      .indexOf(roleId)
 
-    this._isInEditMode = true;
-    this._updatedRole = this._roles[index];
+    this._isInEditMode = true
+    this._updatedRole = this._roles[index]
   }
 
   cancelRoleEditing() {
-    this._roles = this._roles.filter((role) => role.id !== 0);
-    this._updatedRole = null;
-    this._isInEditMode = false;
+    this._roles = this._roles.filter((role) => role.id !== 0)
+    this._updatedRole = null
+    this._isInEditMode = false
   }
 }
-
-export default RolesPageState;

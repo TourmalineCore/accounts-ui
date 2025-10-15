@@ -1,7 +1,6 @@
 declare module '@tourmalinecore/react-tc-ui-kit'
 declare module '@tourmalinecore/react-tc-modal'
 declare module '@tourmalinecore/react-tc-auth'
-declare module '@tourmalinecore/react-table-responsive'
 declare module 'react-copy-to-clipboard'
 declare module 'react-flatpickr'
 declare module 'dayjs-plugin-utc'

@@ -1,20 +1,25 @@
-import { Input } from '@tourmalinecore/react-tc-ui-kit';
-import { ChangeEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { api } from '../../../../common/api';
-import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config';
+import { Input } from '@tourmalinecore/react-tc-ui-kit'
+import { ChangeEvent, useState } from 'react'
+import { toast } from 'react-toastify'
+import { api } from '../../../../common/api'
+import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config'
 
-function CreateTenant() {
-  const history = useNavigate();
+export function CreateTenant() {
 
-  const [triedToSubmit, setTriedToSubmit] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-  });
+  const [
+    triedToSubmit,
+    setTriedToSubmit,
+  ] = useState(false)
+  const [
+    formData,
+    setFormData,
+  ] = useState({
+    name: ``,
+  })
 
   return (
-    <div className="create-tenant" data-cy="create-tenant-page">
+    <div className="create-tenant"
+      data-cy="create-tenant-page">
       <h1 className="heading create-tenant__title">Add New Tenant</h1>
 
       <div className="create-tenant__inner">
@@ -24,10 +29,15 @@ function CreateTenant() {
             data-cy="create-tenant-page-input"
             value={formData.name}
             isInvalid={!formData.name && triedToSubmit}
-            validationMessages={['This field is required. Please fill it up.']}
+            validationMessages={[
+              `This field is required. Please fill it up.`,
+            ]}
             isMessagesAbsolute
             maxLength={50}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, name: e.target.value.trim() })}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setFormData({
+              ...formData,
+              name: e.target.value.trim(), 
+            })}
           />
         </div>
         <div className="create-tenant__inner-button">
@@ -35,7 +45,7 @@ function CreateTenant() {
             type="button"
             data-cy="create-tenant-page-button-cancel"
             className="create-account__button"
-            onClick={() => history('/account-management/tenants')}
+            onClick={() => window.location.href =`/account-management/tenants`}
           >
             Cancel
           </button>
@@ -51,31 +61,31 @@ function CreateTenant() {
         </div>
       </div>
     </div>
-  );
+  )
 
   async function createTenantAsync() {
-    setTriedToSubmit(true);
+    setTriedToSubmit(true)
 
     if (formData.name) {
       try {
         await api.post<TenantCreate>(`${LINK_TO_ACCOUNT_SERVICE}tenants`, {
           ...formData,
-        });
+        })
 
-        setTriedToSubmit(false);
-        history('/account-management/tenants');
+        setTriedToSubmit(false)
+        window.location.href = `/account-management/tenants`
 
-        toast('New tenant added successfully', {
-          type: 'success',
-          position: 'bottom-center',
+        toast(`New tenant added successfully`, {
+          type: `success`,
+          position: `bottom-center`,
           autoClose: 5000,
           pauseOnHover: false,
-        });
-      } catch (e) {
-        console.log(e);
+        })
+      }
+      catch (e) {
+        // eslint-disable-next-line no-console
+        console.log(e)
       }
     }
   }
 }
-
-export default CreateTenant;

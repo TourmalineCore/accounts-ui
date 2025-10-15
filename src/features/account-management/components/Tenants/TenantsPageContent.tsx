@@ -1,45 +1,42 @@
-/* eslint-disable react/no-unstable-nested-components */
-import {
-  useContext,
-} from 'react';
+ 
+import {useContext} from 'react'
 
-import { ClientTable } from '@tourmalinecore/react-table-responsive';
-import { observer } from 'mobx-react-lite';
-import { useNavigate } from 'react-router-dom';
-import { Table } from '../../../../types';
-import { TenantManagementStateContext } from './state/TenantManagementStateContext';
-
-export type Row<TypeProps> = {
-  original: TypeProps;
-  values: TypeProps;
-};
+import { ClientTable } from '@tourmalinecore/react-table-responsive'
+import { observer } from 'mobx-react-lite'
+import { TenantManagementStateContext } from './state/TenantManagementStateContext'
+import { ColumnDef } from '@tanstack/table-core'
 
 export const TenantsPageContent = observer(({
   isLoading,
 }:{
-  isLoading: boolean;
+  isLoading: boolean,
 }) => {
-  const tenantManagementState = useContext(TenantManagementStateContext);
-  const navigate = useNavigate();
+  const tenantManagementState = useContext(TenantManagementStateContext)
 
-  const columns = [
+  const columns: ColumnDef<Tenants>[] = [
     {
-      Header: 'Name',
-      accessor: 'name',
-      minWidth: 300,
-      Cell: ({ row }: Table<Tenants>) => {
-        const { name } = row.original;
+      header: `Name`,
+      id: `name`,
+      accessorFn: (row) => row.name,
+      minSize: 300,
+      cell: ({
+        row, 
+      }) => {
+        const {
+          name, 
+        } = row.original
         return (
           <span data-cy="tenant-table-row">
             {name}
           </span>
-        );
+        )
       },
     },
-  ];
+  ]
 
   return (
-    <section className="account-management-page" data-cy="tenants-page-content">
+    <section className="account-management-page"
+      data-cy="tenants-page-content">
       <h1 className="heading">Tenant`s list</h1>
 
       <div className="account-management-page__inner">
@@ -48,25 +45,25 @@ export const TenantsPageContent = observer(({
           type="button"
           className="account-management-page__button"
           data-cy="tenants-page-content-button"
-          onClick={() => navigate('/account-management/tenants/add')}
+          onClick={() => (window.location.href = `/account-management/tenants/add`)}
         >
           + Add New Tenant
         </button>
 
       </div>
 
-      <ClientTable
+      <ClientTable<Tenants>
         tableId="tenant-table"
         data={tenantManagementState.allTenants}
-        renderMobileTitle={(row: Row<{ name: string }>) => row.original.name}
-        order={{
-          id: 'name',
+        tcRenderMobileTitle={(row) => row.original.name}
+        tcOrder={{
+          id: `name`,
           desc: false,
         }}
         columns={columns}
-        isLoading={isLoading}
+        tcLoading={isLoading}
       />
 
     </section>
-  );
-});
+  )
+})

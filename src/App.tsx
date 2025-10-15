@@ -1,22 +1,21 @@
-import {
-  BrowserRouter,
+import {BrowserRouter,
   Routes,
-  Route,
-} from 'react-router-dom';
+  Route} from 'react-router-dom'
 
-import { useMemo } from 'react';
-import { withPrivateRoute } from './common/withPrivateRoute';
-import Template from './template/Template';
-import AccessBasedOnPemissionsState from './routes/state/AccessBasedOnPemissionsState';
-import AccessBasedOnPemissionsStateContext from './routes/state/AccessBasedOnPemissionsStateContext';
+import { useMemo } from 'react'
+import { withPrivateRoute } from './common/withPrivateRoute'
+import Template from './template/Template'
+import {AccessBasedOnPemissionsState} from './routes/state/AccessBasedOnPemissionsState'
+import {AccessBasedOnPemissionsStateContext} from './routes/state/AccessBasedOnPemissionsStateContext'
 
-const WithPrivateRoute = withPrivateRoute(Template);
+const WithPrivateRoute = withPrivateRoute(Template)
 
+// eslint-disable-next-line import/no-default-export
 export default function App() {
   const accessBasedOnPemissionsState = useMemo(
     () => new AccessBasedOnPemissionsState(),
     [],
-  );
+  )
 
   return (
     <AccessBasedOnPemissionsStateContext.Provider value={accessBasedOnPemissionsState}>
@@ -29,5 +28,5 @@ export default function App() {
         </Routes>
       </BrowserRouter>
     </AccessBasedOnPemissionsStateContext.Provider>
-  );
+  )
 }

@@ -1,27 +1,28 @@
-import { CSSProperties, ReactNode, useRef } from 'react';
-import clsx from 'clsx';
+import { CSSProperties, ReactNode, useRef } from 'react'
+import clsx from 'clsx'
 
-import { useStickyHeader } from './hooks/useStickyHeader';
+import { useStickyHeader } from './hooks/useStickyHeader'
 
-const isIE = window.MSInputMethodContext && document.DOCUMENT_NODE;
+const isIE = window.MSInputMethodContext && document.DOCUMENT_NODE
 
-function ContentCard({
+export function ContentCard({
   style = {},
-  className = '',
+  className = ``,
   isStickyHead,
   headerContent,
   children,
 }: {
-  style?: CSSProperties;
-  className?: string;
-  isStickyHead?: boolean;
-  headerContent?: ReactNode;
-  children?: ReactNode;
+  style?: CSSProperties,
+  className?: string,
+  isStickyHead?: boolean,
+  headerContent?: ReactNode,
+  children?: ReactNode,
 }) {
-  const topSentinelRef = useRef<HTMLDivElement>(null);
-  const bottomSentinelRef = useRef<HTMLDivElement>(null);
+  const topSentinelRef = useRef<HTMLDivElement>(null)
+  const bottomSentinelRef = useRef<HTMLDivElement>(null)
 
-  const isHeaderStuck = isStickyHead && !isIE ? useStickyHeader(topSentinelRef) : false;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const isHeaderStuck = isStickyHead && !isIE ? useStickyHeader(topSentinelRef) : false
 
   return (
     <div
@@ -29,12 +30,14 @@ function ContentCard({
       className={`content-card ${className}`}
     >
       {isStickyHead && (
-        <div ref={topSentinelRef} className="content-card__sentinel content-card__sentinel--top" />
+        <div ref={topSentinelRef}
+          className="content-card__sentinel content-card__sentinel--top" 
+        />
       )}
 
       {headerContent && (
         <div
-          className={clsx('content-card__header', {
+          className={clsx(`content-card__header`, {
             'content-card__header--sticky': isStickyHead,
             'content-card__header--sticky-stuck': isHeaderStuck,
           })}
@@ -48,10 +51,9 @@ function ContentCard({
       </div>
 
       {isStickyHead && (
-        <div ref={bottomSentinelRef} className="content-card__sentinel content-card__sentinel--bottom" />
+        <div ref={bottomSentinelRef}
+          className="content-card__sentinel content-card__sentinel--bottom" />
       )}
     </div>
-  );
+  )
 }
-
-export default ContentCard;

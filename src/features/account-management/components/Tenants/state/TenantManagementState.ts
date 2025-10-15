@@ -1,18 +1,18 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable } from 'mobx'
 
 export class TenantManagementState {
-  private _allTenants: Tenants[] = [];
+  private _allTenants: Tenants[] = []
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this)
   }
 
   get allTenants() {
     return this._allTenants
-      .slice();
+      .slice()
   }
 
   getTenants(newTenant: Tenants[]) {
-    this._allTenants = newTenant;
+    this._allTenants = newTenant
   }
 }

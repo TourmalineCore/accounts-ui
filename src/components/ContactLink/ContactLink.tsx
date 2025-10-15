@@ -1,16 +1,21 @@
-function ContactLink({
+export function ContactLink({
   contact,
-  link = '',
+  link = ``,
 }:{
   contact: string | null,
   link?: string,
 }) {
   return (
-    (!contact
-      ? (<div>Not specified</div>)
-      : (<a href={link} target="_blank" rel="noreferrer">{contact}</a>)
+    !contact ? (
+      <div>Not specified</div>
+    ) : (
+      <a
+        href={link}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {contact}
+      </a>
     )
-  );
+  )
 }
-
-export default ContactLink;
