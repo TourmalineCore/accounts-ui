@@ -1,6 +1,5 @@
-/* eslint-disable react-refresh/only-export-components */
 
-import {useContext, useEffect, useState} from 'react' 
+import { useContext, useEffect, useState } from 'react'
 import moment from 'moment'
 import clsx from 'clsx'
 import { ActionsType, ClientTable } from '@tourmalinecore/react-table-responsive'
@@ -8,12 +7,12 @@ import { observer } from 'mobx-react-lite'
 import { toast } from 'react-toastify'
 import { api } from '../../common/api'
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
-import FilterMenu from './components/FilterMenu/FilterMenu'
-import {AccountManagementStateContext} from './context/AccountManagementStateContext'
-import {AccessBasedOnPemissionsStateContext} from '../../routes/state/AccessBasedOnPemissionsStateContext'
+import { FilterMenu } from './components/FilterMenu/FilterMenu'
+import { AccountManagementStateContext } from './context/AccountManagementStateContext'
+import { AccessBasedOnPemissionsStateContext } from '../../routes/state/AccessBasedOnPemissionsStateContext'
 import { ColumnDef } from '@tanstack/table-core'
 
-function AccountsPageContent() {
+export const AccountsPageContent = observer(() => {
   const accountManagementState = useContext(AccountManagementStateContext)
   const accessToChanges = useContext(AccessBasedOnPemissionsStateContext)
   const [
@@ -213,8 +212,10 @@ function AccountsPageContent() {
   ]
 
   return (
-    <section className="account-management-page"
-      data-cy="accounts-page-content">
+    <section
+      className="account-management-page"
+      data-cy="accounts-page-content"
+    >
       <h1 className="heading">Account`s list!!!</h1>
 
       <div className="account-management-page__inner">
@@ -308,7 +309,4 @@ function AccountsPageContent() {
     })
     await api.post<Accounts[]>(`${LINK_TO_ACCOUNT_SERVICE}accounts/${accountId}/unblock`)
   }
-}
-
-// eslint-disable-next-line import/no-default-export
-export default observer(AccountsPageContent)
+})

@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import {AccountManagementState} from './context/AccountManagementState'
 import {AccountManagementStateContext} from './context/AccountManagementStateContext'
-import AccountsPageContent from './AccountsPageContent'
+import {AccountsPageContent} from './AccountsPageContent'
 
 export function AccountsPage() {
   const accountManagementState = useMemo(

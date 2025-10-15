@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 
 import {MouseEvent, useContext} from 'react'
 
@@ -21,7 +20,7 @@ const filterElements = [
   },
 ]
 
-function FilterMenu() {
+export const FilterMenu = observer(() => {
   const accountManagementState = useContext(AccountManagementStateContext)
 
   return (
@@ -41,7 +40,4 @@ function FilterMenu() {
       ))}
     </div>
   )
-}
-
-// eslint-disable-next-line import/no-default-export
-export default observer(FilterMenu)
+})

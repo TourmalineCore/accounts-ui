@@ -1,5 +1,5 @@
  
-import AccountsPageContent from './AccountsPageContent'
+import {AccountsPageContent} from './AccountsPageContent'
 import {AccountManagementState} from './context/AccountManagementState'
 import {AccountManagementStateContext} from './context/AccountManagementStateContext'
 
