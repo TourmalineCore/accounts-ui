@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable react-refresh/only-export-components */
 
 import {useContext, useEffect, useState} from 'react' 
@@ -203,9 +202,6 @@ function AccountsPageContent() {
           isBlocked, canChangeAccountState, 
         } = row.original
 
-        console.log(`isBlocked && canChangeAccountState`, isBlocked && canChangeAccountState)
-        console.log(`canChangeAccountState`, canChangeAccountState)
-
         return isBlocked && canChangeAccountState
       },
       renderText: () => `Unblock`,
@@ -219,7 +215,7 @@ function AccountsPageContent() {
   return (
     <section className="account-management-page"
       data-cy="accounts-page-content">
-      <h1 className="heading">Account`s list^^::</h1>
+      <h1 className="heading">Account`s list!!!</h1>
 
       <div className="account-management-page__inner">
         <FilterMenu />
