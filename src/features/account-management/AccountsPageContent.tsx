@@ -216,7 +216,7 @@ export const AccountsPageContent = observer(() => {
       className="account-management-page"
       data-cy="accounts-page-content"
     >
-      <h1 className="heading">Account`s list!!!</h1>
+      <h1 className="heading">Account`s list</h1>
 
       <div className="account-management-page__inner">
         <FilterMenu />
