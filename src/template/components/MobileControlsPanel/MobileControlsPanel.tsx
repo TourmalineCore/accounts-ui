@@ -24,17 +24,23 @@ export function MobileControlsPanel({
   return (
     <div className="mobile-controls-panel">
       {prevPath ? (
-        <Link to={prevPath}
-          className="mobile-controls-panel__item">
-          <FontAwesomeIcon className="mobile-controls-panel__item-icon"
-            icon={faArrowLeft} />
+        <Link 
+          to={prevPath}
+          className="mobile-controls-panel__item"
+        >
+          <FontAwesomeIcon 
+            className="mobile-controls-panel__item-icon"
+            icon={faArrowLeft}
+          />
         </Link>
       ) : (
         <div className="mobile-controls-panel__item" />
       )}
 
-      <Link to={homePath}
-        className="mobile-controls-panel__item">
+      <Link 
+        to={homePath}
+        className="mobile-controls-panel__item"
+      >
         <div className="mobile-controls-panel__icon-location">
           {
             location.pathname === homePath

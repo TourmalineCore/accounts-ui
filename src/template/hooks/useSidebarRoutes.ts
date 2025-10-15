@@ -25,18 +25,22 @@ export function useSidebarRoutes(initialRoutes: SidebarRoutesProps[], location: 
 }
 
 function adaptRoutesByLocation({
-  routes = [], location, 
-}: { routes?: SidebarProps[] | SidebarRoutesProps[], location: Location, }): SidebarProps[] {
+  routes = [],
+  location,
+}: {
+  routes?: SidebarProps[] | SidebarRoutesProps[],
+  location: Location,
+}): SidebarProps[] {
   return routes.map((route) => ({
     ...route,
     isActive: isRouteActive(route.path, location),
     isNestedRoutesCollapsed: getItemCollapsedState({
       nestedRoutes: route.routes,
-      location, 
+      location,
     }),
     routes: adaptRoutesByLocation({
       routes: route.routes,
-      location, 
+      location,
     }),
   }))
 }
@@ -46,7 +50,11 @@ function isRouteActive(routePath: string, location: Location) {
 }
 
 function getItemCollapsedState({
-  nestedRoutes = [], location, 
-}: { nestedRoutes?: SidebarRoutesProps[] | SidebarProps[], location: Location, }) {
+  nestedRoutes = [],
+  location,
+}: {
+  nestedRoutes?: SidebarRoutesProps[] | SidebarProps[],
+  location: Location,
+}) {
   return !nestedRoutes.some((item) => location.pathname.includes(item.path))
 }

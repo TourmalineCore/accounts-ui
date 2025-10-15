@@ -31,7 +31,8 @@ export function ContentCard({
     >
       {isStickyHead && (
         <div ref={topSentinelRef}
-          className="content-card__sentinel content-card__sentinel--top" />
+          className="content-card__sentinel content-card__sentinel--top" 
+        />
       )}
 
       {headerContent && (

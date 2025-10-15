@@ -20,42 +20,44 @@ export function Breadcrumbs({
     }
   }, [])
 
-  return !list.length
-    ? <span>Домашняя страница</span>
-    : (
-      <ul ref={breadcrumbsRef}
-        className="breadcrumbs">
-        {list.map(({
-          breadcrumb, key, 
-        }, i) => (
-          <li key={key}
-            className="breadcrumbs__item">
-            {
-              i !== list.length - 1
-                ? (
-                  <>
-                    <Link className="breadcrumbs__link"
-                      to={key}>{breadcrumb}</Link>
-                    {list.length > 1 && (
-                      <span className="breadcrumbs__icon">
-                        <IconBreadcrumbs />
-                      </span>
-                    )}
-                  </>
-                )
-                : (
-                  <span
-                    ref={breadcrumbsLocatedRef}
-                    className={clsx(`breadcrumbs__breadcrumb`, {
-                      'breadcrumbs__breadcrumb--located': list.length > 1,
-                    })}
-                  >
-                    {breadcrumb}
-                  </span>
-                )
-            }
-          </li>
-        ))}
-      </ul>
-    )
+  return !list.length ? (
+    <span>Домашняя страница</span>
+  ) : (
+    <ul 
+      ref={breadcrumbsRef}
+      className="breadcrumbs"
+    >
+      {list.map(({
+        breadcrumb, key, 
+      }, i) => (
+        <li key={key}
+          className="breadcrumbs__item">
+          {i !== list.length - 1 ? (
+            <>
+              <Link
+                to={key}
+                className="breadcrumbs__link"
+              >
+                {breadcrumb}
+              </Link>
+              {list.length > 1 && (
+                <span className="breadcrumbs__icon">
+                  <IconBreadcrumbs />
+                </span>
+              )}
+            </>
+          ) : (
+            <span
+              ref={breadcrumbsLocatedRef}
+              className={clsx(`breadcrumbs__breadcrumb`, {
+                'breadcrumbs__breadcrumb--located': list.length > 1,
+              })}
+            >
+              {breadcrumb}
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
+  )
 }

@@ -6,11 +6,16 @@ export function ContactLink({
   link?: string,
 }) {
   return (
-    (!contact
-      ? (<div>Not specified</div>)
-      : (<a href={link}
+    !contact ? (
+      <div>Not specified</div>
+    ) : (
+      <a
+        href={link}
         target="_blank"
-        rel="noreferrer">{contact}</a>)
+        rel="noreferrer"
+      >
+        {contact}
+      </a>
     )
   )
 }
