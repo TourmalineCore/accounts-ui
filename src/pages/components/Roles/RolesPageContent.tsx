@@ -2,11 +2,11 @@
 
 import { observer } from 'mobx-react-lite'
 import { useContext, useEffect } from 'react'
-import { api } from '../../common/api'
-import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
-import {RolesTable} from './components/RolesTable/RolesTable'
 import {RolesPageStateContext} from './state/roles-page/RolesPageStateContext'
-import {AccessBasedOnPemissionsStateContext} from '../../routes/state/AccessBasedOnPemissionsStateContext'
+import { AccessBasedOnPemissionsStateContext } from '../../../routes/state/AccessBasedOnPemissionsStateContext'
+import { LINK_TO_ACCOUNT_SERVICE } from '../../../common/config/config'
+import { api } from '../../../common/api'
+import { RolesTable } from '../RolesTable/RolesTable'
 
 const PERMISSION_GROUPS = [
   {

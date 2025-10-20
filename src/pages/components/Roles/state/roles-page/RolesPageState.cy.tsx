@@ -1,4 +1,4 @@
-import '../../../../../cypress/support/commands'
+import '../../../../../../cypress/support/commands'
 import {RolesPageState} from './RolesPageState'
 
 const INITIAL_STATE = {

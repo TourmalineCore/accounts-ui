@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
-import RolesPageContent from './RolesPageContent'
-import {RolesPageState} from './state/roles-page/RolesPageState'
-import {RolesPageStateContext} from './state/roles-page/RolesPageStateContext'
+import { RolesPageState } from './components/Roles/state/roles-page/RolesPageState'
+import { RolesPageStateContext } from './components/Roles/state/roles-page/RolesPageStateContext'
+import RolesPageContent from './components/Roles/RolesPageContent'
 
 export function RolesPage() {
   const rolesPageState = useMemo(

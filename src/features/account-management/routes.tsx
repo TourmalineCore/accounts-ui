@@ -1,7 +1,6 @@
 import IconAccountManagement from '../../assets/icons/icon-account-management.svg?react'
 
 import {CreateAccount} from './components/CreateAccount/CreateAccount'
-import {RolesPage} from './RolesPage'
 import {EditAccount} from './components/EditAccount/EditAccount'
 
 import {AccountsPage} from './AccountsPage'
@@ -9,6 +8,7 @@ import {AccountManagementPage} from './AccountManagementPage'
 
 import { TenantsPage } from '../../pages/TenantsPage'
 import { CreateTenant } from '../../pages/components/CreateTenant/CreateTenant'
+import { RolesPage } from '../../pages/RolesPage'
 
 const DEFAULT_PATH = `/account-management`
 
