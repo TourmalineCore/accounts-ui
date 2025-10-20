@@ -1,7 +1,7 @@
-import '../../../../../cypress/support/commands'
-import {CreateTenant} from './CreateTenant'
+import '../../../../cypress/support/commands'
+import { CreateTenant } from './CreateTenant'
 
-describe(`TenantsPageContent`, () => {
+describe(`CreateTenant`, () => {
   it(`
   GIVEN create tenant page 
   WHEN visit tenants page

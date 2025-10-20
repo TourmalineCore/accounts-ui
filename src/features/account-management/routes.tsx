@@ -7,8 +7,8 @@ import {EditAccount} from './components/EditAccount/EditAccount'
 import {AccountsPage} from './AccountsPage'
 import {AccountManagementPage} from './AccountManagementPage'
 
-import {CreateTenant} from './components/CreateTenant/CreateTenant'
-import { TenantsPage } from './TenantsPage'
+import { TenantsPage } from '../../pages/TenantsPage'
+import { CreateTenant } from '../../pages/components/CreateTenant/CreateTenant'
 
 const DEFAULT_PATH = `/account-management`
 

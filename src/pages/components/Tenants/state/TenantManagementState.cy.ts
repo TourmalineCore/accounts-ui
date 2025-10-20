@@ -1,4 +1,5 @@
-import '../../../../../../cypress/support/commands'
+import '../../../../../cypress/support/commands'
+
 import { TenantManagementState } from './TenantManagementState'
 
 const INITIAL_STATE: Tenants[] = [

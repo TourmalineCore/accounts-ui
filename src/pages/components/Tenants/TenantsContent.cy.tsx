@@ -1,8 +1,7 @@
- 
-import '../../../../../cypress/support/commands'
+import '../../../../cypress/support/commands'
 import { TenantManagementState } from './state/TenantManagementState'
 import { TenantManagementStateContext } from './state/TenantManagementStateContext'
-import { TenantsPageContent } from './TenantsPageContent'
+import { TenantsContent } from './TenantsContent'
 
 const initialData: Tenants[] = [
   {
@@ -15,7 +14,7 @@ const initialData: Tenants[] = [
   },
 ]
 
-describe(`TenantsPageContent`, () => {
+describe(`TenantsContent`, () => {
   it(`
   GIVEN tenants page 
   WHEN visit tenants page
@@ -74,7 +73,7 @@ function mountComponent({
   tenantManagementState.getTenants(tenants)
   cy.mount(
     <TenantManagementStateContext.Provider value={tenantManagementState}>
-      <TenantsPageContent isLoading={false} />
+      <TenantsContent isLoading={false} />
     </TenantManagementStateContext.Provider>,
 
   )

@@ -1,4 +1,3 @@
- 
 import {useContext} from 'react'
 
 import { ClientTable } from '@tourmalinecore/react-table-responsive'
@@ -6,7 +5,7 @@ import { observer } from 'mobx-react-lite'
 import { TenantManagementStateContext } from './state/TenantManagementStateContext'
 import { ColumnDef } from '@tanstack/table-core'
 
-export const TenantsPageContent = observer(({
+export const TenantsContent = observer(({
   isLoading,
 }:{
   isLoading: boolean,
@@ -37,7 +36,7 @@ export const TenantsPageContent = observer(({
   return (
     <section className="account-management-page"
       data-cy="tenants-page-content">
-      <h1 className="heading">Tenant`s list</h1>
+      <h1 className="heading">!!!Tenant`s list!!!</h1>
 
       <div className="account-management-page__inner">
         <div />
