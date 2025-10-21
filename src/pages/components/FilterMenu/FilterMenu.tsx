@@ -3,7 +3,7 @@ import {MouseEvent, useContext} from 'react'
 
 import clsx from 'clsx'
 import { observer } from 'mobx-react-lite'
-import { AccountManagementStateContext } from '../../../../pages/components/Accounts/state/AccountManagementStateContext'
+import { AccountManagementStateContext } from '../Accounts/state/AccountManagementStateContext'
 
 const filterElements = [
   {

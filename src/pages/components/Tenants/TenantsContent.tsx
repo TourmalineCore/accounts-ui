@@ -36,7 +36,7 @@ export const TenantsContent = observer(({
   return (
     <section className="account-management-page"
       data-cy="tenants-page-content">
-      <h1 className="heading">!!!Tenant`s list!!!</h1>
+      <h1 className="heading">Tenant`s list</h1>
 
       <div className="account-management-page__inner">
         <div />

@@ -1,4 +1,4 @@
-import { LINK_TO_ACCOUNT_SERVICE, API_ROOT } from '../../../../common/config/config'
+import { LINK_TO_ACCOUNT_SERVICE, API_ROOT } from '../../../common/config/config'
 import {EditAccount} from './EditAccount'
 
 const START_ROOT = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}accounts/findById/*`

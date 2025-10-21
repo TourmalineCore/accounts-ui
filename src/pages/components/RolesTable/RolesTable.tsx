@@ -5,7 +5,7 @@ import IconCheck from '../../../assets/icons/check.svg?react'
 import IconUncheck from '../../../assets/icons/uncheck.svg?react'
 import { RolesManagementStateContext } from '../Roles/state/roles-page/RolesManagementStateContext'
 import { AccessBasedOnPemissionsStateContext } from '../../../routes/state/AccessBasedOnPemissionsStateContext'
-import { ActionsDropdown } from '../../../features/account-management/components/ActionsDropdown/ActionsDropdown'
+import { ActionsDropdown } from '../ActionsDropdown/ActionsDropdown'
 
 // ToDo
 // When create a new role, its object should be added to the beginning of the array using unshift method

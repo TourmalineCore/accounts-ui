@@ -1,7 +1,7 @@
 import IconAccountManagement from '../../assets/icons/icon-account-management.svg?react'
 
-import {CreateAccount} from './components/CreateAccount/CreateAccount'
-import {EditAccount} from './components/EditAccount/EditAccount'
+import {CreateAccount} from '../../pages/components/CreateAccount/CreateAccount'
+import {EditAccount} from '../../pages/components/EditAccount/EditAccount'
 
 import { TenantsPage } from '../../pages/TenantsPage'
 import { CreateTenant } from '../../pages/components/CreateTenant/CreateTenant'

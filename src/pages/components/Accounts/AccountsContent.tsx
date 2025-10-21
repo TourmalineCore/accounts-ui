@@ -1,6 +1,6 @@
 import { ActionsType, ClientTable } from '@tourmalinecore/react-table-responsive'
 import { observer } from 'mobx-react-lite'
-import { FilterMenu } from '../../../features/account-management/components/FilterMenu/FilterMenu'
+import { FilterMenu } from '../FilterMenu/FilterMenu'
 import { useContext } from 'react'
 import { AccessBasedOnPemissionsStateContext } from '../../../routes/state/AccessBasedOnPemissionsStateContext'
 import { AccountManagementStateContext } from './state/AccountManagementStateContext'
