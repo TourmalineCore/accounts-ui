@@ -1,4 +1,4 @@
- import { AccountsPageContent } from './AccountsPageContent'
+import { AccountsContainer } from './AccountsContainer'
 import { AccountManagementState } from './state/AccountManagementState'
 import { AccountManagementStateContext } from './state/AccountManagementStateContext'
 
@@ -49,7 +49,7 @@ const initialData: Accounts[] = [
   },
 ]
 
-describe(`AccountsPageContent`, () => {
+describe(`AccountsContainer`, () => {
   it(`
   GIVEN accounts page 
   WHEN visit accounts page
@@ -66,7 +66,7 @@ describe(`AccountsPageContent`, () => {
     GIVEN accounts page content
     WHEN visit accounts page
     THEN render column with tenant `, () => {
-    context(`desctop resolution`, () => {
+    context(`desktop resolution`, () => {
       cy.viewport(2400, 780)
       mountComponent({
         accounts: initialData,
@@ -83,7 +83,7 @@ describe(`AccountsPageContent`, () => {
     GIVEN accounts page content
     WHEN click on actions menu
     THEN render edit, block and unblock account action if there is a solution for this`, () => {
-    context(`desctop resolution`, () => {
+    context(`desktop resolution`, () => {
       cy.viewport(2400, 780)
       mountComponent({
         accounts: initialData,
@@ -109,7 +109,7 @@ describe(`AccountsPageContent`, () => {
     GIVEN accounts page content
     WHEN block account
     THEN change account's status and add actions unblock`, () => {
-    context(`desctop resolution`, () => {
+    context(`desktop resolution`, () => {
       cy.viewport(2400, 780)
       mountComponent({
         accounts: initialData,
@@ -158,7 +158,7 @@ function mountComponent({
   accountManagementState.getAccounts(accounts)
   cy.mount(
     <AccountManagementStateContext.Provider value={accountManagementState}>
-      <AccountsPageContent />
+      <AccountsContainer />
     </AccountManagementStateContext.Provider>,
 
   )

@@ -1,20 +1,18 @@
-
-import { useContext, useEffect, useState } from 'react'
 import moment from 'moment'
 import clsx from 'clsx'
-import { ActionsType, ClientTable } from '@tourmalinecore/react-table-responsive'
+import { useContext, useEffect, useState } from 'react'
+import { ColumnDef } from '@tanstack/table-core'
+import { ActionsType } from '@tourmalinecore/react-table-responsive'
+
 import { observer } from 'mobx-react-lite'
 import { toast } from 'react-toastify'
-import { ColumnDef } from '@tanstack/table-core'
-import { AccountManagementStateContext } from './state/AccountManagementStateContext'
-import { AccessBasedOnPemissionsStateContext } from '../../../routes/state/AccessBasedOnPemissionsStateContext'
-import { FilterMenu } from '../../../features/account-management/components/FilterMenu/FilterMenu'
 import { api } from '../../../common/api'
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../common/config/config'
+import { AccountManagementStateContext } from './state/AccountManagementStateContext'
+import { AccountsContent } from './AccountsContent'
 
-export const AccountsPageContent = observer(() => {
+export const AccountsContainer = observer(() => {
   const accountManagementState = useContext(AccountManagementStateContext)
-  const accessToChanges = useContext(AccessBasedOnPemissionsStateContext)
   const [
     isLoading,
     setIsLoading,
@@ -212,40 +210,11 @@ export const AccountsPageContent = observer(() => {
   ]
 
   return (
-    <section
-      className="account-management-page"
-      data-cy="accounts-page-content"
-    >
-      <h1 className="heading">Account`s list</h1>
-
-      <div className="account-management-page__inner">
-        <FilterMenu />
-
-        {accessToChanges.accessPermissions.get(`ManageAccounts`) && (
-          <button
-            type="button"
-            className="account-management-page__button"
-            onClick={() => window.location.href = `/account-management/accounts/add`}
-          >
-            + Add New Account
-          </button>
-        )}
-      </div>
-     
-      <ClientTable<Accounts>
-        tableId="account-table"
-        data={accountManagementState.allAccounts}
-        tcRenderMobileTitle={(row) => row.original.lastName}
-        tcOrder={{
-          id: `lastName`,
-          desc: false,
-        }}
-        tcActions={accessToChanges.accessPermissions.get(`ManageAccounts`) ? actions : []}
-        columns={columns}
-        tcLoading={isLoading}
-      />
-
-    </section>
+    <AccountsContent
+      columns={columns}
+      actions={actions}
+      isLoading={isLoading}
+    />
   )
 
   async function getAccountsAsync() {

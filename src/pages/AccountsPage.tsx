@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { AccountManagementState } from './components/Accounts/state/AccountManagementState'
 import { AccountManagementStateContext } from './components/Accounts/state/AccountManagementStateContext'
-import { AccountsPageContent } from './components/Accounts/AccountsPageContent'
+import { AccountsContainer } from './components/Accounts/AccountsContainer'
 
 export function AccountsPage() {
   const accountManagementState = useMemo(
@@ -11,7 +11,7 @@ export function AccountsPage() {
 
   return (
     <AccountManagementStateContext.Provider value={accountManagementState}>
-      <AccountsPageContent />
+      <AccountsContainer />
     </AccountManagementStateContext.Provider>
   )
 }
