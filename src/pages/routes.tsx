@@ -1,12 +1,10 @@
-import IconAccountManagement from '../../assets/icons/icon-account-management.svg?react'
-
-import {CreateAccount} from '../../pages/components/CreateAccount/CreateAccount'
-import {EditAccount} from '../../pages/components/EditAccount/EditAccount'
-
-import { TenantsPage } from '../../pages/TenantsPage'
-import { CreateTenant } from '../../pages/components/CreateTenant/CreateTenant'
-import { RolesPage } from '../../pages/RolesPage'
-import { AccountsPage } from '../../pages/AccountsPage'
+import IconAccountManagement from '../assets/icons/icon-account-management.svg?react'
+import { AccountsPage } from './AccountsPage'
+import { CreateAccount } from './components/CreateAccount/CreateAccount'
+import { CreateTenant } from './components/CreateTenant/CreateTenant'
+import { EditAccount } from './components/EditAccount/EditAccount'
+import { RolesPage } from './RolesPage'
+import { TenantsPage } from './TenantsPage'
 
 const DEFAULT_PATH = `/account-management`
 
