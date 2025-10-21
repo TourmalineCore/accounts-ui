@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { RolesPageState } from './components/Roles/state/roles-page/RolesPageState'
 import { RolesPageStateContext } from './components/Roles/state/roles-page/RolesPageStateContext'
-import RolesPageContent from './components/Roles/RolesPageContent'
+import {RolesContainer} from './components/Roles/RolesContainer'
 
 export function RolesPage() {
   const rolesPageState = useMemo(
@@ -11,7 +11,7 @@ export function RolesPage() {
 
   return (
     <RolesPageStateContext.Provider value={rolesPageState}>
-      <RolesPageContent />
+      <RolesContainer />
     </RolesPageStateContext.Provider>
   )
 }
