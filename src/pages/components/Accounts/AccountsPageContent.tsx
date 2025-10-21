@@ -5,12 +5,12 @@ import clsx from 'clsx'
 import { ActionsType, ClientTable } from '@tourmalinecore/react-table-responsive'
 import { observer } from 'mobx-react-lite'
 import { toast } from 'react-toastify'
-import { api } from '../../common/api'
-import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
-import { FilterMenu } from './components/FilterMenu/FilterMenu'
-import { AccountManagementStateContext } from './context/AccountManagementStateContext'
-import { AccessBasedOnPemissionsStateContext } from '../../routes/state/AccessBasedOnPemissionsStateContext'
 import { ColumnDef } from '@tanstack/table-core'
+import { AccountManagementStateContext } from './state/AccountManagementStateContext'
+import { AccessBasedOnPemissionsStateContext } from '../../../routes/state/AccessBasedOnPemissionsStateContext'
+import { FilterMenu } from '../../../features/account-management/components/FilterMenu/FilterMenu'
+import { api } from '../../../common/api'
+import { LINK_TO_ACCOUNT_SERVICE } from '../../../common/config/config'
 
 export const AccountsPageContent = observer(() => {
   const accountManagementState = useContext(AccountManagementStateContext)

@@ -1,7 +1,6 @@
- 
-import {AccountsPageContent} from './AccountsPageContent'
-import {AccountManagementState} from './context/AccountManagementState'
-import {AccountManagementStateContext} from './context/AccountManagementStateContext'
+ import { AccountsPageContent } from './AccountsPageContent'
+import { AccountManagementState } from './state/AccountManagementState'
+import { AccountManagementStateContext } from './state/AccountManagementStateContext'
 
 const initialData: Accounts[] = [
   {
