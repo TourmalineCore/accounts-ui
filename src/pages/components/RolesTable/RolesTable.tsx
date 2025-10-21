@@ -3,7 +3,7 @@ import {ChangeEvent, Fragment, useContext, useRef} from 'react'
 import { CheckField } from '@tourmalinecore/react-tc-ui-kit'
 import IconCheck from '../../../assets/icons/check.svg?react'
 import IconUncheck from '../../../assets/icons/uncheck.svg?react'
-import { RolesPageStateContext } from '../Roles/state/roles-page/RolesPageStateContext'
+import { RolesManagementStateContext } from '../Roles/state/roles-page/RolesManagementStateContext'
 import { AccessBasedOnPemissionsStateContext } from '../../../routes/state/AccessBasedOnPemissionsStateContext'
 import { ActionsDropdown } from '../../../features/account-management/components/ActionsDropdown/ActionsDropdown'
 
@@ -26,7 +26,7 @@ export const RolesTable = observer(
       rolePermissions: Role[],
     },
   ) => {
-    const rolesPageStateContext = useContext(RolesPageStateContext)
+    const rolesManagementStateContext = useContext(RolesManagementStateContext)
     const accessToChanges = useContext(AccessBasedOnPemissionsStateContext)
 
     const columnRef = useRef<HTMLTableDataCellElement>(null)
@@ -46,7 +46,7 @@ export const RolesTable = observer(
                 ref={columnRef}>
                 <div className="roles-table__role-column-inner">
                   {
-                    id === rolesPageStateContext.updatedRole?.id
+                    id === rolesManagementStateContext.updatedRole?.id
                       ? (
                         <input
                           autoFocus
@@ -54,8 +54,8 @@ export const RolesTable = observer(
                           className="roles-table__name-input"
                           type="text"
                           onChange={(event: { target: { value: any, }, }) => {
-                            rolesPageStateContext.changeRole({
-                              ...rolesPageStateContext.updatedRole!,
+                            rolesManagementStateContext.changeRole({
+                              ...rolesManagementStateContext.updatedRole!,
                               name: event.target.value, 
                             })
                           }}
@@ -65,7 +65,7 @@ export const RolesTable = observer(
                       : <span data-cy={`role-name-${name}`}>{name}</span>
                   }
                   {
-                    accessToChanges.accessPermissions.get(`ManageRoles`) && (name !== `Admin` && (!rolesPageStateContext.isInEditMode))
+                    accessToChanges.accessPermissions.get(`ManageRoles`) && (name !== `Admin` && (!rolesManagementStateContext.isInEditMode))
             && (
               <ActionsDropdown
                 className="roles-table__actions-dropdown"
@@ -75,7 +75,7 @@ export const RolesTable = observer(
                   {
                     text: `Edit`,
                     onClick: () => {
-                      rolesPageStateContext.editRole(id) 
+                      rolesManagementStateContext.editRole(id) 
                     },
                   },
                 ]}
@@ -94,7 +94,7 @@ export const RolesTable = observer(
             <Fragment key={groupName}>
               <tr data-cy="permission-group"
                 className="roles-table__permission-group">
-                <td colSpan={rolesPageStateContext.roles.length + 1}>{groupName}</td>
+                <td colSpan={rolesManagementStateContext.roles.length + 1}>{groupName}</td>
               </tr>
               {children.map(({
                 id, name, 
@@ -110,7 +110,7 @@ export const RolesTable = observer(
                       key={roleId}
                     >
 
-                      {roleId === rolesPageStateContext.updatedRole?.id
+                      {roleId === rolesManagementStateContext.updatedRole?.id
                         ? (
                           <div className="roles-table__permission-checkbox-wrapper">
                             <CheckField
@@ -119,7 +119,7 @@ export const RolesTable = observer(
                               defaultChecked={permissions.some((item) => item === id)}
                               onChange={(event: ChangeEvent<HTMLInputElement>) => {
                                 const permissionsCopy = [
-                                  ...rolesPageStateContext.updatedRole!.permissions,
+                                  ...rolesManagementStateContext.updatedRole!.permissions,
                                 ]
                                 const permissionIndexInArray = permissionsCopy.indexOf(event.target.id)
 
@@ -129,8 +129,8 @@ export const RolesTable = observer(
                                 else {
                                   permissionsCopy.push(event.target.id)
                                 }
-                                rolesPageStateContext.changeRole({
-                                  ...rolesPageStateContext.updatedRole!,
+                                rolesManagementStateContext.changeRole({
+                                  ...rolesManagementStateContext.updatedRole!,
                                   permissions: permissionsCopy, 
                                 })
                               }}

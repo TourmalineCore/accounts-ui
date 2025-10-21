@@ -1,12 +1,12 @@
 import { useContext, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { RolesContent } from './RolesContent'
-import { RolesPageStateContext } from './state/roles-page/RolesPageStateContext'
 import { LINK_TO_ACCOUNT_SERVICE } from '../../../common/config/config'
 import { api } from '../../../common/api'
+import { RolesManagementStateContext } from './state/roles-page/RolesManagementStateContext'
 
 export const RolesContainer = observer(() => {
-  const rolesPageStateContext = useContext(RolesPageStateContext)
+  const rolesManagementStateContext = useContext(RolesManagementStateContext)
 
   useEffect(() => {
     getRoles()
@@ -14,8 +14,8 @@ export const RolesContainer = observer(() => {
 
   return (
     <RolesContent
-      onAddRoleClick={() => rolesPageStateContext.addNewRole()}
-      onCancelClick={() => rolesPageStateContext.cancelRoleEditing()}
+      onAddRoleClick={() => rolesManagementStateContext.addNewRole()}
+      onCancelClick={() => rolesManagementStateContext.cancelRoleEditing()}
       onSaveClick={saveChangesToRole}
     />
   )
@@ -25,16 +25,16 @@ export const RolesContainer = observer(() => {
       data, 
     } = await api.get(`${LINK_TO_ACCOUNT_SERVICE}roles`)
 
-    rolesPageStateContext.initialize({
+    rolesManagementStateContext.initialize({
       loadedRoles: data, 
     })
   }
 
   async function saveChangesToRole() {
-    if (rolesPageStateContext.updatedRole?.id === 0) {
+    if (rolesManagementStateContext.updatedRole?.id === 0) {
       const {
         name, permissions, 
-      } = rolesPageStateContext.updatedRole
+      } = rolesManagementStateContext.updatedRole
 
       await api.post(`${LINK_TO_ACCOUNT_SERVICE}roles/create`, {
         name,
@@ -42,10 +42,10 @@ export const RolesContainer = observer(() => {
       })
     }
     else {
-      await api.post(`${LINK_TO_ACCOUNT_SERVICE}roles/edit`, rolesPageStateContext.updatedRole)
+      await api.post(`${LINK_TO_ACCOUNT_SERVICE}roles/edit`, rolesManagementStateContext.updatedRole)
     }
 
-    rolesPageStateContext.cancelRoleEditing()
+    rolesManagementStateContext.cancelRoleEditing()
     getRoles()
   }
 })

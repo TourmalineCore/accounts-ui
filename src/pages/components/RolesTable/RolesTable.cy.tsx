@@ -1,5 +1,5 @@
-import { RolesPageState } from "../Roles/state/roles-page/RolesPageState"
-import { RolesPageStateContext } from "../Roles/state/roles-page/RolesPageStateContext"
+import { RolesManagementState } from "../Roles/state/roles-page/RolesManagementState"
+import { RolesManagementStateContext } from "../Roles/state/roles-page/RolesManagementStateContext"
 import { RolesTable } from "./RolesTable"
 
 describe(`RolesTable`, () => {
@@ -268,9 +268,9 @@ describe(`RolesTable`, () => {
       ],
     })
 
-    cy.get<RolesPageState>(`@rolesPageState`)
-      .then((rolesPageState) => {
-        rolesPageState.addNewRole()
+    cy.get<RolesManagementState>(`@rolesManagementState`)
+      .then((rolesManagementState) => {
+        rolesManagementState.addNewRole()
       })
 
     cy.getByData(`role-name-input`)
@@ -293,9 +293,9 @@ describe(`RolesTable`, () => {
     cy.getByData(`edit-role-button-Employee`)
       .should(`have.length`, 1)
 
-    cy.get<RolesPageState>(`@rolesPageState`)
-      .then((rolesPageState) => {
-        rolesPageState.addNewRole()
+    cy.get<RolesManagementState>(`@rolesManagementState`)
+      .then((rolesManagementState) => {
+        rolesManagementState.addNewRole()
       })
 
     cy.getByData(`edit-role-button-Employee`)
@@ -311,21 +311,21 @@ function mountComponent({
   rolePermissions: Role[],
 }) {
    
-  const rolesPageState = new RolesPageState()
+  const rolesManagementState = new RolesManagementState()
 
-  rolesPageState.initialize({
+  rolesManagementState.initialize({
     loadedRoles: rolePermissions,
   })
 
-  cy.wrap(rolesPageState)
-    .as(`rolesPageState`)
+  cy.wrap(rolesManagementState)
+    .as(`rolesManagementState`)
 
   cy.mount(
-    <RolesPageStateContext.Provider value={rolesPageState}>
+    <RolesManagementStateContext.Provider value={rolesManagementState}>
       <RolesTable
         permissionGroups={permissionGroups}
-        rolePermissions={rolesPageState.roles}
+        rolePermissions={rolesManagementState.roles}
       />
-    </RolesPageStateContext.Provider>,
+    </RolesManagementStateContext.Provider>,
   )
 }

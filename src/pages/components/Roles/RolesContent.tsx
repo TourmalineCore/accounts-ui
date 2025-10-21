@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { observer } from 'mobx-react-lite'
-import { RolesPageStateContext } from './state/roles-page/RolesPageStateContext'
+import { RolesManagementStateContext } from './state/roles-page/RolesManagementStateContext'
 import { AccessBasedOnPemissionsStateContext } from '../../../routes/state/AccessBasedOnPemissionsStateContext'
 import { RolesTable } from '../RolesTable/RolesTable'
 
@@ -127,14 +127,14 @@ export const RolesContent = observer(({
     onCancelClick: () => void
     onSaveClick: () => void
   }) => {
-    const rolesPageStateContext = useContext(RolesPageStateContext)
+    const rolesManagementStateContext = useContext(RolesManagementStateContext)
     const accessToChanges = useContext(AccessBasedOnPemissionsStateContext)
 
     return (
       <div className="roles-page">
         <div className="roles-page__intro">
           <div className="roles-page__info">
-            <h1 className="roles-page__title">Roles!!!</h1>
+            <h1 className="roles-page__title">!!!Roles!!!</h1>
             <div className="roles-page__description">
               A role provides access to predefined menus and features,
               so that depending on the privileges available in the role,
@@ -145,7 +145,7 @@ export const RolesContent = observer(({
           {accessToChanges.accessPermissions.get('ManageRoles') && (
             <div className="roles-page__buttons">
               {
-                !rolesPageStateContext.isInEditMode 
+                !rolesManagementStateContext.isInEditMode 
                   ? (
                     <button
                       type="button"
@@ -170,7 +170,7 @@ export const RolesContent = observer(({
                         type="button"
                         data-cy="save-changes-button"
                         className="account-management-page__button"
-                        disabled={!rolesPageStateContext.updatedRole?.name}
+                        disabled={!rolesManagementStateContext.updatedRole?.name}
                         onClick={onSaveClick}
                       >
                         Save Changes
@@ -184,7 +184,7 @@ export const RolesContent = observer(({
 
         <div className="roles-page__table">
           <RolesTable
-            rolePermissions={rolesPageStateContext.roles}
+            rolePermissions={rolesManagementStateContext.roles}
             permissionGroups={PERMISSION_GROUPS}
           />
         </div>

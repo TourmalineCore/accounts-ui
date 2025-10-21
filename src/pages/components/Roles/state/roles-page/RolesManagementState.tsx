@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 
-export class RolesPageState {
+export class RolesManagementState {
   private _roles: Role[] = []
 
   private _isInEditMode: boolean = false
