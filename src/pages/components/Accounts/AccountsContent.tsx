@@ -12,11 +12,11 @@ export const AccountsContent = observer(({
   onBlockAccount,
   onUnblockAccount,
 }: {
-  isLoading: boolean
-  accounts: Accounts[]
-  accessPermissions: Map<string, boolean>
-  onBlockAccount: (accountId: number) => void
-  onUnblockAccount: (accountId: number) => void
+  isLoading: boolean,
+  accounts: Accounts[],
+  accessPermissions: Map<string, boolean>,
+  onBlockAccount: (accountId: number) => void,
+  onUnblockAccount: (accountId: number) => void,
 }) => {
   const columns: ColumnDef<Accounts>[] = [
     {
@@ -165,42 +165,42 @@ export const AccountsContent = observer(({
 
   const actions: ActionsType<Accounts> = [
     {
-      name: 'edit',
+      name: `edit`,
       show: (row) => {
         const { 
           isBlocked,
-          canChangeAccountState
+          canChangeAccountState,
         } = row.original
 
         return !isBlocked && canChangeAccountState
       },
-      renderText: () => 'Edit',
+      renderText: () => `Edit`,
       onClick: (_e, row) => window.location.href = `/account-management/accounts/edit/${row.original.id}`,
     },
     {
-      name: 'block',
+      name: `block`,
       show: (row) => {
         const {
           isBlocked,
-          canChangeAccountState
+          canChangeAccountState,
         } = row.original
 
         return !isBlocked && canChangeAccountState
       },
-      renderText: () => 'Block',
+      renderText: () => `Block`,
       onClick: (_e, row) => onBlockAccount(row.original.id),
     },
     {
-      name: 'unblock',
+      name: `unblock`,
       show: (row) => {
         const {
           isBlocked,
-          canChangeAccountState
+          canChangeAccountState,
         } = row.original
 
         return isBlocked && canChangeAccountState
       },
-      renderText: () => 'Unblock',
+      renderText: () => `Unblock`,
       onClick: (_e, row) => {
         onUnblockAccount(row.original.id)
       },
@@ -208,7 +208,7 @@ export const AccountsContent = observer(({
   ]
 
   const handleAddAccount = () => {
-    window.location.assign('/account-management/accounts/add')
+    window.location.assign(`/account-management/accounts/add`)
   }
 
   return (
@@ -221,7 +221,7 @@ export const AccountsContent = observer(({
       <div className="account-management-page__inner">
         <FilterMenu />
 
-        {accessPermissions.get('ManageAccounts') && (
+        {accessPermissions.get(`ManageAccounts`) && (
           <button
             type="button"
             className="account-management-page__button"
@@ -237,10 +237,10 @@ export const AccountsContent = observer(({
         data={accounts}
         tcRenderMobileTitle={(row) => row.original.lastName}
         tcOrder={{
-          id: 'lastName',
+          id: `lastName`,
           desc: false,
         }}
-        tcActions={accessPermissions.get('ManageAccounts') ? actions : []}
+        tcActions={accessPermissions.get(`ManageAccounts`) ? actions : []}
         columns={columns}
         tcLoading={isLoading}
       />

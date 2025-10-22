@@ -119,76 +119,76 @@ const PERMISSION_GROUPS = [
 ]
 
 export const RolesContent = observer(({ 
-    onAddRoleClick,
-    onCancelClick,
-    onSaveClick
-  }: {
-    onAddRoleClick: () => void
-    onCancelClick: () => void
-    onSaveClick: () => void
+  onAddRoleClick,
+  onCancelClick,
+  onSaveClick,
+}: {
+    onAddRoleClick: () => void,
+    onCancelClick: () => void,
+    onSaveClick: () => void,
   }) => {
-    const rolesManagementStateContext = useContext(RolesManagementStateContext)
-    const accessToChanges = useContext(AccessBasedOnPemissionsStateContext)
+  const rolesManagementStateContext = useContext(RolesManagementStateContext)
+  const accessToChanges = useContext(AccessBasedOnPemissionsStateContext)
 
-    return (
-      <div className="roles-page">
-        <div className="roles-page__intro">
-          <div className="roles-page__info">
-            <h1 className="roles-page__title">!!!Roles!!!</h1>
-            <div className="roles-page__description">
+  return (
+    <div className="roles-page">
+      <div className="roles-page__intro">
+        <div className="roles-page__info">
+          <h1 className="roles-page__title">$$$Roles$$$</h1>
+          <div className="roles-page__description">
               A role provides access to predefined menus and features,
               so that depending on the privileges available in the role,
               an account has access to what they need.
-            </div>
           </div>
+        </div>
 
-          {accessToChanges.accessPermissions.get('ManageRoles') && (
-            <div className="roles-page__buttons">
-              {
-                !rolesManagementStateContext.isInEditMode 
-                  ? (
+        {accessToChanges.accessPermissions.get(`ManageRoles`) && (
+          <div className="roles-page__buttons">
+            {
+              !rolesManagementStateContext.isInEditMode 
+                ? (
+                  <button
+                    type="button"
+                    data-cy="add-new-role-button"
+                    className="account-management-page__button"
+                    onClick={onAddRoleClick}
+                  >
+                      + Add new role
+                  </button>
+                ) 
+                : (
+                  <>
                     <button
                       type="button"
-                      data-cy="add-new-role-button"
+                      data-cy="cancel-changes-button"
                       className="account-management-page__button"
-                      onClick={onAddRoleClick}
+                      onClick={onCancelClick}
                     >
-                      + Add new role
-                    </button>
-                  ) 
-                  : (
-                    <>
-                      <button
-                        type="button"
-                        data-cy="cancel-changes-button"
-                        className="account-management-page__button"
-                        onClick={onCancelClick}
-                      >
                         Cancel
-                      </button>
-                      <button
-                        type="button"
-                        data-cy="save-changes-button"
-                        className="account-management-page__button"
-                        disabled={!rolesManagementStateContext.updatedRole?.name}
-                        onClick={onSaveClick}
-                      >
+                    </button>
+                    <button
+                      type="button"
+                      data-cy="save-changes-button"
+                      className="account-management-page__button"
+                      disabled={!rolesManagementStateContext.updatedRole?.name}
+                      onClick={onSaveClick}
+                    >
                         Save Changes
-                      </button>
+                    </button>
                   </>
                 )
-              }
-            </div>
-          )}
-        </div>
-
-        <div className="roles-page__table">
-          <RolesTable
-            rolePermissions={rolesManagementStateContext.roles}
-            permissionGroups={PERMISSION_GROUPS}
-          />
-        </div>
+            }
+          </div>
+        )}
       </div>
-    )
-  }
+
+      <div className="roles-page__table">
+        <RolesTable
+          rolePermissions={rolesManagementStateContext.roles}
+          permissionGroups={PERMISSION_GROUPS}
+        />
+      </div>
+    </div>
+  )
+},
 )

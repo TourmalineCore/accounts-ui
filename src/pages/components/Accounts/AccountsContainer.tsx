@@ -19,7 +19,7 @@ export const AccountsContainer = observer(() => {
     getAccountsAsync()
   }, [])
 
-    return (
+  return (
     <AccountsContent
       isLoading={isLoading}
       accounts={accountManagementState.allAccounts}
