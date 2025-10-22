@@ -14,8 +14,6 @@ export const RolesContainer = observer(() => {
 
   return (
     <RolesContent
-      onAddRoleClick={() => rolesManagementStateContext.addNewRole()}
-      onCancelClick={() => rolesManagementStateContext.cancelRoleEditing()}
       onSaveClick={saveChangesToRole}
     />
   )

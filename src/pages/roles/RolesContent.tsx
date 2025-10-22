@@ -119,13 +119,9 @@ const PERMISSION_GROUPS = [
 ]
 
 export const RolesContent = observer(({ 
-  onAddRoleClick,
-  onCancelClick,
   onSaveClick,
 }: {
-    onAddRoleClick: () => void,
-    onCancelClick: () => void,
-    onSaveClick: () => void,
+    onSaveClick: () => unknown,
   }) => {
   const rolesManagementStateContext = useContext(RolesManagementStateContext)
   const accessToChanges = useContext(AccessBasedOnPemissionsStateContext)
@@ -151,7 +147,7 @@ export const RolesContent = observer(({
                     type="button"
                     data-cy="add-new-role-button"
                     className="account-management-page__button"
-                    onClick={onAddRoleClick}
+                    onClick={() => rolesManagementStateContext.addNewRole()}
                   >
                     + Add new role
                   </button>
@@ -162,7 +158,7 @@ export const RolesContent = observer(({
                       type="button"
                       data-cy="cancel-changes-button"
                       className="account-management-page__button"
-                      onClick={onCancelClick}
+                      onClick={() => rolesManagementStateContext.cancelRoleEditing()}
                     >
                       Cancel
                     </button>

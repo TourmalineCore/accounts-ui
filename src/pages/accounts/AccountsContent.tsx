@@ -4,20 +4,22 @@ import { ActionsType, ClientTable } from '@tourmalinecore/react-table-responsive
 import { observer } from 'mobx-react-lite'
 import { ColumnDef } from '@tanstack/table-core'
 import { FilterMenu } from './components/FilterMenu/FilterMenu'
+import { AccessBasedOnPemissionsStateContext } from '../../routes/state/AccessBasedOnPemissionsStateContext'
+import { useContext } from 'react'
 
 export const AccountsContent = observer(({
   isLoading,
   accounts,
-  accessPermissions,
   onBlockAccount,
   onUnblockAccount,
 }: {
   isLoading: boolean,
   accounts: Accounts[],
-  accessPermissions: Map<string, boolean>,
   onBlockAccount: (accountId: number) => void,
   onUnblockAccount: (accountId: number) => void,
 }) => {
+  const accessToChanges = useContext(AccessBasedOnPemissionsStateContext)
+  
   const columns: ColumnDef<Accounts>[] = [
     {
       header: `Name`,
@@ -221,7 +223,7 @@ export const AccountsContent = observer(({
       <div className="account-management-page__inner">
         <FilterMenu />
 
-        {accessPermissions.get(`ManageAccounts`) && (
+        {accessToChanges.accessPermissions.get(`ManageAccounts`) && (
           <button
             type="button"
             className="account-management-page__button"
@@ -240,7 +242,7 @@ export const AccountsContent = observer(({
           id: `lastName`,
           desc: false,
         }}
-        tcActions={accessPermissions.get(`ManageAccounts`) ? actions : []}
+        tcActions={accessToChanges.accessPermissions.get(`ManageAccounts`) ? actions : []}
         columns={columns}
         tcLoading={isLoading}
       />
