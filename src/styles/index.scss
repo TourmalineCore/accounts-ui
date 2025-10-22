@@ -11,13 +11,13 @@
 @import "../components/ThemeColorPicker/ThemeColorPicker";
 
 // features
-@import "../pages/components/CreateAccount/CreateAccount";
-@import "../pages/components/FilterMenu/FilterMenu";
-@import "../pages/components/EditAccount/EditAccount";
-@import "../pages/components/CreateTenant/CreateTenant";
-@import "../pages/components/RolesTable/RolesTable";
-@import "../pages/RolesPage";
-@import "../pages/AccountManagementPage";
+@import "../pages/accounts/AccountManagementPage";
+@import "../pages/accounts/components/CreateAccount/CreateAccount";
+@import "../pages/accounts/components/FilterMenu/FilterMenu";
+@import "../pages/accounts/components/EditAccount/EditAccount";
+@import "../pages/roles/components/RolesTable/RolesTable";
+@import "../pages/roles/RolesPage";
+@import "../pages/tenants/components/CreateTenant/CreateTenant";
 
 // Template
 @import "../template/components/Breadcrumbs/Breadcrumbs";
