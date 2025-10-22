@@ -134,11 +134,11 @@ export const RolesContent = observer(({
     <div className="roles-page">
       <div className="roles-page__intro">
         <div className="roles-page__info">
-          <h1 className="roles-page__title">$$$Roles$$$</h1>
+          <h1 className="roles-page__title">Roles</h1>
           <div className="roles-page__description">
-              A role provides access to predefined menus and features,
-              so that depending on the privileges available in the role,
-              an account has access to what they need.
+            A role provides access to predefined menus and features,
+            so that depending on the privileges available in the role,
+            an account has access to what they need.
           </div>
         </div>
 
@@ -153,7 +153,7 @@ export const RolesContent = observer(({
                     className="account-management-page__button"
                     onClick={onAddRoleClick}
                   >
-                      + Add new role
+                    + Add new role
                   </button>
                 ) 
                 : (
@@ -164,7 +164,7 @@ export const RolesContent = observer(({
                       className="account-management-page__button"
                       onClick={onCancelClick}
                     >
-                        Cancel
+                      Cancel
                     </button>
                     <button
                       type="button"
@@ -173,7 +173,7 @@ export const RolesContent = observer(({
                       disabled={!rolesManagementStateContext.updatedRole?.name}
                       onClick={onSaveClick}
                     >
-                        Save Changes
+                      Save Changes
                     </button>
                   </>
                 )
