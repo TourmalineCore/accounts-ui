@@ -1,4 +1,4 @@
-import '../../../../../../cypress/support/commands'
+import '../../../../cypress/support/commands'
 
 import { TenantManagementState } from './TenantManagementState'
 
