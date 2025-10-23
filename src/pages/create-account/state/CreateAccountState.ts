@@ -9,7 +9,7 @@ export const EMPTY_FORM_DATA: any = {
 }
 
 export class CreateAccountState {
-  private _triedToSubmit = false
+  private _isTriedToSubmit = false
   private _selectedCheckboxes = new Set<string>([])
   private _formData = {
     firstName: '',
@@ -26,8 +26,8 @@ export class CreateAccountState {
     makeAutoObservable(this)
   }
 
-  get triedToSubmit() {
-    return this._triedToSubmit
+  get isTriedToSubmit() {
+    return this._isTriedToSubmit
   }
 
   get selectedCheckboxes() {
@@ -54,6 +54,10 @@ export class CreateAccountState {
 
   // getTenants(newTenant: Tenants[]) {
   //   this._allTenants = newTenant
+
+  setIsTriedToSubmit(newValue: boolean) {
+    this._isTriedToSubmit = newValue
+  }
   setSelectedCheckboxes(newValue: Set<string>) {
     this._selectedCheckboxes = newValue
   }
