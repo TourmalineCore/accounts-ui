@@ -199,6 +199,38 @@ function tenantsDataTests() {
   })
 }
 
+function isTriedToSubmitTests() {
+  let createAccountState: CreateAccountState
+
+  beforeEach(() => {
+    createAccountState = new CreateAccountState()
+  })
+
+  it(`
+  GIVEN initial isTriedToSubmit = false
+  WHEN call setIsTriedToSubmit(true)
+  SHOULD change value to true
+  WHEN call setIsTriedToSubmit(false)
+  SHOULD change value to false
+  `, () => {
+    expect(createAccountState.isTriedToSubmit)
+    .to
+    .be
+    .false
+
+    createAccountState.setIsTriedToSubmit(true)
+    expect(createAccountState.isTriedToSubmit)
+    .to
+    .be
+    .true
+
+    createAccountState.setIsTriedToSubmit(false)
+    expect(createAccountState.isTriedToSubmit)
+    .to
+    .be
+    .false
+  })
+}
   })
 }
 // import { CreateAccountState } from './CreateAccountState'
