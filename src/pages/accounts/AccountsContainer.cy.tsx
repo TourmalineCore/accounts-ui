@@ -52,7 +52,7 @@ const initialData: Accounts[] = [
 describe(`AccountsContainer`, () => {
   beforeEach(() => {
     cy.viewport(2400, 780)
- })
+  })
 
   it(`
   GIVEN accounts page 
