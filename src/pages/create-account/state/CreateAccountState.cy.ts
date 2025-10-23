@@ -5,6 +5,7 @@ import { CreateAccountState, EMPTY_FORM_DATA } from "./CreateAccountState"
 describe(`CreateAccountState`, () => {
   describe(`Initialization`, initializationTests)
   describe(`Form Data`, formDataTests)
+  describe(`Selected Checkboxes`, selectedCheckboxesTests)
 })
 
 function initializationTests() {
@@ -92,6 +93,52 @@ function formDataTests() {
     expect(createAccountState.formData.tenantId)
     .to
     .eq('0')
+  })
+}
+
+function selectedCheckboxesTests() {
+  let createAccountState: CreateAccountState
+
+  beforeEach(() => {
+    createAccountState = new CreateAccountState()
+  })
+
+  it(`
+  GIVEN the CreateAccountState
+  WHEN toggle empty checkbox 
+  SHOULD add its value to the set of selected checkboxes
+  `, () => {
+    createAccountState.toggleCheckbox('1')
+
+    expect(createAccountState.selectedCheckboxes.has('1'))
+    .to
+    .be
+    .true
+    expect(createAccountState.selectedCheckboxes.size)
+    .to
+    .eq(1)
+  })
+
+  it(`
+  GIVEN the CreateAccountState with existing checkbox
+  WHEN toggle checkbox with existing value
+  SHOULD remove value from the set of selected checkboxes
+  `, () => {
+    createAccountState.setSelectedCheckboxes(new Set(['1', '2']))
+    
+    createAccountState.toggleCheckbox('1')
+
+    expect(createAccountState.selectedCheckboxes.has('1'))
+    .to
+    .be
+    .false
+    expect(createAccountState.selectedCheckboxes.has('2'))
+    .to
+    .be
+    .true
+    expect(createAccountState.selectedCheckboxes.size)
+    .to
+    .eq(1)
   })
 }
 // import { CreateAccountState } from './CreateAccountState'
