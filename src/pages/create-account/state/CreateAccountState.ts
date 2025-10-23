@@ -20,7 +20,7 @@ export class CreateAccountState {
   }
   private _rolesData: { [key: number]: string } = {}
   private _tenantsData: Tenants[] = []
-  private _hasError = false
+  private _isError = false
 
   constructor() {
     makeAutoObservable(this)
@@ -46,8 +46,8 @@ export class CreateAccountState {
     return this._tenantsData
   }
 
-  get hasError() {
-    return this._hasError
+  get isError() {
+    return this._isError
   }
 
   // }
@@ -58,6 +58,7 @@ export class CreateAccountState {
   setIsTriedToSubmit(newValue: boolean) {
     this._isTriedToSubmit = newValue
   }
+
   setSelectedCheckboxes(newValue: Set<string>) {
     this._selectedCheckboxes = newValue
   }
@@ -65,12 +66,17 @@ export class CreateAccountState {
   setFormData(newValue: Partial<typeof this._formData>) {
     this._formData = { ...this._formData, ...newValue }
   }
+
   setRolesData(newValue: { [key: number]: string }) {
     this._rolesData = newValue
   }
 
   setTenantsData(newValue: Tenants[]) {
     this._tenantsData = newValue
+  }
+
+  setIsError(newValue: boolean) {
+    this._isError = newValue
   }
   // }
   toggleCheckbox(value: string) {
