@@ -141,6 +141,33 @@ function selectedCheckboxesTests() {
     .eq(1)
   })
 }
+function rolesDataTests() {
+  let createAccountState: CreateAccountState
+
+  beforeEach(() => {
+    createAccountState = new CreateAccountState()
+  })
+
+  it(`
+  GIVEN the CreateAccountState
+  WHEN call setRolesData
+  SHOULD update roles data
+  `, () => {
+    const newRolesData = {
+      1: 'Employee',
+      2: 'Intern',
+    }
+
+    createAccountState.setRolesData(newRolesData)
+
+    expect(createAccountState.rolesData).to.deep.eq(newRolesData)
+    expect(createAccountState.rolesData)
+    .to
+    .deep
+    .eq(newRolesData)
+  })
+  })
+}
 // import { CreateAccountState } from './CreateAccountState'
 
 // const INITIAL_STATE: Tenants[] = [
