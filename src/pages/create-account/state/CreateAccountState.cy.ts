@@ -166,6 +166,39 @@ function rolesDataTests() {
     .deep
     .eq(newRolesData)
   })
+
+function tenantsDataTests() {
+  let createAccountState: CreateAccountState
+
+  beforeEach(() => {
+    createAccountState = new CreateAccountState()
+  })
+
+  it(`
+  GIVEN the CreateAccountState
+  WHEN call setTenantsData
+  SHOULD update tenants data
+  `, () => {
+    const newTenantsData = [
+      { 
+        id: 0, 
+        name: 'Tenant 1' 
+      },
+      { 
+        id: 1, 
+        name: 'Tenant 2'
+      },
+    ]
+
+    createAccountState.setTenantsData(newTenantsData)
+
+    expect(createAccountState.tenantsData)
+    .to
+    .deep
+    .eq(newTenantsData)
+  })
+}
+
   })
 }
 // import { CreateAccountState } from './CreateAccountState'
