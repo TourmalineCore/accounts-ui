@@ -69,6 +69,31 @@ function formDataTests() {
     .deep
     .eq(accountDataForInitialization)
   })
+
+  it(`
+  GIVEN the CreateAccountState with existing form data
+  WHEN setFormData with new values
+  SHOULD update only specified fields
+  `, () => {
+    createAccountState.setFormData(accountDataForInitialization)
+    createAccountState.setFormData({
+      firstName: 'Test',
+    })
+
+    expect(createAccountState.formData.firstName)
+    .to
+    .eq('Test')
+    expect(createAccountState.formData.lastName)
+    .to
+    .eq('Ceo')
+    expect(createAccountState.formData.corporateEmail)
+    .to
+    .eq('ceo@tourmalinecore.com')
+    expect(createAccountState.formData.tenantId)
+    .to
+    .eq('0')
+  })
+}
 // import { CreateAccountState } from './CreateAccountState'
 
 // const INITIAL_STATE: Tenants[] = [
