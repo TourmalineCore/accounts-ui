@@ -6,6 +6,9 @@ describe(`CreateAccountState`, () => {
   describe(`Initialization`, initializationTests)
   describe(`Form Data`, formDataTests)
   describe(`Selected Checkboxes`, selectedCheckboxesTests)
+  describe(`Roles Data`, rolesDataTests)
+  describe(`Tenants Data`, tenantsDataTests)
+  describe(`Is Tried To Submit`, isTriedToSubmitTests)
 })
 
 function initializationTests() {
@@ -16,7 +19,7 @@ function initializationTests() {
   WHEN initialize
   SHOULD have default values
   `, () => {
-    expect(createAccountState.triedToSubmit)
+    expect(createAccountState.isTriedToSubmit)
       .to
       .be
       .false
@@ -141,6 +144,7 @@ function selectedCheckboxesTests() {
     .eq(1)
   })
 }
+
 function rolesDataTests() {
   let createAccountState: CreateAccountState
 
@@ -160,12 +164,12 @@ function rolesDataTests() {
 
     createAccountState.setRolesData(newRolesData)
 
-    expect(createAccountState.rolesData).to.deep.eq(newRolesData)
     expect(createAccountState.rolesData)
     .to
     .deep
     .eq(newRolesData)
   })
+}
 
 function tenantsDataTests() {
   let createAccountState: CreateAccountState
