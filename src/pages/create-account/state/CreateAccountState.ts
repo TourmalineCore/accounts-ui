@@ -55,4 +55,18 @@ export class CreateAccountState {
   // getTenants(newTenant: Tenants[]) {
   //   this._allTenants = newTenant
   // }
+  toggleCheckbox(value: string) {
+    if (this._selectedCheckboxes.has(value)) {
+  toggleCheckbox(newValue: string) {
+    if (this._selectedCheckboxes.has(newValue)) {
+        this._selectedCheckboxes = new Set(
+            [...this._selectedCheckboxes].filter((x) => x !== newValue)
+        )
+    } else {
+        this._selectedCheckboxes = new Set([
+            ...this._selectedCheckboxes,
+            newValue,
+        ])
+    }
+  }
 }
