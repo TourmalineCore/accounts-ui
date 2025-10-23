@@ -12,9 +12,9 @@
 
 // features
 @import "../pages/accounts/AccountManagementPage";
-@import "../pages/accounts/components/CreateAccount/CreateAccount";
 @import "../pages/accounts/components/FilterMenu/FilterMenu";
 @import "../pages/accounts/components/EditAccount/EditAccount";
+@import "../pages/create-account/CreateAccount";
 @import "../pages/roles/components/RolesTable/RolesTable";
 @import "../pages/roles/RolesPage";
 @import "../pages/tenants/components/CreateTenant/CreateTenant";

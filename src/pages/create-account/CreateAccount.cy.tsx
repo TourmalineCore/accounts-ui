@@ -1,6 +1,6 @@
-import { API_ROOT, LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config'
-import '../../../../../cypress/support/commands'
-import {CreateAccount} from './CreateAccount'
+import { API_ROOT, LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
+import '../../../cypress/support/commands'
+import { CreateAccountContainer } from './CreateAccountContainer'
 
 const START_ROOT = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}tenants/all`
 const START_ROOT_ROLES = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}roles`
@@ -89,6 +89,6 @@ describe(`Create Account`, () => {
 
 function mountComponent() {
   cy.mount(
-    <CreateAccount />,
+    <CreateAccountContainer />,
   )
 }

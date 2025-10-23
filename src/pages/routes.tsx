@@ -1,7 +1,7 @@
 import IconAccountManagement from '../assets/icons/icon-account-management.svg?react'
 import { AccountsPage } from './accounts/AccountsPage'
-import { CreateAccount } from './accounts/components/CreateAccount/CreateAccount'
 import { EditAccount } from './accounts/components/EditAccount/EditAccount'
+import { CreateAccountPage } from './create-account/CreateAccountPage'
 import { RolesPage } from './roles/RolesPage'
 import { CreateTenant } from './tenants/components/CreateTenant/CreateTenant'
 import { TenantsPage } from './tenants/TenantsPage'
@@ -12,7 +12,7 @@ export const accountManagementRoutes = [
   {
     path: `${DEFAULT_PATH}/accounts/add`,
     breadcrumb: `Add new account`,
-    Component: CreateAccount,
+    Component: CreateAccountPage,
   },
   {
     path: `${DEFAULT_PATH}/accounts/edit/:id`,
@@ -24,7 +24,6 @@ export const accountManagementRoutes = [
     breadcrumb: `Add new tenant`,
     Component: CreateTenant,
   },
-
 ]
 
 export const accountRoutes = [
