@@ -48,7 +48,7 @@ describe(`Create Account`, () => {
   it(`
   GIVEN create account page 
   WHEN visit account page
-  THEN render account page content `, () => {
+  SHOULD render account page content `, () => {
     mountComponent()
 
     cy.getByData(`create-account-page`)
@@ -80,7 +80,7 @@ describe(`Create Account`, () => {
   it(`
   GIVEN create account page 
   WHEN visit account page
-  THEN a select with data about tenants is rendered`, () => {
+  SHOULD render a select with data about tenants`, () => {
     cy.getByData(`create-account-page-select-tenant`)
       .should(`exist`)
       .select(`Black`)
