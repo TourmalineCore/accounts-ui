@@ -35,7 +35,7 @@ export function EditAccount() {
   ] = useState<{ [key: number]: string, }>({})
 
   useEffect(() => {
-    getEditAccountLoad()
+    getEditAccountLoadAsync()
   }, [])
 
   return (
@@ -175,7 +175,7 @@ export function EditAccount() {
     </section>
   )
 
-  async function getEditAccountLoad() {
+  async function getEditAccountLoadAsync() {
     const {
       data, 
     } = await api.get<AccountEdit>(`${LINK_TO_ACCOUNT_SERVICE}accounts/findById/${id}`)

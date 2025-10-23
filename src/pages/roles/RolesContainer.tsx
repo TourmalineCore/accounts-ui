@@ -9,16 +9,16 @@ export const RolesContainer = observer(() => {
   const rolesManagementStateContext = useContext(RolesManagementStateContext)
 
   useEffect(() => {
-    getRoles()
+    getRolesAsync()
   }, [])
 
   return (
     <RolesContent
-      onSaveClick={saveChangesToRole}
+      onSaveClick={saveChangesToRoleAsync}
     />
   )
 
-  async function getRoles() {
+  async function getRolesAsync() {
     const {
       data, 
     } = await api.get(`${LINK_TO_ACCOUNT_SERVICE}roles`)
@@ -28,7 +28,7 @@ export const RolesContainer = observer(() => {
     })
   }
 
-  async function saveChangesToRole() {
+  async function saveChangesToRoleAsync() {
     if (rolesManagementStateContext.updatedRole?.id === 0) {
       const {
         name, permissions, 
@@ -44,6 +44,6 @@ export const RolesContainer = observer(() => {
     }
 
     rolesManagementStateContext.cancelRoleEditing()
-    getRoles()
+    getRolesAsync()
   }
 })

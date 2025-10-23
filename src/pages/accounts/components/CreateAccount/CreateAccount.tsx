@@ -44,11 +44,11 @@ export function CreateAccount() {
   ] = useState(false)
 
   useEffect(() => {
-    getRolesAccountLoad()
+    getRolesAccountLoadAsync()
   }, [])
 
   useEffect(() => {
-    getTenantsAccountLoad()
+    getTenantsAccountLoadAsync()
   }, [])
 
   return (
@@ -248,7 +248,7 @@ export function CreateAccount() {
     </div>
   )
 
-  async function getRolesAccountLoad() {
+  async function getRolesAccountLoadAsync() {
     const {
       data, 
     } = await api.get<{
@@ -260,7 +260,7 @@ export function CreateAccount() {
     }))))
   }
 
-  async function getTenantsAccountLoad() {
+  async function getTenantsAccountLoadAsync() {
     const {
       data, 
     } = await api.get(`${LINK_TO_ACCOUNT_SERVICE}tenants/all`)

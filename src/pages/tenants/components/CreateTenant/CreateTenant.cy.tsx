@@ -5,7 +5,7 @@ describe(`CreateTenant`, () => {
   it(`
   GIVEN create tenant page 
   WHEN visit tenants page
-  THEN render tenants page content `, () => {
+  SHOULD render tenants page content `, () => {
     mountComponent()
 
     cy.getByData(`create-tenant-page`)

@@ -50,6 +50,10 @@ const initialData: Accounts[] = [
 ]
 
 describe(`AccountsContainer`, () => {
+  beforeEach(() => {
+    cy.viewport(2400, 780)
+ })
+
   it(`
   GIVEN accounts page 
   WHEN visit accounts page
@@ -67,7 +71,6 @@ describe(`AccountsContainer`, () => {
     WHEN visit accounts page
     THEN render column with tenant `, () => {
     context(`desktop resolution`, () => {
-      cy.viewport(2400, 780)
       mountComponent({
         accounts: initialData,
       })
@@ -84,7 +87,6 @@ describe(`AccountsContainer`, () => {
     WHEN click on actions menu
     THEN render edit, block and unblock account action if there is a solution for this`, () => {
     context(`desktop resolution`, () => {
-      cy.viewport(2400, 780)
       mountComponent({
         accounts: initialData,
       })
@@ -110,7 +112,6 @@ describe(`AccountsContainer`, () => {
     WHEN block account
     THEN change account's status and add actions unblock`, () => {
     context(`desktop resolution`, () => {
-      cy.viewport(2400, 780)
       mountComponent({
         accounts: initialData,
       })
