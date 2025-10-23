@@ -9,6 +9,7 @@ describe(`CreateAccountState`, () => {
   describe(`Roles Data`, rolesDataTests)
   describe(`Tenants Data`, tenantsDataTests)
   describe(`Is Tried To Submit`, isTriedToSubmitTests)
+  describe(`Is Error`, isErrorTests)
 })
 
 function initializationTests() {
@@ -38,7 +39,7 @@ function initializationTests() {
       .to
       .deep
       .eq([])
-    expect(createAccountState.hasError)
+    expect(createAccountState.isError)
       .to
       .be
       .false
@@ -235,6 +236,37 @@ function isTriedToSubmitTests() {
     .false
   })
 }
+
+function isErrorTests() {
+  let createAccountState: CreateAccountState
+
+  beforeEach(() => {
+    createAccountState = new CreateAccountState()
+  })
+
+  it(`
+  GIVEN initial isError = false
+  WHEN setIsError(true)
+  SHOULD change value to true
+  WHEN setIsError(false)
+  SHOULD change value to false
+  `, () => {
+    expect(createAccountState.isError)
+    .to
+    .be
+    .false
+
+    createAccountState.setIsError(true)
+    expect(createAccountState.isError)
+    .to
+    .be
+    .true
+
+    createAccountState.setIsError(false)
+    expect(createAccountState.isError)
+    .to
+    .be
+    .false
   })
 }
 // import { CreateAccountState } from './CreateAccountState'
