@@ -50,12 +50,12 @@ function initializationTests() {
 function formDataTests() {
   let createAccountState: CreateAccountState
 
-   const accountDataForInitialization = {
-    firstName: 'Ceo',
-    lastName: 'Ceo',
-    middleName: 'Ceo',
-    corporateEmail: 'ceo@tourmalinecore.com',
-    tenantId: '0',
+  const accountDataForInitialization = {
+    firstName: `Ceo`,
+    lastName: `Ceo`,
+    middleName: `Ceo`,
+    corporateEmail: `ceo@tourmalinecore.com`,
+    tenantId: `0`,
   }
 
   beforeEach(() => {
@@ -70,9 +70,9 @@ function formDataTests() {
     createAccountState.setFormData(accountDataForInitialization)
 
     expect(createAccountState.formData)
-    .to
-    .deep
-    .eq(accountDataForInitialization)
+      .to
+      .deep
+      .eq(accountDataForInitialization)
   })
 
   it(`
@@ -82,21 +82,21 @@ function formDataTests() {
   `, () => {
     createAccountState.setFormData(accountDataForInitialization)
     createAccountState.setFormData({
-      firstName: 'Test',
+      firstName: `Test`,
     })
 
     expect(createAccountState.formData.firstName)
-    .to
-    .eq('Test')
+      .to
+      .eq(`Test`)
     expect(createAccountState.formData.lastName)
-    .to
-    .eq('Ceo')
+      .to
+      .eq(`Ceo`)
     expect(createAccountState.formData.corporateEmail)
-    .to
-    .eq('ceo@tourmalinecore.com')
+      .to
+      .eq(`ceo@tourmalinecore.com`)
     expect(createAccountState.formData.tenantId)
-    .to
-    .eq('0')
+      .to
+      .eq(`0`)
   })
 }
 
@@ -112,15 +112,15 @@ function selectedCheckboxesTests() {
   WHEN toggle empty checkbox 
   SHOULD add its value to the set of selected checkboxes
   `, () => {
-    createAccountState.toggleCheckbox('1')
+    createAccountState.toggleCheckbox(`1`)
 
-    expect(createAccountState.selectedCheckboxes.has('1'))
-    .to
-    .be
-    .true
+    expect(createAccountState.selectedCheckboxes.has(`1`))
+      .to
+      .be
+      .true
     expect(createAccountState.selectedCheckboxes.size)
-    .to
-    .eq(1)
+      .to
+      .eq(1)
   })
 
   it(`
@@ -128,21 +128,24 @@ function selectedCheckboxesTests() {
   WHEN toggle checkbox with existing value
   SHOULD remove value from the set of selected checkboxes
   `, () => {
-    createAccountState.setSelectedCheckboxes(new Set(['1', '2']))
+    createAccountState.setSelectedCheckboxes(new Set([
+      `1`,
+      `2`,
+    ]))
     
-    createAccountState.toggleCheckbox('1')
+    createAccountState.toggleCheckbox(`1`)
 
-    expect(createAccountState.selectedCheckboxes.has('1'))
-    .to
-    .be
-    .false
-    expect(createAccountState.selectedCheckboxes.has('2'))
-    .to
-    .be
-    .true
+    expect(createAccountState.selectedCheckboxes.has(`1`))
+      .to
+      .be
+      .false
+    expect(createAccountState.selectedCheckboxes.has(`2`))
+      .to
+      .be
+      .true
     expect(createAccountState.selectedCheckboxes.size)
-    .to
-    .eq(1)
+      .to
+      .eq(1)
   })
 }
 
@@ -159,16 +162,16 @@ function rolesDataTests() {
   SHOULD update roles data
   `, () => {
     const newRolesData = {
-      1: 'Employee',
-      2: 'Intern',
+      1: `Employee`,
+      2: `Intern`,
     }
 
     createAccountState.setRolesData(newRolesData)
 
     expect(createAccountState.rolesData)
-    .to
-    .deep
-    .eq(newRolesData)
+      .to
+      .deep
+      .eq(newRolesData)
   })
 }
 
@@ -187,20 +190,20 @@ function tenantsDataTests() {
     const newTenantsData = [
       { 
         id: 0, 
-        name: 'Tenant 1' 
+        name: `Tenant 1`, 
       },
       { 
         id: 1, 
-        name: 'Tenant 2'
+        name: `Tenant 2`,
       },
     ]
 
     createAccountState.setTenantsData(newTenantsData)
 
     expect(createAccountState.tenantsData)
-    .to
-    .deep
-    .eq(newTenantsData)
+      .to
+      .deep
+      .eq(newTenantsData)
   })
 }
 
@@ -219,21 +222,21 @@ function isTriedToSubmitTests() {
   SHOULD change value to false
   `, () => {
     expect(createAccountState.isTriedToSubmit)
-    .to
-    .be
-    .false
+      .to
+      .be
+      .false
 
     createAccountState.setIsTriedToSubmit(true)
     expect(createAccountState.isTriedToSubmit)
-    .to
-    .be
-    .true
+      .to
+      .be
+      .true
 
     createAccountState.setIsTriedToSubmit(false)
     expect(createAccountState.isTriedToSubmit)
-    .to
-    .be
-    .false
+      .to
+      .be
+      .false
   })
 }
 
@@ -252,21 +255,21 @@ function isErrorTests() {
   SHOULD change value to false
   `, () => {
     expect(createAccountState.isError)
-    .to
-    .be
-    .false
+      .to
+      .be
+      .false
 
     createAccountState.setIsError(true)
     expect(createAccountState.isError)
-    .to
-    .be
-    .true
+      .to
+      .be
+      .true
 
     createAccountState.setIsError(false)
     expect(createAccountState.isError)
-    .to
-    .be
-    .false
+      .to
+      .be
+      .false
   })
 }
 // import { CreateAccountState } from './CreateAccountState'

@@ -1,24 +1,24 @@
 import { makeAutoObservable } from 'mobx'
 
 export const EMPTY_FORM_DATA: any = {
-  firstName: '',
-  lastName: '',
-  middleName: '',
-  corporateEmail: '',
-  tenantId: '',
+  firstName: ``,
+  lastName: ``,
+  middleName: ``,
+  corporateEmail: ``,
+  tenantId: ``,
 }
 
 export class CreateAccountState {
   private _isTriedToSubmit = false
   private _selectedCheckboxes = new Set<string>([])
   private _formData = {
-    firstName: '',
-    lastName: '',
-    middleName: '',
-    corporateEmail: '',
-    tenantId: '',
+    firstName: ``,
+    lastName: ``,
+    middleName: ``,
+    corporateEmail: ``,
+    tenantId: ``,
   }
-  private _rolesData: { [key: number]: string } = {}
+  private _rolesData: { [key: number]: string, } = {}
   private _tenantsData: Tenants[] = []
   private _isError = false
 
@@ -64,10 +64,13 @@ export class CreateAccountState {
   }
 
   setFormData(newValue: Partial<typeof this._formData>) {
-    this._formData = { ...this._formData, ...newValue }
+    this._formData = {
+      ...this._formData,
+      ...newValue, 
+    }
   }
 
-  setRolesData(newValue: { [key: number]: string }) {
+  setRolesData(newValue: { [key: number]: string, }) {
     this._rolesData = newValue
   }
 
@@ -79,18 +82,20 @@ export class CreateAccountState {
     this._isError = newValue
   }
   // }
-  toggleCheckbox(value: string) {
-    if (this._selectedCheckboxes.has(value)) {
+
   toggleCheckbox(newValue: string) {
     if (this._selectedCheckboxes.has(newValue)) {
-        this._selectedCheckboxes = new Set(
-            [...this._selectedCheckboxes].filter((x) => x !== newValue)
-        )
-    } else {
-        this._selectedCheckboxes = new Set([
-            ...this._selectedCheckboxes,
-            newValue,
-        ])
+      this._selectedCheckboxes = new Set(
+        [
+          ...this._selectedCheckboxes,
+        ].filter((x) => x !== newValue),
+      )
+    }
+    else {
+      this._selectedCheckboxes = new Set([
+        ...this._selectedCheckboxes,
+        newValue,
+      ])
     }
   }
 }

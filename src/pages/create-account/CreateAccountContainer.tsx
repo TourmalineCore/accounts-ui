@@ -22,9 +22,9 @@ export const CreateAccountContainer = observer(() => {
 
   async function getRolesAccountLoadAsync() {
     const {
-      data
+      data,
     } = await api.get<{
-      id: number, name: string, permissions: []
+      id: number, name: string, permissions: [],
     }[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`)
 
     createAccountState.setRolesData(Object.assign({}, ...data.map((role) => ({
@@ -34,7 +34,7 @@ export const CreateAccountContainer = observer(() => {
 
   async function getTenantsAccountLoadAsync() {
     const {
-      data
+      data,
     } = await api.get(`${LINK_TO_ACCOUNT_SERVICE}tenants/all`)
 
     createAccountState.setTenantsData(data)

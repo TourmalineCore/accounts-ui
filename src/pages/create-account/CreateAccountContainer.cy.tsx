@@ -96,6 +96,6 @@ function mountComponent() {
   cy.mount(
     <CreateAccountStateContext.Provider value={createAccountState}>
       <CreateAccountContainer />
-    </CreateAccountStateContext.Provider>
+    </CreateAccountStateContext.Provider>,
   )
 }
