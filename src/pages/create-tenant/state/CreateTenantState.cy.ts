@@ -3,6 +3,7 @@ import { CreateTenantState } from "./CreateTenantState"
 describe(`CreateTenantState`, () => {
   describe(`Initialization`, initializationTests)
   describe(`Form Data`, formDataTests)
+  describe(`Is Tried To Submit`, isTriedToSubmitTests)
 })
 
 function initializationTests() {
@@ -61,5 +62,38 @@ function formDataTests() {
     })
 
     expect(createTenantState.formData.name).to.eq('Test 2')
+  })
+}
+
+function isTriedToSubmitTests() {
+  let createTenantState: CreateTenantState
+
+  beforeEach(() => {
+    createTenantState = new CreateTenantState()
+  })
+
+  it(`
+  GIVEN initial isTriedToSubmit = false
+  WHEN setIsTriedToSubmit(true)
+  SHOULD change value to true
+  WHEN setIsTriedToSubmit(false)
+  SHOULD change value to false
+  `, () => {
+    expect(createTenantState.isTriedToSubmit)
+      .to
+      .be
+      .false
+
+    createTenantState.setIsTriedToSubmit(true)
+    expect(createTenantState.isTriedToSubmit)
+      .to
+      .be
+      .true
+
+    createTenantState.setIsTriedToSubmit(false)
+    expect(createTenantState.isTriedToSubmit)
+      .to
+      .be
+      .false
   })
 }
