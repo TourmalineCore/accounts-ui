@@ -1,13 +1,14 @@
 import { Input, CheckField } from '@tourmalinecore/react-tc-ui-kit'
 import clsx from 'clsx'
 import { ChangeEvent, useContext } from 'react'
-import { toast } from 'react-toastify'
-import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
-import { api } from '../../common/api'
 import { CreateAccountStateContext } from './state/CreateAccountStateContext'
 import { observer } from 'mobx-react-lite'
 
-export const CreateAccountContent = observer(() => {
+export const CreateAccountContent = observer(({
+  createAccountAsync,
+} : {
+  createAccountAsync: () => unknown,
+}) => {
   const createAccountState = useContext(CreateAccountStateContext)
 
   const isCorporateEmailError = !createAccountState.formData.corporateEmail && createAccountState.isTriedToSubmit
@@ -16,7 +17,7 @@ export const CreateAccountContent = observer(() => {
     <div className="create-account"
       data-cy="create-account-page"
     >
-      <h1 className="heading create-account__title">Add New Account!!!</h1>
+      <h1 className="heading create-account__title">!!!Add New Account!!!</h1>
 
       <div className="create-account__inner">
         <div className="create-account__box">
@@ -191,7 +192,7 @@ export const CreateAccountContent = observer(() => {
             type="button"
             data-cy="create-account-page-button-add"
             className="create-account__button"
-            onClick={() => createAccountAsync()}
+            onClick={createAccountAsync}
           >
             Add
           </button>
@@ -199,38 +200,5 @@ export const CreateAccountContent = observer(() => {
       </div>
     </div>
   )
-
-  async function createAccountAsync() {
-    createAccountState.setIsTriedToSubmit(true)
-
-    if (createAccountState.formData.firstName && createAccountState.formData.lastName && createAccountState.formData.corporateEmail && [
-      ...createAccountState.selectedCheckboxes,
-    ].length > 0 && createAccountState.formData.tenantId) {
-      try {
-        await api.post<AccountCreate>(`${LINK_TO_ACCOUNT_SERVICE}accounts/create`, {
-          ...createAccountState.formData,
-          corporateEmail: `${createAccountState.formData.corporateEmail}@tourmalinecore.com`,
-          middleName: createAccountState.formData.middleName || undefined,
-          roleIds: [
-            ...createAccountState.selectedCheckboxes,
-          ].map((item) => Number(item)),
-        })
-
-        createAccountState.setIsTriedToSubmit(false)
-        window.location.href = `/account-management`
-
-        toast(`New account added successfully`, {
-          type: `success`,
-          position: `bottom-center`,
-          autoClose: 5000,
-          pauseOnHover: false,
-        })
-      }
-      catch (e) {
-        // eslint-disable-next-line no-console
-        console.log(e)
-        createAccountState.setIsError(true)
-      }
-    }
-  }
+  
 })
