@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite'
 export const CreateTenantContent = observer(({ 
   createTenantAsync,
 }: {
-  createTenantAsync: () => unknown
+  createTenantAsync: () => unknown,
 }) => {
   const createTenantState = useContext(CreateTenantStateContext)
 

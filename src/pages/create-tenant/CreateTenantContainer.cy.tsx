@@ -26,7 +26,6 @@ describe(`CreateTenantContainer`, () => {
   })
 })
 
-
 function mountComponent() {
   const createTenantState = new CreateTenantState()
 

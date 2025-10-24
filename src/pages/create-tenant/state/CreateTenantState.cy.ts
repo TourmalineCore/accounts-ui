@@ -22,7 +22,7 @@ function initializationTests() {
       .to
       .deep
       .eq({
-        name: '',
+        name: ``,
       })
   })
 }
@@ -40,12 +40,12 @@ function formDataTests() {
   SHOULD update form data with name
   `, () => {
     createTenantState.setFormData({
-      name: 'Test',
+      name: `Test`,
     })
 
     expect(createTenantState.formData.name)
       .to
-      .eq('Test')
+      .eq(`Test`)
   })
 
   it(`
@@ -54,14 +54,14 @@ function formDataTests() {
   SHOULD update form data with new name
   `, () => {
     createTenantState.setFormData({
-      name: 'Test',
+      name: `Test`,
     })
 
     createTenantState.setFormData({
-      name: 'Test 2',
+      name: `Test 2`,
     })
 
-    expect(createTenantState.formData.name).to.eq('Test 2')
+    expect(createTenantState.formData.name).to.eq(`Test 2`)
   })
 }
 
