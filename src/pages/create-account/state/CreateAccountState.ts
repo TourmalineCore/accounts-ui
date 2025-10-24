@@ -50,11 +50,6 @@ export class CreateAccountState {
     return this._isError
   }
 
-  // }
-
-  // getTenants(newTenant: Tenants[]) {
-  //   this._allTenants = newTenant
-
   setIsTriedToSubmit(newValue: boolean) {
     this._isTriedToSubmit = newValue
   }
@@ -81,7 +76,6 @@ export class CreateAccountState {
   setIsError(newValue: boolean) {
     this._isError = newValue
   }
-  // }
 
   toggleCheckbox(newValue: string) {
     if (this._selectedCheckboxes.has(newValue)) {

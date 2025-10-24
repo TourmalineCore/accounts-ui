@@ -1,15 +1,17 @@
 import { useMemo } from 'react'
 import { CreateTenantContainer } from './CreateTenantContainer'
+import { CreateTenantState } from './state/CreateTenantState'
+import { CreateTenantStateContext } from './state/CreateTenantStateContext'
 
 export function CreateTenantPage() {
-  const createTenantManagementState = useMemo(
-    () => new CreateTenantManagementState(),
+  const createTenantState = useMemo(
+    () => new CreateTenantState(),
     [],
   )
 
   return (
-    <CreateTenantManagementStateContext.Provider value={createTenantManagementState}>
+    <CreateTenantStateContext.Provider value={createTenantState}>
       <CreateTenantContainer />
-    </CreateTenantManagementStateContext.Provider>
+    </CreateTenantStateContext.Provider>
   )
 }
