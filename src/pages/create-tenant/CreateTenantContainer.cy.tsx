@@ -1,5 +1,7 @@
 import '../../../cypress/support/commands'
 import { CreateTenantContainer } from './CreateTenantContainer'
+import { CreateTenantState } from './state/CreateTenantState'
+import { CreateTenantStateContext } from './state/CreateTenantStateContext'
 
 describe(`CreateTenantContainer`, () => {
   it(`
@@ -24,8 +26,13 @@ describe(`CreateTenantContainer`, () => {
   })
 })
 
+
 function mountComponent() {
+  const createTenantState = new CreateTenantState()
+
   cy.mount(
-    <CreateTenantContainer />,
+    <CreateTenantStateContext.Provider value={createTenantState}>
+      <CreateTenantContainer />
+    </CreateTenantStateContext.Provider>,
   )
 }
