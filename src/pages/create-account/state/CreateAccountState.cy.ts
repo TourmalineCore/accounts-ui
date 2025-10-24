@@ -1,10 +1,10 @@
 import '../../../../cypress/support/commands'
 
-import { CreateAccountState, EMPTY_FORM_DATA } from "./CreateAccountState"
+import { CreateAccountState, EMPTY_ACCOUNT_DATA } from "./CreateAccountState"
 
 describe(`CreateAccountState`, () => {
   describe(`Initialization`, initializationTests)
-  describe(`Form Data`, formDataTests)
+  describe(`Account Data`, accountDataTests)
   describe(`Selected Checkboxes`, selectedCheckboxesTests)
   describe(`Roles Data`, rolesDataTests)
   describe(`Tenants Data`, tenantsDataTests)
@@ -27,10 +27,10 @@ function initializationTests() {
     expect(createAccountState.selectedCheckboxes.size)
       .to
       .eq(0)
-    expect(createAccountState.formData)
+    expect(createAccountState.accountData)
       .to
       .deep
-      .eq(EMPTY_FORM_DATA)
+      .eq(EMPTY_ACCOUNT_DATA)
     expect(createAccountState.rolesData)
       .to
       .deep
@@ -47,7 +47,7 @@ function initializationTests() {
   })
 }
 
-function formDataTests() {
+function accountDataTests() {
   let createAccountState: CreateAccountState
 
   const accountDataForInitialization = {
@@ -67,34 +67,34 @@ function formDataTests() {
   WHEN set account form data
   SHOULD display new values in the account object
   `, () => {
-    createAccountState.setFormData(accountDataForInitialization)
+    createAccountState.setAccountData(accountDataForInitialization)
 
-    expect(createAccountState.formData)
+    expect(createAccountState.accountData)
       .to
       .deep
       .eq(accountDataForInitialization)
   })
 
   it(`
-  GIVEN the CreateAccountState with existing form data
-  WHEN setFormData with new values
+  GIVEN the CreateAccountState with existing account form data
+  WHEN setAccountData with new values
   SHOULD update only specified fields
   `, () => {
-    createAccountState.setFormData(accountDataForInitialization)
-    createAccountState.setFormData({
+    createAccountState.setAccountData(accountDataForInitialization)
+    createAccountState.setAccountData({
       firstName: `Test`,
     })
 
-    expect(createAccountState.formData.firstName)
+    expect(createAccountState.accountData.firstName)
       .to
       .eq(`Test`)
-    expect(createAccountState.formData.lastName)
+    expect(createAccountState.accountData.lastName)
       .to
       .eq(`Ceo`)
-    expect(createAccountState.formData.corporateEmail)
+    expect(createAccountState.accountData.corporateEmail)
       .to
       .eq(`ceo@tourmalinecore.com`)
-    expect(createAccountState.formData.tenantId)
+    expect(createAccountState.accountData.tenantId)
       .to
       .eq(`0`)
   })

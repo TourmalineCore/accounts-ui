@@ -46,14 +46,14 @@ export const CreateAccountContainer = observer(() => {
   async function createAccountAsync() {
     createAccountState.setIsTriedToSubmit(true)
 
-    if (createAccountState.formData.firstName && createAccountState.formData.lastName && createAccountState.formData.corporateEmail && [
+    if (createAccountState.accountData.firstName && createAccountState.accountData.lastName && createAccountState.accountData.corporateEmail && [
       ...createAccountState.selectedCheckboxes,
-    ].length > 0 && createAccountState.formData.tenantId) {
+    ].length > 0 && createAccountState.accountData.tenantId) {
       try {
         await api.post<AccountCreate>(`${LINK_TO_ACCOUNT_SERVICE}accounts/create`, {
-          ...createAccountState.formData,
-          corporateEmail: `${createAccountState.formData.corporateEmail}@tourmalinecore.com`,
-          middleName: createAccountState.formData.middleName || undefined,
+          ...createAccountState.accountData,
+          corporateEmail: `${createAccountState.accountData.corporateEmail}@tourmalinecore.com`,
+          middleName: createAccountState.accountData.middleName || undefined,
           roleIds: [
             ...createAccountState.selectedCheckboxes,
           ].map((item) => Number(item)),

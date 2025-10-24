@@ -18,10 +18,10 @@ export const CreateTenantContainer = observer(() => {
   async function createTenantAsync() {
     createTenantState.setIsTriedToSubmit(true)
 
-    if (createTenantState.formData.name) {
+    if (createTenantState.tenantData.name) {
       try {
         await api.post<TenantCreate>(`${LINK_TO_ACCOUNT_SERVICE}tenants`, {
-          ...createTenantState.formData,
+          ...createTenantState.tenantData,
         })
 
         createTenantState.setIsTriedToSubmit(false)

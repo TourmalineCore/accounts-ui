@@ -11,7 +11,7 @@ export const CreateAccountContent = observer(({
 }) => {
   const createAccountState = useContext(CreateAccountStateContext)
 
-  const isCorporateEmailError = !createAccountState.formData.corporateEmail && createAccountState.isTriedToSubmit
+  const isCorporateEmailError = !createAccountState.accountData.corporateEmail && createAccountState.isTriedToSubmit
 
   return (
     <div className="create-account"
@@ -24,15 +24,15 @@ export const CreateAccountContent = observer(({
           <span>First Name</span>
           <Input
             data-cy="create-account-page-input-firstName"
-            value={createAccountState.formData.firstName}
-            isInvalid={!createAccountState.formData.firstName && createAccountState.isTriedToSubmit}
+            value={createAccountState.accountData.firstName}
+            isInvalid={!createAccountState.accountData.firstName && createAccountState.isTriedToSubmit}
             validationMessages={[
               `This field is required. Please fill it up.`,
             ]}
             isMessagesAbsolute
             maxLength={50}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => createAccountState.setFormData({
-              ...createAccountState.formData,
+            onChange={(e: ChangeEvent<HTMLInputElement>) => createAccountState.setAccountData({
+              ...createAccountState.accountData,
               firstName: e.target.value.trim(), 
             })}
           />
@@ -42,11 +42,11 @@ export const CreateAccountContent = observer(({
           <span>Middle Name</span>
           <Input
             data-cy="create-account-page-input-middleName"
-            value={createAccountState.formData.middleName}
+            value={createAccountState.accountData.middleName}
             isMessagesAbsolute
             maxLength={50}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => createAccountState.setFormData({
-              ...createAccountState.formData,
+            onChange={(e: ChangeEvent<HTMLInputElement>) => createAccountState.setAccountData({
+              ...createAccountState.accountData,
               middleName: e.target.value.trim(), 
             })}
           />
@@ -56,15 +56,15 @@ export const CreateAccountContent = observer(({
           <span>Last Name</span>
           <Input
             data-cy="create-account-page-input-lastName"
-            value={createAccountState.formData.lastName}
-            isInvalid={!createAccountState.formData.lastName && createAccountState.isTriedToSubmit}
+            value={createAccountState.accountData.lastName}
+            isInvalid={!createAccountState.accountData.lastName && createAccountState.isTriedToSubmit}
             validationMessages={[
               `This field is required. Please fill it up.`,
             ]}
             isMessagesAbsolute
             maxLength={50}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => createAccountState.setFormData({
-              ...createAccountState.formData,
+            onChange={(e: ChangeEvent<HTMLInputElement>) => createAccountState.setAccountData({
+              ...createAccountState.accountData,
               lastName: e.target.value.trim(), 
             })}
           />
@@ -79,10 +79,10 @@ export const CreateAccountContent = observer(({
                 className={clsx(`create-account__input`, {
                   'create-account__input--error': !isCorporateEmailError || createAccountState.isError,
                 })}
-                value={createAccountState.formData.corporateEmail}
+                value={createAccountState.accountData.corporateEmail}
                 maxLength={31}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => createAccountState.setFormData({
-                  ...createAccountState.formData,
+                onChange={(e: ChangeEvent<HTMLInputElement>) => createAccountState.setAccountData({
+                  ...createAccountState.accountData,
                   corporateEmail: e.target.value.trim(), 
                 })}
               />
@@ -147,9 +147,9 @@ export const CreateAccountContent = observer(({
             data-cy="create-account-page-select-tenant"
             className="create-account__select"
             defaultValue=""
-            value={createAccountState.formData.tenantId}
-            onChange={(e) => createAccountState.setFormData({
-              ...createAccountState.formData,
+            value={createAccountState.accountData.tenantId}
+            onChange={(e) => createAccountState.setAccountData({
+              ...createAccountState.accountData,
               tenantId: e.target.value.trim(), 
             })}
           >

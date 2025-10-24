@@ -21,15 +21,15 @@ export const CreateTenantContent = observer(({
           <span>Name</span>
           <Input
             data-cy="create-tenant-page-input"
-            value={createTenantState.formData.name}
-            isInvalid={!createTenantState.formData.name && createTenantState.isTriedToSubmit}
+            value={createTenantState.tenantData.name}
+            isInvalid={!createTenantState.tenantData.name && createTenantState.isTriedToSubmit}
             validationMessages={[
               `This field is required. Please fill it up.`,
             ]}
             isMessagesAbsolute
             maxLength={50}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => createTenantState.setFormData({
-              ...createTenantState.formData,
+            onChange={(e: ChangeEvent<HTMLInputElement>) => createTenantState.setTenantData({
+              ...createTenantState.tenantData,
               name: e.target.value.trim(), 
             })}
           />

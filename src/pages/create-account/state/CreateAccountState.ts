@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 
-export const EMPTY_FORM_DATA: any = {
+export const EMPTY_ACCOUNT_DATA: any = {
   firstName: ``,
   lastName: ``,
   middleName: ``,
@@ -11,7 +11,7 @@ export const EMPTY_FORM_DATA: any = {
 export class CreateAccountState {
   private _isTriedToSubmit = false
   private _selectedCheckboxes = new Set<string>([])
-  private _formData = {
+  private _accountData = {
     firstName: ``,
     lastName: ``,
     middleName: ``,
@@ -34,8 +34,8 @@ export class CreateAccountState {
     return this._selectedCheckboxes
   }
 
-  get formData() {
-    return this._formData
+  get accountData() {
+    return this._accountData
   }
 
   get rolesData() {
@@ -58,9 +58,9 @@ export class CreateAccountState {
     this._selectedCheckboxes = newValue
   }
 
-  setFormData(newValue: Partial<typeof this._formData>) {
-    this._formData = {
-      ...this._formData,
+  setAccountData(newValue: Partial<typeof this._accountData>) {
+    this._accountData = {
+      ...this._accountData,
       ...newValue, 
     }
   }

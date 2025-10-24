@@ -2,7 +2,7 @@ import { CreateTenantState } from "./CreateTenantState"
 
 describe(`CreateTenantState`, () => {
   describe(`Initialization`, initializationTests)
-  describe(`Form Data`, formDataTests)
+  describe(`Tenant Data`, tenantDataTests)
   describe(`Is Tried To Submit`, isTriedToSubmitTests)
 })
 
@@ -18,7 +18,7 @@ function initializationTests() {
       .to
       .be
       .false
-    expect(createTenantState.formData)
+    expect(createTenantState.tenantData)
       .to
       .deep
       .eq({
@@ -27,7 +27,7 @@ function initializationTests() {
   })
 }
 
-function formDataTests() {
+function tenantDataTests() {
   let createTenantState: CreateTenantState
 
   beforeEach(() => {
@@ -36,32 +36,32 @@ function formDataTests() {
 
   it(`
   GIVEN CreateTenantState
-  WHEN set account name
-  SHOULD update form data with name
+  WHEN set tenant name
+  SHOULD update tenant form data with name
   `, () => {
-    createTenantState.setFormData({
+    createTenantState.setTenantData({
       name: `Test`,
     })
 
-    expect(createTenantState.formData.name)
+    expect(createTenantState.tenantData.name)
       .to
       .eq(`Test`)
   })
 
   it(`
-  GIVEN CreateTenantState with existing form data
-  WHEN set new account name
-  SHOULD update form data with new name
+  GIVEN CreateTenantState with existing tenant form data
+  WHEN set new tenant name
+  SHOULD update tenant form data with new name
   `, () => {
-    createTenantState.setFormData({
+    createTenantState.setTenantData({
       name: `Test`,
     })
 
-    createTenantState.setFormData({
+    createTenantState.setTenantData({
       name: `Test 2`,
     })
 
-    expect(createTenantState.formData.name).to.eq(`Test 2`)
+    expect(createTenantState.tenantData.name).to.eq(`Test 2`)
   })
 }
 

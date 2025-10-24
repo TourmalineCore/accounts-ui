@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 
 export class CreateTenantState {
   private _isTriedToSubmit = false
-  private _formData = {
+  private _tenantData = {
     name: ``,
   }
 
@@ -14,17 +14,17 @@ export class CreateTenantState {
     return this._isTriedToSubmit
   }
 
-  get formData() {
-    return this._formData
+  get tenantData() {
+    return this._tenantData
   }
 
   setIsTriedToSubmit(value: boolean) {
     this._isTriedToSubmit = value
   }
 
-  setFormData(value: TenantCreate) {
-    this._formData = { 
-      ...this._formData, 
+  setTenantData(value: TenantCreate) {
+    this._tenantData = { 
+      ...this._tenantData, 
       ...value, 
     }
   }
