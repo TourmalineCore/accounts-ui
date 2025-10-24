@@ -17,4 +17,11 @@ export class CreateTenantState {
   get formData() {
     return this._formData
   }
+
+  setFormData(value: TenantCreate) {
+    this._formData = { 
+      ...this._formData, 
+      ...value 
+    }
+  }
 }
