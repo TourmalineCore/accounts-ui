@@ -12,7 +12,7 @@ function initializationTests() {
   WHEN initialize
   SHOULD have default values
   `, () => {
-    expect(createTenantState.triedToSubmit)
+    expect(createTenantState.isTriedToSubmit)
       .to
       .be
       .false
