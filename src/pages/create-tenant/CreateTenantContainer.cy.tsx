@@ -1,7 +1,7 @@
-import '../../../../../cypress/support/commands'
-import { CreateTenant } from './CreateTenant'
+import '../../../cypress/support/commands'
+import { CreateTenantContainer } from './CreateTenantContainer'
 
-describe(`CreateTenant`, () => {
+describe(`CreateTenantContainer`, () => {
   it(`
   GIVEN create tenant page 
   WHEN visit tenants page
@@ -26,6 +26,6 @@ describe(`CreateTenant`, () => {
 
 function mountComponent() {
   cy.mount(
-    <CreateTenant />,
+    <CreateTenantContainer />,
   )
 }

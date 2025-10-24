@@ -3,7 +3,7 @@ import { AccountsPage } from './accounts/AccountsPage'
 import { EditAccount } from './accounts/components/EditAccount/EditAccount'
 import { CreateAccountPage } from './create-account/CreateAccountPage'
 import { RolesPage } from './roles/RolesPage'
-import { CreateTenant } from './tenants/components/CreateTenant/CreateTenant'
+import { CreateTenantPage } from './create-tenant/CreateTenantPage'
 import { TenantsPage } from './tenants/TenantsPage'
 
 const DEFAULT_PATH = `/account-management`
@@ -22,7 +22,7 @@ export const accountManagementRoutes = [
   {
     path: `${DEFAULT_PATH}/tenants/add`,
     breadcrumb: `Add new tenant`,
-    Component: CreateTenant,
+    Component: CreateTenantPage,
   },
 ]
 

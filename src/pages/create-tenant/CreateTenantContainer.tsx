@@ -1,10 +1,10 @@
 import { Input } from '@tourmalinecore/react-tc-ui-kit'
 import { ChangeEvent, useState } from 'react'
 import { toast } from 'react-toastify'
-import { api } from '../../../../common/api'
-import { LINK_TO_ACCOUNT_SERVICE } from '../../../../common/config/config'
+import { api } from '../../common/api'
+import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 
-export function CreateTenant() {
+export function CreateTenantContainer() {
 
   const [
     triedToSubmit,
