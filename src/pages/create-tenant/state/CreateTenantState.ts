@@ -18,6 +18,10 @@ export class CreateTenantState {
     return this._formData
   }
 
+  setIsTriedToSubmit(value: boolean) {
+    this._isTriedToSubmit = value
+  }
+
   setFormData(value: TenantCreate) {
     this._formData = { 
       ...this._formData, 
