@@ -1,6 +1,8 @@
 import { API_ROOT, LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 import '../../../cypress/support/commands'
 import { CreateAccountContainer } from './CreateAccountContainer'
+import { CreateAccountStateContext } from './state/CreateAccountStateContext'
+import { CreateAccountState } from './state/CreateAccountState'
 
 const START_ROOT = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}tenants/all`
 const START_ROOT_ROLES = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}roles`
@@ -28,7 +30,7 @@ const MOCK_DATA_ROLES = [
   },
 ]
 
-describe(`Create Account`, () => {
+describe(`Create Account Container`, () => {
   beforeEach(() => {
     cy.intercept(
       `GET`,
@@ -77,6 +79,7 @@ describe(`Create Account`, () => {
       .should(`exist`)
       .should(`have.text`, `Add`)
   })
+  
   it(`
   GIVEN create account page 
   WHEN visit account page
@@ -88,7 +91,11 @@ describe(`Create Account`, () => {
 })
 
 function mountComponent() {
+  const createAccountState = new CreateAccountState()
+
   cy.mount(
-    <CreateAccountContainer />,
+    <CreateAccountStateContext.Provider value={createAccountState}>
+      <CreateAccountContainer />
+    </CreateAccountStateContext.Provider>
   )
 }
