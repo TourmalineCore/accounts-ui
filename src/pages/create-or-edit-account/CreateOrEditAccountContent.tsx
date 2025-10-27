@@ -3,27 +3,43 @@ import clsx from 'clsx'
 import { ChangeEvent, useContext } from 'react'
 import { CreateOrEditAccountStateContext } from './state/CreateOrEditAccountStateContext'
 import { observer } from 'mobx-react-lite'
+import IconEmail from '../../assets/icons/icon-email.svg?react'
 
 export const CreateOrEditAccountContent = observer(({
   createAccountAsync,
+  isEditMode
 } : {
   createAccountAsync: () => unknown,
+  isEditMode: boolean,
 }) => {
   const createOrEditAccountState = useContext(CreateOrEditAccountStateContext)
 
   const isCorporateEmailError = !createOrEditAccountState.accountData.corporateEmail && createOrEditAccountState.isTriedToSubmit
 
   return (
-    <div className="create-account"
-      data-cy="create-account-page"
+    <div className={isEditMode ? "edit-account" : "create-account"}
+      data-cy={isEditMode ? "edit-account-page" : "create-account-page"}
     >
-      <h1 className="heading create-account__title">!!!Add New Account!!!</h1>
+      <h1 className="heading create-account__title">
+        {isEditMode ? 'Edit Account' : 'Add New Account'}
+      </h1>
 
       <div className="create-account__inner">
+        {isEditMode && (
+          <div className="edit-account__info-box">
+            <div className="edit-account__icon">
+              <IconEmail />
+            </div>
+            <div data-cy="corporate-email" className="edit-account__email">
+              existingEmail
+            </div>
+          </div>
+        )}
+
         <div className="create-account__box">
-          <span>First Name</span>
+          <span>First Name*</span>
           <Input
-            data-cy="create-account-page-input-firstName"
+            data-cy={isEditMode ? "first-name" : "create-account-page-input-firstName"}
             value={createOrEditAccountState.accountData.firstName}
             isInvalid={!createOrEditAccountState.accountData.firstName && createOrEditAccountState.isTriedToSubmit}
             validationMessages={[
@@ -41,7 +57,7 @@ export const CreateOrEditAccountContent = observer(({
         <div className="create-account__box">
           <span>Middle Name</span>
           <Input
-            data-cy="create-account-page-input-middleName"
+            data-cy={isEditMode ? "middle-name" : "create-account-page-input-middleName"}
             value={createOrEditAccountState.accountData.middleName}
             isMessagesAbsolute
             maxLength={50}
@@ -53,9 +69,9 @@ export const CreateOrEditAccountContent = observer(({
         </div>
 
         <div className="create-account__box">
-          <span>Last Name</span>
+          <span>Last Name*</span>
           <Input
-            data-cy="create-account-page-input-lastName"
+            data-cy={isEditMode ? "last-name" : "create-account-page-input-lastName"}
             value={createOrEditAccountState.accountData.lastName}
             isInvalid={!createOrEditAccountState.accountData.lastName && createOrEditAccountState.isTriedToSubmit}
             validationMessages={[
@@ -70,6 +86,7 @@ export const CreateOrEditAccountContent = observer(({
           />
         </div>
 
+      {!isEditMode && (
         <div className="create-account__box create-account__box--email">
           <span>Corporate Email</span>
           <div>
@@ -107,10 +124,11 @@ export const CreateOrEditAccountContent = observer(({
             </div>
           </div>
         </div>
+      )}
 
         <div className="create-account__box">
-          <span>Role</span>
-          <div data-cy="create-account__role-checkbox">
+          <span>Role*</span>
+          <div data-cy={isEditMode ? "edit-account__role-checkbox" : "create-account__role-checkbox"}>
             {Object.entries(createOrEditAccountState.rolesData)
               .map(([
                 value,
@@ -141,47 +159,49 @@ export const CreateOrEditAccountContent = observer(({
           </div>
         </div>
 
-        <div className="create-account__box">
-          <span>Tenant</span>
-          <select
-            data-cy="create-account-page-select-tenant"
-            className="create-account__select"
-            defaultValue=""
-            value={createOrEditAccountState.accountData.tenantId}
-            onChange={(e) => createOrEditAccountState.setAccountData({
-              ...createOrEditAccountState.accountData,
-              tenantId: e.target.value.trim(), 
-            })}
-          >
-            <option
-              value=""
-              disabled
+        {!isEditMode && (
+          <div className="create-account__box">
+            <span>Tenant</span>
+            <select
+              data-cy="create-account-page-select-tenant"
+              className="create-account__select"
+              defaultValue=""
+              value={createOrEditAccountState.accountData.tenantId}
+              onChange={(e) => createOrEditAccountState.setAccountData({
+                ...createOrEditAccountState.accountData,
+                tenantId: e.target.value.trim(), 
+              })}
             >
-              Select tenant
-            </option>
-            {createOrEditAccountState.tenantsData.length !== 0
-              ? createOrEditAccountState.tenantsData.map(({
-                id, name, 
-              }) => (
-                <option
-                  key={id}
-                  value={id}
-                >
-                  {name}
-                </option>
-              ))
-              : (
-                <option>
-                  No tenants
-                </option>
-              )}
-          </select>
-        </div>
+              <option
+                value=""
+                disabled
+              >
+                Select tenant
+              </option>
+              {createOrEditAccountState.tenantsData.length !== 0
+                ? createOrEditAccountState.tenantsData.map(({
+                  id, name, 
+                }) => (
+                  <option
+                    key={id}
+                    value={id}
+                  >
+                    {name}
+                  </option>
+                ))
+                : (
+                  <option>
+                    No tenants
+                  </option>
+                )}
+            </select>
+          </div>
+        )}
 
         <div className="create-account__inner-button">
           <button
             type="button"
-            data-cy="create-account-page-button-cancel"
+            data-cy={isEditMode ? "cancel-button" : "create-account-page-button-cancel"}
             className="create-account__button"
             onClick={() => window.location.href =`/account-management`}
           >
@@ -190,11 +210,11 @@ export const CreateOrEditAccountContent = observer(({
 
           <button
             type="button"
-            data-cy="create-account-page-button-add"
+            data-cy={isEditMode ? "save-button" : "create-account-page-button-add"}
             className="create-account__button"
             onClick={createAccountAsync}
           >
-            Add
+            {isEditMode ? 'Save Changes' : 'Add'}
           </button>
         </div>
       </div>

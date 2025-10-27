@@ -5,9 +5,13 @@ import { CreateOrEditAccountContent } from './CreateOrEditAccountContent'
 import { api } from '../../common/api'
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 import { toast } from 'react-toastify'
+import { useParams } from 'react-router-dom'
 
 export const CreateOrEditAccountContainer = observer(() => {
   const createOrEditAccountState = useContext(CreateOrEditAccountStateContext)
+
+  const { id } = useParams()
+  const isEditMode = !!id
 
   useEffect(() => {
     getRolesAccountLoadAsync()
@@ -20,6 +24,7 @@ export const CreateOrEditAccountContainer = observer(() => {
   return (
     <CreateOrEditAccountContent
       createAccountAsync={createAccountAsync} 
+      isEditMode={isEditMode}
     />
   )
 
