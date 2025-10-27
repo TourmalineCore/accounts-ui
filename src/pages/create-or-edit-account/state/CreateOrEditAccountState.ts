@@ -21,6 +21,7 @@ export class CreateOrEditAccountState {
   private _rolesData: { [key: number]: string, } = {}
   private _tenantsData: Tenants[] = []
   private _isError = false
+  private _isEditMode = false
 
   constructor() {
     makeAutoObservable(this)
@@ -50,6 +51,10 @@ export class CreateOrEditAccountState {
     return this._isError
   }
 
+   get isEditMode() {
+    return this._isEditMode
+  }
+
   setIsTriedToSubmit(newValue: boolean) {
     this._isTriedToSubmit = newValue
   }
@@ -76,6 +81,10 @@ export class CreateOrEditAccountState {
 
   setIsError(newValue: boolean) {
     this._isError = newValue
+  }
+
+  setIsEditMode(newValue: boolean) {
+    this._isEditMode = newValue
   }
 
   toggleCheckbox(newValue: string) {
