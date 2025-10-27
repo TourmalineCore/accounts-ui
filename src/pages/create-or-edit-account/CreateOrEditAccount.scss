@@ -1,4 +1,4 @@
-.create-account {
+.create-or-edit-account {
   $error-color: #e11961;
 
   &__title {
@@ -26,6 +26,19 @@
   &__inner {
     margin: 0 auto;
     max-width: 700px;
+  }
+
+  &__info-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 34px;
+  }
+
+  &__icon {
+    display: block;
+    margin-right: 16px;
+    width: 24px;
+    height: 24px;
   }
 
   &__box {
