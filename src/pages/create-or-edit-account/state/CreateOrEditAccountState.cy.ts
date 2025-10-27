@@ -10,7 +10,41 @@ describe(`CreateOrEditAccountState`, () => {
   describe(`Tenants Data`, tenantsDataTests)
   describe(`Is Tried To Submit`, isTriedToSubmitTests)
   describe(`Is Error`, isErrorTests)
+  describe(`Edit Mode`, editModeTests)
 })
+
+function editModeTests() {
+  let createOrEditAccountState: CreateOrEditAccountState
+
+  beforeEach(() => {
+    createOrEditAccountState = new CreateOrEditAccountState()
+  })
+
+  it(`
+  GIVEN initial isEditMode = false
+  WHEN call setIsEditMode(true)
+  SHOULD change value to true
+  WHEN call setIsEditMode(false)
+  SHOULD change value to false
+  `, () => {
+    expect(createOrEditAccountState.isEditMode)
+      .to
+      .be
+      .false
+
+    createOrEditAccountState.setIsEditMode(true)
+    expect(createOrEditAccountState.isEditMode)
+      .to
+      .be
+      .true
+
+    createOrEditAccountState.setIsEditMode(false)
+    expect(createOrEditAccountState.isEditMode)
+      .to
+      .be
+      .false
+  })
+}
 
 function initializationTests() {
   const createOrEditAccountState = new CreateOrEditAccountState()
