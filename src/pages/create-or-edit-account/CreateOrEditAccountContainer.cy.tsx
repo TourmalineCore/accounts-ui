@@ -1,8 +1,8 @@
 import { API_ROOT, LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 import '../../../cypress/support/commands'
-import { CreateAccountContainer } from './CreateAccountContainer'
-import { CreateAccountStateContext } from './state/CreateAccountStateContext'
-import { CreateAccountState } from './state/CreateAccountState'
+import { CreateOrEditAccountContainer } from './CreateOrEditAccountContainer'
+import { CreateOrEditAccountStateContext } from './state/CreateOrEditAccountStateContext'
+import { CreateOrEditAccountState } from './state/CreateOrEditAccountState'
 
 const START_ROOT = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}tenants/all`
 const START_ROOT_ROLES = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}roles`
@@ -91,11 +91,11 @@ describe(`Create Account Container`, () => {
 })
 
 function mountComponent() {
-  const createAccountState = new CreateAccountState()
+  const createAccountState = new CreateOrEditAccountState()
 
   cy.mount(
-    <CreateAccountStateContext.Provider value={createAccountState}>
-      <CreateAccountContainer />
-    </CreateAccountStateContext.Provider>,
+    <CreateOrEditAccountStateContext.Provider value={createAccountState}>
+      <CreateOrEditAccountContainer />
+    </CreateOrEditAccountStateContext.Provider>,
   )
 }

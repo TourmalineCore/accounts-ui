@@ -1,8 +1,8 @@
 import '../../../../cypress/support/commands'
 
-import { CreateAccountState, EMPTY_ACCOUNT_DATA } from "./CreateAccountState"
+import { CreateOrEditAccountState, EMPTY_ACCOUNT_DATA } from "./CreateOrEditAccountState"
 
-describe(`CreateAccountState`, () => {
+describe(`CreateOrEditAccountState`, () => {
   describe(`Initialization`, initializationTests)
   describe(`Account Data`, accountDataTests)
   describe(`Selected Checkboxes`, selectedCheckboxesTests)
@@ -13,33 +13,33 @@ describe(`CreateAccountState`, () => {
 })
 
 function initializationTests() {
-  const createAccountState = new CreateAccountState()
+  const createOrEditAccountState = new CreateOrEditAccountState()
   
   it(`
   GIVEN a CreateAccountState
   WHEN initialize
   SHOULD have default values
   `, () => {
-    expect(createAccountState.isTriedToSubmit)
+    expect(createOrEditAccountState.isTriedToSubmit)
       .to
       .be
       .false
-    expect(createAccountState.selectedCheckboxes.size)
+    expect(createOrEditAccountState.selectedCheckboxes.size)
       .to
       .eq(0)
-    expect(createAccountState.accountData)
+    expect(createOrEditAccountState.accountData)
       .to
       .deep
       .eq(EMPTY_ACCOUNT_DATA)
-    expect(createAccountState.rolesData)
+    expect(createOrEditAccountState.rolesData)
       .to
       .deep
       .eq({})
-    expect(createAccountState.tenantsData)
+    expect(createOrEditAccountState.tenantsData)
       .to
       .deep
       .eq([])
-    expect(createAccountState.isError)
+    expect(createOrEditAccountState.isError)
       .to
       .be
       .false
@@ -48,7 +48,7 @@ function initializationTests() {
 }
 
 function accountDataTests() {
-  let createAccountState: CreateAccountState
+  let createOrEditAccountState: CreateOrEditAccountState
 
   const accountDataForInitialization = {
     firstName: `Ceo`,
@@ -59,7 +59,7 @@ function accountDataTests() {
   }
 
   beforeEach(() => {
-    createAccountState = new CreateAccountState()
+    createOrEditAccountState = new CreateOrEditAccountState()
   })
 
   it(`
@@ -67,9 +67,9 @@ function accountDataTests() {
   WHEN set account form data
   SHOULD display new values in the account object
   `, () => {
-    createAccountState.setAccountData(accountDataForInitialization)
+    createOrEditAccountState.setAccountData(accountDataForInitialization)
 
-    expect(createAccountState.accountData)
+    expect(createOrEditAccountState.accountData)
       .to
       .deep
       .eq(accountDataForInitialization)
@@ -80,31 +80,31 @@ function accountDataTests() {
   WHEN setAccountData with new values
   SHOULD update only specified fields
   `, () => {
-    createAccountState.setAccountData(accountDataForInitialization)
-    createAccountState.setAccountData({
+    createOrEditAccountState.setAccountData(accountDataForInitialization)
+    createOrEditAccountState.setAccountData({
       firstName: `Test`,
     })
 
-    expect(createAccountState.accountData.firstName)
+    expect(createOrEditAccountState.accountData.firstName)
       .to
       .eq(`Test`)
-    expect(createAccountState.accountData.lastName)
+    expect(createOrEditAccountState.accountData.lastName)
       .to
       .eq(`Ceo`)
-    expect(createAccountState.accountData.corporateEmail)
+    expect(createOrEditAccountState.accountData.corporateEmail)
       .to
       .eq(`ceo@tourmalinecore.com`)
-    expect(createAccountState.accountData.tenantId)
+    expect(createOrEditAccountState.accountData.tenantId)
       .to
       .eq(`0`)
   })
 }
 
 function selectedCheckboxesTests() {
-  let createAccountState: CreateAccountState
+  let createOrEditAccountState: CreateOrEditAccountState
 
   beforeEach(() => {
-    createAccountState = new CreateAccountState()
+    createOrEditAccountState = new CreateOrEditAccountState()
   })
 
   it(`
@@ -112,13 +112,13 @@ function selectedCheckboxesTests() {
   WHEN toggle empty checkbox 
   SHOULD add its value to the set of selected checkboxes
   `, () => {
-    createAccountState.toggleCheckbox(`1`)
+    createOrEditAccountState.toggleCheckbox(`1`)
 
-    expect(createAccountState.selectedCheckboxes.has(`1`))
+    expect(createOrEditAccountState.selectedCheckboxes.has(`1`))
       .to
       .be
       .true
-    expect(createAccountState.selectedCheckboxes.size)
+    expect(createOrEditAccountState.selectedCheckboxes.size)
       .to
       .eq(1)
   })
@@ -128,32 +128,32 @@ function selectedCheckboxesTests() {
   WHEN toggle checkbox with existing value
   SHOULD remove value from the set of selected checkboxes
   `, () => {
-    createAccountState.setSelectedCheckboxes(new Set([
+    createOrEditAccountState.setSelectedCheckboxes(new Set([
       `1`,
       `2`,
     ]))
     
-    createAccountState.toggleCheckbox(`1`)
+    createOrEditAccountState.toggleCheckbox(`1`)
 
-    expect(createAccountState.selectedCheckboxes.has(`1`))
+    expect(createOrEditAccountState.selectedCheckboxes.has(`1`))
       .to
       .be
       .false
-    expect(createAccountState.selectedCheckboxes.has(`2`))
+    expect(createOrEditAccountState.selectedCheckboxes.has(`2`))
       .to
       .be
       .true
-    expect(createAccountState.selectedCheckboxes.size)
+    expect(createOrEditAccountState.selectedCheckboxes.size)
       .to
       .eq(1)
   })
 }
 
 function rolesDataTests() {
-  let createAccountState: CreateAccountState
+  let createOrEditAccountState: CreateOrEditAccountState
 
   beforeEach(() => {
-    createAccountState = new CreateAccountState()
+    createOrEditAccountState = new CreateOrEditAccountState()
   })
 
   it(`
@@ -166,9 +166,9 @@ function rolesDataTests() {
       2: `Intern`,
     }
 
-    createAccountState.setRolesData(newRolesData)
+    createOrEditAccountState.setRolesData(newRolesData)
 
-    expect(createAccountState.rolesData)
+    expect(createOrEditAccountState.rolesData)
       .to
       .deep
       .eq(newRolesData)
@@ -176,10 +176,10 @@ function rolesDataTests() {
 }
 
 function tenantsDataTests() {
-  let createAccountState: CreateAccountState
+  let createOrEditAccountState: CreateOrEditAccountState
 
   beforeEach(() => {
-    createAccountState = new CreateAccountState()
+    createOrEditAccountState = new CreateOrEditAccountState()
   })
 
   it(`
@@ -198,9 +198,9 @@ function tenantsDataTests() {
       },
     ]
 
-    createAccountState.setTenantsData(newTenantsData)
+    createOrEditAccountState.setTenantsData(newTenantsData)
 
-    expect(createAccountState.tenantsData)
+    expect(createOrEditAccountState.tenantsData)
       .to
       .deep
       .eq(newTenantsData)
@@ -208,10 +208,10 @@ function tenantsDataTests() {
 }
 
 function isTriedToSubmitTests() {
-  let createAccountState: CreateAccountState
+  let createOrEditAccountState: CreateOrEditAccountState
 
   beforeEach(() => {
-    createAccountState = new CreateAccountState()
+    createOrEditAccountState = new CreateOrEditAccountState()
   })
 
   it(`
@@ -221,19 +221,19 @@ function isTriedToSubmitTests() {
   WHEN call setIsTriedToSubmit(false)
   SHOULD change value to false
   `, () => {
-    expect(createAccountState.isTriedToSubmit)
+    expect(createOrEditAccountState.isTriedToSubmit)
       .to
       .be
       .false
 
-    createAccountState.setIsTriedToSubmit(true)
-    expect(createAccountState.isTriedToSubmit)
+    createOrEditAccountState.setIsTriedToSubmit(true)
+    expect(createOrEditAccountState.isTriedToSubmit)
       .to
       .be
       .true
 
-    createAccountState.setIsTriedToSubmit(false)
-    expect(createAccountState.isTriedToSubmit)
+    createOrEditAccountState.setIsTriedToSubmit(false)
+    expect(createOrEditAccountState.isTriedToSubmit)
       .to
       .be
       .false
@@ -241,10 +241,10 @@ function isTriedToSubmitTests() {
 }
 
 function isErrorTests() {
-  let createAccountState: CreateAccountState
+  let createOrEditAccountState: CreateOrEditAccountState
 
   beforeEach(() => {
-    createAccountState = new CreateAccountState()
+    createOrEditAccountState = new CreateOrEditAccountState()
   })
 
   it(`
@@ -254,19 +254,19 @@ function isErrorTests() {
   WHEN setIsError(false)
   SHOULD change value to false
   `, () => {
-    expect(createAccountState.isError)
+    expect(createOrEditAccountState.isError)
       .to
       .be
       .false
 
-    createAccountState.setIsError(true)
-    expect(createAccountState.isError)
+    createOrEditAccountState.setIsError(true)
+    expect(createOrEditAccountState.isError)
       .to
       .be
       .true
 
-    createAccountState.setIsError(false)
-    expect(createAccountState.isError)
+    createOrEditAccountState.setIsError(false)
+    expect(createOrEditAccountState.isError)
       .to
       .be
       .false

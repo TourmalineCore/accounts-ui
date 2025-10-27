@@ -1,17 +1,17 @@
 import { Input, CheckField } from '@tourmalinecore/react-tc-ui-kit'
 import clsx from 'clsx'
 import { ChangeEvent, useContext } from 'react'
-import { CreateAccountStateContext } from './state/CreateAccountStateContext'
+import { CreateOrEditAccountStateContext } from './state/CreateOrEditAccountStateContext'
 import { observer } from 'mobx-react-lite'
 
-export const CreateAccountContent = observer(({
+export const CreateOrEditAccountContent = observer(({
   createAccountAsync,
 } : {
   createAccountAsync: () => unknown,
 }) => {
-  const createAccountState = useContext(CreateAccountStateContext)
+  const createOrEditAccountState = useContext(CreateOrEditAccountStateContext)
 
-  const isCorporateEmailError = !createAccountState.accountData.corporateEmail && createAccountState.isTriedToSubmit
+  const isCorporateEmailError = !createOrEditAccountState.accountData.corporateEmail && createOrEditAccountState.isTriedToSubmit
 
   return (
     <div className="create-account"
@@ -24,15 +24,15 @@ export const CreateAccountContent = observer(({
           <span>First Name</span>
           <Input
             data-cy="create-account-page-input-firstName"
-            value={createAccountState.accountData.firstName}
-            isInvalid={!createAccountState.accountData.firstName && createAccountState.isTriedToSubmit}
+            value={createOrEditAccountState.accountData.firstName}
+            isInvalid={!createOrEditAccountState.accountData.firstName && createOrEditAccountState.isTriedToSubmit}
             validationMessages={[
               `This field is required. Please fill it up.`,
             ]}
             isMessagesAbsolute
             maxLength={50}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => createAccountState.setAccountData({
-              ...createAccountState.accountData,
+            onChange={(e: ChangeEvent<HTMLInputElement>) => createOrEditAccountState.setAccountData({
+              ...createOrEditAccountState.accountData,
               firstName: e.target.value.trim(), 
             })}
           />
@@ -42,11 +42,11 @@ export const CreateAccountContent = observer(({
           <span>Middle Name</span>
           <Input
             data-cy="create-account-page-input-middleName"
-            value={createAccountState.accountData.middleName}
+            value={createOrEditAccountState.accountData.middleName}
             isMessagesAbsolute
             maxLength={50}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => createAccountState.setAccountData({
-              ...createAccountState.accountData,
+            onChange={(e: ChangeEvent<HTMLInputElement>) => createOrEditAccountState.setAccountData({
+              ...createOrEditAccountState.accountData,
               middleName: e.target.value.trim(), 
             })}
           />
@@ -56,15 +56,15 @@ export const CreateAccountContent = observer(({
           <span>Last Name</span>
           <Input
             data-cy="create-account-page-input-lastName"
-            value={createAccountState.accountData.lastName}
-            isInvalid={!createAccountState.accountData.lastName && createAccountState.isTriedToSubmit}
+            value={createOrEditAccountState.accountData.lastName}
+            isInvalid={!createOrEditAccountState.accountData.lastName && createOrEditAccountState.isTriedToSubmit}
             validationMessages={[
               `This field is required. Please fill it up.`,
             ]}
             isMessagesAbsolute
             maxLength={50}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => createAccountState.setAccountData({
-              ...createAccountState.accountData,
+            onChange={(e: ChangeEvent<HTMLInputElement>) => createOrEditAccountState.setAccountData({
+              ...createOrEditAccountState.accountData,
               lastName: e.target.value.trim(), 
             })}
           />
@@ -77,19 +77,19 @@ export const CreateAccountContent = observer(({
               <Input
                 data-cy="create-account-page-input-email"
                 className={clsx(`create-account__input`, {
-                  'create-account__input--error': !isCorporateEmailError || createAccountState.isError,
+                  'create-account__input--error': !isCorporateEmailError || createOrEditAccountState.isError,
                 })}
-                value={createAccountState.accountData.corporateEmail}
+                value={createOrEditAccountState.accountData.corporateEmail}
                 maxLength={31}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => createAccountState.setAccountData({
-                  ...createAccountState.accountData,
+                onChange={(e: ChangeEvent<HTMLInputElement>) => createOrEditAccountState.setAccountData({
+                  ...createOrEditAccountState.accountData,
                   corporateEmail: e.target.value.trim(), 
                 })}
               />
               <span>@tourmalinecore.com</span>
             </div>
             <div className={clsx(`create-account__important-info`, {
-              'create-account__important-info--error': isCorporateEmailError || createAccountState.isError,
+              'create-account__important-info--error': isCorporateEmailError || createOrEditAccountState.isError,
             })}
             >
               {isCorporateEmailError && (
@@ -98,7 +98,7 @@ export const CreateAccountContent = observer(({
                   <br />
                 </>
               )}
-              {!createAccountState.isError ? (
+              {!createOrEditAccountState.isError ? (
                 <>
                   <b>Сheck the entered data</b>
                   , it will be impossible to edit this field.
@@ -111,7 +111,7 @@ export const CreateAccountContent = observer(({
         <div className="create-account__box">
           <span>Role</span>
           <div data-cy="create-account__role-checkbox">
-            {Object.entries(createAccountState.rolesData)
+            {Object.entries(createOrEditAccountState.rolesData)
               .map(([
                 value,
                 label,
@@ -122,17 +122,17 @@ export const CreateAccountContent = observer(({
                     marginBottom: 16,
                   }}
                   label={label}
-                  checked={createAccountState.selectedCheckboxes.has(value)}
+                  checked={createOrEditAccountState.selectedCheckboxes.has(value)}
                   onChange={() => {
-                    createAccountState.toggleCheckbox(value)
+                    createOrEditAccountState.toggleCheckbox(value)
                   }}
                 />
               ))}
 
             <div className="create-account__error-message">
               {[
-                ...createAccountState.selectedCheckboxes,
-              ].length === 0 && createAccountState.isTriedToSubmit && (
+                ...createOrEditAccountState.selectedCheckboxes,
+              ].length === 0 && createOrEditAccountState.isTriedToSubmit && (
                 <>
                   Select at least one role
                 </>
@@ -147,9 +147,9 @@ export const CreateAccountContent = observer(({
             data-cy="create-account-page-select-tenant"
             className="create-account__select"
             defaultValue=""
-            value={createAccountState.accountData.tenantId}
-            onChange={(e) => createAccountState.setAccountData({
-              ...createAccountState.accountData,
+            value={createOrEditAccountState.accountData.tenantId}
+            onChange={(e) => createOrEditAccountState.setAccountData({
+              ...createOrEditAccountState.accountData,
               tenantId: e.target.value.trim(), 
             })}
           >
@@ -159,8 +159,8 @@ export const CreateAccountContent = observer(({
             >
               Select tenant
             </option>
-            {createAccountState.tenantsData.length !== 0
-              ? createAccountState.tenantsData.map(({
+            {createOrEditAccountState.tenantsData.length !== 0
+              ? createOrEditAccountState.tenantsData.map(({
                 id, name, 
               }) => (
                 <option

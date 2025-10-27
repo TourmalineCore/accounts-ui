@@ -8,7 +8,7 @@ export const EMPTY_ACCOUNT_DATA: any = {
   tenantId: ``,
 }
 
-export class CreateAccountState {
+export class CreateOrEditAccountState {
   private _isTriedToSubmit = false
   private _selectedCheckboxes = new Set<string>([])
   private _accountData = {
@@ -59,6 +59,7 @@ export class CreateAccountState {
   }
 
   setAccountData(newValue: Partial<typeof this._accountData>) {
+  // setAccountData(newValue: AccountCreate {
     this._accountData = {
       ...this._accountData,
       ...newValue, 

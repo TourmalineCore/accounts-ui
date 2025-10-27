@@ -1,13 +1,13 @@
 import { observer } from 'mobx-react-lite'
 import { useContext, useEffect } from 'react'
-import { CreateAccountStateContext } from './state/CreateAccountStateContext'
-import { CreateAccountContent } from './CreateAccountContent'
+import { CreateOrEditAccountStateContext } from './state/CreateOrEditAccountStateContext'
+import { CreateOrEditAccountContent } from './CreateOrEditAccountContent'
 import { api } from '../../common/api'
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 import { toast } from 'react-toastify'
 
-export const CreateAccountContainer = observer(() => {
-  const createAccountState = useContext(CreateAccountStateContext)
+export const CreateOrEditAccountContainer = observer(() => {
+  const createOrEditAccountState = useContext(CreateOrEditAccountStateContext)
 
   useEffect(() => {
     getRolesAccountLoadAsync()
@@ -18,7 +18,7 @@ export const CreateAccountContainer = observer(() => {
   }, [])
 
   return (
-    <CreateAccountContent
+    <CreateOrEditAccountContent
       createAccountAsync={createAccountAsync} 
     />
   )
@@ -30,7 +30,7 @@ export const CreateAccountContainer = observer(() => {
       id: number, name: string, permissions: [],
     }[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`)
 
-    createAccountState.setRolesData(Object.assign({}, ...data.map((role) => ({
+    createOrEditAccountState.setRolesData(Object.assign({}, ...data.map((role) => ({
       [role.id]: role.name,
     }))))
   }
@@ -40,26 +40,26 @@ export const CreateAccountContainer = observer(() => {
       data,
     } = await api.get(`${LINK_TO_ACCOUNT_SERVICE}tenants/all`)
 
-    createAccountState.setTenantsData(data)
+    createOrEditAccountState.setTenantsData(data)
   }
 
   async function createAccountAsync() {
-    createAccountState.setIsTriedToSubmit(true)
+    createOrEditAccountState.setIsTriedToSubmit(true)
 
-    if (createAccountState.accountData.firstName && createAccountState.accountData.lastName && createAccountState.accountData.corporateEmail && [
-      ...createAccountState.selectedCheckboxes,
-    ].length > 0 && createAccountState.accountData.tenantId) {
+    if (createOrEditAccountState.accountData.firstName && createOrEditAccountState.accountData.lastName && createOrEditAccountState.accountData.corporateEmail && [
+      ...createOrEditAccountState.selectedCheckboxes,
+    ].length > 0 && createOrEditAccountState.accountData.tenantId) {
       try {
         await api.post<AccountCreate>(`${LINK_TO_ACCOUNT_SERVICE}accounts/create`, {
-          ...createAccountState.accountData,
-          corporateEmail: `${createAccountState.accountData.corporateEmail}@tourmalinecore.com`,
-          middleName: createAccountState.accountData.middleName || undefined,
+          ...createOrEditAccountState.accountData,
+          corporateEmail: `${createOrEditAccountState.accountData.corporateEmail}@tourmalinecore.com`,
+          middleName: createOrEditAccountState.accountData.middleName || undefined,
           roleIds: [
-            ...createAccountState.selectedCheckboxes,
+            ...createOrEditAccountState.selectedCheckboxes,
           ].map((item) => Number(item)),
         })
 
-        createAccountState.setIsTriedToSubmit(false)
+        createOrEditAccountState.setIsTriedToSubmit(false)
         window.location.href = `/account-management`
 
         toast(`New account added successfully`, {
@@ -72,7 +72,7 @@ export const CreateAccountContainer = observer(() => {
       catch (e) {
         // eslint-disable-next-line no-console
         console.log(e)
-        createAccountState.setIsError(true)
+        createOrEditAccountState.setIsError(true)
       }
     }
   }
