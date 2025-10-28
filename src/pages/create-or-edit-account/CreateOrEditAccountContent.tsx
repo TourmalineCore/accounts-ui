@@ -30,8 +30,11 @@ export const CreateOrEditAccountContent = observer(({
             <div className="create-or-edit-account__icon">
               <IconEmail />
             </div>
-            <div data-cy="corporate-email" className="create-or-edit-account__email">
-              existingEmail
+            <div 
+              data-cy="corporate-email" 
+              className="create-or-edit-account__email"
+            >
+              {createOrEditAccountState.accountData.corporateEmail}
             </div>
           </div>
         )}
