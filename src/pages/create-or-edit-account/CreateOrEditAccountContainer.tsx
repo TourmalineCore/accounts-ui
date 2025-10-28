@@ -26,6 +26,7 @@ export const CreateOrEditAccountContainer = observer(() => {
   return (
     <CreateOrEditAccountContent
       createAccountAsync={createAccountAsync} 
+      editAccountAsync={editAccountAsync} 
       isEditMode={isEditMode}
     />
   )
@@ -50,6 +51,29 @@ export const CreateOrEditAccountContainer = observer(() => {
     createOrEditAccountState.setIsEditMode(true)
   }
 
+  async function editAccountAsync() {
+    createOrEditAccountState.setIsTriedToSubmit(true)
+
+    if (createOrEditAccountState.accountData.firstName && 
+        createOrEditAccountState.accountData.lastName && 
+        [...createOrEditAccountState.selectedCheckboxes].length > 0) {
+      try {
+        await api.post(`${LINK_TO_ACCOUNT_SERVICE}accounts/edit`, {
+          id: id,
+          firstName: createOrEditAccountState.accountData.firstName,
+          middleName: createOrEditAccountState.accountData.middleName ? createOrEditAccountState.accountData.middleName : null,
+          lastName: createOrEditAccountState.accountData.lastName,
+          roles: [...createOrEditAccountState.selectedCheckboxes].map((item) => Number(item)),
+        })
+
+        window.location.href = `/account-management`
+        
+        createOrEditAccountState.setIsTriedToSubmit(false)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+  }
 
   async function getRolesAccountLoadAsync() {
     const {

@@ -7,9 +7,11 @@ import IconEmail from '../../assets/icons/icon-email.svg?react'
 
 export const CreateOrEditAccountContent = observer(({
   createAccountAsync,
+  editAccountAsync,
   isEditMode
 } : {
   createAccountAsync: () => unknown,
+  editAccountAsync: () => unknown,
   isEditMode: boolean,
 }) => {
   const createOrEditAccountState = useContext(CreateOrEditAccountStateContext)
@@ -215,7 +217,7 @@ export const CreateOrEditAccountContent = observer(({
             type="button"
             data-cy={isEditMode ? "save-button" : "create-account-page-button-add"}
             className="create-or-edit-account__button"
-            onClick={createAccountAsync}
+            onClick={isEditMode ? editAccountAsync : createAccountAsync}
           >
             {isEditMode ? 'Save Changes' : 'Add'}
           </button>
