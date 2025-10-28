@@ -14,11 +14,13 @@ export const CreateOrEditAccountContainer = observer(() => {
   const isEditMode = !!id
 
   useEffect(() => {
-    getRolesAccountLoadAsync()
-  }, [])
-
-  useEffect(() => {
-    getTenantsAccountLoadAsync()
+    if (isEditMode) {
+      getEditAccountLoadAsync()
+    } else {
+      getRolesAccountLoadAsync()
+      getTenantsAccountLoadAsync()
+      createOrEditAccountState.setIsEditMode(false)
+    }
   }, [])
 
   return (
@@ -27,6 +29,27 @@ export const CreateOrEditAccountContainer = observer(() => {
       isEditMode={isEditMode}
     />
   )
+
+  async function getEditAccountLoadAsync() {
+    const { 
+      data
+    } = await api.get<AccountEdit>(`${LINK_TO_ACCOUNT_SERVICE}accounts/findById/${id}`)
+    const { 
+      data: roles
+    } = await api.get<{
+      id: number, name: string, permissions: []
+    }[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`)
+
+    createOrEditAccountState.setAccountData(data)
+    createOrEditAccountState.setSelectedCheckboxes(new Set([
+      ...data.roles.map((role) => String(role.id)),
+    ]))
+    createOrEditAccountState.setRolesData(Object.assign({}, ...roles.map((role) => ({
+      [role.id]: role.name, 
+    }))))
+    createOrEditAccountState.setIsEditMode(true)
+  }
+
 
   async function getRolesAccountLoadAsync() {
     const {
