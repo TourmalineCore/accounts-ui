@@ -1,13 +1,13 @@
 import { API_ROOT, LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 import '../../../cypress/support/commands'
-import { CreateOrEditAccountContainer } from './CreateOrEditAccountContainer'
 import { CreateOrEditAccountStateContext } from './state/CreateOrEditAccountStateContext'
 import { CreateOrEditAccountState } from './state/CreateOrEditAccountState'
+import { CreateOrEditAccountContent } from './CreateOrEditAccountContent'
 
-const START_ROOT = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}tenants/all`
+const START_ROOT_TENANTS_ALL = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}tenants/all`
 const START_ROOT_ROLES = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}roles`
 
-const MOCK_DATA: Tenants[] = [
+const MOCK_DATA_TENANTS: Tenants[] = [
   {
     id: 1,
     name: `Blue`,
@@ -34,8 +34,8 @@ describe(`Create Account Container`, () => {
   beforeEach(() => {
     cy.intercept(
       `GET`,
-      START_ROOT,
-      MOCK_DATA,
+      START_ROOT_TENANTS_ALL,
+      MOCK_DATA_TENANTS,
     )
 
     cy.intercept(
@@ -90,12 +90,24 @@ describe(`Create Account Container`, () => {
   })
 })
 
-function mountComponent() {
+function mountComponent(isEditMode = false) {
   const createAccountState = new CreateOrEditAccountState()
 
-  cy.mount(
+  createAccountState.setTenantsData(MOCK_DATA_TENANTS)
+  createAccountState.setRolesData({
+    1: `CEO`,
+  })
+
+  const mockCreateAccount = cy.stub().as('createAccount')
+  const mockEditAccount = cy.stub().as('editAccount')
+
+   cy.mount(
     <CreateOrEditAccountStateContext.Provider value={createAccountState}>
-      <CreateOrEditAccountContainer />
+      <CreateOrEditAccountContent
+        createAccountAsync={mockCreateAccount}
+        editAccountAsync={mockEditAccount}
+        isEditMode={isEditMode}
+      />
     </CreateOrEditAccountStateContext.Provider>,
   )
 }
