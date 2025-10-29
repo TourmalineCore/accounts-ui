@@ -64,7 +64,6 @@ export class CreateOrEditAccountState {
   }
 
   setAccountData(newValue: Partial<typeof this._accountData>) {
-  // setAccountData(newValue: AccountCreate {
     this._accountData = {
       ...this._accountData,
       ...newValue, 

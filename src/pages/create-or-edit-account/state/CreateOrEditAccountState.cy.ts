@@ -77,7 +77,6 @@ function initializationTests() {
       .to
       .be
       .false
-    
   })
 }
 
