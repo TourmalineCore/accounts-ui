@@ -78,6 +78,7 @@ export const CreateOrEditAccountContainer = observer(() => {
         createOrEditAccountState.setIsTriedToSubmit(false)
       }
       catch (e) {
+        // eslint-disable-next-line no-console
         console.error(e)
       }
     }
