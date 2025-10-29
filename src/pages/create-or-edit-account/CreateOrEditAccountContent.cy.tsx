@@ -6,7 +6,7 @@ import { CreateOrEditAccountContent } from './CreateOrEditAccountContent'
 
 const START_ROOT_TENANTS_ALL = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}tenants/all`
 const START_ROOT_ROLES = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}roles`
-const START_ROOT = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}accounts/findById/*`
+const START_ROOT_FIND_BY_ID = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}accounts/findById/*`
 
 const MOCK_DATA_TENANTS: Tenants[] = [
   {
@@ -121,7 +121,7 @@ function editAccountContent() {
   beforeEach(() => {
     cy.intercept(
       `GET`,
-      START_ROOT,
+      START_ROOT_FIND_BY_ID,
       MOCK_DATA_ACCOUNT,
     )
 
