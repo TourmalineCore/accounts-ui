@@ -10,17 +10,21 @@ describe(`CreateTenantContainer`, () => {
   SHOULD render tenants page content `, () => {
     mountComponent()
 
-    cy.getByData(`create-tenant-page`)
+    cy
+      .getByData(`create-tenant-page`)
       .should(`exist`)
 
-    cy.getByData(`create-tenant-page-input`)
+    cy
+      .getByData(`create-tenant-page-input`)
       .should(`exist`)
 
-    cy.getByData(`create-tenant-page-button-cancel`)
+    cy
+      .getByData(`create-tenant-page-button-cancel`)
       .should(`exist`)
       .should(`have.text`, `Cancel`)
 
-    cy.getByData(`create-tenant-page-button-add`)
+    cy
+      .getByData(`create-tenant-page-button-add`)
       .should(`exist`)
       .should(`have.text`, `Add`)
   })

@@ -22,7 +22,10 @@ describe(`RolesManagementState`, () => {
 
     rolesPageState.initialize(INITIAL_STATE)
 
-    expect(rolesPageState.roles).to.has.lengthOf(2)
+    expect(rolesPageState.roles)
+      .to
+      .has
+      .lengthOf(2)
   })
 
   it(`SHOULD add new role to the beginning of the list in edit mode WHEN adding was called`, () => {
@@ -32,7 +35,10 @@ describe(`RolesManagementState`, () => {
 
     rolesManagementState.addNewRole()
 
-    expect(rolesManagementState.roles).to.has.lengthOf(3)
+    expect(rolesManagementState.roles)
+      .to
+      .has
+      .lengthOf(3)
     expect(rolesManagementState.roles[0].name)
       .eq(``)
     expect(rolesManagementState.isInEditMode)

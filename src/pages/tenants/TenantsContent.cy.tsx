@@ -23,7 +23,8 @@ describe(`TenantsContent`, () => {
       tenants: initialData,
     })
 
-    cy.getByData(`tenants-page-content`)
+    cy
+      .getByData(`tenants-page-content`)
       .should(`exist`)
   })
 
@@ -35,7 +36,8 @@ describe(`TenantsContent`, () => {
       tenants: initialData,
     })
 
-    cy.getByData(`tenants-page-content-button`)
+    cy
+      .getByData(`tenants-page-content-button`)
       .should(`exist`)
       .should(`have.text`, `+ Add New Tenant`)
   })
@@ -45,17 +47,20 @@ describe(`TenantsContent`, () => {
   WHEN visit tenants page
   SHOULD render table with data `, () => {
     context(`desctop resolution`, () => {
-      cy.viewport(2400, 780)
+      cy
+        .viewport(2400, 780)
       mountComponent({
         tenants: initialData,
       })
 
-      cy.getByData(`tenant-table-row`)
+      cy
+        .getByData(`tenant-table-row`)
         .should(`exist`)
         .first()
         .should(`have.text`, `Blue`)
 
-      cy.getByData(`tenant-table-row`)
+      cy
+        .getByData(`tenant-table-row`)
         .should(`exist`)
         .last()
         .should(`have.text`, `Black`)

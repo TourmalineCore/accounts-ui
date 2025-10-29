@@ -19,6 +19,9 @@ describe(`TenantManagementState`, () => {
 
     tenantManagementState.getTenants(INITIAL_STATE)
 
-    expect(tenantManagementState.allTenants).to.has.lengthOf(2)
+    expect(tenantManagementState.allTenants)
+      .to
+      .has
+      .lengthOf(2)
   })
 })

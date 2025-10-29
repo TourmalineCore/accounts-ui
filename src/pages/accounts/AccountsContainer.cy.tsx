@@ -91,18 +91,22 @@ describe(`AccountsContainer`, () => {
         accounts: initialData,
       })
 
-      cy.get(`:nth-child(1) > .tc-table-desktop__action-cell > .tc-table-desktop-actions-dropdown > .tc-table-desktop-actions-dropdown__button`)
+      cy
+        .get(`:nth-child(1) > .tc-table-desktop__action-cell > .tc-table-desktop-actions-dropdown > .tc-table-desktop-actions-dropdown__button`)
         .click()
-      cy.get(`.tc-table-desktop-actions-dropdown__list`)
+      cy
+        .get(`.tc-table-desktop-actions-dropdown__list`)
         .children()
         .first()
         .should(`have.text`, `Edit`)
-      cy.get(`.tc-table-desktop-actions-dropdown__list`)
+      cy
+        .get(`.tc-table-desktop-actions-dropdown__list`)
         .children()
         .last()
         .should(`have.text`, `Block`)
 
-      cy.get(`:nth-child(2) > .tc-table-desktop__action-cell`)
+      cy
+        .get(`:nth-child(2) > .tc-table-desktop__action-cell`)
         .children()
         .should(`not.exist`)
     })
@@ -116,34 +120,42 @@ describe(`AccountsContainer`, () => {
         accounts: initialData,
       })
 
-      cy.get(`:nth-child(1) > .tc-table-desktop__action-cell > .tc-table-desktop-actions-dropdown > .tc-table-desktop-actions-dropdown__button`)
+      cy
+        .get(`:nth-child(1) > .tc-table-desktop__action-cell > .tc-table-desktop-actions-dropdown > .tc-table-desktop-actions-dropdown__button`)
         .click()
-      cy.get(`.tc-table-desktop-actions-dropdown__list`)
+      cy
+        .get(`.tc-table-desktop-actions-dropdown__list`)
         .children()
         .last()
         .should(`have.text`, `Block`)
         .click()
 
-      cy.getByData(`accounts-page-status-column`)
+      cy
+        .getByData(`accounts-page-status-column`)
         .should(`exist`)
         .first()
         .should(`have.text`, `Blocked`)
 
-      cy.get(`#block`)
+      cy
+        .get(`#block`)
         .click()
-      cy.getByData(`accounts-page-tenant-column`)
+      cy
+        .getByData(`accounts-page-tenant-column`)
         .should(`exist`)
         .should(`have.length`, `1`)
         .should(`have.text`, `Black`)
 
-      cy.get(`:nth-child(1) > .tc-table-desktop__action-cell > .tc-table-desktop-actions-dropdown > .tc-table-desktop-actions-dropdown__button`)
+      cy
+        .get(`:nth-child(1) > .tc-table-desktop__action-cell > .tc-table-desktop-actions-dropdown > .tc-table-desktop-actions-dropdown__button`)
         .click()
-      cy.get(`.tc-table-desktop-actions-dropdown__list`)
+      cy
+        .get(`.tc-table-desktop-actions-dropdown__list`)
         .children()
         .should(`have.text`, `Unblock`)
         .click()
 
-      cy.getByData(`accounts-page-tenant-column`)
+      cy
+        .getByData(`accounts-page-tenant-column`)
         .should(`have.length`, `0`)
     })
   })

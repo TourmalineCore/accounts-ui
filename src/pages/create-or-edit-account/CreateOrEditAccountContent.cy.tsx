@@ -43,7 +43,12 @@ const MOCK_DATA_ACCOUNT = {
   ],
 }
 
-describe(`Create Account Container`, () => {
+describe(`CreateOrEditAccountContent`, () => {
+  describe(`createAccountContent`, createAccountContent)
+  describe(`editAccountContent`, editAccountContent)
+})
+
+function createAccountContent() {
   beforeEach(() => {
     cy.intercept(
       `GET`,
@@ -63,32 +68,40 @@ describe(`Create Account Container`, () => {
   it(`
   GIVEN create account page 
   WHEN visit account page
-  SHOULD render account page content `, () => {
+  SHOULD render account page content`, () => {
     mountComponent({})
 
-    cy.getByData(`create-account`)
+    cy
+      .getByData(`create-account`)
       .should(`exist`)
 
-    cy.getByData(`first-name`)
+    cy
+      .getByData(`first-name`)
       .should(`exist`)
 
-    cy.getByData(`middle-name`)
+    cy
+      .getByData(`middle-name`)
       .should(`exist`)
 
-    cy.getByData(`last-name`)
+    cy
+      .getByData(`last-name`)
       .should(`exist`)
 
-    cy.getByData(`email-input`)
+    cy
+      .getByData(`email-input`)
       .should(`exist`)
 
-    cy.getByData(`select-tenant`)
+    cy
+      .getByData(`select-tenant`)
       .should(`exist`)
 
-    cy.getByData(`cancel-button`)
+    cy
+      .getByData(`cancel-button`)
       .should(`exist`)
       .should(`have.text`, `Cancel`)
 
-    cy.getByData(`add-button`)
+    cy
+      .getByData(`add-button`)
       .should(`exist`)
       .should(`have.text`, `Add`)
   })
@@ -97,13 +110,14 @@ describe(`Create Account Container`, () => {
   GIVEN create account page 
   WHEN visit account page
   SHOULD render a select with data about tenants`, () => {
-    cy.getByData(`select-tenant`)
+    cy
+      .getByData(`select-tenant`)
       .should(`exist`)
       .select(`Black`)
   })
-})
+}
 
-describe(`render elements EditAccount components`, () => {
+function editAccountContent() {
   beforeEach(() => {
     cy.intercept(
       `GET`,
@@ -122,47 +136,78 @@ describe(`render elements EditAccount components`, () => {
     })
   })
 
-  it(`SHOULD render edit page WHEN there is component`, () => {
-    cy.getByData(`edit-account`)
+  it(`
+    SHOULD render edit page 
+    WHEN there is component`, () => {
+    cy
+      .getByData(`edit-account`)
       .should(`exist`)
   })
 
-  it(`AFTER render`, () => {
-    cy.getByData(`corporate-email`)
+  it(`
+    GIVEN edit account page 
+    SHOULD display corporate email of the account
+    AFTER render`, () => {
+    cy
+      .getByData(`corporate-email`)
       .should(`have.text`, `test@tourmalinecore.com`)
   })
 
-  it(`first name input SHOULD have value AFTER render`, () => {
-    cy.getByData(`first-name`)
+  it(`
+    GIVEN first name input 
+    SHOULD display value 
+    AFTER render`, () => {
+    cy
+      .getByData(`first-name`)
       .should(`have.value`, `TestName`)
   })
 
-  it(`last name input SHOULD have value AFTER render`, () => {
-    cy.getByData(`last-name`)
+  it(`
+    GIVEN last name input 
+    SHOULD display value
+    AFTER render`, () => {
+    cy
+      .getByData(`last-name`)
       .should(`have.value`, `TestLastName`)
   })
 
-  it(`middle name input SHOULD have value AFTER render`, () => {
-    cy.getByData(`middle-name`)
+  it(`
+    GIVEN middle name input 
+    SHOULD display value
+    AFTER render`, () => {
+    cy
+      .getByData(`middle-name`)
       .should(`have.value`, ``)
   })
 
-  it(`role checkboxs SHOULD have value AFTER render`, () => {
-    cy.get(`.tc-checkfield :checked`)
+  it(`
+    GIVEN role checkbox 
+    SHOULD be checked
+    AFTER render`, () => {
+    cy
+      .get(`.tc-checkfield :checked`)
       .should(`be.checked`)
       .and(`have.value`, `on`)
   })
 
-  it(`SHOULD render cancel button on the edit page WHEN there is component`, () => {
-    cy.getByData(`cancel-button`)
+  it(`
+    GIVEN edit account page 
+    SHOULD render cancel button
+    WHEN there is component`, () => {
+    cy
+      .getByData(`cancel-button`)
       .should(`exist`)
   })
 
-  it(`SHOULD render save button on the edit page WHEN there is component`, () => {
-    cy.getByData(`save-button`)
+  it(`
+    GIVEN edit account page 
+    SHOULD render save button
+    WHEN there is component`, () => {
+    cy
+      .getByData(`save-button`)
       .should(`exist`)
   })
-})
+}
 
 function mountComponent({
   isEditMode = false,
