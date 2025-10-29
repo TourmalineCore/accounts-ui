@@ -8,7 +8,7 @@ import IconEmail from '../../assets/icons/icon-email.svg?react'
 export const CreateOrEditAccountContent = observer(({
   createAccountAsync,
   editAccountAsync,
-  isEditMode
+  isEditMode,
 } : {
   createAccountAsync: () => unknown,
   editAccountAsync: () => unknown,
@@ -20,10 +20,10 @@ export const CreateOrEditAccountContent = observer(({
 
   return (
     <div className="create-or-edit-account"
-      data-cy={isEditMode ? "edit-account" : "create-account"}
+      data-cy={isEditMode ? `edit-account` : `create-account`}
     >
       <h1 className="heading create-or-edit-account__title">
-        {isEditMode ? 'Edit Account' : 'Add New Account'}
+        {isEditMode ? `Edit Account` : `Add New Account`}
       </h1>
 
       <div className="create-or-edit-account__inner">
@@ -91,45 +91,45 @@ export const CreateOrEditAccountContent = observer(({
           />
         </div>
 
-      {!isEditMode && (
-        <div className="create-or-edit-account__box create-or-edit-account__box--email">
-          <span>Corporate Email</span>
-          <div>
-            <div className="create-or-edit-account__input-domain">
-              <Input
-                data-cy="email-input"
-                className={clsx(`create-or-edit-account__input`, {
-                  'create-or-edit-account__input--error': !isCorporateEmailError || createOrEditAccountState.isError,
-                })}
-                value={createOrEditAccountState.accountData.corporateEmail}
-                maxLength={31}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => createOrEditAccountState.setAccountData({
-                  ...createOrEditAccountState.accountData,
-                  corporateEmail: e.target.value.trim(), 
-                })}
-              />
-              <span>@tourmalinecore.com</span>
-            </div>
-            <div className={clsx(`create-or-edit-account__important-info`, {
-              'create-or-edit-account__important-info--error': isCorporateEmailError || createOrEditAccountState.isError,
-            })}
-            >
-              {isCorporateEmailError && (
-                <>
-                  <span>This field is required. Please fill it up.</span>
-                  <br />
-                </>
-              )}
-              {!createOrEditAccountState.isError ? (
-                <>
-                  <b>Сheck the entered data</b>
+        {!isEditMode && (
+          <div className="create-or-edit-account__box create-or-edit-account__box--email">
+            <span>Corporate Email</span>
+            <div>
+              <div className="create-or-edit-account__input-domain">
+                <Input
+                  data-cy="email-input"
+                  className={clsx(`create-or-edit-account__input`, {
+                    'create-or-edit-account__input--error': !isCorporateEmailError || createOrEditAccountState.isError,
+                  })}
+                  value={createOrEditAccountState.accountData.corporateEmail}
+                  maxLength={31}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => createOrEditAccountState.setAccountData({
+                    ...createOrEditAccountState.accountData,
+                    corporateEmail: e.target.value.trim(), 
+                  })}
+                />
+                <span>@tourmalinecore.com</span>
+              </div>
+              <div className={clsx(`create-or-edit-account__important-info`, {
+                'create-or-edit-account__important-info--error': isCorporateEmailError || createOrEditAccountState.isError,
+              })}
+              >
+                {isCorporateEmailError && (
+                  <>
+                    <span>This field is required. Please fill it up.</span>
+                    <br />
+                  </>
+                )}
+                {!createOrEditAccountState.isError ? (
+                  <>
+                    <b>Сheck the entered data</b>
                   , it will be impossible to edit this field.
-                </>
-              ) : (<>Account with such Corpotare Email already exists. Check the correctness of the entered data, it must be unique.</>)}
+                  </>
+                ) : (<>Account with such Corpotare Email already exists. Check the correctness of the entered data, it must be unique.</>)}
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
         <div className="create-or-edit-account__box">
           <span>Role*</span>
@@ -215,11 +215,11 @@ export const CreateOrEditAccountContent = observer(({
 
           <button
             type="button"
-            data-cy={isEditMode ? "save-button" : "add-button"}
+            data-cy={isEditMode ? `save-button` : `add-button`}
             className="create-or-edit-account__button"
             onClick={isEditMode ? editAccountAsync : createAccountAsync}
           >
-            {isEditMode ? 'Save Changes' : 'Add'}
+            {isEditMode ? `Save Changes` : `Add`}
           </button>
         </div>
       </div>

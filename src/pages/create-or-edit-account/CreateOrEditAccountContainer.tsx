@@ -10,13 +10,16 @@ import { useParams } from 'react-router-dom'
 export const CreateOrEditAccountContainer = observer(() => {
   const createOrEditAccountState = useContext(CreateOrEditAccountStateContext)
 
-  const { id } = useParams()
+  const {
+    id, 
+  } = useParams()
   const isEditMode = !!id
 
   useEffect(() => {
     if (isEditMode) {
       getEditAccountLoadAsync()
-    } else {
+    }
+    else {
       getRolesAccountLoadAsync()
       getTenantsAccountLoadAsync()
       createOrEditAccountState.setIsEditMode(false)
@@ -33,12 +36,12 @@ export const CreateOrEditAccountContainer = observer(() => {
 
   async function getEditAccountLoadAsync() {
     const { 
-      data
+      data,
     } = await api.get<AccountEdit>(`${LINK_TO_ACCOUNT_SERVICE}accounts/findById/${id}`)
     const { 
-      data: roles
+      data: roles,
     } = await api.get<{
-      id: number, name: string, permissions: []
+      id: number, name: string, permissions: [],
     }[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`)
 
     createOrEditAccountState.setAccountData(data)
@@ -56,20 +59,25 @@ export const CreateOrEditAccountContainer = observer(() => {
 
     if (createOrEditAccountState.accountData.firstName && 
         createOrEditAccountState.accountData.lastName && 
-        [...createOrEditAccountState.selectedCheckboxes].length > 0) {
+        [
+          ...createOrEditAccountState.selectedCheckboxes,
+        ].length > 0) {
       try {
         await api.post(`${LINK_TO_ACCOUNT_SERVICE}accounts/edit`, {
           id: id,
           firstName: createOrEditAccountState.accountData.firstName,
           middleName: createOrEditAccountState.accountData.middleName ? createOrEditAccountState.accountData.middleName : null,
           lastName: createOrEditAccountState.accountData.lastName,
-          roles: [...createOrEditAccountState.selectedCheckboxes].map((item) => Number(item)),
+          roles: [
+            ...createOrEditAccountState.selectedCheckboxes,
+          ].map((item) => Number(item)),
         })
 
         window.location.href = `/account-management`
         
         createOrEditAccountState.setIsTriedToSubmit(false)
-      } catch (e) {
+      }
+      catch (e) {
         console.error(e)
       }
     }

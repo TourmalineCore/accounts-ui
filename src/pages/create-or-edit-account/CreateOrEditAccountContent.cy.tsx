@@ -117,7 +117,9 @@ describe(`render elements EditAccount components`, () => {
       MOCK_DATA_ROLES,
     )
 
-    mountComponent({isEditMode: true})
+    mountComponent({
+      isEditMode: true,
+    })
   })
 
   it(`SHOULD render edit page WHEN there is component`, () => {
@@ -162,11 +164,10 @@ describe(`render elements EditAccount components`, () => {
   })
 })
 
-
 function mountComponent({
-  isEditMode = false
+  isEditMode = false,
 }: {
-  isEditMode?: boolean
+  isEditMode?: boolean,
 }) {
   const createAccountState = new CreateOrEditAccountState()
 
@@ -178,7 +179,7 @@ function mountComponent({
       corporateEmail: MOCK_DATA_ACCOUNT.corporateEmail,
     })
     createAccountState.setSelectedCheckboxes(
-      new Set(MOCK_DATA_ACCOUNT.roles.map(role => String(role.id)))
+      new Set(MOCK_DATA_ACCOUNT.roles.map(role => String(role.id))),
     )
   }
 
@@ -187,10 +188,12 @@ function mountComponent({
     1: `CEO`,
   })
 
-  const mockCreateAccount = cy.stub().as('createAccount')
-  const mockEditAccount = cy.stub().as('editAccount')
+  const mockCreateAccount = cy.stub()
+    .as(`createAccount`)
+  const mockEditAccount = cy.stub()
+    .as(`editAccount`)
 
-   cy.mount(
+  cy.mount(
     <CreateOrEditAccountStateContext.Provider value={createAccountState}>
       <CreateOrEditAccountContent
         createAccountAsync={mockCreateAccount}

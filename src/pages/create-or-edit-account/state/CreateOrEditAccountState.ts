@@ -51,7 +51,7 @@ export class CreateOrEditAccountState {
     return this._isError
   }
 
-   get isEditMode() {
+  get isEditMode() {
     return this._isEditMode
   }
 
