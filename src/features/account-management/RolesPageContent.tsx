@@ -120,12 +120,12 @@ const PERMISSION_GROUPS = [
       },
       {
         id: `IsBookCopiesHardDeleteAllowed`,
-        name: 'Is Book Copies Hard Delete Allowed',
+        name: `Is Book Copies Hard Delete Allowed`,
       },
       {
         id: `IsBookCopiesReadingHistoryHardDeleteAllowed`,
         name: `Is Book Copies Reading History Hard Delete Allowed`,
-      }
+      },
     ],
   },
 ]
