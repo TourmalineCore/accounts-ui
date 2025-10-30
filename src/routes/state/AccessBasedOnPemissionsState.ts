@@ -20,6 +20,8 @@ export enum Permission {
   CanManageBooks = `CanManageBooks`,
   IsBooksHardDeleteAllowed = `IsBooksHardDeleteAllowed`,
   IsAccountsHardDeleteAllowed = `IsAccountsHardDeleteAllowed`,
+  IsBookCopiesHardDeleteAllowed = "IsBookCopiesHardDeleteAllowed",
+  IsBookCopiesReadingHistoryHardDeleteAllowed = "IsBookCopiesReadingHistoryHardDeleteAllowed",
 }
 
 export class AccessBasedOnPemissionsState {
