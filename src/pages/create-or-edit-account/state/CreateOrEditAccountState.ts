@@ -12,7 +12,7 @@ export class CreateOrEditAccountState {
   private _isTriedToSubmit = false
   private _selectedCheckboxes = new Set<string>([])
   private _accountData = {
-    ...EMPTY_ACCOUNT_DATA
+    ...EMPTY_ACCOUNT_DATA,
   }
   private _rolesData: { [key: number]: string, } = {}
   private _tenantsData: Tenants[] = []

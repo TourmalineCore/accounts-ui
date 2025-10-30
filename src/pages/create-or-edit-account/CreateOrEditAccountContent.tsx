@@ -20,15 +20,15 @@ export const CreateOrEditAccountContent = observer(({
     isTriedToSubmit,
     isError,
     rolesData, 
-    selectedCheckboxes
-    } = createOrEditAccountState
+    selectedCheckboxes,
+  } = createOrEditAccountState
   const { 
     firstName, 
     lastName, 
     corporateEmail,
     middleName, 
-    tenantId 
-    } = accountData
+    tenantId, 
+  } = accountData
 
   const isCorporateEmailError = !corporateEmail && isTriedToSubmit
 

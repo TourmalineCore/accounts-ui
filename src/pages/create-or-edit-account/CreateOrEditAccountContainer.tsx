@@ -54,9 +54,15 @@ export const CreateOrEditAccountContainer = observer(() => {
   async function editAccountAsync() {
     createOrEditAccountState.setIsTriedToSubmit(true)
 
-    const { accountData, selectedCheckboxes } = createOrEditAccountState
-    const { firstName, lastName, middleName } = accountData
-    const selectedRoles = [...selectedCheckboxes]
+    const {
+      accountData, selectedCheckboxes, 
+    } = createOrEditAccountState
+    const {
+      firstName, lastName, middleName, 
+    } = accountData
+    const selectedRoles = [
+      ...selectedCheckboxes,
+    ]
 
     const isRequiredFieldsFilledIn = firstName && lastName && selectedRoles.length > 0
     
@@ -102,9 +108,15 @@ export const CreateOrEditAccountContainer = observer(() => {
   async function createAccountAsync() {
     createOrEditAccountState.setIsTriedToSubmit(true)
 
-    const { accountData, selectedCheckboxes } = createOrEditAccountState
-    const { firstName, lastName, corporateEmail, middleName, tenantId } = accountData
-    const selectedRoles = [...selectedCheckboxes]
+    const {
+      accountData, selectedCheckboxes, 
+    } = createOrEditAccountState
+    const {
+      firstName, lastName, corporateEmail, middleName, tenantId, 
+    } = accountData
+    const selectedRoles = [
+      ...selectedCheckboxes,
+    ]
 
     const isRequiredFieldsFilledIn = firstName && lastName && corporateEmail && 
       selectedRoles.length > 0 && tenantId

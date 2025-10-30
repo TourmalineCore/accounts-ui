@@ -4,7 +4,7 @@ type AccountCreate = {
   middleName?: string,
   corporateEmail: string,
   roleIds: number[],
-  tenantId?: string
+  tenantId?: string,
 };
 
 type AccountEdit = {
