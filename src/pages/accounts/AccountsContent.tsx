@@ -6,19 +6,19 @@ import { ColumnDef } from '@tanstack/table-core'
 import { FilterMenu } from './components/FilterMenu/FilterMenu'
 import { AccessBasedOnPemissionsStateContext } from '../../routes/state/AccessBasedOnPemissionsStateContext'
 import { useContext } from 'react'
+import { AccountManagementStateContext } from './state/AccountManagementStateContext'
 
 export const AccountsContent = observer(({
-  isLoading,
   accounts,
   onBlockAccount,
   onUnblockAccount,
 }: {
-  isLoading: boolean,
   accounts: Accounts[],
   onBlockAccount: (accountId: number) => void,
   onUnblockAccount: (accountId: number) => void,
 }) => {
   const accessToChanges = useContext(AccessBasedOnPemissionsStateContext)
+  const accountManagementState = useContext(AccountManagementStateContext)
   
   const columns: ColumnDef<Accounts>[] = [
     {
@@ -244,7 +244,7 @@ export const AccountsContent = observer(({
         }}
         tcActions={accessToChanges.accessPermissions.get(`ManageAccounts`) ? actions : []}
         columns={columns}
-        tcLoading={isLoading}
+        tcLoading={accountManagementState.isLoading}
       />
     </section>
   )

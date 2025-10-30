@@ -3,6 +3,8 @@ import { makeAutoObservable } from 'mobx'
 export class TenantManagementState {
   private _allTenants: Tenants[] = []
 
+  private _isLoading = false
+
   constructor() {
     makeAutoObservable(this)
   }
@@ -12,7 +14,15 @@ export class TenantManagementState {
       .slice()
   }
 
+  get isLoading() {
+    return this._isLoading
+  }
+
   getTenants(newTenant: Tenants[]) {
     this._allTenants = newTenant
+  }
+
+  setIsLoading(newValue: boolean) {
+    this._isLoading = newValue
   }
 }

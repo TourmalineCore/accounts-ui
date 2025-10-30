@@ -9,6 +9,8 @@ export class AccountManagementState {
 
   private _filterTerm = `all`
 
+  private _isLoading = false
+
   constructor() {
     makeAutoObservable(this)
   }
@@ -25,6 +27,10 @@ export class AccountManagementState {
 
   get accountToUnblock() {
     return this._lastBlockAccount
+  }
+
+  get isLoading() {
+    return this._isLoading
   }
 
   updateFilterTerm(newFilterTerm: string) {
@@ -75,6 +81,10 @@ export class AccountManagementState {
     })
 
     this._lastBlockAccount = null
+  }
+
+  setIsLoading(newValue: boolean) {
+    this._isLoading = newValue
   }
 }
 

@@ -5,11 +5,7 @@ import { observer } from 'mobx-react-lite'
 import { TenantManagementStateContext } from './state/TenantManagementStateContext'
 import { ColumnDef } from '@tanstack/table-core'
 
-export const TenantsContent = observer(({
-  isLoading,
-}:{
-  isLoading: boolean,
-}) => {
+export const TenantsContent = observer(() => {
   const tenantManagementState = useContext(TenantManagementStateContext)
 
   const columns: ColumnDef<Tenants>[] = [
@@ -60,7 +56,7 @@ export const TenantsContent = observer(({
           desc: false,
         }}
         columns={columns}
-        tcLoading={isLoading}
+        tcLoading={tenantManagementState.isLoading}
       />
 
     </section>

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { toast } from 'react-toastify'
 import { AccountManagementStateContext } from './state/AccountManagementStateContext'
@@ -8,10 +8,6 @@ import { AccountsContent } from './AccountsContent'
 
 export const AccountsContainer = observer(() => {
   const accountManagementState = useContext(AccountManagementStateContext)
-  const [
-    isLoading,
-    setIsLoading,
-  ] = useState(false)
 
   useEffect(() => {
     getAccountsAsync()
@@ -19,7 +15,6 @@ export const AccountsContainer = observer(() => {
 
   return (
     <AccountsContent
-      isLoading={isLoading}
       accounts={accountManagementState.allAccounts}
       onBlockAccount={blockAccountsAsync}
       onUnblockAccount={unblockAccountsAsync}
@@ -27,7 +22,7 @@ export const AccountsContainer = observer(() => {
   )
 
   async function getAccountsAsync() {
-    setIsLoading(true)
+    accountManagementState.setIsLoading(true)
     try {
       const {
         data, 
@@ -35,7 +30,7 @@ export const AccountsContainer = observer(() => {
       accountManagementState.getAccounts(data)
     }
     finally {
-      setIsLoading(false)
+      accountManagementState.setIsLoading(false)
     }
   }
 

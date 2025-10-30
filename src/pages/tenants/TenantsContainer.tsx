@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 
 import { TenantsContent } from './TenantsContent'
@@ -7,10 +7,6 @@ import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 import { TenantManagementStateContext } from './state/TenantManagementStateContext'
 
 export const TenantsContainer = observer(() => {
-  const [
-    isLoading,
-    setIsLoading,
-  ] = useState(false)
   const tenantManagementState = useContext(TenantManagementStateContext)
 
   useEffect(() => {
@@ -18,10 +14,10 @@ export const TenantsContainer = observer(() => {
   }, [])
 
   return (
-    <TenantsContent isLoading={isLoading} />
+    <TenantsContent />
   )
   async function getTenantsAsync() {
-    setIsLoading(true)
+    tenantManagementState.setIsLoading(true)
     try {
       const {
         data, 
@@ -29,7 +25,7 @@ export const TenantsContainer = observer(() => {
       tenantManagementState.getTenants(data)
     }
     finally {
-      setIsLoading(false)
+      tenantManagementState.setIsLoading(false)
     }
   }
 })

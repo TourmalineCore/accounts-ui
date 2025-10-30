@@ -78,7 +78,7 @@ function mountComponent({
   tenantManagementState.getTenants(tenants)
   cy.mount(
     <TenantManagementStateContext.Provider value={tenantManagementState}>
-      <TenantsContent isLoading={false} />
+      <TenantsContent />
     </TenantManagementStateContext.Provider>,
 
   )
