@@ -57,20 +57,20 @@ export const CreateOrEditAccountContainer = observer(() => {
   async function editAccountAsync() {
     createOrEditAccountState.setIsTriedToSubmit(true)
 
-    if (createOrEditAccountState.accountData.firstName && 
-        createOrEditAccountState.accountData.lastName && 
-        [
-          ...createOrEditAccountState.selectedCheckboxes,
-        ].length > 0) {
+    const { accountData, selectedCheckboxes } = createOrEditAccountState
+    const { firstName, lastName, middleName } = accountData
+    const selectedRoles = [...selectedCheckboxes]
+
+    const isRequiredFieldsFilledIn = firstName && lastName && selectedRoles.length > 0
+    
+    if (isRequiredFieldsFilledIn) {
       try {
         await api.post(`${LINK_TO_ACCOUNT_SERVICE}accounts/edit`, {
           id: id,
-          firstName: createOrEditAccountState.accountData.firstName,
-          middleName: createOrEditAccountState.accountData.middleName ? createOrEditAccountState.accountData.middleName : null,
-          lastName: createOrEditAccountState.accountData.lastName,
-          roles: [
-            ...createOrEditAccountState.selectedCheckboxes,
-          ].map((item) => Number(item)),
+          firstName,
+          middleName: middleName ? middleName : null,
+          lastName,
+          roles: selectedRoles.map((item) => Number(item)),
         })
 
         window.location.href = `/account-management`
@@ -107,17 +107,20 @@ export const CreateOrEditAccountContainer = observer(() => {
   async function createAccountAsync() {
     createOrEditAccountState.setIsTriedToSubmit(true)
 
-    if (createOrEditAccountState.accountData.firstName && createOrEditAccountState.accountData.lastName && createOrEditAccountState.accountData.corporateEmail && [
-      ...createOrEditAccountState.selectedCheckboxes,
-    ].length > 0 && createOrEditAccountState.accountData.tenantId) {
+    const { accountData, selectedCheckboxes } = createOrEditAccountState
+    const { firstName, lastName, corporateEmail, middleName, tenantId } = accountData
+    const selectedRoles = [...selectedCheckboxes]
+
+    const isRequiredFieldsFilledIn = firstName && lastName && corporateEmail && 
+      selectedRoles.length > 0 && tenantId
+
+    if (isRequiredFieldsFilledIn) {
       try {
         await api.post<AccountCreate>(`${LINK_TO_ACCOUNT_SERVICE}accounts/create`, {
-          ...createOrEditAccountState.accountData,
-          corporateEmail: `${createOrEditAccountState.accountData.corporateEmail}@tourmalinecore.com`,
-          middleName: createOrEditAccountState.accountData.middleName || undefined,
-          roleIds: [
-            ...createOrEditAccountState.selectedCheckboxes,
-          ].map((item) => Number(item)),
+          ...accountData,
+          corporateEmail: `${corporateEmail}@tourmalinecore.com`,
+          middleName: middleName || undefined,
+          roleIds: selectedRoles.map((item) => Number(item)),
         })
 
         createOrEditAccountState.setIsTriedToSubmit(false)
