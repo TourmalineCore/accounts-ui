@@ -243,7 +243,6 @@ function mountComponent({
       <CreateOrEditAccountContent
         createAccountAsync={mockCreateAccount}
         editAccountAsync={mockEditAccount}
-        isEditMode={isEditMode}
       />
     </CreateOrEditAccountStateContext.Provider>,
   )

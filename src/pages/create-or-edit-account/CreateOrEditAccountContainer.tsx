@@ -30,7 +30,6 @@ export const CreateOrEditAccountContainer = observer(() => {
     <CreateOrEditAccountContent
       createAccountAsync={createAccountAsync} 
       editAccountAsync={editAccountAsync} 
-      isEditMode={isEditMode}
     />
   )
 

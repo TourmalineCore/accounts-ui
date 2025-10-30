@@ -8,11 +8,9 @@ import IconEmail from '../../assets/icons/icon-email.svg?react'
 export const CreateOrEditAccountContent = observer(({
   createAccountAsync,
   editAccountAsync,
-  isEditMode,
 } : {
   createAccountAsync: () => unknown,
   editAccountAsync: () => unknown,
-  isEditMode: boolean,
 }) => {
   const createOrEditAccountState = useContext(CreateOrEditAccountStateContext)
 
@@ -20,14 +18,14 @@ export const CreateOrEditAccountContent = observer(({
 
   return (
     <div className="create-or-edit-account"
-      data-cy={isEditMode ? `edit-account` : `create-account`}
+      data-cy={createOrEditAccountState.isEditMode ? `edit-account` : `create-account`}
     >
       <h1 className="heading create-or-edit-account__title">
-        {isEditMode ? `Edit Account` : `Add New Account`}
+        {createOrEditAccountState.isEditMode ? `Edit Account` : `Add New Account`}
       </h1>
 
       <div className="create-or-edit-account__inner">
-        {isEditMode && (
+        {createOrEditAccountState.isEditMode && (
           <div className="create-or-edit-account__info-box">
             <div className="create-or-edit-account__icon">
               <IconEmail />
@@ -91,7 +89,7 @@ export const CreateOrEditAccountContent = observer(({
           />
         </div>
 
-        {!isEditMode && (
+        {!createOrEditAccountState.isEditMode && (
           <div className="create-or-edit-account__box create-or-edit-account__box--email">
             <span>Corporate Email</span>
             <div>
@@ -164,7 +162,7 @@ export const CreateOrEditAccountContent = observer(({
           </div>
         </div>
 
-        {!isEditMode && (
+        {!createOrEditAccountState.isEditMode && (
           <div className="create-or-edit-account__box">
             <span>Tenant</span>
             <select
@@ -215,11 +213,11 @@ export const CreateOrEditAccountContent = observer(({
 
           <button
             type="button"
-            data-cy={isEditMode ? `save-button` : `add-button`}
+            data-cy={createOrEditAccountState.isEditMode ? `save-button` : `add-button`}
             className="create-or-edit-account__button"
-            onClick={isEditMode ? editAccountAsync : createAccountAsync}
+            onClick={createOrEditAccountState.isEditMode ? editAccountAsync : createAccountAsync}
           >
-            {isEditMode ? `Save Changes` : `Add`}
+            {createOrEditAccountState.isEditMode ? `Save Changes` : `Add`}
           </button>
         </div>
       </div>
