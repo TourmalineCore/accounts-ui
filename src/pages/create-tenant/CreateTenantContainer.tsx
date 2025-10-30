@@ -24,7 +24,6 @@ export const CreateTenantContainer = observer(() => {
           ...createTenantState.tenantData,
         })
 
-        createTenantState.setIsTriedToSubmit(false)
         window.location.href = `/account-management/tenants`
 
         toast(`New tenant added successfully`, {
@@ -37,6 +36,9 @@ export const CreateTenantContainer = observer(() => {
       catch (e) {
         // eslint-disable-next-line no-console
         console.log(e)
+      }
+      finally {
+        createTenantState.setIsTriedToSubmit(false)
       }
     }
   }
