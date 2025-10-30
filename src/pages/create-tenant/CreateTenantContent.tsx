@@ -38,7 +38,7 @@ export const CreateTenantContent = observer(({
           <button
             type="button"
             data-cy="create-tenant-page-button-cancel"
-            className="create-account__button"
+            className="primary-button"
             onClick={() => window.location.href =`/account-management/tenants`}
           >
             Cancel
@@ -47,7 +47,7 @@ export const CreateTenantContent = observer(({
           <button
             type="button"
             data-cy="create-tenant-page-button-add"
-            className="create-account__button"
+            className="primary-button"
             onClick={createTenantAsync}
           >
             Add

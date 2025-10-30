@@ -221,7 +221,7 @@ export const CreateOrEditAccountContent = observer(({
           <button
             type="button"
             data-cy="cancel-button"
-            className="create-or-edit-account__button"
+            className="primary-button"
             onClick={() => window.location.href =`/account-management`}
           >
             Cancel
@@ -230,7 +230,7 @@ export const CreateOrEditAccountContent = observer(({
           <button
             type="button"
             data-cy={isEditMode ? `save-button` : `add-button`}
-            className="create-or-edit-account__button"
+            className="primary-button"
             onClick={isEditMode ? editAccountAsync : createAccountAsync}
           >
             {isEditMode ? `Save Changes` : `Add`}
