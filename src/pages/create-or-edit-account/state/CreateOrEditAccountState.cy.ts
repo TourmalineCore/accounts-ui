@@ -115,6 +115,7 @@ function accountDataTests() {
   `, () => {
     createOrEditAccountState.setAccountData(accountDataForInitialization)
     createOrEditAccountState.setAccountData({
+      ...accountDataForInitialization,
       firstName: `Test`,
     })
 

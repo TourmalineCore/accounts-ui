@@ -39,9 +39,7 @@ export const CreateOrEditAccountContainer = observer(() => {
     } = await api.get<AccountEdit>(`${LINK_TO_ACCOUNT_SERVICE}accounts/findById/${id}`)
     const { 
       data: roles,
-    } = await api.get<{
-      id: number, name: string, permissions: [],
-    }[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`)
+    } = await api.get<Role[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`)
 
     createOrEditAccountState.setAccountData(data)
     createOrEditAccountState.setSelectedCheckboxes(new Set([
@@ -86,9 +84,7 @@ export const CreateOrEditAccountContainer = observer(() => {
   async function getRolesAccountLoadAsync() {
     const {
       data,
-    } = await api.get<{
-      id: number, name: string, permissions: [],
-    }[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`)
+    } = await api.get<Role[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`)
 
     createOrEditAccountState.setRolesData(Object.assign({}, ...data.map((role) => ({
       [role.id]: role.name,
