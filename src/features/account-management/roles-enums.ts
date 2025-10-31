@@ -19,6 +19,4 @@ export const Permissions = {
   CanManageBooks: `Can Manage Books`,
   IsBooksHardDeleteAllowed: `Is Books Hard Delete Allowed`,
   IsAccountsHardDeleteAllowed: `Is Accounts Hard Delete Allowed`,
-  IsBookCopiesHardDeleteAllowed: `IsBookCopiesHardDeleteAllowed`,
-  IsBookCopiesReadingHistoryHardDeleteAllowed: `IsBookCopiesReadingHistoryHardDeleteAllowed`,
 }
