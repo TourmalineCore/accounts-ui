@@ -22,7 +22,7 @@ export const AccountsContainer = observer(() => {
   )
 
   async function getAccountsAsync() {
-    accountManagementState.setIsLoading(true)
+    accountManagementState.setIsLoading()
     try {
       const {
         data, 
@@ -30,7 +30,7 @@ export const AccountsContainer = observer(() => {
       accountManagementState.getAccounts(data)
     }
     finally {
-      accountManagementState.setIsLoading(false)
+      accountManagementState.resetIsLoading()
     }
   }
 

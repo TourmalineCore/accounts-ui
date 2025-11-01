@@ -18,8 +18,12 @@ export class CreateTenantState {
     return this._tenantData
   }
 
-  setIsTriedToSubmit(value: boolean) {
-    this._isTriedToSubmit = value
+  setIsTriedToSubmit() {
+    this._isTriedToSubmit = true
+  }
+
+  resetIsTriedToSubmit() {
+    this._isTriedToSubmit = false
   }
 
   setTenantData(value: TenantCreate) {

@@ -16,7 +16,7 @@ export const CreateTenantContainer = observer(() => {
   )
 
   async function createTenantAsync() {
-    createTenantState.setIsTriedToSubmit(true)
+    createTenantState.setIsTriedToSubmit()
 
     if (createTenantState.tenantData.name) {
       try {
@@ -38,7 +38,7 @@ export const CreateTenantContainer = observer(() => {
         console.log(e)
       }
       finally {
-        createTenantState.setIsTriedToSubmit(false)
+        createTenantState.resetIsTriedToSubmit()
       }
     }
   }

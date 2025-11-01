@@ -22,9 +22,9 @@ function editModeTests() {
 
   it(`
   GIVEN initial isEditMode = false
-  WHEN call setIsEditMode(true)
+  WHEN call setIsEditMode
   SHOULD change value to true
-  WHEN call setIsEditMode(false)
+  WHEN call resetIsEditMode
   SHOULD change value to false
   `, () => {
     expect(createOrEditAccountState.isEditMode)
@@ -32,13 +32,13 @@ function editModeTests() {
       .be
       .false
 
-    createOrEditAccountState.setIsEditMode(true)
+    createOrEditAccountState.setIsEditMode()
     expect(createOrEditAccountState.isEditMode)
       .to
       .be
       .true
 
-    createOrEditAccountState.setIsEditMode(false)
+    createOrEditAccountState.resetIsEditMode()
     expect(createOrEditAccountState.isEditMode)
       .to
       .be
@@ -250,9 +250,9 @@ function isTriedToSubmitTests() {
 
   it(`
   GIVEN initial isTriedToSubmit = false
-  WHEN call setIsTriedToSubmit(true)
+  WHEN call setIsTriedToSubmit
   SHOULD change value to true
-  WHEN call setIsTriedToSubmit(false)
+  WHEN call resetIsTriedToSubmit
   SHOULD change value to false
   `, () => {
     expect(createOrEditAccountState.isTriedToSubmit)
@@ -260,13 +260,13 @@ function isTriedToSubmitTests() {
       .be
       .false
 
-    createOrEditAccountState.setIsTriedToSubmit(true)
+    createOrEditAccountState.setIsTriedToSubmit()
     expect(createOrEditAccountState.isTriedToSubmit)
       .to
       .be
       .true
 
-    createOrEditAccountState.setIsTriedToSubmit(false)
+    createOrEditAccountState.resetIsTriedToSubmit()
     expect(createOrEditAccountState.isTriedToSubmit)
       .to
       .be
@@ -283,9 +283,9 @@ function isErrorTests() {
 
   it(`
   GIVEN initial isError = false
-  WHEN setIsError(true)
+  WHEN setIsError
   SHOULD change value to true
-  WHEN setIsError(false)
+  WHEN resetIsError
   SHOULD change value to false
   `, () => {
     expect(createOrEditAccountState.isError)
@@ -293,13 +293,13 @@ function isErrorTests() {
       .be
       .false
 
-    createOrEditAccountState.setIsError(true)
+    createOrEditAccountState.setIsError()
     expect(createOrEditAccountState.isError)
       .to
       .be
       .true
 
-    createOrEditAccountState.setIsError(false)
+    createOrEditAccountState.resetIsError()
     expect(createOrEditAccountState.isError)
       .to
       .be

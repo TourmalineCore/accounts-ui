@@ -83,8 +83,12 @@ export class AccountManagementState {
     this._lastBlockAccount = null
   }
 
-  setIsLoading(newValue: boolean) {
-    this._isLoading = newValue
+  setIsLoading() {
+    this._isLoading = true
+  }
+
+  resetIsLoading() {
+    this._isLoading = false
   }
 }
 

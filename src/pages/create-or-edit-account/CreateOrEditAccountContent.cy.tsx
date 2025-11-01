@@ -217,7 +217,7 @@ function mountComponent({
   const createAccountState = new CreateOrEditAccountState()
 
   if (isEditMode) {
-    createAccountState.setIsEditMode(true)
+    createAccountState.setIsEditMode()
     createAccountState.setAccountData({
       firstName: MOCK_DATA_ACCOUNT.firstName,
       lastName: MOCK_DATA_ACCOUNT.lastName,

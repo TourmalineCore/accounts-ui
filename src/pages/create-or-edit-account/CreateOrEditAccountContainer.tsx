@@ -22,7 +22,7 @@ export const CreateOrEditAccountContainer = observer(() => {
     else {
       getRolesAccountLoadAsync()
       getTenantsAccountLoadAsync()
-      createOrEditAccountState.setIsEditMode(false)
+      createOrEditAccountState.resetIsEditMode()
     }
   }, [])
 
@@ -48,11 +48,11 @@ export const CreateOrEditAccountContainer = observer(() => {
     createOrEditAccountState.setRolesData(Object.assign({}, ...roles.map((role) => ({
       [role.id]: role.name, 
     }))))
-    createOrEditAccountState.setIsEditMode(true)
+    createOrEditAccountState.setIsEditMode()
   }
 
   async function editAccountAsync() {
-    createOrEditAccountState.setIsTriedToSubmit(true)
+    createOrEditAccountState.setIsTriedToSubmit()
 
     const {
       accountData, selectedCheckboxes, 
@@ -78,7 +78,7 @@ export const CreateOrEditAccountContainer = observer(() => {
 
         window.location.href = `/account-management`
         
-        createOrEditAccountState.setIsTriedToSubmit(false)
+        createOrEditAccountState.resetIsTriedToSubmit()
       }
       catch (e) {
         // eslint-disable-next-line no-console
@@ -106,7 +106,7 @@ export const CreateOrEditAccountContainer = observer(() => {
   }
 
   async function createAccountAsync() {
-    createOrEditAccountState.setIsTriedToSubmit(true)
+    createOrEditAccountState.setIsTriedToSubmit()
 
     const {
       accountData, selectedCheckboxes, 
@@ -130,7 +130,7 @@ export const CreateOrEditAccountContainer = observer(() => {
           roleIds: selectedRoles.map((item) => Number(item)),
         })
 
-        createOrEditAccountState.setIsTriedToSubmit(false)
+        createOrEditAccountState.resetIsTriedToSubmit()
         window.location.href = `/account-management`
 
         toast(`New account added successfully`, {
@@ -143,7 +143,7 @@ export const CreateOrEditAccountContainer = observer(() => {
       catch (e) {
         // eslint-disable-next-line no-console
         console.log(e)
-        createOrEditAccountState.setIsError(true)
+        createOrEditAccountState.setIsError()
       }
     }
   }

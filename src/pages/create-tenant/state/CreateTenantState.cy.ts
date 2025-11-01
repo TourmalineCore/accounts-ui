@@ -74,9 +74,9 @@ function isTriedToSubmitTests() {
 
   it(`
   GIVEN initial isTriedToSubmit = false
-  WHEN setIsTriedToSubmit(true)
+  WHEN setIsTriedToSubmit
   SHOULD change value to true
-  WHEN setIsTriedToSubmit(false)
+  WHEN resetIsTriedToSubmit
   SHOULD change value to false
   `, () => {
     expect(createTenantState.isTriedToSubmit)
@@ -84,13 +84,13 @@ function isTriedToSubmitTests() {
       .be
       .false
 
-    createTenantState.setIsTriedToSubmit(true)
+    createTenantState.setIsTriedToSubmit()
     expect(createTenantState.isTriedToSubmit)
       .to
       .be
       .true
 
-    createTenantState.setIsTriedToSubmit(false)
+    createTenantState.resetIsTriedToSubmit()
     expect(createTenantState.isTriedToSubmit)
       .to
       .be

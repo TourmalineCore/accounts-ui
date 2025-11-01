@@ -17,7 +17,7 @@ export const TenantsContainer = observer(() => {
     <TenantsContent />
   )
   async function getTenantsAsync() {
-    tenantManagementState.setIsLoading(true)
+    tenantManagementState.setIsLoading()
     try {
       const {
         data, 
@@ -25,7 +25,7 @@ export const TenantsContainer = observer(() => {
       tenantManagementState.getTenants(data)
     }
     finally {
-      tenantManagementState.setIsLoading(false)
+      tenantManagementState.resetIsLoading()
     }
   }
 })

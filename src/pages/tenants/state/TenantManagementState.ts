@@ -22,7 +22,11 @@ export class TenantManagementState {
     this._allTenants = newTenant
   }
 
-  setIsLoading(newValue: boolean) {
-    this._isLoading = newValue
+  setIsLoading() {
+    this._isLoading = true
+  }
+
+  resetIsLoading() {
+    this._isLoading = false
   }
 }

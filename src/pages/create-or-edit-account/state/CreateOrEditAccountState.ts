@@ -51,8 +51,12 @@ export class CreateOrEditAccountState {
     return this._isEditMode
   }
 
-  setIsTriedToSubmit(newValue: boolean) {
-    this._isTriedToSubmit = newValue
+  setIsTriedToSubmit() {
+    this._isTriedToSubmit = true
+  }
+
+  resetIsTriedToSubmit() {
+    this._isTriedToSubmit = false
   }
 
   setSelectedCheckboxes(newValue: Set<string>) {
@@ -74,12 +78,20 @@ export class CreateOrEditAccountState {
     this._tenantsData = newValue
   }
 
-  setIsError(newValue: boolean) {
-    this._isError = newValue
+  setIsError() {
+    this._isError = true
   }
 
-  setIsEditMode(newValue: boolean) {
-    this._isEditMode = newValue
+  resetIsError() {
+    this._isError = false
+  }
+
+  setIsEditMode() {
+    this._isEditMode = true
+  }
+
+  resetIsEditMode() {
+    this._isEditMode = false
   }
 
   toggleCheckbox(newValue: string) {
