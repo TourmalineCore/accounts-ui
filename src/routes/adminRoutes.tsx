@@ -8,7 +8,7 @@ import {accountManagementRoutes,
   sidebarAccounts,
   sidebarRoles,
   sidebarTenants,
-  tenantRoutes} from '../features/account-management/routes'
+  tenantRoutes} from '../pages/routes'
 import { SidebarRoutesProps } from '../types'
 import { Permission } from './state/AccessBasedOnPemissionsState'
 import { compensationsAllAccessSidebarRoutes, getRouteForCompensations } from '../features/compensations/routes'
