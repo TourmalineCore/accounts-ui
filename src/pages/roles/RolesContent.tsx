@@ -141,7 +141,7 @@ export const RolesContent = observer(({
         {accessToChanges.accessPermissions.get(`ManageRoles`) && (
           <div className="roles-page__buttons">
             {
-              !rolesManagementStateContext.isInEditMode 
+              !rolesManagementStateContext.isInEditMode
                 ? (
                   <button
                     type="button"
@@ -151,7 +151,7 @@ export const RolesContent = observer(({
                   >
                     + Add new role
                   </button>
-                ) 
+                )
                 : (
                   <>
                     <button
