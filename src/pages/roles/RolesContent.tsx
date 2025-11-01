@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { observer } from 'mobx-react-lite'
-import { RolesManagementStateContext } from './state/roles-page/RolesManagementStateContext'
+import { RolesManagementStateContext } from './state/RolesManagementStateContext'
 import { AccessBasedOnPemissionsStateContext } from '../../routes/state/AccessBasedOnPemissionsStateContext'
 import { RolesTable } from './components/RolesTable/RolesTable'
 

@@ -3,9 +3,9 @@ import {ChangeEvent, Fragment, useContext, useRef} from 'react'
 import { CheckField } from '@tourmalinecore/react-tc-ui-kit'
 import IconCheck from '../../../../assets/icons/check.svg?react'
 import IconUncheck from '../../../../assets/icons/uncheck.svg?react'
-import { RolesManagementStateContext } from '../../state/roles-page/RolesManagementStateContext'
 import { AccessBasedOnPemissionsStateContext } from '../../../../routes/state/AccessBasedOnPemissionsStateContext'
 import { ActionsDropdown } from '../ActionsDropdown/ActionsDropdown'
+import { RolesManagementStateContext } from '../../state/RolesManagementStateContext'
 
 // ToDo
 // When create a new role, its object should be added to the beginning of the array using unshift method

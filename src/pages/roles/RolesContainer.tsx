@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { RolesContent } from './RolesContent'
-import { RolesManagementStateContext } from './state/roles-page/RolesManagementStateContext'
+import { RolesManagementStateContext } from './state/RolesManagementStateContext'
 import { api } from '../../common/api'
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 

@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { RolesManagementState } from './state/roles-page/RolesManagementState'
-import { RolesManagementStateContext } from './state/roles-page/RolesManagementStateContext'
+import { RolesManagementState } from './state/RolesManagementState'
+import { RolesManagementStateContext } from './state/RolesManagementStateContext'
 import { RolesContainer } from './RolesContainer'
 
 export function RolesPage() {
