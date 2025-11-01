@@ -54,10 +54,16 @@ export class RolesManagementState {
       permissions: [],
     })
 
-    this.editRole(0)
+    this.editRole({
+      roleId: 0,
+    })
   }
 
-  editRole(roleId: number) {
+  editRole({
+    roleId,
+  }: {
+    roleId: number,
+  }) {
     const index = this._roles.map((element) => element.id)
       .indexOf(roleId)
 

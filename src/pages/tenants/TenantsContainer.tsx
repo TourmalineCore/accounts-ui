@@ -22,7 +22,9 @@ export const TenantsContainer = observer(() => {
       const {
         data, 
       } = await api.get<Tenants[]>(`${LINK_TO_ACCOUNT_SERVICE}tenants/all`)
-      tenantManagementState.getTenants(data)
+      tenantManagementState.getTenants({
+        newTenant: data,
+      })
     }
     finally {
       tenantManagementState.resetIsLoading()

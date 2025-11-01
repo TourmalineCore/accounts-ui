@@ -26,7 +26,11 @@ export class CreateTenantState {
     this._isTriedToSubmit = false
   }
 
-  setTenantData(value: TenantCreate) {
+  setTenantData({
+    value,
+  }: {
+    value: TenantCreate,
+  }) {
     this._tenantData = { 
       ...this._tenantData, 
       ...value, 

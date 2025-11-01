@@ -100,7 +100,9 @@ function accountDataTests() {
   WHEN set account form data
   SHOULD display new values in the account object
   `, () => {
-    createOrEditAccountState.setAccountData(accountDataForInitialization)
+    createOrEditAccountState.setAccountData({
+      newValue: accountDataForInitialization,
+    })
 
     expect(createOrEditAccountState.accountData)
       .to
@@ -113,10 +115,14 @@ function accountDataTests() {
   WHEN setAccountData with new values
   SHOULD update only specified fields
   `, () => {
-    createOrEditAccountState.setAccountData(accountDataForInitialization)
     createOrEditAccountState.setAccountData({
-      ...accountDataForInitialization,
-      firstName: `Test`,
+      newValue: accountDataForInitialization,
+    })
+    createOrEditAccountState.setAccountData({
+      newValue: {
+        ...accountDataForInitialization,
+        firstName: `Test`,
+      },
     })
 
     expect(createOrEditAccountState.accountData.firstName)
@@ -146,7 +152,9 @@ function selectedCheckboxesTests() {
   WHEN toggle empty checkbox 
   SHOULD add its value to the set of selected checkboxes
   `, () => {
-    createOrEditAccountState.toggleCheckbox(`1`)
+    createOrEditAccountState.toggleCheckbox({
+      newValue: `1`,
+    })
 
     expect(createOrEditAccountState.selectedCheckboxes.has(`1`))
       .to
@@ -162,12 +170,16 @@ function selectedCheckboxesTests() {
   WHEN toggle checkbox with existing value
   SHOULD remove value from the set of selected checkboxes
   `, () => {
-    createOrEditAccountState.setSelectedCheckboxes(new Set([
-      `1`,
-      `2`,
-    ]))
+    createOrEditAccountState.setSelectedCheckboxes({
+      newValue: new Set([
+        `1`,
+        `2`,
+      ]),
+    })
     
-    createOrEditAccountState.toggleCheckbox(`1`)
+    createOrEditAccountState.toggleCheckbox({
+      newValue: `1`,
+    })
 
     expect(createOrEditAccountState.selectedCheckboxes.has(`1`))
       .to
@@ -200,7 +212,9 @@ function rolesDataTests() {
       2: `Intern`,
     }
 
-    createOrEditAccountState.setRolesData(newRolesData)
+    createOrEditAccountState.setRolesData({
+      newValue: newRolesData,
+    })
 
     expect(createOrEditAccountState.rolesData)
       .to
@@ -232,7 +246,9 @@ function tenantsDataTests() {
       },
     ]
 
-    createOrEditAccountState.setTenantsData(newTenantsData)
+    createOrEditAccountState.setTenantsData({
+      newValue: newTenantsData,
+    })
 
     expect(createOrEditAccountState.tenantsData)
       .to

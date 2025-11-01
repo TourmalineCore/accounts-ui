@@ -67,8 +67,10 @@ export const CreateOrEditAccountContent = observer(({
             isMessagesAbsolute
             maxLength={50}
             onChange={(e: ChangeEvent<HTMLInputElement>) => createOrEditAccountState.setAccountData({
-              ...accountData,
-              firstName: e.target.value.trim(), 
+              newValue: {
+                ...accountData,
+                firstName: e.target.value.trim(),
+              }, 
             })}
           />
         </div>
@@ -81,8 +83,10 @@ export const CreateOrEditAccountContent = observer(({
             isMessagesAbsolute
             maxLength={50}
             onChange={(e: ChangeEvent<HTMLInputElement>) => createOrEditAccountState.setAccountData({
-              ...accountData,
-              middleName: e.target.value.trim(), 
+              newValue: {
+                ...accountData,
+                middleName: e.target.value.trim(),
+              }, 
             })}
           />
         </div>
@@ -99,8 +103,10 @@ export const CreateOrEditAccountContent = observer(({
             isMessagesAbsolute
             maxLength={50}
             onChange={(e: ChangeEvent<HTMLInputElement>) => createOrEditAccountState.setAccountData({
-              ...accountData,
-              lastName: e.target.value.trim(), 
+              newValue: {
+                ...accountData,
+                lastName: e.target.value.trim(),
+              }, 
             })}
           />
         </div>
@@ -118,8 +124,10 @@ export const CreateOrEditAccountContent = observer(({
                   value={corporateEmail}
                   maxLength={31}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => createOrEditAccountState.setAccountData({
-                    ...accountData,
-                    corporateEmail: e.target.value.trim(), 
+                    newValue: {
+                      ...accountData,
+                      corporateEmail: e.target.value.trim(),
+                    },
                   })}
                 />
                 <span>@tourmalinecore.com</span>
@@ -161,7 +169,9 @@ export const CreateOrEditAccountContent = observer(({
                   label={label}
                   checked={selectedCheckboxes.has(value)}
                   onChange={() => {
-                    createOrEditAccountState.toggleCheckbox(value)
+                    createOrEditAccountState.toggleCheckbox({
+                      newValue: value,
+                    })
                   }}
                 />
               ))}
@@ -187,8 +197,10 @@ export const CreateOrEditAccountContent = observer(({
               defaultValue=""
               value={tenantId}
               onChange={(e) => createOrEditAccountState.setAccountData({
-                ...accountData,
-                tenantId: e.target.value.trim(), 
+                newValue: {
+                  ...accountData,
+                  tenantId: e.target.value.trim(),
+                },
               })}
             >
               <option

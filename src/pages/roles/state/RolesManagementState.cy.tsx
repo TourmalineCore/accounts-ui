@@ -52,7 +52,9 @@ describe(`RolesManagementState`, () => {
 
     rolesManagementState.initialize(INITIAL_STATE)
 
-    rolesManagementState.editRole(2)
+    rolesManagementState.editRole({
+      roleId: 2,
+    })
     expect(rolesManagementState.updatedRole!.id)
       .eq(2)
   })
@@ -62,7 +64,9 @@ describe(`RolesManagementState`, () => {
 
     rolesManagementState.initialize(INITIAL_STATE)
 
-    rolesManagementState.editRole(2)
+    rolesManagementState.editRole({
+      roleId: 2,
+    })
 
     rolesManagementState.changeRole({
       id: 2,
@@ -87,7 +91,9 @@ describe(`RolesManagementState`, () => {
       ],
     })
 
-    rolesManagementState.editRole(2)
+    rolesManagementState.editRole({
+      roleId: 2,
+    })
 
     expect(rolesManagementState.isInEditMode)
       .eq(true)
@@ -125,7 +131,9 @@ describe(`RolesManagementState`, () => {
       ],
     })
 
-    rolesManagementState.editRole(2)
+    rolesManagementState.editRole({
+      roleId: 2,
+    })
 
     expect(rolesManagementState.isInEditMode)
       .eq(true)

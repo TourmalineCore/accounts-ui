@@ -59,22 +59,45 @@ export class CreateOrEditAccountState {
     this._isTriedToSubmit = false
   }
 
-  setSelectedCheckboxes(newValue: Set<string>) {
+  setSelectedCheckboxes({
+    newValue,
+  }: {
+    newValue: Set<string>,
+  }) {
     this._selectedCheckboxes = newValue
   }
 
-  setAccountData(newValue: Pick<AccountCreate, 'firstName' | 'lastName' | 'middleName' | 'corporateEmail' | 'tenantId'>) {
+  setAccountData({
+    newValue,
+  }: {
+    newValue: Pick<AccountCreate, 
+    'firstName' | 
+    'lastName' |
+    'middleName' |
+    'corporateEmail' |
+    'tenantId'>,
+  }) {
     this._accountData = {
       ...this._accountData,
       ...newValue, 
     }
   }
 
-  setRolesData(newValue: { [key: number]: string, }) {
+  setRolesData({
+    newValue,
+  }: { 
+    newValue: {
+      [key: number]: string,
+    },
+  }) {
     this._rolesData = newValue
   }
 
-  setTenantsData(newValue: Tenants[]) {
+  setTenantsData({
+    newValue,
+  }: {
+    newValue: Tenants[],
+    }) {
     this._tenantsData = newValue
   }
 
@@ -94,7 +117,11 @@ export class CreateOrEditAccountState {
     this._isEditMode = false
   }
 
-  toggleCheckbox(newValue: string) {
+  toggleCheckbox({
+    newValue,
+  }: {
+    newValue: string,
+  }) {
     if (this._selectedCheckboxes.has(newValue)) {
       this._selectedCheckboxes = new Set(
         [

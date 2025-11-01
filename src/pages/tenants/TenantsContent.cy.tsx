@@ -75,7 +75,9 @@ function mountComponent({
 }) {
   const tenantManagementState = new TenantManagementState()
 
-  tenantManagementState.getTenants(tenants)
+  tenantManagementState.getTenants({
+    newTenant: tenants,
+  })
   cy.mount(
     <TenantManagementStateContext.Provider value={tenantManagementState}>
       <TenantsContent />

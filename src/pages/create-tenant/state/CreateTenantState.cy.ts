@@ -40,7 +40,9 @@ function tenantDataTests() {
   SHOULD update tenant form data with name
   `, () => {
     createTenantState.setTenantData({
-      name: `Test`,
+      value: {
+        name: `Test`,
+      },
     })
 
     expect(createTenantState.tenantData.name)
@@ -54,11 +56,15 @@ function tenantDataTests() {
   SHOULD update tenant form data with new name
   `, () => {
     createTenantState.setTenantData({
-      name: `Test`,
+      value: {
+        name: `Test`,
+      },
     })
 
     createTenantState.setTenantData({
-      name: `Test 2`,
+      value: {
+        name: `Test 2`,
+      },
     })
 
     expect(createTenantState.tenantData.name).to.eq(`Test 2`)

@@ -18,7 +18,11 @@ export class TenantManagementState {
     return this._isLoading
   }
 
-  getTenants(newTenant: Tenants[]) {
+  getTenants({
+    newTenant,
+  }: {
+    newTenant: Tenants[],
+  }) {
     this._allTenants = newTenant
   }
 

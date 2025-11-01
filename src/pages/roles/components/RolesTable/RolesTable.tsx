@@ -75,7 +75,9 @@ export const RolesTable = observer(
                   {
                     text: `Edit`,
                     onClick: () => {
-                      rolesManagementStateContext.editRole(id) 
+                      rolesManagementStateContext.editRole({
+                        roleId: id,
+                      }) 
                     },
                   },
                 ]}

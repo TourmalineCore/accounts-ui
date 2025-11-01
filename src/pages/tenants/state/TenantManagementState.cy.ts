@@ -17,7 +17,9 @@ describe(`TenantManagementState`, () => {
   it(`SHOULD return all tenants WHEN initialized`, () => {
     const tenantManagementState = new TenantManagementState()
 
-    tenantManagementState.getTenants(INITIAL_STATE)
+    tenantManagementState.getTenants({
+      newTenant: INITIAL_STATE,
+    })
 
     expect(tenantManagementState.allTenants)
       .to

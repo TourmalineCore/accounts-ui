@@ -219,18 +219,24 @@ function mountComponent({
   if (isEditMode) {
     createAccountState.setIsEditMode()
     createAccountState.setAccountData({
-      firstName: MOCK_DATA_ACCOUNT.firstName,
-      lastName: MOCK_DATA_ACCOUNT.lastName,
-      corporateEmail: MOCK_DATA_ACCOUNT.corporateEmail,
+      newValue: {
+        firstName: MOCK_DATA_ACCOUNT.firstName,
+        lastName: MOCK_DATA_ACCOUNT.lastName,
+        corporateEmail: MOCK_DATA_ACCOUNT.corporateEmail,
+      },
     })
-    createAccountState.setSelectedCheckboxes(
-      new Set(MOCK_DATA_ACCOUNT.roles.map(role => String(role.id))),
-    )
+    createAccountState.setSelectedCheckboxes({
+      newValue: new Set(MOCK_DATA_ACCOUNT.roles.map(role => String(role.id))),
+    })
   }
 
-  createAccountState.setTenantsData(MOCK_DATA_TENANTS)
+  createAccountState.setTenantsData({
+    newValue: MOCK_DATA_TENANTS,
+  })
   createAccountState.setRolesData({
-    1: `CEO`,
+    newValue: {
+      1: `CEO`,
+    },
   })
 
   const mockCreateAccount = cy.stub()

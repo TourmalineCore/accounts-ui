@@ -41,13 +41,19 @@ export const CreateOrEditAccountContainer = observer(() => {
       data: roles,
     } = await api.get<Role[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`)
 
-    createOrEditAccountState.setAccountData(data)
-    createOrEditAccountState.setSelectedCheckboxes(new Set([
-      ...data.roles.map((role) => String(role.id)),
-    ]))
-    createOrEditAccountState.setRolesData(Object.assign({}, ...roles.map((role) => ({
-      [role.id]: role.name, 
-    }))))
+    createOrEditAccountState.setAccountData({
+      newValue: data,
+    })
+    createOrEditAccountState.setSelectedCheckboxes({
+      newValue: new Set([
+        ...data.roles.map((role) => String(role.id)),
+      ]),
+    })
+    createOrEditAccountState.setRolesData({
+      newValue: Object.assign({}, ...roles.map((role) => ({
+        [role.id]: role.name, 
+      }))),
+    })
     createOrEditAccountState.setIsEditMode()
   }
 
@@ -92,9 +98,11 @@ export const CreateOrEditAccountContainer = observer(() => {
       data,
     } = await api.get<Role[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`)
 
-    createOrEditAccountState.setRolesData(Object.assign({}, ...data.map((role) => ({
-      [role.id]: role.name,
-    }))))
+    createOrEditAccountState.setRolesData({
+      newValue: Object.assign({}, ...data.map((role) => ({
+        [role.id]: role.name,
+      }))),
+    })
   }
 
   async function getTenantsAccountLoadAsync() {
@@ -102,7 +110,9 @@ export const CreateOrEditAccountContainer = observer(() => {
       data,
     } = await api.get(`${LINK_TO_ACCOUNT_SERVICE}tenants/all`)
 
-    createOrEditAccountState.setTenantsData(data)
+    createOrEditAccountState.setTenantsData({
+      newValue: data,
+    })
   }
 
   async function createAccountAsync() {

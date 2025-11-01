@@ -29,8 +29,10 @@ export const CreateTenantContent = observer(({
             isMessagesAbsolute
             maxLength={50}
             onChange={(e: ChangeEvent<HTMLInputElement>) => createTenantState.setTenantData({
-              ...createTenantState.tenantData,
-              name: e.target.value.trim(), 
+              value: { 
+                ...createTenantState.tenantData,
+                name: e.target.value.trim(),
+              }, 
             })}
           />
         </div>
