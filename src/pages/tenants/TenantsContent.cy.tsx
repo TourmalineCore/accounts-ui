@@ -18,7 +18,8 @@ describe(`TenantsContent`, () => {
   it(`
   GIVEN tenants page 
   WHEN visit tenants page
-  SHOULD render tenants page content `, () => {
+  SHOULD render tenants page content
+  `, () => {
     mountComponent({
       tenants: initialData,
     })
@@ -31,7 +32,8 @@ describe(`TenantsContent`, () => {
   it(`
   GIVEN tenants page 
   WHEN visit tenants page
-  SHOULD render button `, () => {
+  SHOULD render button
+  `, () => {
     mountComponent({
       tenants: initialData,
     })
@@ -45,7 +47,8 @@ describe(`TenantsContent`, () => {
   it(`
   GIVEN tenants page 
   WHEN visit tenants page
-  SHOULD render table with data `, () => {
+  SHOULD render table with data
+  `, () => {
     context(`desctop resolution`, () => {
       cy
         .viewport(2400, 780)

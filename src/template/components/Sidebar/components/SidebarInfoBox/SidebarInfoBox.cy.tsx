@@ -60,10 +60,10 @@ describe(`SidebarInfoBox`, () => {
   })
 
   it(`
-    GIVEN exception email starts at snl and then last name without first letter
-    WHEN open sidebar
-    THEN render correct user fullName
-    `, () => {
+  GIVEN exception email starts at snl and then last name without first letter
+  WHEN open sidebar
+  THEN render correct user fullName
+  `, () => {
     mountComponent({
       infoBoxData: initialDataFourth,
     })

@@ -68,7 +68,8 @@ function createAccountContent() {
   it(`
   GIVEN create account page 
   WHEN visit account page
-  SHOULD render account page content`, () => {
+  SHOULD render account page content
+  `, () => {
     mountComponent({})
 
     cy
@@ -109,7 +110,8 @@ function createAccountContent() {
   it(`
   GIVEN create account page 
   WHEN visit account page
-  SHOULD render a select with data about tenants`, () => {
+  SHOULD render a select with data about tenants
+  `, () => {
     cy
       .getByData(`select-tenant`)
       .should(`exist`)
@@ -137,53 +139,59 @@ function editAccountContent() {
   })
 
   it(`
-    SHOULD render edit page 
-    WHEN there is component`, () => {
+  SHOULD render edit page 
+  WHEN there is component
+  `, () => {
     cy
       .getByData(`edit-account`)
       .should(`exist`)
   })
 
   it(`
-    GIVEN edit account page 
-    SHOULD display corporate email of the account
-    AFTER render`, () => {
+  GIVEN edit account page 
+  SHOULD display corporate email of the account
+  AFTER render
+  `, () => {
     cy
       .getByData(`corporate-email`)
       .should(`have.text`, `test@tourmalinecore.com`)
   })
 
   it(`
-    GIVEN first name input 
-    SHOULD display value 
-    AFTER render`, () => {
+  GIVEN first name input 
+  SHOULD display value 
+  AFTER render
+  `, () => {
     cy
       .getByData(`first-name`)
       .should(`have.value`, `TestName`)
   })
 
   it(`
-    GIVEN last name input 
-    SHOULD display value
-    AFTER render`, () => {
+  GIVEN last name input 
+  SHOULD display value
+  AFTER render
+  `, () => {
     cy
       .getByData(`last-name`)
       .should(`have.value`, `TestLastName`)
   })
 
   it(`
-    GIVEN middle name input 
-    SHOULD display value
-    AFTER render`, () => {
+  GIVEN middle name input 
+  SHOULD display value
+  AFTER render
+  `, () => {
     cy
       .getByData(`middle-name`)
       .should(`have.value`, ``)
   })
 
   it(`
-    GIVEN role checkbox 
-    SHOULD be checked
-    AFTER render`, () => {
+  GIVEN role checkbox 
+  SHOULD be checked
+  AFTER render
+  `, () => {
     cy
       .get(`.tc-checkfield :checked`)
       .should(`be.checked`)
@@ -191,18 +199,20 @@ function editAccountContent() {
   })
 
   it(`
-    GIVEN edit account page 
-    SHOULD render cancel button
-    WHEN there is component`, () => {
+  GIVEN edit account page 
+  SHOULD render cancel button
+  WHEN there is component
+  `, () => {
     cy
       .getByData(`cancel-button`)
       .should(`exist`)
   })
 
   it(`
-    GIVEN edit account page 
-    SHOULD render save button
-    WHEN there is component`, () => {
+  GIVEN edit account page 
+  SHOULD render save button
+  WHEN there is component
+  `, () => {
     cy
       .getByData(`save-button`)
       .should(`exist`)

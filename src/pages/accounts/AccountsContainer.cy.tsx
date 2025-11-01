@@ -57,7 +57,8 @@ describe(`AccountsContainer`, () => {
   it(`
   GIVEN accounts page 
   WHEN visit accounts page
-  SHOULD render accounts page content `, () => {
+  SHOULD render accounts page content 
+  `, () => {
     mountComponent({
       accounts: initialData,
     })
@@ -67,9 +68,10 @@ describe(`AccountsContainer`, () => {
   })
 
   it(`
-    GIVEN accounts page content
-    WHEN visit accounts page
-    SHOULD render column with tenant `, () => {
+  GIVEN accounts page content
+  WHEN visit accounts page
+  SHOULD render column with tenant 
+  `, () => {
     context(`desktop resolution`, () => {
       mountComponent({
         accounts: initialData,
@@ -83,9 +85,10 @@ describe(`AccountsContainer`, () => {
   })
 
   it(`
-    GIVEN accounts page content
-    WHEN click on actions menu
-    SHOULD render edit, block and unblock account action if there is a solution for this`, () => {
+  GIVEN accounts page content
+  WHEN click on actions menu
+  SHOULD render edit, block and unblock account action if there is a solution for this
+  `, () => {
     context(`desktop resolution`, () => {
       mountComponent({
         accounts: initialData,
@@ -112,9 +115,10 @@ describe(`AccountsContainer`, () => {
     })
   })
   it(`
-    GIVEN accounts page content
-    WHEN block account
-    SHOULD change account's status and add actions unblock`, () => {
+  GIVEN accounts page content
+  WHEN block account
+  SHOULD change account's status and add actions unblock
+  `, () => {
     context(`desktop resolution`, () => {
       mountComponent({
         accounts: initialData,

@@ -7,7 +7,8 @@ describe(`CreateTenantContainer`, () => {
   it(`
   GIVEN create tenant page 
   WHEN visit tenants page
-  SHOULD render tenants page content `, () => {
+  SHOULD render tenants page content
+  `, () => {
     mountComponent()
 
     cy
