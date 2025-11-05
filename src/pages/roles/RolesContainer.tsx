@@ -1,12 +1,12 @@
 import { useContext, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { RolesContent } from './RolesContent'
-import { RolesManagementStateContext } from './state/RolesManagementStateContext'
+import { RolesStateContext } from './state/RolesStateContext'
 import { api } from '../../common/api'
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 
 export const RolesContainer = observer(() => {
-  const rolesManagementStateContext = useContext(RolesManagementStateContext)
+  const rolesManagementStateContext = useContext(RolesStateContext)
 
   useEffect(() => {
     getRolesAsync()

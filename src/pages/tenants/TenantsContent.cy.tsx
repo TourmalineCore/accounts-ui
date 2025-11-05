@@ -1,6 +1,6 @@
 import '../../../cypress/support/commands'
-import { TenantManagementState } from './state/TenantManagementState'
-import { TenantManagementStateContext } from './state/TenantManagementStateContext'
+import { TenantsState } from './state/TenantsState'
+import { TenantsStateContext } from './state/TenantsStateContext'
 import { TenantsContent } from './TenantsContent'
 
 const initialData: Tenants[] = [
@@ -76,15 +76,15 @@ function mountComponent({
 }: {
   tenants: Tenants[],
 }) {
-  const tenantManagementState = new TenantManagementState()
+  const tenantManagementState = new TenantsState()
 
   tenantManagementState.getTenants({
     newTenant: tenants,
   })
   cy.mount(
-    <TenantManagementStateContext.Provider value={tenantManagementState}>
+    <TenantsStateContext.Provider value={tenantManagementState}>
       <TenantsContent />
-    </TenantManagementStateContext.Provider>,
+    </TenantsStateContext.Provider>,
 
   )
 }

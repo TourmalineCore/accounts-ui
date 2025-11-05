@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 
-export class TenantManagementState {
+export class TenantsState {
   private _allTenants: Tenants[] = []
 
   private _isLoading = false

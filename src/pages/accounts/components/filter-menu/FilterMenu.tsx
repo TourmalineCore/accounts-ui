@@ -3,7 +3,7 @@ import {MouseEvent, useContext} from 'react'
 
 import clsx from 'clsx'
 import { observer } from 'mobx-react-lite'
-import { AccountManagementStateContext } from '../../state/AccountManagementStateContext'
+import { AccountsStateContext } from '../../state/AccountsStateContext'
 
 const filterElements = [
   {
@@ -21,7 +21,7 @@ const filterElements = [
 ]
 
 export const FilterMenu = observer(() => {
-  const accountManagementState = useContext(AccountManagementStateContext)
+  const accountManagementState = useContext(AccountsStateContext)
 
   return (
     <div className="filter-menu">

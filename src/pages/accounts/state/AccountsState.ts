@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 
-export class AccountManagementState {
+export class AccountsState {
   private _allAccounts: Accounts[] = []
 
   private _lastBlockAccount: Accounts | null = null

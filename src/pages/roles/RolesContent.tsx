@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { observer } from 'mobx-react-lite'
-import { RolesManagementStateContext } from './state/RolesManagementStateContext'
+import { RolesStateContext } from './state/RolesStateContext'
 import { AccessBasedOnPemissionsStateContext } from '../../routes/state/AccessBasedOnPemissionsStateContext'
 import { RolesTable } from './components/roles-table/RolesTable'
 
@@ -123,7 +123,7 @@ export const RolesContent = observer(({
 }: {
     onSaveClick: () => unknown,
   }) => {
-  const rolesManagementStateContext = useContext(RolesManagementStateContext)
+  const rolesManagementStateContext = useContext(RolesStateContext)
   const accessToChanges = useContext(AccessBasedOnPemissionsStateContext)
 
   return (

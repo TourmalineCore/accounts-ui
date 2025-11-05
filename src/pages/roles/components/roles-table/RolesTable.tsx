@@ -5,7 +5,7 @@ import IconCheck from '../../../../assets/icons/check.svg?react'
 import IconUncheck from '../../../../assets/icons/uncheck.svg?react'
 import { AccessBasedOnPemissionsStateContext } from '../../../../routes/state/AccessBasedOnPemissionsStateContext'
 import { ActionsDropdown } from '../actions-dropdown/ActionsDropdown'
-import { RolesManagementStateContext } from '../../state/RolesManagementStateContext'
+import { RolesStateContext } from '../../state/RolesStateContext'
 
 // ToDo
 // When create a new role, its object should be added to the beginning of the array using unshift method
@@ -26,7 +26,7 @@ export const RolesTable = observer(
       rolePermissions: Role[],
     },
   ) => {
-    const rolesManagementStateContext = useContext(RolesManagementStateContext)
+    const rolesManagementStateContext = useContext(RolesStateContext)
     const accessToChanges = useContext(AccessBasedOnPemissionsStateContext)
 
     const columnRef = useRef<HTMLTableDataCellElement>(null)

@@ -1,6 +1,6 @@
 import { AccountsContainer } from './AccountsContainer'
-import { AccountManagementState } from './state/AccountManagementState'
-import { AccountManagementStateContext } from './state/AccountManagementStateContext'
+import { AccountsState } from './state/AccountsState'
+import { AccountsStateContext } from './state/AccountsStateContext'
 
 const initialData: Accounts[] = [
   {
@@ -170,13 +170,13 @@ function mountComponent({
 }: {
   accounts: Accounts[],
 }) {
-  const accountManagementState = new AccountManagementState()
+  const accountManagementState = new AccountsState()
 
   accountManagementState.getAccounts(accounts)
   cy.mount(
-    <AccountManagementStateContext.Provider value={accountManagementState}>
+    <AccountsStateContext.Provider value={accountManagementState}>
       <AccountsContainer />
-    </AccountManagementStateContext.Provider>,
+    </AccountsStateContext.Provider>,
 
   )
 }

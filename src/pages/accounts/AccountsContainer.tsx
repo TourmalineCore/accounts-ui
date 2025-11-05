@@ -1,13 +1,13 @@
 import { useContext, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { toast } from 'react-toastify'
-import { AccountManagementStateContext } from './state/AccountManagementStateContext'
+import { AccountsStateContext } from './state/AccountsStateContext'
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 import { api } from '../../common/api'
 import { AccountsContent } from './AccountsContent'
 
 export const AccountsContainer = observer(() => {
-  const accountManagementState = useContext(AccountManagementStateContext)
+  const accountManagementState = useContext(AccountsStateContext)
 
   useEffect(() => {
     getAccountsAsync()

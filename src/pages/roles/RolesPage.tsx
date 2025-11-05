@@ -1,17 +1,17 @@
 import { useMemo } from 'react'
-import { RolesManagementState } from './state/RolesManagementState'
-import { RolesManagementStateContext } from './state/RolesManagementStateContext'
+import { RolesState } from './state/RolesState'
+import { RolesStateContext } from './state/RolesStateContext'
 import { RolesContainer } from './RolesContainer'
 
 export function RolesPage() {
   const rolesManagementState = useMemo(
-    () => new RolesManagementState(),
+    () => new RolesState(),
     [],
   )
 
   return (
-    <RolesManagementStateContext.Provider value={rolesManagementState}>
+    <RolesStateContext.Provider value={rolesManagementState}>
       <RolesContainer />
-    </RolesManagementStateContext.Provider>
+    </RolesStateContext.Provider>
   )
 }

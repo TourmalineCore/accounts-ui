@@ -2,11 +2,11 @@ import {useContext} from 'react'
 
 import { ClientTable } from '@tourmalinecore/react-table-responsive'
 import { observer } from 'mobx-react-lite'
-import { TenantManagementStateContext } from './state/TenantManagementStateContext'
+import { TenantsStateContext } from './state/TenantsStateContext'
 import { ColumnDef } from '@tanstack/table-core'
 
 export const TenantsContent = observer(() => {
-  const tenantManagementState = useContext(TenantManagementStateContext)
+  const tenantManagementState = useContext(TenantsStateContext)
 
   const columns: ColumnDef<Tenants>[] = [
     {

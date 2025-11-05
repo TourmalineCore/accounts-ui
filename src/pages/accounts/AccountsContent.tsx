@@ -6,7 +6,7 @@ import { ColumnDef } from '@tanstack/table-core'
 import { FilterMenu } from './components/filter-menu/FilterMenu'
 import { AccessBasedOnPemissionsStateContext } from '../../routes/state/AccessBasedOnPemissionsStateContext'
 import { useContext } from 'react'
-import { AccountManagementStateContext } from './state/AccountManagementStateContext'
+import { AccountsStateContext } from './state/AccountsStateContext'
 
 export const AccountsContent = observer(({
   accounts,
@@ -18,7 +18,7 @@ export const AccountsContent = observer(({
   onUnblockAccount: (accountId: number) => void,
 }) => {
   const accessToChanges = useContext(AccessBasedOnPemissionsStateContext)
-  const accountManagementState = useContext(AccountManagementStateContext)
+  const accountManagementState = useContext(AccountsStateContext)
   
   const columns: ColumnDef<Accounts>[] = [
     {

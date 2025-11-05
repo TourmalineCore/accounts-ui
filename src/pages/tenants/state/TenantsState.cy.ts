@@ -1,6 +1,6 @@
 import '../../../../cypress/support/commands'
 
-import { TenantManagementState } from './TenantManagementState'
+import { TenantsState } from './TenantsState'
 
 const INITIAL_STATE: Tenants[] = [
   {
@@ -13,15 +13,15 @@ const INITIAL_STATE: Tenants[] = [
   },
 ]
 
-describe(`TenantManagementState`, () => {
+describe(`TenantsState`, () => {
   it(`SHOULD return all tenants WHEN initialized`, () => {
-    const tenantManagementState = new TenantManagementState()
+    const tenantsState = new TenantsState()
 
-    tenantManagementState.getTenants({
+    tenantsState.getTenants({
       newTenant: INITIAL_STATE,
     })
 
-    expect(tenantManagementState.allTenants)
+    expect(tenantsState.allTenants)
       .to
       .has
       .lengthOf(2)
