@@ -35,8 +35,8 @@ export const AccountsContent = observer(({
           firstName, lastName, middleName, isBlocked,
         } = row.original
         return (
-          <div className={clsx(`account-management-page__account`, {
-            'account-management-page__account--isBlocked': isBlocked,
+          <div className={clsx(`accounts-page__account`, {
+            'accounts-page__account--isBlocked': isBlocked,
           })}
           >
             {lastName}
@@ -59,8 +59,8 @@ export const AccountsContent = observer(({
           roles, isBlocked, 
         } = row.original
         return (
-          <span className={clsx(`account-management-page__account`, {
-            'account-management-page__account--isBlocked': isBlocked,
+          <span className={clsx(`accounts-page__account`, {
+            'accounts-page__account--isBlocked': isBlocked,
           })}
           >
             {roles.map((role, index) => (
@@ -84,8 +84,8 @@ export const AccountsContent = observer(({
           corporateEmail, isBlocked, 
         } = row.original
         return (
-          <span className={clsx(`account-management-page__account`, {
-            'account-management-page__account--isBlocked': isBlocked,
+          <span className={clsx(`accounts-page__account`, {
+            'accounts-page__account--isBlocked': isBlocked,
           })}
           >
             {corporateEmail}
@@ -107,8 +107,8 @@ export const AccountsContent = observer(({
         } = row.original
         return (
           <span
-            className={clsx(`account-management-page__account`, {
-              'account-management-page__account--isBlocked': isBlocked,
+            className={clsx(`accounts-page__account`, {
+              'accounts-page__account--isBlocked': isBlocked,
             })}
             data-cy="accounts-page-tenant-column"
           >
@@ -133,8 +133,8 @@ export const AccountsContent = observer(({
           .format(`DD.MM.YYYY HH:mm`)
 
         return (
-          <span className={clsx(`account-management-page__account`, {
-            'account-management-page__account--isBlocked': isBlocked,
+          <span className={clsx(`accounts-page__account`, {
+            'accounts-page__account--isBlocked': isBlocked,
           })}
           >
             {formattedDate}
@@ -155,7 +155,7 @@ export const AccountsContent = observer(({
 
         return (
           <div
-            className="account-management-page__status"
+            className="accounts-page__status"
             data-cy="accounts-page-status-column"
           >
             {!isBlocked ? `Active` : `Blocked`}
@@ -215,18 +215,18 @@ export const AccountsContent = observer(({
 
   return (
     <section
-      className="account-management-page"
+      className="accounts-page"
       data-cy="accounts-page-content"
     >
       <h1 className="heading">Account's list</h1>
 
-      <div className="account-management-page__inner">
+      <div className="accounts-page__inner">
         <FilterMenu />
 
         {accessToChanges.accessPermissions.get(`ManageAccounts`) && (
           <button
             type="button"
-            className="account-management-page__button"
+            className="accounts-page__button"
             onClick={handleAddAccount}
           >
             + Add New Account

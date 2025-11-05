@@ -146,7 +146,7 @@ export const RolesContent = observer(({
                   <button
                     type="button"
                     data-cy="add-new-role-button"
-                    className="account-management-page__button"
+                    className="accounts-page__button"
                     onClick={() => rolesManagementStateContext.addNewRole()}
                   >
                     + Add new role
@@ -157,7 +157,7 @@ export const RolesContent = observer(({
                     <button
                       type="button"
                       data-cy="cancel-changes-button"
-                      className="account-management-page__button"
+                      className="accounts-page__button"
                       onClick={() => rolesManagementStateContext.cancelRoleEditing()}
                     >
                       Cancel
@@ -165,7 +165,7 @@ export const RolesContent = observer(({
                     <button
                       type="button"
                       data-cy="save-changes-button"
-                      className="account-management-page__button"
+                      className="accounts-page__button"
                       disabled={!rolesManagementStateContext.updatedRole?.name}
                       onClick={onSaveClick}
                     >

@@ -39,7 +39,7 @@ export const AccountsContainer = observer(() => {
     toast.dismiss()
 
     toast(() => (
-      <div className="account-management-page__notification">
+      <div className="accounts-page__notification">
         {accountManagementState.accountToUnblock?.middleName ? (
           <span>
             {`${accountManagementState.accountToUnblock?.lastName}
@@ -54,7 +54,7 @@ export const AccountsContainer = observer(() => {
 
         <button
           type="button"
-          className="account-management-page__unblock-button"
+          className="accounts-page__unblock-button"
           onClick={() => {
             toast.dismiss(accountManagementState.accountToUnblock!.id)
             unblockAccountsAsync(accountManagementState.accountToUnblock!.id)
