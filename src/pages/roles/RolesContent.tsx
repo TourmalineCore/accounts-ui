@@ -123,7 +123,7 @@ export const RolesContent = observer(({
 }: {
     onSaveClick: () => unknown,
   }) => {
-  const rolesManagementStateContext = useContext(RolesStateContext)
+  const rolesStateContext = useContext(RolesStateContext)
   const accessToChanges = useContext(AccessBasedOnPemissionsStateContext)
 
   return (
@@ -141,13 +141,13 @@ export const RolesContent = observer(({
         {accessToChanges.accessPermissions.get(`ManageRoles`) && (
           <div className="roles-page__buttons">
             {
-              !rolesManagementStateContext.isInEditMode
+              !rolesStateContext.isInEditMode
                 ? (
                   <button
                     type="button"
                     data-cy="add-new-role-button"
                     className="accounts-page__button"
-                    onClick={() => rolesManagementStateContext.addNewRole()}
+                    onClick={() => rolesStateContext.addNewRole()}
                   >
                     + Add new role
                   </button>
@@ -158,7 +158,7 @@ export const RolesContent = observer(({
                       type="button"
                       data-cy="cancel-changes-button"
                       className="accounts-page__button"
-                      onClick={() => rolesManagementStateContext.cancelRoleEditing()}
+                      onClick={() => rolesStateContext.cancelRoleEditing()}
                     >
                       Cancel
                     </button>
@@ -166,7 +166,7 @@ export const RolesContent = observer(({
                       type="button"
                       data-cy="save-changes-button"
                       className="accounts-page__button"
-                      disabled={!rolesManagementStateContext.updatedRole?.name}
+                      disabled={!rolesStateContext.updatedRole?.name}
                       onClick={onSaveClick}
                     >
                       Save Changes
@@ -180,7 +180,7 @@ export const RolesContent = observer(({
 
       <div className="roles-page__table">
         <RolesTable
-          rolePermissions={rolesManagementStateContext.roles}
+          rolePermissions={rolesStateContext.roles}
           permissionGroups={PERMISSION_GROUPS}
         />
       </div>

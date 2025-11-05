@@ -6,7 +6,7 @@ import { api } from '../../common/api'
 import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 
 export const RolesContainer = observer(() => {
-  const rolesManagementStateContext = useContext(RolesStateContext)
+  const rolesStateContext = useContext(RolesStateContext)
 
   useEffect(() => {
     getRolesAsync()
@@ -23,16 +23,16 @@ export const RolesContainer = observer(() => {
       data, 
     } = await api.get(`${LINK_TO_ACCOUNT_SERVICE}roles`)
 
-    rolesManagementStateContext.initialize({
+    rolesStateContext.initialize({
       loadedRoles: data, 
     })
   }
 
   async function saveChangesToRoleAsync() {
-    if (rolesManagementStateContext.updatedRole?.id === 0) {
+    if (rolesStateContext.updatedRole?.id === 0) {
       const {
         name, permissions, 
-      } = rolesManagementStateContext.updatedRole
+      } = rolesStateContext.updatedRole
 
       await api.post(`${LINK_TO_ACCOUNT_SERVICE}roles/create`, {
         name,
@@ -40,10 +40,10 @@ export const RolesContainer = observer(() => {
       })
     }
     else {
-      await api.post(`${LINK_TO_ACCOUNT_SERVICE}roles/edit`, rolesManagementStateContext.updatedRole)
+      await api.post(`${LINK_TO_ACCOUNT_SERVICE}roles/edit`, rolesStateContext.updatedRole)
     }
 
-    rolesManagementStateContext.cancelRoleEditing()
+    rolesStateContext.cancelRoleEditing()
     getRolesAsync()
   }
 })

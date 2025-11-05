@@ -21,7 +21,7 @@ const filterElements = [
 ]
 
 export const FilterMenu = observer(() => {
-  const accountManagementState = useContext(AccountsStateContext)
+  const accountsState = useContext(AccountsStateContext)
 
   return (
     <div className="filter-menu">
@@ -29,11 +29,11 @@ export const FilterMenu = observer(() => {
         <button
           type="button"
           className={clsx(`filter-menu__button`, {
-            'filter-menu__button--active': item.id === accountManagementState.filterTerm,
+            'filter-menu__button--active': item.id === accountsState.filterTerm,
           })}
           key={item.id}
           id={item.id}
-          onClick={(event: MouseEvent<HTMLButtonElement>) => accountManagementState.updateFilterTerm(event.currentTarget.id)}
+          onClick={(event: MouseEvent<HTMLButtonElement>) => accountsState.updateFilterTerm(event.currentTarget.id)}
         >
           {item.name}
         </button>

@@ -76,13 +76,13 @@ function mountComponent({
 }: {
   tenants: Tenants[],
 }) {
-  const tenantManagementState = new TenantsState()
+  const tenantsState = new TenantsState()
 
-  tenantManagementState.getTenants({
+  tenantsState.getTenants({
     newTenant: tenants,
   })
   cy.mount(
-    <TenantsStateContext.Provider value={tenantManagementState}>
+    <TenantsStateContext.Provider value={tenantsState}>
       <TenantsContent />
     </TenantsStateContext.Provider>,
 

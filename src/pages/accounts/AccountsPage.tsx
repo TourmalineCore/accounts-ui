@@ -4,13 +4,13 @@ import { AccountsState } from './state/AccountsState'
 import { AccountsContainer } from './AccountsContainer'
 
 export function AccountsPage() {
-  const accountManagementState = useMemo(
+  const accountsState = useMemo(
     () => new AccountsState(),
     [],
   )
 
   return (
-    <AccountsStateContext.Provider value={accountManagementState}>
+    <AccountsStateContext.Provider value={accountsState}>
       <AccountsContainer />
     </AccountsStateContext.Provider>
   )

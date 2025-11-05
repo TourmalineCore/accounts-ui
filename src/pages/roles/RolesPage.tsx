@@ -4,13 +4,13 @@ import { RolesStateContext } from './state/RolesStateContext'
 import { RolesContainer } from './RolesContainer'
 
 export function RolesPage() {
-  const rolesManagementState = useMemo(
+  const rolesState = useMemo(
     () => new RolesState(),
     [],
   )
 
   return (
-    <RolesStateContext.Provider value={rolesManagementState}>
+    <RolesStateContext.Provider value={rolesState}>
       <RolesContainer />
     </RolesStateContext.Provider>
   )

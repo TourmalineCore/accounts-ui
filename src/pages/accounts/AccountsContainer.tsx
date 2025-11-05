@@ -7,7 +7,7 @@ import { api } from '../../common/api'
 import { AccountsContent } from './AccountsContent'
 
 export const AccountsContainer = observer(() => {
-  const accountManagementState = useContext(AccountsStateContext)
+  const accountsState = useContext(AccountsStateContext)
 
   useEffect(() => {
     getAccountsAsync()
@@ -15,22 +15,22 @@ export const AccountsContainer = observer(() => {
 
   return (
     <AccountsContent
-      accounts={accountManagementState.allAccounts}
+      accounts={accountsState.allAccounts}
       onBlockAccount={blockAccountsAsync}
       onUnblockAccount={unblockAccountsAsync}
     />
   )
 
   async function getAccountsAsync() {
-    accountManagementState.setIsLoading()
+    accountsState.setIsLoading()
     try {
       const {
         data, 
       } = await api.get<Accounts[]>(`${LINK_TO_ACCOUNT_SERVICE}accounts/all`)
-      accountManagementState.getAccounts(data)
+      accountsState.getAccounts(data)
     }
     finally {
-      accountManagementState.resetIsLoading()
+      accountsState.resetIsLoading()
     }
   }
 
@@ -40,15 +40,15 @@ export const AccountsContainer = observer(() => {
 
     toast(() => (
       <div className="accounts-page__notification">
-        {accountManagementState.accountToUnblock?.middleName ? (
+        {accountsState.accountToUnblock?.middleName ? (
           <span>
-            {`${accountManagementState.accountToUnblock?.lastName}
-              ${accountManagementState.accountToUnblock?.firstName} 
-              ${accountManagementState.accountToUnblock?.middleName}`}
+            {`${accountsState.accountToUnblock?.lastName}
+              ${accountsState.accountToUnblock?.firstName} 
+              ${accountsState.accountToUnblock?.middleName}`}
           </span>
         ) : (
           <span>
-            {`${accountManagementState.accountToUnblock?.firstName} ${accountManagementState.accountToUnblock?.lastName}`}
+            {`${accountsState.accountToUnblock?.firstName} ${accountsState.accountToUnblock?.lastName}`}
           </span>
         )}
 
@@ -56,8 +56,8 @@ export const AccountsContainer = observer(() => {
           type="button"
           className="accounts-page__unblock-button"
           onClick={() => {
-            toast.dismiss(accountManagementState.accountToUnblock!.id)
-            unblockAccountsAsync(accountManagementState.accountToUnblock!.id)
+            toast.dismiss(accountsState.accountToUnblock!.id)
+            unblockAccountsAsync(accountsState.accountToUnblock!.id)
           }}
         >
           Unblock
@@ -70,14 +70,14 @@ export const AccountsContainer = observer(() => {
       toastId: accountId,
     })
 
-    accountManagementState.blockAccount({
+    accountsState.blockAccount({
       accountId, 
     })
     await api.post<Accounts[]>(`${LINK_TO_ACCOUNT_SERVICE}accounts/${accountId}/block`)
   }
 
   async function unblockAccountsAsync(accountId: number) {
-    accountManagementState.unblockAccont({
+    accountsState.unblockAccont({
       accountId, 
     })
     await api.post<Accounts[]>(`${LINK_TO_ACCOUNT_SERVICE}accounts/${accountId}/unblock`)

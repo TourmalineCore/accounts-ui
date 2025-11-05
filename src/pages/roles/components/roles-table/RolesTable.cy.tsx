@@ -268,9 +268,9 @@ describe(`RolesTable`, () => {
       ],
     })
 
-    cy.get<RolesState>(`@rolesManagementState`)
-      .then((rolesManagementState) => {
-        rolesManagementState.addNewRole()
+    cy.get<RolesState>(`@rolesState`)
+      .then((rolesState) => {
+        rolesState.addNewRole()
       })
 
     cy.getByData(`role-name-input`)
@@ -293,9 +293,9 @@ describe(`RolesTable`, () => {
     cy.getByData(`edit-role-button-Employee`)
       .should(`have.length`, 1)
 
-    cy.get<RolesState>(`@rolesManagementState`)
-      .then((rolesManagementState) => {
-        rolesManagementState.addNewRole()
+    cy.get<RolesState>(`@rolesState`)
+      .then((rolesState) => {
+        rolesState.addNewRole()
       })
 
     cy.getByData(`edit-role-button-Employee`)
@@ -311,20 +311,20 @@ function mountComponent({
   rolePermissions: Role[],
 }) {
    
-  const rolesManagementState = new RolesState()
+  const rolesState = new RolesState()
 
-  rolesManagementState.initialize({
+  rolesState.initialize({
     loadedRoles: rolePermissions,
   })
 
-  cy.wrap(rolesManagementState)
-    .as(`rolesManagementState`)
+  cy.wrap(rolesState)
+    .as(`rolesState`)
 
   cy.mount(
-    <RolesStateContext.Provider value={rolesManagementState}>
+    <RolesStateContext.Provider value={rolesState}>
       <RolesTable
         permissionGroups={permissionGroups}
-        rolePermissions={rolesManagementState.roles}
+        rolePermissions={rolesState.roles}
       />
     </RolesStateContext.Provider>,
   )

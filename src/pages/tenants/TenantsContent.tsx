@@ -6,7 +6,7 @@ import { TenantsStateContext } from './state/TenantsStateContext'
 import { ColumnDef } from '@tanstack/table-core'
 
 export const TenantsContent = observer(() => {
-  const tenantManagementState = useContext(TenantsStateContext)
+  const tenantsState = useContext(TenantsStateContext)
 
   const columns: ColumnDef<Tenants>[] = [
     {
@@ -49,14 +49,14 @@ export const TenantsContent = observer(() => {
 
       <ClientTable<Tenants>
         tableId="tenant-table"
-        data={tenantManagementState.allTenants}
+        data={tenantsState.allTenants}
         tcRenderMobileTitle={(row) => row.original.name}
         tcOrder={{
           id: `name`,
           desc: false,
         }}
         columns={columns}
-        tcLoading={tenantManagementState.isLoading}
+        tcLoading={tenantsState.isLoading}
       />
 
     </section>

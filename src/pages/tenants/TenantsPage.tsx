@@ -4,13 +4,13 @@ import { TenantsStateContext } from './state/TenantsStateContext'
 import { TenantsContainer } from './TenantsContainer'
 
 export function TenantsPage() {
-  const tenantManagementState = useMemo(
+  const tenantsState = useMemo(
     () => new TenantsState(),
     [],
   )
 
   return (
-    <TenantsStateContext.Provider value={tenantManagementState}>
+    <TenantsStateContext.Provider value={tenantsState}>
       <TenantsContainer />
     </TenantsStateContext.Provider>
   )

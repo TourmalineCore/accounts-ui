@@ -7,7 +7,7 @@ import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 import { TenantsStateContext } from './state/TenantsStateContext'
 
 export const TenantsContainer = observer(() => {
-  const tenantManagementState = useContext(TenantsStateContext)
+  const tenantsState = useContext(TenantsStateContext)
 
   useEffect(() => {
     getTenantsAsync()
@@ -17,17 +17,17 @@ export const TenantsContainer = observer(() => {
     <TenantsContent />
   )
   async function getTenantsAsync() {
-    tenantManagementState.setIsLoading()
+    tenantsState.setIsLoading()
     try {
       const {
         data, 
       } = await api.get<Tenants[]>(`${LINK_TO_ACCOUNT_SERVICE}tenants/all`)
-      tenantManagementState.getTenants({
+      tenantsState.getTenants({
         newTenant: data,
       })
     }
     finally {
-      tenantManagementState.resetIsLoading()
+      tenantsState.resetIsLoading()
     }
   }
 })

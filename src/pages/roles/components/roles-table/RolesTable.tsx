@@ -26,7 +26,7 @@ export const RolesTable = observer(
       rolePermissions: Role[],
     },
   ) => {
-    const rolesManagementStateContext = useContext(RolesStateContext)
+    const rolesStateContext = useContext(RolesStateContext)
     const accessToChanges = useContext(AccessBasedOnPemissionsStateContext)
 
     const columnRef = useRef<HTMLTableDataCellElement>(null)
@@ -46,7 +46,7 @@ export const RolesTable = observer(
                 ref={columnRef}>
                 <div className="roles-table__role-column-inner">
                   {
-                    id === rolesManagementStateContext.updatedRole?.id
+                    id === rolesStateContext.updatedRole?.id
                       ? (
                         <input
                           autoFocus
@@ -54,8 +54,8 @@ export const RolesTable = observer(
                           className="roles-table__name-input"
                           type="text"
                           onChange={(event: { target: { value: any, }, }) => {
-                            rolesManagementStateContext.changeRole({
-                              ...rolesManagementStateContext.updatedRole!,
+                            rolesStateContext.changeRole({
+                              ...rolesStateContext.updatedRole!,
                               name: event.target.value, 
                             })
                           }}
@@ -65,7 +65,7 @@ export const RolesTable = observer(
                       : <span data-cy={`role-name-${name}`}>{name}</span>
                   }
                   {
-                    accessToChanges.accessPermissions.get(`ManageRoles`) && (name !== `Admin` && (!rolesManagementStateContext.isInEditMode))
+                    accessToChanges.accessPermissions.get(`ManageRoles`) && (name !== `Admin` && (!rolesStateContext.isInEditMode))
             && (
               <ActionsDropdown
                 className="roles-table__actions-dropdown"
@@ -75,7 +75,7 @@ export const RolesTable = observer(
                   {
                     text: `Edit`,
                     onClick: () => {
-                      rolesManagementStateContext.editRole({
+                      rolesStateContext.editRole({
                         roleId: id,
                       }) 
                     },
@@ -96,7 +96,7 @@ export const RolesTable = observer(
             <Fragment key={groupName}>
               <tr data-cy="permission-group"
                 className="roles-table__permission-group">
-                <td colSpan={rolesManagementStateContext.roles.length + 1}>{groupName}</td>
+                <td colSpan={rolesStateContext.roles.length + 1}>{groupName}</td>
               </tr>
               {children.map(({
                 id, name, 
@@ -112,7 +112,7 @@ export const RolesTable = observer(
                       key={roleId}
                     >
 
-                      {roleId === rolesManagementStateContext.updatedRole?.id
+                      {roleId === rolesStateContext.updatedRole?.id
                         ? (
                           <div className="roles-table__permission-checkbox-wrapper">
                             <CheckField
@@ -121,7 +121,7 @@ export const RolesTable = observer(
                               defaultChecked={permissions.some((item) => item === id)}
                               onChange={(event: ChangeEvent<HTMLInputElement>) => {
                                 const permissionsCopy = [
-                                  ...rolesManagementStateContext.updatedRole!.permissions,
+                                  ...rolesStateContext.updatedRole!.permissions,
                                 ]
                                 const permissionIndexInArray = permissionsCopy.indexOf(event.target.id)
 
@@ -131,8 +131,8 @@ export const RolesTable = observer(
                                 else {
                                   permissionsCopy.push(event.target.id)
                                 }
-                                rolesManagementStateContext.changeRole({
-                                  ...rolesManagementStateContext.updatedRole!,
+                                rolesStateContext.changeRole({
+                                  ...rolesStateContext.updatedRole!,
                                   permissions: permissionsCopy, 
                                 })
                               }}

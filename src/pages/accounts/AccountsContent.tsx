@@ -18,7 +18,7 @@ export const AccountsContent = observer(({
   onUnblockAccount: (accountId: number) => void,
 }) => {
   const accessToChanges = useContext(AccessBasedOnPemissionsStateContext)
-  const accountManagementState = useContext(AccountsStateContext)
+  const accountsState = useContext(AccountsStateContext)
   
   const columns: ColumnDef<Accounts>[] = [
     {
@@ -244,7 +244,7 @@ export const AccountsContent = observer(({
         }}
         tcActions={accessToChanges.accessPermissions.get(`ManageAccounts`) ? actions : []}
         columns={columns}
-        tcLoading={accountManagementState.isLoading}
+        tcLoading={accountsState.isLoading}
       />
     </section>
   )

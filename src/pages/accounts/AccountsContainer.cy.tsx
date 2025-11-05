@@ -170,11 +170,11 @@ function mountComponent({
 }: {
   accounts: Accounts[],
 }) {
-  const accountManagementState = new AccountsState()
+  const accountsState = new AccountsState()
 
-  accountManagementState.getAccounts(accounts)
+  accountsState.getAccounts(accounts)
   cy.mount(
-    <AccountsStateContext.Provider value={accountManagementState}>
+    <AccountsStateContext.Provider value={accountsState}>
       <AccountsContainer />
     </AccountsStateContext.Provider>,
 
