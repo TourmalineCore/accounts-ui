@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import { RolesManagementStateContext } from './state/RolesManagementStateContext'
 import { AccessBasedOnPemissionsStateContext } from '../../routes/state/AccessBasedOnPemissionsStateContext'
-import { RolesTable } from './components/RolesTable/RolesTable'
+import { RolesTable } from './components/roles-table/RolesTable'
 
 const PERMISSION_GROUPS = [
   {

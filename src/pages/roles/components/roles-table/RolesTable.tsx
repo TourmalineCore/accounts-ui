@@ -4,7 +4,7 @@ import { CheckField } from '@tourmalinecore/react-tc-ui-kit'
 import IconCheck from '../../../../assets/icons/check.svg?react'
 import IconUncheck from '../../../../assets/icons/uncheck.svg?react'
 import { AccessBasedOnPemissionsStateContext } from '../../../../routes/state/AccessBasedOnPemissionsStateContext'
-import { ActionsDropdown } from '../ActionsDropdown/ActionsDropdown'
+import { ActionsDropdown } from '../actions-dropdown/ActionsDropdown'
 import { RolesManagementStateContext } from '../../state/RolesManagementStateContext'
 
 // ToDo
