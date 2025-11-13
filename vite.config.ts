@@ -13,15 +13,6 @@ const ACCOUNTS_PORT = process.env.NODE_ENV === `production` ? LOCAL_ENV_PORT : 4
 
 const BASE_PATH = '/account-management'
 
-// if (VITE_BASE_URL === undefined) set default local docker url
-// const LAYOUT_URL = process.env.VITE_BASE_URL ?? `http://localhost:4455`
-
-// for run in local docker use `/`, and for others use `/books` path
-// const BOOKS_PATH = LAYOUT_URL === `http://localhost:4455` ? `/` : `/books`
-
-// for run in local docker use `http://localhost:4455/assets..`, and for others use `../layout/assets..` path
-// const LAYOUT_PATH = LAYOUT_URL === `http://localhost:4455` ? `` : `/layout`
-
 // eslint-disable-next-line import/no-default-export
 export default defineConfig({
   // Set the port on which the development server runs
