@@ -24,5 +24,5 @@ export const Permissions = {
   CanViewItemsTypes: `Can View Items Types`,
   AUTO_TESTS_ONLY_IsItemsHardDeleteAllowed: `AUTO TESTS ONLY Is Items Hard Delete Allowed`,
   CanManageItems: `Can Manage Items`,
-  CanViewItems: `Can View Items`
+  CanViewItems: `Can View Items`,
 }
