@@ -19,4 +19,10 @@ export const Permissions = {
   CanManageBooks: `Can Manage Books`,
   IsBooksHardDeleteAllowed: `Is Books Hard Delete Allowed`,
   IsAccountsHardDeleteAllowed: `Is Accounts Hard Delete Allowed`,
+  AUTO_TESTS_ONLY_IsItemTypesHardDeleteAllowed: `AUTO TESTS ONLY Is Item Types Hard Delete Allowed`,
+  CanManageItemsTypes: `Can Manage Items Types`,
+  CanViewItemsTypes: `Can View Items Types`,
+  AUTO_TESTS_ONLY_IsItemsHardDeleteAllowed: `AUTO TESTS ONLY Is Items Hard Delete Allowed`,
+  CanManageItems: `Can Manage Items`,
+  CanViewItems: `Can View Items`,
 }
