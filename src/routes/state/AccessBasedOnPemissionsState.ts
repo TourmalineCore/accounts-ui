@@ -20,6 +20,12 @@ export enum Permission {
   CanManageBooks = `CanManageBooks`,
   IsBooksHardDeleteAllowed = `IsBooksHardDeleteAllowed`,
   IsAccountsHardDeleteAllowed = `IsAccountsHardDeleteAllowed`,
+  AUTO_TESTS_ONLY_IsItemTypesHardDeleteAllowed = `AUTO_TESTS_ONLY_IsItemTypesHardDeleteAllowed`,
+  CanManageItemsTypes = `CanManageItemsTypes`,
+  CanViewItemsTypes = `CanViewItemsTypes`,
+  AUTO_TESTS_ONLY_IsItemsHardDeleteAllowed = `AUTO_TESTS_ONLY_IsItemsHardDeleteAllowed`,
+  CanManageItems = `CanManageItems`,
+  CanViewItems = `CanViewItems`
 }
 
 export class AccessBasedOnPemissionsState {

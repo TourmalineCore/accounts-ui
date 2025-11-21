@@ -116,6 +116,35 @@ const PERMISSION_GROUPS = [
       },
     ],
   },
+  {
+    groupName: `Items`,
+    children: [
+      {
+        id: `AUTO_TESTS_ONLY_IsItemTypesHardDeleteAllowed`,
+        name: `AUTO TESTS ONLY Is Item Types Hard Delete Allowed`, 
+      },
+      {
+        id: `CanManageItemsTypes`,
+        name: `Can Manage Items Types`, 
+      },
+      {
+        id: `CanViewItemsTypes`,
+        name: `Can View Items Types`, 
+      },
+      {
+        id: `AUTO_TESTS_ONLY_IsItemsHardDeleteAllowed`,
+        name: `AUTO TESTS ONLY Is Items Hard Delete Allowed`, 
+      },
+      {
+        id: `CanManageItems`,
+        name: `Can Manage Items`, 
+      },
+      {
+        id: `CanViewItems`,
+        name: `Can View Items`, 
+      },
+    ],
+  },
 ]
 
 export const RolesContent = observer(({ 
