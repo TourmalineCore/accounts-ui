@@ -2,7 +2,7 @@
 
 image:
   registry: ghcr.io
-  repository: tourmalinecore/accounts-ui
+  repository: tourmalinecore/inner-circle-accounts-ui
   tag: "latest"
   pullPolicy: Always
   debug: true
