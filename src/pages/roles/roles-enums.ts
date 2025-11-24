@@ -4,7 +4,6 @@ export const Permissions = {
   ViewContacts: `View contacts`,
   ViewSalaryAndDocumentsData: `View salary and documents data`,
   EditFullEmployeesData: `Edit full employees data`,
-  AccessAnalyticalForecastsPage: `access to analytical forecasts page`,
   ViewAccounts: `View accounts`,
   EditAccounts: `Edit accounts`,
   ViewRoles: `View roles`,

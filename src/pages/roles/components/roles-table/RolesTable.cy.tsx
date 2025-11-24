@@ -36,10 +36,6 @@ describe(`RolesTable`, () => {
           groupName: `Employees`,
           children: [],
         },
-        {
-          groupName: `Analytics`,
-          children: [],
-        },
       ],
       rolePermissions: [],
     })
@@ -58,10 +54,6 @@ describe(`RolesTable`, () => {
         },
         {
           groupName: `Employees`,
-          children: [],
-        },
-        {
-          groupName: `Analytics`,
           children: [],
         },
       ],

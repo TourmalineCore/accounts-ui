@@ -32,15 +32,6 @@ const PERMISSION_GROUPS = [
     ],
   },
   {
-    groupName: `Analytics`,
-    children: [
-      {
-        id: `AccessAnalyticalForecastsPage`,
-        name: `Access to analytical forecasts page`, 
-      },
-    ],
-  },
-  {
     groupName: `Account Management`,
     children: [
       {
