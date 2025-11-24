@@ -145,6 +145,15 @@ const PERMISSION_GROUPS = [
       },
     ],
   },
+  {
+    groupName: `Auth`,
+    children: [
+      {
+        id: `AUTO_TESTS_ONLY_IsSetUserPasswordBypassingEmailConfirmationAllowed`,
+        name: `AUTO TESTS ONLY Is Set User Password Bypassing Email Confirmation Allowed`, 
+      },
+    ],
+  },
 ]
 
 export const RolesContent = observer(({ 

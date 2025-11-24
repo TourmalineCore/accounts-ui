@@ -25,7 +25,8 @@ export enum Permission {
   CanViewItemsTypes = `CanViewItemsTypes`,
   AUTO_TESTS_ONLY_IsItemsHardDeleteAllowed = `AUTO_TESTS_ONLY_IsItemsHardDeleteAllowed`,
   CanManageItems = `CanManageItems`,
-  CanViewItems = `CanViewItems`
+  CanViewItems = `CanViewItems`,
+  AUTO_TESTS_ONLY_IsSetUserPasswordBypassingEmailConfirmationAllowed = `AUTO_TESTS_ONLY_IsSetUserPasswordBypassingEmailConfirmationAllowed`
 }
 
 export class AccessBasedOnPemissionsState {
