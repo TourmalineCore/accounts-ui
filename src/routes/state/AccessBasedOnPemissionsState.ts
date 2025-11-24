@@ -5,7 +5,6 @@ export enum Permission {
   ViewContacts = `ViewContacts`,
   ViewSalaryAndDocumentsData = `ViewSalaryAndDocumentsData`,
   EditFullEmployeesData = `EditFullEmployeesData`,
-  AccessAnalyticalForecastsPage = `AccessAnalyticalForecastsPage`,
   ViewAccounts = `ViewAccounts`,
   ManageAccounts = `ManageAccounts`,
   ViewRoles = `ViewRoles`,
