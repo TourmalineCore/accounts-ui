@@ -1,13 +1,13 @@
-import { qase } from 'cypress-qase-reporter/dist/mocha';
+import { qase } from 'cypress-qase-reporter/dist/mocha'
 
-import AuthView from './pages/AuthView';
+import AuthView from './pages/AuthView'
 
-describe('Auth tests', () => {
-  beforeEach('visit site', () => {
-    AuthView.visit();
-  });
+describe(`Auth tests`, () => {
+  beforeEach(`visit site`, () => {
+    AuthView.visit()
+  })
 
-  qase(1, it('should successfully auth', () => {
-    cy.auth();
-  }));
-});
+  qase(1, it(`should successfully auth`, () => {
+    cy.auth()
+  }))
+})
