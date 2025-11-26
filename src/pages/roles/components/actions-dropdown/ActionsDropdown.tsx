@@ -52,6 +52,7 @@ export function ActionsDropdown({
             top: listPosition.top + dropdownContainer.current!.offsetHeight,
           }}
           className="tc-table-desktop-actions-dropdown__list"
+          data-cy="actions-dropdown"
         >
           {
             actions

@@ -1,34 +1,71 @@
 describe(`RolesPage`, () => {
-  it(`SHOULD test happy path of role creation, editind and deleting WHEN visiting roles page`, () => {
-    cy.visit(`/account-management/roles-page`)
+  beforeEach(`Authorize and cleanup`, () => {
+    cy.authByApi()
+    cy.removeRoles()
 
-    cy.getByData(`roles-table`)
+    cy
+    .intercept(
+      'GET', 
+      '/api/account-management/roles'
+    )
+    .as('getRoles')
+  })
+
+  afterEach(`Cleanup`, () => {
+    cy.removeRoles()
+  })
+
+it(`
+  GIVEN created role with name "[AUTO TEST] Manager1"
+  WHEN changing its name to "[AUTO TEST] Manager2" and save it
+  SHOULD display "[AUTO TEST] Manager2" in the list
+`, () => {
+    cy.visit(`/account-management/roles`)
+
+    cy.wait('@getRoles')
+    
+    cy
+      .getByData(`roles-table`)
       .should(`exist`)
 
-    // adding a role
-    cy.getByData(`add-new-role-button`)
+    cy
+      .getByData(`add-new-role-button`)
       .click()
 
-    cy.getByData(`role-name-input`)
-      .type(`Manager1`)
+    cy
+      .getByData(`role-name-input`)
+      .type(`[AUTO TEST] Manager1`)
 
-    cy.getByData(`permission-checkbox`)
+    cy
+      .getByData(`permission-checkbox`)      
       .first()
-      .check()
+      .parent()
+      .find('.tc-checkfield__box')
+      .click()
 
-    // saving
     cy.getByData(`save-changes-button`)
       .click()
 
-    // editing
-    cy.getByData(`edit-role-button-Manager1`)
+    cy
+      .getByData(`edit-role-button-[AUTO TEST] Manager1`)      
       .click()
 
-    cy.getByData(`role-name-input`)
-      .type(`Manager2`)
+    cy
+      .getByData(`actions-dropdown`)  
+      .click()
 
-    cy.getByData(`roles-table`)
-      .contains(`Manager2`)
+    cy
+      .getByData(`role-name-input`)
+      .clear()
+      .type(`[AUTO TEST] Manager2`)
+
+    cy
+      .getByData(`save-changes-button`)
+      .click()
+
+    cy
+      .getByData(`roles-table`)
+      .contains(`[AUTO TEST] Manager2`)
   })
 })
 
