@@ -4,25 +4,25 @@ describe(`RolesPage`, () => {
     cy.removeRoles()
 
     cy
-    .intercept(
-      'GET', 
-      '/api/account-management/roles'
-    )
-    .as('getRoles')
+      .intercept(
+        `GET`, 
+        `/api/account-management/roles`,
+      )
+      .as(`getRoles`)
   })
 
   afterEach(`Cleanup`, () => {
     cy.removeRoles()
   })
 
-it(`
+  it(`
   GIVEN created role with name "[AUTO TEST] Manager1"
   WHEN changing its name to "[AUTO TEST] Manager2" and save it
   SHOULD display "[AUTO TEST] Manager2" in the list
 `, () => {
     cy.visit(`/account-management/roles`)
 
-    cy.wait('@getRoles')
+    cy.wait(`@getRoles`)
     
     cy
       .getByData(`roles-table`)
@@ -40,7 +40,7 @@ it(`
       .getByData(`permission-checkbox`)      
       .first()
       .parent()
-      .find('.tc-checkfield__box')
+      .find(`.tc-checkfield__box`)
       .click()
 
     cy.getByData(`save-changes-button`)

@@ -1,7 +1,6 @@
 /// <reference types="cypress" />
 import { createAuthService } from '@tourmalinecore/react-tc-auth'
 
-
 Cypress.on(`uncaught:exception`, () => false)
 
 Cypress.on(`uncaught:exception`, (err) => {
@@ -54,35 +53,40 @@ Cypress.Commands.add(`authByApi`, () => {
     })
 })
 
-Cypress.Commands.add('removeRoles', () => {
+Cypress.Commands.add(`removeRoles`, () => {
   cy.request({
-    method: 'GET',
-    url: `${Cypress.env('API_ROOT')}/account-management/roles`,
+    method: `GET`,
+    url: `${Cypress.env(`API_ROOT`)}/account-management/roles`,
     headers: {
-      Authorization: `Bearer ${Cypress.env('accessToken')}`,
+      Authorization: `Bearer ${Cypress.env(`accessToken`)}`,
     },
     failOnStatusCode: false,
-  }).then(({ body }) => {
+  })
+    .then(({
+      body, 
+    }) => {
 
-    const roles = Array.isArray(body) ? body : []
+      const roles = Array.isArray(body) ? body : []
 
-    const rolesToDelete = roles.filter(({ name }) =>
-      name.startsWith('[AUTO TEST]')
-    )
+      const rolesToDelete = roles.filter(({
+        name, 
+      }) =>
+        name.startsWith(`[AUTO TEST]`),
+      )
 
-    rolesToDelete.forEach(({ id }) => {
-      cy.request({
-        method: 'DELETE',
-        url: `${Cypress.env('API_ROOT')}/account-management/roles/${id}/hard-delete`,
-        headers: {
-          Authorization: `Bearer ${Cypress.env('accessToken')}`,
-        },
-        failOnStatusCode: false,
+      rolesToDelete.forEach(({
+        id, 
+      }) => {
+        cy.request({
+          method: `DELETE`,
+          url: `${Cypress.env(`API_ROOT`)}/account-management/roles/${id}/hard-delete`,
+          headers: {
+            Authorization: `Bearer ${Cypress.env(`accessToken`)}`,
+          },
+          failOnStatusCode: false,
+        })
       })
     })
-  })
 })
-
-
 
 export {}
