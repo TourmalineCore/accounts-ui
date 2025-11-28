@@ -118,6 +118,7 @@ export const RolesTable = observer(
                             <CheckField
                               id={id}
                               type="checkbox"
+                              data-cy="permission-checkbox"
                               defaultChecked={permissions.some((item) => item === id)}
                               onChange={(event: ChangeEvent<HTMLInputElement>) => {
                                 const permissionsCopy = [

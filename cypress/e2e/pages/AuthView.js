@@ -1,23 +1,32 @@
-const INPUT_LOGIN = '#login';
-const INPUT_PASSWORD = '#password';
-const LOG_IN_BUTTON = 'Log In';
+const INPUT_LOGIN = `#login`
+const INPUT_PASSWORD = `#password`
+const LOG_IN_BUTTON = `Log In`
 
 // eslint-disable-next-line import/no-default-export
 export default class AuthView {
   static visit() {
-    cy.visit('/');
-    cy.contains('Sign Out').click(); // need remove after
+    cy.visit(`/`)
+
+    cy
+      .contains(`Sign Out`)
+      .click() // need remove after
   }
 
   static enterLogin(login) {
-    cy.get(INPUT_LOGIN).type(login);
+    cy
+      .get(INPUT_LOGIN)
+      .type(login)
   }
 
   static enterPassword(password) {
-    cy.get(INPUT_PASSWORD).type(password);
+    cy
+      .get(INPUT_PASSWORD)
+      .type(password)
   }
 
   static tapLogIn() {
-    cy.contains(LOG_IN_BUTTON).click();
+    cy
+      .contains(LOG_IN_BUTTON)
+      .click()
   }
 }
