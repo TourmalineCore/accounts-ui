@@ -25,7 +25,9 @@ export enum Permission {
   AUTO_TESTS_ONLY_IsItemsHardDeleteAllowed = `AUTO_TESTS_ONLY_IsItemsHardDeleteAllowed`,
   CanManageItems = `CanManageItems`,
   CanViewItems = `CanViewItems`,
-  AUTO_TESTS_ONLY_IsSetUserPasswordBypassingEmailConfirmationAllowed = `AUTO_TESTS_ONLY_IsSetUserPasswordBypassingEmailConfirmationAllowed`
+  AUTO_TESTS_ONLY_IsSetUserPasswordBypassingEmailConfirmationAllowed = `AUTO_TESTS_ONLY_IsSetUserPasswordBypassingEmailConfirmationAllowed`,
+  CanManagePersonalTimetracker = `CanManagePersonalTimetracker`,
+  AUTO_TESTS_ONLY_IsWorkEntriesHardDeleteAllowed = `AUTO_TESTS_ONLY_IsWorkEntriesHardDeleteAllowed`
 }
 
 export class AccessBasedOnPemissionsState {
