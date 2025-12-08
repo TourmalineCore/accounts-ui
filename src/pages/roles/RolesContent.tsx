@@ -145,6 +145,19 @@ const PERMISSION_GROUPS = [
       },
     ],
   },
+  {
+    groupName: `Time`,
+    children: [
+      {
+        id: `CanManagePersonalTimetracker`,
+        name: `Can Manage Personal Timetracker`, 
+      },
+      {
+        id: `AUTO_TESTS_ONLY_IsWorkEntriesHardDeleteAllowed`,
+        name: `AUTO TESTS ONLY Is Work Entries Hard Delete Allowed`, 
+      },
+    ],
+  },
 ]
 
 export const RolesContent = observer(({ 
