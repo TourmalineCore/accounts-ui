@@ -149,8 +149,8 @@ const PERMISSION_GROUPS = [
     groupName: `Time`,
     children: [
       {
-        id: `CanManagePersonalTimetracker`,
-        name: `Can Manage Personal Timetracker`, 
+        id: `CanManagePersonalTimeTracker`,
+        name: `Can Manage Personal Time Tracker`, 
       },
       {
         id: `AUTO_TESTS_ONLY_IsWorkEntriesHardDeleteAllowed`,

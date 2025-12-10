@@ -25,6 +25,6 @@ export const Permissions = {
   CanManageItems: `Can Manage Items`,
   CanViewItems: `Can View Items`,
   AUTO_TESTS_ONLY_IsSetUserPasswordBypassingEmailConfirmationAllowed: `AUTO TESTS ONLY Is Set User Password Bypassing Email Confirmation Allowed`,
-  CanManagePersonalTimetracker: `Can Manage Personal Timetracker`,
+  CanManagePersonalTimeTracker: `Can Manage Personal Time Tracker`,
   AUTO_TESTS_ONLY_IsWorkEntriesHardDeleteAllowed: `AUTO TESTS ONLY Is Work Entries Hard Delete Allowed`,
 }

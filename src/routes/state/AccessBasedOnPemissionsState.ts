@@ -26,7 +26,7 @@ export enum Permission {
   CanManageItems = `CanManageItems`,
   CanViewItems = `CanViewItems`,
   AUTO_TESTS_ONLY_IsSetUserPasswordBypassingEmailConfirmationAllowed = `AUTO_TESTS_ONLY_IsSetUserPasswordBypassingEmailConfirmationAllowed`,
-  CanManagePersonalTimetracker = `CanManagePersonalTimetracker`,
+  CanManagePersonalTimeTracker = `CanManagePersonalTimeTracker`,
   AUTO_TESTS_ONLY_IsWorkEntriesHardDeleteAllowed = `AUTO_TESTS_ONLY_IsWorkEntriesHardDeleteAllowed`
 }
 
