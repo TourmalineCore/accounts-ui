@@ -1,8 +1,8 @@
 import '../../../cypress/support/commands'
-import { API_ROOT, LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
+import { API_ROOT_URL } from '../../common/config/config'
 import { RolesPage } from './RolesPage'
 
-const GET_ROLES = `${API_ROOT}${LINK_TO_ACCOUNT_SERVICE}roles`
+const GET_ROLES = `${API_ROOT_URL}/roles`
 
 describe(`RolesPage`, () => {
   it(`SHOULD render roles table WHEN visit roles page`, () => {

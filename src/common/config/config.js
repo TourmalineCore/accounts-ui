@@ -1,5 +1,4 @@
 export const {
-  API_ROOT,
-  API_ROOT_AUTH,
-  LINK_TO_ACCOUNT_SERVICE,
+  API_ROOT_URL,
+  AUTH_API_ROOT_URL,
 } = window.__ENV__

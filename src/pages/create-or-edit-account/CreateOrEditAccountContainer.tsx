@@ -3,7 +3,6 @@ import { useContext, useEffect } from 'react'
 import { CreateOrEditAccountStateContext } from './state/CreateOrEditAccountStateContext'
 import { CreateOrEditAccountContent } from './CreateOrEditAccountContent'
 import { api } from '../../common/api'
-import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 import { toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
 
@@ -36,10 +35,10 @@ export const CreateOrEditAccountContainer = observer(() => {
   async function getEditAccountLoadAsync() {
     const { 
       data,
-    } = await api.get<AccountEdit>(`${LINK_TO_ACCOUNT_SERVICE}accounts/findById/${id}`)
+    } = await api.get<AccountEdit>(`/accounts/findById/${id}`)
     const { 
       data: roles,
-    } = await api.get<Role[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`)
+    } = await api.get<Role[]>(`/roles`)
 
     createOrEditAccountState.setAccountData({
       newValue: data,
@@ -74,7 +73,7 @@ export const CreateOrEditAccountContainer = observer(() => {
     
     if (isRequiredFieldsFilledIn) {
       try {
-        await api.post(`${LINK_TO_ACCOUNT_SERVICE}accounts/edit`, {
+        await api.post(`/accounts/edit`, {
           id: id,
           firstName,
           middleName: middleName ? middleName : null,
@@ -96,7 +95,7 @@ export const CreateOrEditAccountContainer = observer(() => {
   async function getRolesAccountLoadAsync() {
     const {
       data,
-    } = await api.get<Role[]>(`${LINK_TO_ACCOUNT_SERVICE}roles`)
+    } = await api.get<Role[]>(`/roles`)
 
     createOrEditAccountState.setRolesData({
       newValue: Object.assign({}, ...data.map((role) => ({
@@ -108,7 +107,7 @@ export const CreateOrEditAccountContainer = observer(() => {
   async function getTenantsAccountLoadAsync() {
     const {
       data,
-    } = await api.get(`${LINK_TO_ACCOUNT_SERVICE}tenants/all`)
+    } = await api.get(`/tenants/all`)
 
     createOrEditAccountState.setTenantsData({
       newValue: data,
@@ -133,7 +132,7 @@ export const CreateOrEditAccountContainer = observer(() => {
 
     if (isRequiredFieldsFilledIn) {
       try {
-        await api.post<AccountCreate>(`${LINK_TO_ACCOUNT_SERVICE}accounts/create`, {
+        await api.post<AccountCreate>(`/accounts/create`, {
           ...accountData,
           corporateEmail: `${corporateEmail}@tourmalinecore.com`,
           middleName: middleName || undefined,

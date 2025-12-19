@@ -3,7 +3,6 @@ import { useContext } from 'react'
 import { CreateTenantStateContext } from './state/CreateTenantStateContext'
 import { CreateTenantContent } from './CreateTenantContent'
 import { api } from '../../common/api'
-import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 import { toast } from 'react-toastify'
 
 export const CreateTenantContainer = observer(() => {
@@ -20,7 +19,7 @@ export const CreateTenantContainer = observer(() => {
 
     if (createTenantState.tenantData.name) {
       try {
-        await api.post<TenantCreate>(`${LINK_TO_ACCOUNT_SERVICE}tenants`, {
+        await api.post<TenantCreate>(`/tenants`, {
           ...createTenantState.tenantData,
         })
 

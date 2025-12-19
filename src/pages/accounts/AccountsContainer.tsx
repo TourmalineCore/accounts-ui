@@ -2,7 +2,6 @@ import { useContext, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { toast } from 'react-toastify'
 import { AccountsStateContext } from './state/AccountsStateContext'
-import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 import { api } from '../../common/api'
 import { AccountsContent } from './AccountsContent'
 
@@ -26,7 +25,7 @@ export const AccountsContainer = observer(() => {
     try {
       const {
         data, 
-      } = await api.get<Accounts[]>(`${LINK_TO_ACCOUNT_SERVICE}accounts/all`)
+      } = await api.get<Accounts[]>(`/accounts/all`)
       accountsState.getAccounts(data)
     }
     finally {
@@ -73,13 +72,13 @@ export const AccountsContainer = observer(() => {
     accountsState.blockAccount({
       accountId, 
     })
-    await api.post<Accounts[]>(`${LINK_TO_ACCOUNT_SERVICE}accounts/${accountId}/block`)
+    await api.post<Accounts[]>(`/accounts/${accountId}/block`)
   }
 
   async function unblockAccountsAsync(accountId: number) {
     accountsState.unblockAccont({
       accountId, 
     })
-    await api.post<Accounts[]>(`${LINK_TO_ACCOUNT_SERVICE}accounts/${accountId}/unblock`)
+    await api.post<Accounts[]>(`/accounts/${accountId}/unblock`)
   }
 })

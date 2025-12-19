@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite'
 import { RolesContent } from './RolesContent'
 import { RolesStateContext } from './state/RolesStateContext'
 import { api } from '../../common/api'
-import { LINK_TO_ACCOUNT_SERVICE } from '../../common/config/config'
 
 export const RolesContainer = observer(() => {
   const rolesStateContext = useContext(RolesStateContext)
@@ -21,7 +20,7 @@ export const RolesContainer = observer(() => {
   async function getRolesAsync() {
     const {
       data, 
-    } = await api.get(`${LINK_TO_ACCOUNT_SERVICE}roles`)
+    } = await api.get(`/roles`)
 
     rolesStateContext.initialize({
       loadedRoles: data, 
@@ -34,13 +33,13 @@ export const RolesContainer = observer(() => {
         name, permissions, 
       } = rolesStateContext.updatedRole
 
-      await api.post(`${LINK_TO_ACCOUNT_SERVICE}roles/create`, {
+      await api.post(`/roles/create`, {
         name,
         permissions, 
       })
     }
     else {
-      await api.post(`${LINK_TO_ACCOUNT_SERVICE}roles/edit`, rolesStateContext.updatedRole)
+      await api.post(`/roles/edit`, rolesStateContext.updatedRole)
     }
 
     rolesStateContext.cancelRoleEditing()
