@@ -153,6 +153,10 @@ const PERMISSION_GROUPS = [
         name: `Can Manage Personal Time Tracker`, 
       },
       {
+        id: `AUTO_TESTS_ONLY_IsEntriesHardDeleteAllowed`,
+        name: `AUTO TESTS ONLY Is Entries Hard Delete Allowed`, 
+      },
+      {
         id: `AUTO_TESTS_ONLY_IsWorkEntriesHardDeleteAllowed`,
         name: `AUTO TESTS ONLY Is Work Entries Hard Delete Allowed`, 
       },
