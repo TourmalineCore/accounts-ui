@@ -28,6 +28,7 @@ export enum Permission {
   AUTO_TESTS_ONLY_IsSetUserPasswordBypassingEmailConfirmationAllowed = `AUTO_TESTS_ONLY_IsSetUserPasswordBypassingEmailConfirmationAllowed`,
   CanManagePersonalTimeTracker = `CanManagePersonalTimeTracker`,
   AUTO_TESTS_ONLY_IsEntriesHardDeleteAllowed = `AUTO_TESTS_ONLY_IsEntriesHardDeleteAllowed`,
+  CanViewInvoices = `CanViewInvoices`
 }
 
 export class AccessBasedOnPemissionsState {
