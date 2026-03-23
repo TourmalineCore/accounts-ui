@@ -158,6 +158,15 @@ const PERMISSION_GROUPS = [
       },
     ],
   },
+  {
+    groupName: `Invoices`,
+    children: [
+      {
+        id: `CanViewInvoices`,
+        name: `Can View Invoices`, 
+      }
+    ],
+  },
 ]
 
 export const RolesContent = observer(({ 
