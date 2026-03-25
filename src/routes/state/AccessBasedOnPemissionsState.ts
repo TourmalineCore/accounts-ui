@@ -29,6 +29,8 @@ export enum Permission {
   CanManagePersonalTimeTracker = `CanManagePersonalTimeTracker`,
   AUTO_TESTS_ONLY_IsEntriesHardDeleteAllowed = `AUTO_TESTS_ONLY_IsEntriesHardDeleteAllowed`,
   CanViewInvoices = `CanViewInvoices`,
+  CanViewAllTimeTrackerEntries = `CanViewAllTimeTrackerEntries`,
+  CanViewAllProjects = `CanViewAllProjects`,
 }
 
 export class AccessBasedOnPemissionsState {
