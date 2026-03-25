@@ -29,5 +29,5 @@ export const Permissions = {
   AUTO_TESTS_ONLY_IsEntriesHardDeleteAllowed: `AUTO TESTS ONLY Is Entries Hard Delete Allowed`,
   CanViewInvoices: `Can View Invoices`,
   CanViewAllTimeTrackerEntries: `CanViewAllTimeTrackerEntries`,
-  CanViewAllProjects: `CanViewAllTimeTrackerEntries`
+  CanViewAllProjects: `CanViewAllTimeTrackerEntries`,
 }
