@@ -164,7 +164,7 @@ const PERMISSION_GROUPS = [
       {
         id: `CanViewInvoices`,
         name: `Can View Invoices`, 
-      }
+      },
     ],
   },
 ]
