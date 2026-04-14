@@ -164,6 +164,10 @@ const PERMISSION_GROUPS = [
         id: `CanViewAllProjects`,
         name: `Can View All Projects`, 
       },
+      {
+        id: `CanViewPersonalReport`,
+        name: `Can View Personal Report`, 
+      },
     ],
   },
   {

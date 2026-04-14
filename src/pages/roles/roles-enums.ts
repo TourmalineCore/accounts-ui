@@ -30,4 +30,5 @@ export const Permissions = {
   CanViewInvoices: `Can View Invoices`,
   CanViewAllTimeTrackerEntries: `CanViewAllTimeTrackerEntries`,
   CanViewAllProjects: `CanViewAllTimeTrackerEntries`,
+  CanViewPersonalReport: `CanViewPersonalReport`,
 }

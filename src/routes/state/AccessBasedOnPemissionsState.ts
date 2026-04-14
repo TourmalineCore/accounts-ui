@@ -31,6 +31,7 @@ export enum Permission {
   CanViewInvoices = `CanViewInvoices`,
   CanViewAllTimeTrackerEntries = `CanViewAllTimeTrackerEntries`,
   CanViewAllProjects = `CanViewAllProjects`,
+  CanViewPersonalReport = `CanViewPersonalReport`,
 }
 
 export class AccessBasedOnPemissionsState {
