@@ -157,6 +157,10 @@ const PERMISSION_GROUPS = [
         name: `AUTO TESTS ONLY Is Entries Hard Delete Allowed`, 
       },
       {
+        id: `AUTO_TESTS_ONLY_IsWorkEntriesHardDeleteAllowed`,
+        name: `AUTO TESTS ONLY Is Work Entries Hard Delete Allowed`, 
+      },
+      {
         id: `CanViewAllTimeTrackerEntries`,
         name: `Can View All Time Tracker Entries`, 
       },
