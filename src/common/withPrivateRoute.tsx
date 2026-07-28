@@ -13,7 +13,7 @@ export const withPrivateRoute = <Type extends Record<string, unknown>>(ComposedC
 
   useEffect(() => {
     if (!token) {
-      window.location.href = `/auth`
+      window.location.href = `/auth?returnUrl=${encodeURIComponent(window.location.href)}`
     }
   }, [
     token,
