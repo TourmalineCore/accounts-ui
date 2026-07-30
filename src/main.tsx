@@ -8,10 +8,9 @@ import App from './App'
 
 import { ThemeProvider } from './theme/themeContext'
 import { authService } from './common/authService'
-import { refreshTokenAndSubscribe } from './common/api/refreshByInterval'
 
 async function initApp() {
-  await refreshTokenAndSubscribe()
+  await authService.startPeriodicalAccessTokenRefresh()
 
   ReactDOM.render(
     <React.StrictMode>
