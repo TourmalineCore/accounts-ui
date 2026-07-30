@@ -23,7 +23,7 @@ resources:
     memory: 300Mi
   requests:
     cpu: 1m
-    memory: 250Mi
+    memory: 25Mi
 
 livenessProbe:
   enabled: false
