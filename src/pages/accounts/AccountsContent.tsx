@@ -129,13 +129,17 @@ export const AccountsContent = observer(({
         const {
           creationDate, isBlocked, 
         } = row.original
-        const formattedDate = moment(creationDate)
-          .format(`DD.MM.YYYY HH:mm`)
+        
+        // Keep UTC to match the "Creation date (UTC)" column header and avoid local timezone shifts
+        const formattedDate = moment
+          .utc(creationDate)
+          .format(`YYYY-MM-DD HH:mm`)
 
         return (
           <span className={clsx(`accounts-page__account`, {
             'accounts-page__account--isBlocked': isBlocked,
           })}
+          data-cy={`accounts-page-creation-date`}
           >
             {formattedDate}
           </span>
