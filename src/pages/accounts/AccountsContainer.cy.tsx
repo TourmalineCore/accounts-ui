@@ -86,6 +86,21 @@ describe(`AccountsContainer`, () => {
 
   it(`
   GIVEN accounts page content
+  WHEN visit accounts page
+  SHOULD render creation date in YYYY-MM-DD HH:mm format
+  `, () => {
+    mountComponent({
+      accounts: initialData,
+    })
+
+    cy.getByData(`accounts-page-creation-date`)
+      .should(`exist`)
+      .first()
+      .should(`have.text`, `2024-02-12 08:14`)
+  })
+
+  it(`
+  GIVEN accounts page content
   WHEN click on actions menu
   SHOULD render edit, block and unblock account action if there is a solution for this
   `, () => {
